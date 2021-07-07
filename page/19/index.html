@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>UMU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta property="og:type" content="website">
+<meta property="og:title" content="UMU">
+<meta property="og:url" content="//blog.umu618.com/page/19/">
+<meta property="og:site_name" content="UMU">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="圣小开">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@UMU618">
+  
+  <link rel="alternative" href="/atom.xml" title="UMU" type="application/atom+xml" />
+  
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  <script data-ad-client="ca-pub-3156871832516803" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?bfeb40675aeab650834346c3e91557f2";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">UMU</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">天地玄黄，宇宙洪荒，度修七鹰劫，证悟神通。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon" title="菜单"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="搜索">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="//blog.umu618.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-umutech-push-notification-to-im-using-nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/24/umutech-push-notification-to-im-using-nodejs/" class="article-date">
+  <time datetime="2019-01-24T10:53:55.000Z" itemprop="datePublished">2019-01-24 18:53:55</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UMUTech/">UMUTech</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/24/umutech-push-notification-to-im-using-nodejs/">Nodejs 实现监控告警</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>作者: UMU @ MEET.ONE 实验室</p>
+</blockquote>
+<h2 id="钉钉">钉钉</h2>
+<ol>
+<li>
+<p>选择要接受通知的群，群设置 - 群机器人 - 添加机器人；</p>
+</li>
+<li>
+<p>复制 webhook URL，记为 webhook_url；</p>
+</li>
+<li>
+<p>发送通知的代码：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const fetch &#x3D; require(&#39;node-fetch&#39;)</span><br><span class="line"></span><br><span class="line">fetch(webhook_url, &#123;</span><br><span class="line">  method: &#39;POST&#39;,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    &#39;Content-Type&#39;: &#39;application&#x2F;json&#39;</span><br><span class="line">  &#125;,</span><br><span class="line">  body: JSON.stringify(&#123;</span><br><span class="line">    &quot;msgtype&quot;: &quot;text&quot;,</span><br><span class="line">    &quot;text&quot;: &#123;&quot;content&quot;: text&#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).then(function(res) &#123;</span><br><span class="line">  if (res.ok) &#123;</span><br><span class="line">    console.log(&#39;Dingtalk message sent!&#39;)</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">   console.log(&#39;status &#x3D; &#39; + res.status)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="Telegram">Telegram</h2>
+<ol>
+<li>
+<p>添加 <a target="_blank" rel="noopener" href="https://telegram.me/BotFather">@BotFather</a>，发送 /newbot 命令，随提示逐步建立一个机器人，得到这个机器人的 token，记为 bot_token。</p>
+</li>
+<li>
+<p>选择要接受通知的 Group 或 Channel，按以下任一方式取得 chat_id：</p>
+</li>
+</ol>
+<p>(1) 转发 Group 或 Channel 内的消息到 <a target="_blank" rel="noopener" href="https://telegram.me/getidsbot">@getidsbot</a></p>
+<p>(2) 通过 Web 版查看 Group 或 Channel 的 URL 中，p 参数 的值。</p>
+<ul>
+<li>
+<p>如果是 Group，chat_id 为把 g 前缀替换为负号的负整数。比如 <code>p=g268787210</code>，则 <code>chat_id = '-268787210'</code></p>
+</li>
+<li>
+<p>如果是 Channel，chat_id 为 _ 前部分，并把 c 前缀替换为 -100 的负整数。比如 <code>p=c1383705039_968667419389618100</code>，则 <code>chat_id = '-1001383705039'</code></p>
+</li>
+</ul>
+<ol start="3">
+<li>发送通知的代码：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const TelegramBot &#x3D; require(&#39;node-telegram-bot-api&#39;)</span><br><span class="line">const bot &#x3D; new TelegramBot(bot_token, &#123;polling: false&#125;)</span><br><span class="line"></span><br><span class="line">bot.sendMessage(chat_id, text)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/24/umutech-push-notification-to-im-using-nodejs/" data-id="ckj637put0148x07858dl5x0p" class="article-share-link" data-share="baidu" data-title="Nodejs 实现监控告警">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/24/umutech-push-notification-to-im-using-nodejs/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dev/" rel="tag">dev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ops/" rel="tag">ops</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8C%A8%E8%B8%A2/" rel="tag">挨踢</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B0%83%E7%A0%94/" rel="tag">调研</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-god-of-debug-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/20/god-of-debug-2/" class="article-date">
+  <time datetime="2019-01-20T12:45:12.000Z" itemprop="datePublished">2019-01-20 20:45:12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%90%93%E9%86%92/">吓醒</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/20/god-of-debug-2/">八哥之神【2】</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>稣出生在道州德国鹰熊岛，四面环海，无论往哪个方向走，都会被海阻挡。海的那头，除了海天一色，就是高耸的青山。</p>
+<p>曾经以为，稣这辈子都会被困在海里。鹰熊岛的岛民处于农耕时代，人情社会，这并不是稣擅长、喜欢的。</p>
+<p>上了小学后，稣有一段时间快乐过——在书籍的海洋里遨游，也是不错的……</p>
+<p>到四年级，稣又被无限的宇宙给吓出翔！无穷无尽的宇宙，让稣感到恐惧，觉得人生没有意义。</p>
+<blockquote>
+<p>稣生也有涯，而宇宙也无涯。以有涯随无涯，殆已！</p>
+</blockquote>
+<p>五年级，宇宙觉得稣太孤独，就创造了道州德国鹰熊岛外面的世界。</p>
+<p>也许那些全是假的，所以稣现在又回到一个相似的困境。只是这里和鹰熊岛景观差很多，走了快三天，没遇到海，连小河都没有。</p>
+<p>走过田野，就是高山，就是海那边印象中永远到不了的那种山，翻过去却是雪地。虽然很陡，走得很累的稣还是直接跳了下去。</p>
+<p>稣被冻死前，想起吴情，嗯？？几天前，明明有人愿意嫁给稣，外面的世界又没人知道，为什么稣要拒绝呢？还跑出来冻死在雪地里，真是脑子抽风啊！</p>
+<h2 id="从一个梦里醒来，马上就继续另一个梦，或者梦见自己醒来，都会产生梦中梦的错觉">从一个梦里醒来，马上就继续另一个梦，或者梦见自己醒来，都会产生梦中梦的错觉</h2>
+<p>稣醒来，身在软件园非正常人类研究中心！门，居然开着！卧槽，稣不可能这么不小心。只有一个可能，舍友开的门，睡眼惺忪转头一看，果然她没在床上！</p>
+<p>门口都是灰，稣想起是物业来装修什么东西，然后回床上一瞧，竟是一堆的粉尘，所以稣一晚上吸了多少灰尘……床太脏，想睡个回笼觉都不行。</p>
+<p>稣觉得不太对劲，心想：如果还在梦中，只要继续睡就行了。站在落地窗边，看到阳台有女人的衣服，想起另外一张床，丑女舍友的，现在她不在，可以借用一下吧！但是，马上又想起，她实在太丑了，根本睡不了……</p>
+<p>算了，刚才做梦在雪里冻死，这个舍友叫黄雪，不是暗示睡她的床会再死一次吧？！既然睡不着，就起来看看电影吧。</p>
+<p>打开电脑，却发现宿舍居然没有网络！翻翻手机微信，也没有任何人联系稣。看来只能去上班了……</p>
+<p>习惯性想牵电助力自行车出宿舍，才意识到，自己刚刚换工作，已经不需要跑去观音山非正常人类研究中心那么远的地方了，现在走路去新公司就行……</p>
+<p>然而伸手去推门，才发现出八哥了，走廊是被封起来的，也就是说稣出不去！太可怕了，稣得打打电话。</p>
+<p>第一个打给脑波，没人接！有点怪，但稣马上安慰自己，她经常睡得很死，没接很正常。</p>
+<p>接着打给六舅——号码是空号！射精病呢？啥时候把号码注销的？</p>
+<p>再打给我妹，也不通！纳尼？回英国了吗？</p>
+<p>突然想起，不是还有个舍友吗？虽然稣不明白，为什么有这样一个舍友……打给黄雪，她一开口就说：“嘿，稣，好久不见！”</p>
+<p>稣，好奇地问：“很久了吗？”</p>
+<p>黄雪：“是啊，自从我交到男朋友，就没见过面啊，超过两个月了吧！”</p>
+<p>稣：“什么鬼……你知道六舅的号码为什么变成空号吗？”</p>
+<p>黄雪：“呃……他不是挂了？”</p>
+<p>稣大吃一精：“挂了？！别开玩笑啊！”</p>
+<p>黄雪：“那家伙不是喜欢骑车上班，结果被地铁撞飞，挂了呗。”</p>
+<p>“擦！好像是有这肥屎，但怎么是地铁？好奇怪！”再问，“我妹呢？”</p>
+<p>黄雪：“这我不清楚，没怎么联系。”</p>
+<p>稣：“哦，那我们是怎么成为舍友的，我怎么都不记得？”</p>
+<p>黄雪：“不就是为了省钱吗？”</p>
+<p>“我擦，稣存款千万，缺这点宿舍费？说实话不行吗？”</p>
+<p>“哈哈哈……”黄雪银铃般笑个不停，好吧，这家伙虽然长得丑，起码声音很好听。</p>
+<p>稣：“笑够了吧！电话费也是要钱的。”</p>
+<p>“呵，哈哈，你看你，连电话费都要省，还吹牛！”黄雪稍微严肃了一下，继续说：“你不是离婚吗！每个月要付三万抚养费，还要还车贷和房贷，装？你继续装！”</p>
+<p>卧槽，稣突然想起来，鹰熊岛是个农村，以前政策不开放，生了二胎会被强行结扎，为了不结扎离的婚，然后要让脑波安心，啥房子、车子都归她，而且还要每个月交钱。</p>
+<p>稣一阵沉默，“……还有个问题，偷偷地问，我们没发生过什么吧？”</p>
+<p>“哈哈哈”又是那阵鄙视的笑声，“<a href="/2017/12/27/reconstructionism-poet-monkey-king/">干林涝</a>！不和你说梦话了，白白！”</p>
+<p>擦，虽然是一通不愉快的电话，但起码对起来一部分。稣立刻尝试破解附近的 WiFi 密码，很顺利找到一个信号是弱密码。</p>
+<p>连上网络后，打开 QQ 想查查其它真相，奇怪的是，群名单里居然空空的，以前加的基友群、联盟群啥的，都躲到“已退出的群”里了。</p>
+<p>居然没人鸟稣！？算了，先看电影吧。《灰静熊西蒙》好像还可以……</p>
+<p>第二天，WiFi 密码被改了……真特么小气，稣不就看了几集电影？后来发现，自己的手机原来早就开通无限流量套餐，以前不知道，真浪费！宿舍还是出不去，只能继续看电影消遣。</p>
+<p>这样的日子一天天过去，稣消耗完耐心，终于从阳台跳了下去……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/20/god-of-debug-2/" data-id="ckj637pus0145x0782eq3ggq4" class="article-share-link" data-share="baidu" data-title="八哥之神【2】">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/20/god-of-debug-2/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" rel="tag">心理邪稣</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" rel="tag">鲸神魂裂</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-bitch-identification-officer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/20/bitch-identification-officer/" class="article-date">
+  <time datetime="2019-01-20T06:20:19.000Z" itemprop="datePublished">2019-01-20 14:20:19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/">宇督观</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/20/bitch-identification-officer/">鉴喵稣</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题">问题</h2>
+<p>稣有个前女友，想鉴定一下。</p>
+<p>某日晚，稣在她宿舍，出了一道选择题：“好困，稣就在你这睡眯眯了？”</p>
+<h3 id="1-被拉黑">1. 被拉黑</h3>
+<p>她生气地说：“没想到你是这样的人！”稣觉得莫名其妙就几天不理她，过一段时间发现被她拉黑微信，再过几天 QQ 也被拉黑。</p>
+<h3 id="2-实力劝退">2. 实力劝退</h3>
+<p>讲各种道理，全方面分析，有凭有据，稣感动得内牛满面，哭着回自己宿舍睡。</p>
+<h3 id="3-睡就睡">3. 睡就睡</h3>
+<p>人非圣贤孰能不睡，一起睡个觉而已。</p>
+<p>然后真的只是睡觉……</p>
+<h3 id="4-陪聊通宵">4. 陪聊通宵</h3>
+<p>就是不睡！</p>
+<h2 id="分析">分析</h2>
+<p>很早以前有人告诉稣，头像是猫的女生一般比较骚，刚开始稣是不信的，后来发现可能有点道理。</p>
+<h3 id="1-绿茶喵">1. 绿茶喵</h3>
+<p>绿茶喵的主要特点是装纯。</p>
+<p>她们可能是由于早年错误的教育，不由自主很感性地装纯，送人绿茶，唇齿留香，所以可能是好人。</p>
+<p>也可能是因为某些心理问题，不得不掩饰，时间久了就是习惯性装，人格有明显缺陷，这种更可能不是好人。</p>
+<p>她们习惯站在道德高点，而且可能没有意识到自己的行为很喵。</p>
+<p>内心一般很自卑，比较容易玩老了就嫁给屌丝渣男。</p>
+<h3 id="2-心机喵">2. 心机喵</h3>
+<p>心机喵主要特点是擅长玩套路，会主动引导，软中带理性，大部分行为都是故意的，甚至会安排或提醒以后要怎么发展。</p>
+<p>特征一：卖乖。经常不假思索地说：是的、好的。只要故意说一个她不可能知道的事情，她习惯性地说“是的”，那就要留意。</p>
+<p>特征二：会夸人。经常说好听的话，偶尔会冒出一些正确的赞美。</p>
+<p>特征三：备胎多。</p>
+<p>特征四：不排斥开车和亲密行为，但上床会很谨慎，因为她们怕因此输了，也怕其他备胎知道。但只要她要的条件达到了，是愿意上床的，毕竟她也需要。</p>
+<p>特征五：刻意营造自己的道德高点，但她们明白自己的行为有点喵，可能会被身边的亲近的人说是心机喵，心里有芥蒂，如果智商不够，可能会自爆某人说她心机喵，以求得别人安慰和放下戒心。</p>
+<h3 id="3-喜欢稣的女人">3. 喜欢稣的女人</h3>
+<p>互相喜欢的人不会在这种时刻拒绝，最多只会留个心思观测对方。</p>
+<p>也有的，以为稣啥都没干是不喜欢她，第二天就和稣分手，稣明明没说谎啊！但这种是正常女人。</p>
+<h3 id="4-喜欢稣的女神">4. 喜欢稣的女神</h3>
+<p>实力观测……没话说。反正稣已经被收服了……</p>
+<h3 id="5-薛定谔的喵">5. 薛定谔的喵</h3>
+<p>女人心是难以捉摸的，反正稣看不懂，就把大部分女人归到这类。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/20/bitch-identification-officer/" data-id="ckj637pur0142x0782j17hoib" class="article-share-link" data-share="baidu" data-title="鉴喵稣">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/20/bitch-identification-officer/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" rel="tag">心理邪稣</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A3%85%E9%80%BC/" rel="tag">装逼</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lie-zi-yang-zhu-philosophy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/19/lie-zi-yang-zhu-philosophy/" class="article-date">
+  <time datetime="2019-01-19T15:09:50.000Z" itemprop="datePublished">2019-01-19 23:09:50</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/">宇督观</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/19/lie-zi-yang-zhu-philosophy/">《列子·杨朱》人生观</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="生">生</h2>
+<blockquote>
+<p>杨朱曰：“百年，寿之大齐。得百年者千无一焉。</p>
+</blockquote>
+<p>杨朱说：“一百岁，是寿命的极限。能活到一百岁的，一千人中难有一人。</p>
+<blockquote>
+<p>设有一者，孩抱以逮昏老，几居其半矣。</p>
+</blockquote>
+<p>即使有一人，他在孩童与衰老糊涂的时间，几乎占去了一半时间。</p>
+<blockquote>
+<p>夜眠之所弭，昼觉之所遗，又几居其半矣。</p>
+</blockquote>
+<p>再去掉夜间睡眠的时间，去掉白天休息的时间，又几乎占去了一半。</p>
+<blockquote>
+<p>痛疾哀苦，亡失忧惧，又几居其半矣。</p>
+</blockquote>
+<p>加上疾病痛苦、失意优愁，又几乎占去了一半。</p>
+<blockquote>
+<p>量十数年之中，然而自得亡介焉之虑者，亦亡一时之中尔。</p>
+</blockquote>
+<p>估计剩下的十多年中，舒适自得，没有丝毫顾虑的时间，也没有其中的一半。</p>
+<blockquote>
+<p>则人之生也奚为哉？奚乐哉？</p>
+</blockquote>
+<p>那么人生在世又为了什么呢？有什么快乐呢？</p>
+<blockquote>
+<p>为美厚尔，为声色尔，而美厚复不可常厌足，声色不可常玩闻。</p>
+</blockquote>
+<p>为了味美丰富的食物吧，为了悦耳的音乐与悦目的女色吧，可是味美丰富的食物并不能经常得到满足，悦耳的音乐与悦目的女色也不能经常听得到与玩得到。</p>
+<blockquote>
+<p>乃复为刑赏之所禁劝，名法之所进退，遑遑尔竞一时之虚誉，规死后之余荣，尔顺耳目之观听，惜身意之是非，徒失当年之至乐，不能自肆于一时，重囚累梏，何以异哉？</p>
+</blockquote>
+<p>再加上要被刑罚所禁止，被赏赐所规劝，被名誉所推进，被法网所阻遏，惶恐不安地去竞争一时的虚伪声誉，以图死后所留下的荣耀，孤独谨慎地去选择耳朵可以听的东西与眼睛可以看的东西，爱惜身体与意念的是与非，白白地丧失了当时最高的快乐，不能自由自在地活一段时间，这与罪恶深重的囚犯所关押的一层又一层的牢笼又有什么区别呢？</p>
+<blockquote>
+<p>太古之人知生之暂来，知死之暂住，故从心而动，不违自然所好，当身之娱非所去也，故不为名所劝；</p>
+</blockquote>
+<p>上古的人懂得出生是暂时的到来，懂得死亡是暂时的离去，因而随心所欲地行动，不违背自然的喜好，不减少今生的娱乐，所以不被名誉所规劝，顺从自然本性去游玩，</p>
+<blockquote>
+<p>从性而游，不逆万物所好，死后之名非所取也，故不为刑所及。名誉先后，年命多少，非所量也。”</p>
+</blockquote>
+<p>不违背万物的喜好，不博取死后的名誉，所以不被刑罚所牵连。名誉的先后，寿命的长短，都不是他们所考虑的。”</p>
+<h2 id="死">死</h2>
+<blockquote>
+<p>杨朱曰：“万物所异者生也，所同者死也。</p>
+</blockquote>
+<p>杨朱说：“万物所不同的是生存，所相同的是死亡。</p>
+<blockquote>
+<p>生则有贤愚、贵贱，是所异也；死则有臭腐、消灭，是所同也。</p>
+</blockquote>
+<p>生存就有贤有愚、有贵有贱，这是不同的；死亡就有腐烂发臭、消失灭亡，这是相同的。</p>
+<blockquote>
+<p>虽然，贤愚、贵贱非所能也，臭腐、消灭亦非所能也。</p>
+</blockquote>
+<p>即使是这样，贤愚与贵贱也不是人所能办到的，腐臭、消灭也不是人所能办到的。</p>
+<blockquote>
+<p>故生非所生，死非所死，贤非所贤，愚非所愚，贵非所贵，贱非所贱。</p>
+</blockquote>
+<p>所以生不是人所能生，死不是人所能死，贤不是人所能贤，愚不是人所能愚，贵不是人所能贵，贱也不是人所能贱。</p>
+<blockquote>
+<p>然而万物齐生齐死，齐贤齐愚，齐贵齐贱。</p>
+</blockquote>
+<p>然而万物的生与死是一样的，贤与愚是一样的，贵与贱也是一样的。</p>
+<blockquote>
+<p>十年亦死，百年亦死，仁圣亦死，凶愚亦死。</p>
+</blockquote>
+<p>活十年也是死，活百年也是死。仁人圣人也是死，凶人愚人也是死。</p>
+<blockquote>
+<p>生则尧舜，死则腐骨；生则桀纣，死则腐骨。</p>
+</blockquote>
+<p>活着是尧舜，死了便是腐骨；活着是桀纣，死了也是腐骨。</p>
+<blockquote>
+<p>腐骨一矣，孰知其异？且趣当生，奚逢死后？”</p>
+</blockquote>
+<p>腐骨是一样的，谁知道它们的差异呢？姑且追求今生，哪有工夫顾及死后？”</p>
+<h2 id="恋">恋</h2>
+<p>古语有云：书不读秦汉以下；意常在山水之间。爱不是光说不练；恋不能自私自利。稣一直记得吓大的校训：恋爱不息，止于上车。恋爱有益身心健康，失恋锻炼思维意志。有时候稣也会幻想能不能跳过恋爱的过程，直接让失恋强壮稣的心灵，但往往变成自恋，被人唾弃，所以这是不对的，还是要多找几个女朋友。</p>
+<h2 id="爱">爱</h2>
+<p>爱制造压力和动力……</p>
+<h2 id="性">性</h2>
+<p>以利相交，利尽则散；以势相交，势去则倾；以权相交，权失则弃；以情相交，情逝人伤；唯以性相交，成其久远。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/19/lie-zi-yang-zhu-philosophy/" data-id="ckj637pur013zx0786an74u9o" class="article-share-link" data-share="baidu" data-title="《列子·杨朱》人生观">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/19/lie-zi-yang-zhu-philosophy/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%AA%E6%82%9F/" rel="tag">怪悟</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-god-of-debug-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/19/god-of-debug-1/" class="article-date">
+  <time datetime="2019-01-18T16:15:10.000Z" itemprop="datePublished">2019-01-19 00:15:10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%90%93%E9%86%92/">吓醒</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/19/god-of-debug-1/">八哥之神【1】</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2018 年 9 月 11 日，稣开<a href="/2018/05/22/tesula/">特稣垃</a>回德国，遇到一个女孩想搭便车，看起来并不是德国人，但应该是个学生，稣就同意了。</p>
+<p>车开到德国大桥爬坡时，居然提示快没电了……难道多载一个人，里程就要打这么多折？为了省电下坡空档滑行，结果进入异次元空间……来到一个很陌生的村庄。</p>
+<p>下车给老爸打电话，居然能通，他说那个地方是汽车坟场，凡是过德国大桥正好没油的车就可能掉进去。</p>
+<p>这坑很大，而且历史悠久！进来的人都发展出一个村庄了，主要靠农业和修车维持生存。</p>
+<p>一个大伯说：“这里的科技很原始，你这车很难修，得在村里生活很久才可能离开了。”</p>
+<p>另一个大妈说：“呵呵，来到这里的人，还有离开的先例吗？”</p>
+<p>大伯看起来像修车工，稣好奇地问：“修好要多少钱？”</p>
+<p>大伯乐呵了：“钱是什么东西？这里没有银行、ATM，你上哪里取？就算取了，我们也不承认。”</p>
+<p>原来，这里陆陆续续进来三四百人，至今没有人成功离开。无法离开的原因可能是：在原始农业时代修好工业时代的车——难；修好之后，开出这个异次元世界——更难！</p>
+<p>不过大妈似乎并没有很绝望，眼神看起来很乐观，有种在这里一样能快乐地生活的气态。继续深聊，才发现当地有个传说：只要在这里生儿育女，就可以一个换一个，如果生两个孩子，那么在孩子都成年后，夫妻就可以离开，回到原来的世界。</p>
+<p>这时候，身边的女孩说话了：“我愿意和你结婚、生子，等孩子长大，争取他们的同意，我们就离开！”</p>
+<p>稣看着眼前这个相貌平平又没胸的女孩，惊讶不已！怎么能这么轻易就谈婚论嫁！？难道她看穿稣在现实世界有两千万存款？不对啊，外面的钱，在这里又没啥卵用。还是问点实际的：“都不知道你贵姓芳名呢？”</p>
+<p>“我叫吴情，爱情的情。”女孩问答道，口气很平静，像在念口头禅。</p>
+<p>稣隐约记得在现实世界，稣已经结婚生子，但还是好奇地问：“那你说说为什么要嫁给稣？我们才认识几分钟呢！”</p>
+<p>“首先，你有车，说明在实现世界里，能力没问题，而且对车肯定比我更了解；其次，从你的年纪和身材来看，保持得挺好，在这边主要是靠农业和修车业，这两者你都会比我有优势很多。然后，刚才你让我搭便车，说明心地善良。最后，我是读金融的，在这里刚开始用处不大，但会越来越有用，只要我们结合，我会用专业帮助你更好地规划生活、事业和资产。”</p>
+<p>听起来好像还不错，稣也一直很喜欢读财务、金融之类的女生，顿时有点心动，继续问：“你觉得我们在这里能活得好？”</p>
+<p>“一定比大部分人活得好！说不定，我们会成为这里的富豪家族。”</p>
+<p>哇嗷！成为一方富豪！？想想还有点期待……但还是有个隐患：“如果我们真的能活得很好，这里又是世外桃源，稣可能想留下，你会陪稣留下来吗？”</p>
+<p>“不会。”吴情无情地回答。</p>
+<p>稣：“为什么？”</p>
+<p>吴情：“这里的时代落后我们原来生活的时代太多，我只能接受一时的倒退，不能是一辈子！我必须回去。”</p>
+<p>“所以你，只是想互相利用，你并不喜欢稣，是吧？”稣失望地问。</p>
+<p>“可能吧，我不确定以后会不会喜欢你，但即使喜欢，以我现在的心思，我大概率要离开。”有一刹那，女孩露出了羞涩的表情。</p>
+<p>虽然有点诱惑，但稣最终还是做出决定，“对不起，稣不能娶你，没有感情基础，很为难，况且这个传说还没人实践过，说不定只是哪个有才的人，想出来娱乐大家的主意呢！”</p>
+<p>“我是 98 年的，虽然没有很漂亮，但很年轻，你居然能拒绝我这个年龄段的女孩子！”吴情有点意外，继续问：“我想听听你有什么更好的方案！”</p>
+<p>“稣没有什么更好的方案！不过很感谢你在某些程度上，对稣的肯定，作为答谢，车就送你吧！稣是暴走族，每次暴走灵思飞扬说不定可以穿越时空，想用走的试试……”</p>
+<p>吴情忍不住笑了，可能是笑稣天真，但眼神里还带着一丝丝鄙视……不过，稣却发现她笑起来挺美的。</p>
+<p>稣：“你要多笑！很美。再见！”</p>
+<p>“好吧，再见！”她又笑了一下，这次没有鄙视。稣记住了这个年轻女孩的笑容。</p>
+<p>说完，稣不顾一切反对，往东直走，三天三夜之后，终于累死在路上。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/19/god-of-debug-1/" data-id="ckj637puq013wx078hjy733ab" class="article-share-link" data-share="baidu" data-title="八哥之神【1】">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/19/god-of-debug-1/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%93%BE/" rel="tag">鲸神链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" rel="tag">鲸神魂裂</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-reconstructionism-poet-grass" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/15/reconstructionism-poet-grass/" class="article-date">
+  <time datetime="2019-01-15T01:37:00.000Z" itemprop="datePublished">2019-01-15 09:37:00</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/15/reconstructionism-poet-grass/">诗盗·草</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>《#诗盗#·草》：心怀蒙古大草原，脚踩都市小草团。心旷神怡思飞扬，每天冒死来上班。</p>
+<h2 id="注解">注解</h2>
+<p>没错，“小草青青，脚下留情”这是反人类的标语，人类自古就喜欢踩草地。</p>
+<blockquote>
+<p>可是人人都踩，草地就坏了鸭！草草这么可爱你怎么可以踩？</p>
+</blockquote>
+<p>草，之所以被踩坏，是因为很多人焦虑总是走同一条最短路线。而稣不走寻常路，每天走不同曲线，踩不同的位置。草草这么口爱，稣就是要踩，只要不被人捅死就可以愉快地去上班。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/15/reconstructionism-poet-grass/" data-id="ckj637pup013tx07849q4h7ma" class="article-share-link" data-share="baidu" data-title="诗盗·草">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/15/reconstructionism-poet-grass/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%96%B7/" rel="tag">喷</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-reconstructionism-poet-two-ghosts" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/13/reconstructionism-poet-two-ghosts/" class="article-date">
+  <time datetime="2019-01-13T04:20:00.000Z" itemprop="datePublished">2019-01-13 12:20:00</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/reconstructionism-poet-two-ghosts/">诗盗·记一次见鬼吓醒</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>《#诗盗#·记一次见鬼吓醒》：鳏寡残废天不欢，绝症孤独神作伴。纵有二逼快乐多，情智双高命却短。</p>
+<h2 id="注解">注解</h2>
+<p>梦见两个过世的朋友，一个横结肠癌，一个胃癌……醒来又想起鳏寡效应……</p>
+<p>愿科技进步，人间应该只有一种绝症，叫：活腻了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/13/reconstructionism-poet-two-ghosts/" data-id="ckj637pup013qx0788afk4g2p" class="article-share-link" data-share="baidu" data-title="诗盗·记一次见鬼吓醒">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/13/reconstructionism-poet-two-ghosts/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AD%BB%E7%A5%9E/" rel="tag">死神</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-reconstructionism-poet-haze" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/12/reconstructionism-poet-haze/" class="article-date">
+  <time datetime="2019-01-12T05:54:00.000Z" itemprop="datePublished">2019-01-12 13:54:00</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/12/reconstructionism-poet-haze/">诗盗·大霾苍蝇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>《#诗盗#·大霾苍蝇》：碉堡千栋插云立，雾霾万里从天倾。晨跑打球不怕病？盖被睡眯保小命。</p>
+<h2 id="注解">注解</h2>
+<p>霹雳角色“大漠苍鹰”的诗号：</p>
+<blockquote>
+<p>太行千仞插云立，黄河万里从天倾。冲霄岂为层嶂碍？击光翻浪任翱行。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/12/reconstructionism-poet-haze/" data-id="ckj637puo013nx0782wvohfor" class="article-share-link" data-share="baidu" data-title="诗盗·大霾苍蝇">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/12/reconstructionism-poet-haze/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%96%B7/" rel="tag">喷</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9C%B9%E9%9B%B3/" rel="tag">霹雳</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-reconstructionism-poet-ceh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/05/reconstructionism-poet-ceh/" class="article-date">
+  <time datetime="2019-01-05T05:41:28.000Z" itemprop="datePublished">2019-01-05 13:41:28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/05/reconstructionism-poet-ceh/">诗盗·黑客求道</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>《#诗盗#·黑客求道》：数十年来炼黑客，求知问心不可得。情劫歧途会有期，直见正道更无疑。</p>
+<h2 id="注解">注解</h2>
+<p>霹雳角色“剑禅觅心”的诗号：</p>
+<blockquote>
+<p>数甲子来寻剑客，空劫佛尘会有期。求道觅心不可得，直见禅锋更无疑。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/05/reconstructionism-poet-ceh/" data-id="ckj637pun013kx0782c7k1o60" class="article-share-link" data-share="baidu" data-title="诗盗·黑客求道">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/05/reconstructionism-poet-ceh/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9C%B9%E9%9B%B3/" rel="tag">霹雳</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-umutech-eosio-smart-contracts-development-beginners-guide" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" class="article-date">
+  <time datetime="2019-01-04T14:25:47.000Z" itemprop="datePublished">2019-01-04 22:25:47</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UMUTech/">UMUTech</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/">程序员鼓励师系列：EOSIO 智能合约开发从入门到入定</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>作者: UMU @ MEET.ONE 实验室</p>
+</blockquote>
+<h2 id="常规入门流程">常规入门流程</h2>
+<p>经典三步：</p>
+<ol>
+<li>
+<p>了解区块链基本概念，了解 EOS 基本情况；</p>
+</li>
+<li>
+<p>看<a target="_blank" rel="noopener" href="https://developers.eos.io/eosio-cpp/docs">官方开发者文档</a>；</p>
+</li>
+<li>
+<p>开始愉快地写代码。</p>
+</li>
+</ol>
+<p>但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了……</p>
+<h2 id="这不是-C-，这不是-C-，这真是不是-C">这不是 C++，这不是 C++，这真是不是 C++</h2>
+<p>不信？我们就来试一试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: cannot use &#39;try&#39; with exceptions disabled</span><br><span class="line">        try &#123;</span><br><span class="line">        ^</span><br></pre></td></tr></table></figure>
+<p>智能合约的编译目标是 WASM 文件，最终要在 WASM 的 VM 里运行，比如 <a target="_blank" rel="noopener" href="https://github.com/WebAssembly/wabt">wabt</a>，这和常规情况下使用原生 C++ 开发可执行程序、静态库、动态库等，有很大不同。</p>
+<p>受限部分包括：</p>
+<ul>
+<li>
+<p>语言特性。比如上面举例的 try。</p>
+</li>
+<li>
+<p>可调用外部函数。比如 CRT 的 rand 函数，再比如您想用 socket 自由通信……没门。</p>
+</li>
+<li>
+<p>内存访问。这个比较难解释，后面再说。</p>
+</li>
+</ul>
+<p>如果您学过 Golang、Python、nodejs、Java 或其它相近语言，转到智能合约开发，可以说是轻而易举。理由如下：</p>
+<ol>
+<li>
+<p>智能合约关注业务逻辑，和大部分脚本语言类似。</p>
+</li>
+<li>
+<p>智能合约有很强的约束范围，API 很有限，不会要求记忆大量知识。举个例子，它可以使用 boost，但也只是子集，无法使用完全的 boost。</p>
+</li>
+<li>
+<p>智能合约有很强的套路，代码是满满的既定格式。熟悉 Hello world，会用基本的命令行工具进行测试，最多只需要 2 天，就会发出“原来这么简单”的感叹。</p>
+</li>
+</ol>
+<h2 id="【高级话题】关于-WASM">【高级话题】关于 WASM</h2>
+<h3 id="1-多语言支持">1. 多语言支持</h3>
+<p>如果您学过 Golang、Rust 可能会注意到，它们可以编译成 WASM 文件。比如 Golang 的编译命令为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GOOS=js GOARCH=wasm go build -o hello.wasm</span><br></pre></td></tr></table></figure>
+<p>但是找个 Hello world 编译一下，您可能会哭，产生的 WASM 文件有 2.3MB，就获得一个打印信息……（EOS 基本概念：RAM 挺贵的。）</p>
+<p>虽然现状是 C++ 一枝独秀，但未来可能会有人开发专门的编译器支持 Golang、Rust 等语言开发 EOS 智能合约。</p>
+<h3 id="2-WASM-逆向">2. WASM 逆向</h3>
+<p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode</a> 安装插件后可以直接打开 WASM 文件，显示 WAST 代码，比如我们随便打开一个 hello.wasm，滚动到末尾，可能会看到以下两行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(data (i32.const 8192) &quot;read\00&quot;)</span><br><span class="line">(data (i32.const 8197) &quot;get\00malloc_from_freed was designed to only be called after _heap was completely allocated\00&quot;))</span><br></pre></td></tr></table></figure>
+<p>下面我们写个 C++ 代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">char</span>*&gt;(<span class="number">8192</span>);</span><br><span class="line">eosio::print(p);</span><br></pre></td></tr></table></figure>
+<p>以上代码，打印出 <code>read</code>。如果把 <code>8192</code> 改为 <code>8197</code>，则打印 <code>get</code>；改为 <code>8201</code>，打印 <code>malloc_from_freed was designed to only be called after _heap was completely allocated</code>。</p>
+<p>这个例子可能吓倒大家，特别交代下，一般开发中，较难遇到逆向……只是想说明 WASM 的内存管理和常规 C++ 开发的可执行程序是不同的，后者把指针指向 8192，是 Process Working Set 的地址，通常来说去读这么低的地址，后果极可能是读异常，挂掉。</p>
+<p><strong>划重点</strong>：虽然你用 C++ 写代码，但编译后是 WASM 二进制编码，运行时使用 VM，受控性很强，降低了开发难度，也杜绝很多安全问题。</p>
+<h3 id="3-性能问题">3. 性能问题</h3>
+<p>为了讨好 Python 程序员，下面用 Python 来写个开平方运算，有这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">print(math.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<p>也有这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">print(numpy.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<p>他们有个共同点——很快……相对 C++ 写的！！有点难以理解？</p>
+<p>Python 的 sqrt 函数，其实都是用 C 语言实现的，最终都是调用解释器里的本地代码，速度很快。</p>
+<p>原生 C++ 写的本地程序，几乎肯定是比 Python 快的，但我们前面说过：智能合约的 C++ 不是常规的 C++，当它被编译成 WASM 后，我们去看 WAST 代码，会发现 sqrt 的实现整个被塞进 WASM 里，它最终要用 VM 来执行，当然没有 Python 解释器快了！</p>
+<h3 id="4-设计原则">4. 设计原则</h3>
+<p>打开任意 WASM 文件，可以看到里面很多 <code>(import</code> 开头的行，这些都是原生 C++ 实现的 API，它们的执行速度就是本地代码的速度，对应<a target="_blank" rel="noopener" href="https://eosio.github.io/eosio.cdt/modules.html">官网 API 文档</a>里的 API。</p>
+<p>有前面的性能问题，我们不禁要问 EOS 为什么不多做点 API 来提高性能？这是因为维护少量 API 代价比较可控，数量一多就有版本问题，各节点可能因为版本不同步而无法达成共识。</p>
+<p>另外，目前的 <a target="_blank" rel="noopener" href="https://github.com/WebAssembly/wabt">wabt</a> 功能强大，性能也过得去，对于 sqrt 此类可能并不常用的数学函数，即使用原生 C++ 实现了，性能提升带来的好处，也无法平衡多版本可能带来的风险。</p>
+<p>原则上，BP 之间快速达成共识，提升 TPS 才是更值得做的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" data-id="ckj637pum013hx0784sn471mf" class="article-share-link" data-share="baidu" data-title="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B4%97%E8%84%91/" rel="tag">洗脑</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B0%83%E7%A0%94/" rel="tag">调研</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/18/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/20/">下一页 &raquo;</a>
+  </nav>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/UMUTech/">UMUTech</a><span class="category-list-count">127</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/U%E5%A2%A8/">U墨</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%93%E9%86%92/">吓醒</a><span class="category-list-count">76</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/">宇督观</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a><span class="category-list-count">308</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atl/" rel="tag">atl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/" rel="tag">boost</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpp/" rel="tag">cpp</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dev/" rel="tag">dev</a><span class="tag-list-count">49</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dotnet/" rel="tag">dotnet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/embedded/" rel="tag">embedded</a><span class="tag-list-count">38</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lib/" rel="tag">lib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">38</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/" rel="tag">macos</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openwrt/" rel="tag">openwrt</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ops/" rel="tag">ops</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/" rel="tag">optimization</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspbian/" rel="tag">raspbian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming-media/" rel="tag">streaming-media</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a><span class="tag-list-count">156</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E9%B9%B0%E5%9C%A3/" rel="tag">七鹰圣</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%94%E8%A8%80/" rel="tag">五言</a><span class="tag-list-count">79</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%9C%E5%93%81/" rel="tag">作品</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%9A%E9%A2%98/" rel="tag">做题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%96%B7/" rel="tag">喷</a><span class="tag-list-count">128</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%A3%E5%B0%8F%E5%BC%80/" rel="tag">圣小开</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%93%E8%A8%80/" rel="tag">寓言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E8%81%94/" rel="tag">对联</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" rel="tag">心理邪稣</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%AA%E6%82%9F/" rel="tag">怪悟</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%93%E5%98%B4%E7%82%AE/" rel="tag">打嘴炮</a><span class="tag-list-count">47</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%A8%E8%B8%A2/" rel="tag">挨踢</a><span class="tag-list-count">100</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E8%B5%B0/" rel="tag">暴走</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%8C%E8%AF%84/" rel="tag">歌评</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%BB%E7%A5%9E/" rel="tag">死神</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A5%E5%B7%B4%E5%A8%83/" rel="tag">泥巴娃</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%97%E8%84%91/" rel="tag">洗脑</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%80%B6%E4%B9%8E%E7%9F%A5%E7%A8%A3/" rel="tag">耶乎知稣</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%80%BC/" rel="tag">装逼</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%8D/" rel="tag">词</a><span class="tag-list-count">73</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E7%A0%94/" rel="tag">调研</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8F%E5%AD%90%E9%82%AA%E7%A8%A3/" rel="tag">量子邪稣</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%BD%E5%8D%97%E8%AF%AD/" rel="tag">闽南语</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9C%B9%E9%9B%B3/" rel="tag">霹雳</a><span class="tag-list-count">57</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%93%BE/" rel="tag">鲸神链</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" rel="tag">鲸神魂裂</a><span class="tag-list-count">45</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/armbian/" style="font-size: 10.91px;">armbian</a> <a href="/tags/atl/" style="font-size: 10px;">atl</a> <a href="/tags/blockchain/" style="font-size: 14.24px;">blockchain</a> <a href="/tags/boost/" style="font-size: 10.91px;">boost</a> <a href="/tags/c/" style="font-size: 10.61px;">c</a> <a href="/tags/cpp/" style="font-size: 14.55px;">cpp</a> <a href="/tags/cryptology/" style="font-size: 11.21px;">cryptology</a> <a href="/tags/debug/" style="font-size: 16.06px;">debug</a> <a href="/tags/dev/" style="font-size: 18.18px;">dev</a> <a href="/tags/dotnet/" style="font-size: 10.3px;">dotnet</a> <a href="/tags/embedded/" style="font-size: 16.97px;">embedded</a> <a href="/tags/ffmpeg/" style="font-size: 11.52px;">ffmpeg</a> <a href="/tags/go/" style="font-size: 11.21px;">go</a> <a href="/tags/lib/" style="font-size: 10px;">lib</a> <a href="/tags/linux/" style="font-size: 16.97px;">linux</a> <a href="/tags/machine-learning/" style="font-size: 10.3px;">machine-learning</a> <a href="/tags/macos/" style="font-size: 11.21px;">macos</a> <a href="/tags/mongodb/" style="font-size: 12.12px;">mongodb</a> <a href="/tags/nodejs/" style="font-size: 12.12px;">nodejs</a> <a href="/tags/openwrt/" style="font-size: 15.76px;">openwrt</a> <a href="/tags/ops/" style="font-size: 13.94px;">ops</a> <a href="/tags/optimization/" style="font-size: 12.73px;">optimization</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspbian/" style="font-size: 10px;">raspbian</a> <a href="/tags/router/" style="font-size: 11.52px;">router</a> <a href="/tags/rust/" style="font-size: 10.91px;">rust</a> <a href="/tags/security/" style="font-size: 10.3px;">security</a> <a href="/tags/streaming-media/" style="font-size: 12.12px;">streaming-media</a> <a href="/tags/windows/" style="font-size: 15.45px;">windows</a> <a href="/tags/%E4%B8%83%E5%BE%8B/" style="font-size: 20px;">七律</a> <a href="/tags/%E4%B8%83%E9%B9%B0%E5%9C%A3/" style="font-size: 12.12px;">七鹰圣</a> <a href="/tags/%E4%BA%94%E8%A8%80/" style="font-size: 19.09px;">五言</a> <a href="/tags/%E4%BD%9C%E5%93%81/" style="font-size: 11.82px;">作品</a> <a href="/tags/%E5%81%9A%E9%A2%98/" style="font-size: 10.3px;">做题</a> <a href="/tags/%E5%96%B7/" style="font-size: 19.7px;">喷</a> <a href="/tags/%E5%9C%A3%E5%B0%8F%E5%BC%80/" style="font-size: 12.73px;">圣小开</a> <a href="/tags/%E5%AF%93%E8%A8%80/" style="font-size: 10px;">寓言</a> <a href="/tags/%E5%AF%B9%E8%81%94/" style="font-size: 11.21px;">对联</a> <a href="/tags/%E5%BD%B1%E8%AF%84/" style="font-size: 10.3px;">影评</a> <a href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" style="font-size: 17.27px;">心理邪稣</a> <a href="/tags/%E6%80%AA%E6%82%9F/" style="font-size: 15.15px;">怪悟</a> <a href="/tags/%E6%89%93%E5%98%B4%E7%82%AE/" style="font-size: 17.88px;">打嘴炮</a> <a href="/tags/%E6%8C%A8%E8%B8%A2/" style="font-size: 19.39px;">挨踢</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10.91px;">数学</a> <a href="/tags/%E6%9A%B4%E8%B5%B0/" style="font-size: 12.12px;">暴走</a> <a href="/tags/%E6%AD%8C%E8%AF%84/" style="font-size: 10px;">歌评</a> <a href="/tags/%E6%AD%BB%E7%A5%9E/" style="font-size: 12.42px;">死神</a> <a href="/tags/%E6%B3%A5%E5%B7%B4%E5%A8%83/" style="font-size: 13.64px;">泥巴娃</a> <a href="/tags/%E6%B4%97%E8%84%91/" style="font-size: 13.33px;">洗脑</a> <a href="/tags/%E8%80%B6%E4%B9%8E%E7%9F%A5%E7%A8%A3/" style="font-size: 13.03px;">耶乎知稣</a> <a href="/tags/%E8%A3%85%E9%80%BC/" style="font-size: 15.15px;">装逼</a> <a href="/tags/%E8%AF%8D/" style="font-size: 18.79px;">词</a> <a href="/tags/%E8%B0%83%E7%A0%94/" style="font-size: 14.85px;">调研</a> <a href="/tags/%E9%87%8F%E5%AD%90%E9%82%AA%E7%A8%A3/" style="font-size: 12.42px;">量子邪稣</a> <a href="/tags/%E9%87%91%E8%9E%8D/" style="font-size: 16.36px;">金融</a> <a href="/tags/%E9%97%BD%E5%8D%97%E8%AF%AD/" style="font-size: 13.64px;">闽南语</a> <a href="/tags/%E9%9C%B9%E9%9B%B3/" style="font-size: 18.48px;">霹雳</a> <a href="/tags/%E9%B2%B8%E7%A5%9E%E9%93%BE/" style="font-size: 16.67px;">鲸神链</a> <a href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" style="font-size: 17.58px;">鲸神魂裂</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">十月 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">九月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">八月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">四月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">三月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">二月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">十二月 2012</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">五月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">四月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/02/">二月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/08/">八月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">六月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/03/">三月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/06/umutech-boost-3-installation-on-linux/">Boost【3】在 Linux 上安装</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/04/god-of-debug-side-story-10/">八哥之神【番外篇10】</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/26/god-of-debug-prequel-20/">八哥之神前传【20】</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/20/god-of-debug-prequel-19/">八哥之神前传【19】</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/12/god-of-debug-prequel-18/">八哥之神前传【18】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://my.oschina.net/umu618" target="_blank">UMUTech</a>
+          </li>
+        
+          <li>
+            <a href="http://blog.vichamp.com/" target="_blank">叹为观止</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+	  <a href="https://beian.miit.gov.cn/" target="_blank">闽ICP备14015033号-1</a>
+	  &copy; 2008-2021 圣小开<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+	  <p>Hosted by <a target="_blank" rel="noopener" href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<script type="text/javascript"> 
+  (function(){ 
+  var appid = 'cytnUIVvU'; 
+  var conf = 'prod_ec4a41b6dd2a5922bc15dea6d7b0cab4'; 
+  var width = window.innerWidth || document.documentElement.clientWidth; 
+  if (width < 960) {
+  var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.charset = 'utf-8';
+  script.id = 'changyan_mobile_js';
+  script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+  head.appendChild(script);
+  } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
