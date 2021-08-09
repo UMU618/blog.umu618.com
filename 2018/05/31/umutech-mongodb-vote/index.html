@@ -14,7 +14,7 @@
 <meta property="og:description" content="为了快速了解 MongoDB 选举机制，在网上找了一些文章来学习，后来发现里面提到的一些机制都过时了，尝试看代码了解，发现协议有 PV0 和 PV1 两种。 代码：https:&#x2F;&#x2F;github.com&#x2F;mongodb&#x2F;mongo&#x2F;blob&#x2F;r3.6.5&#x2F;src&#x2F;mongo&#x2F;db&#x2F;repl&#x2F;topology_coordinator.cpp 一篇比较新的参考文章：https:&#x2F;&#x2F;blog.csdn.n">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-05-31T10:25:32.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.633Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.912Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="mongodb">
@@ -41,7 +41,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,8 +116,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>为了快速了解 MongoDB 选举机制，在网上找了一些文章来学习，后来发现里面提到的一些机制都过时了，尝试看代码了解，发现协议有 PV0 和 PV1 两种。</p>
-<p>代码：<a target="_blank" rel="noopener" href="https://github.com/mongodb/mongo/blob/r3.6.5/src/mongo/db/repl/topology_coordinator.cpp">https://github.com/mongodb/mongo/blob/r3.6.5/src/mongo/db/repl/topology_coordinator.cpp</a></p>
-<p>一篇比较新的参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wentyoon/article/details/78986174">https://blog.csdn.net/wentyoon/article/details/78986174</a></p>
+<p>代码：<a href="https://github.com/mongodb/mongo/blob/r3.6.5/src/mongo/db/repl/topology_coordinator.cpp" target="_blank" rel="noopener">https://github.com/mongodb/mongo/blob/r3.6.5/src/mongo/db/repl/topology_coordinator.cpp</a></p>
+<p>一篇比较新的参考文章：<a href="https://blog.csdn.net/wentyoon/article/details/78986174" target="_blank" rel="noopener">https://blog.csdn.net/wentyoon/article/details/78986174</a></p>
 <p>如果新选举出的主节点立马挂掉，至少需要 30s 重新选主，这个是由 leaseTime 常量决定的：</p>
 <p>const Seconds TopologyCoordinator::VoteLease::leaseTime = Seconds(30);</p>
 <p>PV0 时，一个反对会将最终票数减 10000，即在绝大多数情况下,只要有节点反对，请求的节点就不能成为主节点，由 prepareElectResponse 函数实现，里面有不少 vote = -10000;，PV1 版本取消了否决票。</p>
@@ -126,7 +126,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/05/31/umutech-mongodb-vote/" data-id="ckj637psl00v4x078487o817o" class="article-share-link" data-share="baidu" data-title="学习 MongoDB 选举机制">分享到</a>
+        <a data-url="//blog.umu618.com/2018/05/31/umutech-mongodb-vote/" data-id="ckdw5bc0000ve1sij8cn70c6t" class="article-share-link" data-share="baidu" data-title="学习 MongoDB 选举机制">分享到</a>
       
 
       

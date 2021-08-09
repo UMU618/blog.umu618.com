@@ -14,11 +14,11 @@
 <meta property="og:description" content="发现问题，2012-12-11 18:16:00 快游（网游加速器）包含一个 LSP，属于加速核心组件，在测试 LSP 期间，发现一个奇怪的现象：反注册它，并 netsh winsock reset 加重启好几次……依然有程序加载它。用 Process Explorer 查看是：IpOverUsbSvc.exe 和 daemonu.exe。把 LSP 的 DLL 文件删掉，再重启，可以消灭这个奇怪">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2013-03-26T15:24:30.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.570Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.819Z">
 <meta property="article:author" content="圣小开">
+<meta property="article:tag" content="debug">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
-<meta property="article:tag" content="debug">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@UMU618">
   
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,15 +116,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="发现问题，2012-12-11-18-16-00">发现问题，2012-12-11 18:16:00</h2>
+        <h2>发现问题，2012-12-11 18:16:00</h2>
 <p>快游（网游加速器）包含一个 LSP，属于加速核心组件，在测试 LSP 期间，发现一个奇怪的现象：反注册它，并 netsh winsock reset 加重启好几次……依然有程序加载它。用 Process Explorer 查看是：IpOverUsbSvc.exe 和 daemonu.exe。把 LSP 的 DLL 文件删掉，再重启，可以消灭这个奇怪的现象。但后来想重现这个怪现象时，却无法重现。</p>
-<h2 id="重现和解决问题，2012-12-25-15-38-00">重现和解决问题，2012-12-25 15:38:00</h2>
+<h2>重现和解决问题，2012-12-25 15:38:00</h2>
 <p>问题自然重现，继续研究。这两个进程对应的服务名是：IpOverUsbSvc 和 nvUpdatusService。手动重启这两个服务后，即不再加载 LSP。推理：这两个服务很可能每次重启机器时都没有正常关闭，系统提供了某种机制让他们在下一次重启后快速恢复了运行现场（保留了有 LSP 注册时的环境）。</p>
-<h2 id="分析问题，2013-03-26-23-24-30">分析问题，2013-03-26 23:24:30</h2>
+<h2>分析问题，2013-03-26 23:24:30</h2>
 <p>时隔三个月，偶然看到介绍&quot;混合式关机&quot;的文章，恍然大悟，原来是这货引发的八哥！</p>
 <blockquote>
 <p>在安装 Win8 后，很多人都体验到了其开关机惊人的速度，尤其是开机速度，相比 Win7 之下，它提升的不止是一点半点。在某些超极本和配备了 SSD 的机器上，其开关机速度可以在数秒以内。例如 Surface Pro，其实测系统引导速度为2秒，从启动到自动登录到开始屏幕只要6秒。</p>
-<p>究竟是什么技术提升了 Win8 的开关机速度呢？如果要用最简单的一句话概括，那应该是&quot;系统会话休眠&quot;，或者更简单的，“混合式关机”。</p>
+<p>究竟是什么技术提升了 Win8 的开关机速度呢？如果要用最简单的一句话概括，那应该是&quot;系统会话休眠&quot;，或者更简单的，&quot;混合式关机&quot;。</p>
 <p>在 以往的 Windows OS 中，典型的关机顺序为：</p>
 <ol>
 <li>
@@ -177,7 +177,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2013/03/26/umutech-service-not-unload-lsp/" data-id="ckj637pnw008px078djus8yxh" class="article-share-link" data-share="baidu" data-title="卸载 LSP 并重启系统依然有服务加载它">分享到</a>
+        <a data-url="//blog.umu618.com/2013/03/26/umutech-service-not-unload-lsp/" data-id="ckdw5bbsm00bl1sijfx6m05j9" class="article-share-link" data-share="baidu" data-title="卸载 LSP 并重启系统依然有服务加载它">分享到</a>
       
 
       

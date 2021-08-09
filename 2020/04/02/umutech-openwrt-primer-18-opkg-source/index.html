@@ -6,15 +6,15 @@
   
   <title>跟 UMU 一起玩 OpenWRT（入门篇18）：更换 opkg 源 | UMU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="问题 默认源在国内访问速度普遍比较慢。 PS: 本篇理论上应该几年前就写的……以前经常用台湾省的网络，没发现，现在补一篇。 解决  更换清华大学源  12sed -i &amp;#x27;s&#x2F;downloads\.openwrt\.org&#x2F;mirrors\.tuna\.tsinghua\.edu\.cn\&#x2F;openwrt&#x2F;g&amp;#x27; &#x2F;etc&#x2F;opkg&#x2F;distfeeds.confopkg updat">
+  <meta name="description" content="问题 默认源在国内访问速度普遍比较慢。 PS: 本篇理论上应该几年前就写的……以前经常用台湾省的网络，没发现，现在补一篇。 解决  更换清华大学源  12sed -i &#39;s&#x2F;downloads\.openwrt\.org&#x2F;mirrors\.tuna\.tsinghua\.edu\.cn\&#x2F;openwrt&#x2F;g&#39; &#x2F;etc&#x2F;opkg&#x2F;distfeeds.confopkg update  使用 http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跟 UMU 一起玩 OpenWRT（入门篇18）：更换 opkg 源">
 <meta property="og:url" content="//blog.umu618.com/2020/04/02/umutech-openwrt-primer-18-opkg-source/">
 <meta property="og:site_name" content="UMU">
-<meta property="og:description" content="问题 默认源在国内访问速度普遍比较慢。 PS: 本篇理论上应该几年前就写的……以前经常用台湾省的网络，没发现，现在补一篇。 解决  更换清华大学源  12sed -i &amp;#x27;s&#x2F;downloads\.openwrt\.org&#x2F;mirrors\.tuna\.tsinghua\.edu\.cn\&#x2F;openwrt&#x2F;g&amp;#x27; &#x2F;etc&#x2F;opkg&#x2F;distfeeds.confopkg updat">
+<meta property="og:description" content="问题 默认源在国内访问速度普遍比较慢。 PS: 本篇理论上应该几年前就写的……以前经常用台湾省的网络，没发现，现在补一篇。 解决  更换清华大学源  12sed -i &#39;s&#x2F;downloads\.openwrt\.org&#x2F;mirrors\.tuna\.tsinghua\.edu\.cn\&#x2F;openwrt&#x2F;g&#39; &#x2F;etc&#x2F;opkg&#x2F;distfeeds.confopkg update  使用 http">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-02T14:20:19.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.680Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.990Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="embedded">
 <meta property="article:tag" content="linux">
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,26 +116,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="问题">问题</h2>
+        <h2>问题</h2>
 <p>默认源在国内访问速度普遍比较慢。</p>
 <p>PS: 本篇理论上应该几年前就写的……以前经常用台湾省的网络，没发现，现在补一篇。</p>
-<h2 id="解决">解决</h2>
+<h2>解决</h2>
 <ol>
 <li>更换清华大学源</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/downloads\.openwrt\.org/mirrors\.tuna\.tsinghua\.edu\.cn\/openwrt/g&#x27;</span> /etc/opkg/distfeeds.conf</span><br><span class="line">opkg update</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/downloads\.openwrt\.org/mirrors\.tuna\.tsinghua\.edu\.cn\/openwrt/g'</span> /etc/opkg/distfeeds.conf</span><br><span class="line">opkg update</span><br></pre></td></tr></table></figure></p>
 <ol start="2">
 <li>使用 https</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg install libustream-mbedtls</span><br><span class="line">sed -i <span class="string">&#x27;s/http:/https:/g&#x27;</span> /etc/opkg/distfeeds.conf</span><br></pre></td></tr></table></figure>
-<h2 id="相关">相关</h2>
-<p>如果您想把整个软件源下载到本地，可以参考：<a target="_blank" rel="noopener" href="https://github.com/UMU618/openwrt-opkg-cache">https://github.com/UMU618/openwrt-opkg-cache</a></p>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg install libustream-mbedtls</span><br><span class="line">sed -i <span class="string">'s/http:/https:/g'</span> /etc/opkg/distfeeds.conf</span><br></pre></td></tr></table></figure></p>
+<h2>相关</h2>
+<p>如果您想把整个软件源下载到本地，可以参考：<a href="https://github.com/UMU618/openwrt-opkg-cache" target="_blank" rel="noopener">https://github.com/UMU618/openwrt-opkg-cache</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2020/04/02/umutech-openwrt-primer-18-opkg-source/" data-id="ckj637ptn00zpx07871sh5e43" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇18）：更换 opkg 源">分享到</a>
+        <a data-url="//blog.umu618.com/2020/04/02/umutech-openwrt-primer-18-opkg-source/" data-id="ckdw5bc5l019h1sij2hbs6ktl" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇18）：更换 opkg 源">分享到</a>
       
 
       

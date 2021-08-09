@@ -35,7 +35,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -112,14 +112,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·某些节约是另一种浪费》：回扣肥水流，电器连连修。何物足堪用？好像是木有……</p>
-<h2 id="注解">注解</h2>
+<h2>注解</h2>
 <p>有些公司买一些洋乐射给员工用，以为可以节约成本，结果连连坏掉，反复修乐射的时间难道不是成本？再认真想想，公司有什么东西称心好用的？好像没有！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/22/reconstructionism-poet-save-sth-to-waste-another/" data-id="ckj637pph00gyx078e59qdeko" class="article-share-link" data-share="baidu" data-title="诗盗·某些节约是另一种浪费">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/22/reconstructionism-poet-save-sth-to-waste-another/" data-id="ckdw5bbur00h51sijhozeal8j" class="article-share-link" data-share="baidu" data-title="诗盗·某些节约是另一种浪费">分享到</a>
       
 
       
@@ -163,7 +163,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>UMU 2010 年初就玩 OpenWRT/DD-WRT 了，蛋似编译东西还是初学者，本文纯属蛋疼的过程，欢迎批评教育，谢谢……</p>
-<p>首先到 <a target="_blank" rel="noopener" href="https://github.com/pepe2k/u-boot_mod">https://github.com/pepe2k/u-boot_mod</a> 看明白作者的说明。这里简单说一下原理：固件（firmware）刷坏，但 U-Boot 没坏，这是半砖，可以用 TTL 线连路由器，通过 U-Boot 的功能刷好 firmware。如果两者都坏了，叫全砖，只能把 Flash 拆下来，用编程器刷好 U-Boot 和 firmware。不死 U-Boot 就是修改了 U-Boot 的实现，使我们可以用 RJ-45 网线来救砖，省去拆机搭 TTL 线的麻烦。</p>
+<p>首先到 <a href="https://github.com/pepe2k/u-boot_mod" target="_blank" rel="noopener">https://github.com/pepe2k/u-boot_mod</a> 看明白作者的说明。这里简单说一下原理：固件（firmware）刷坏，但 U-Boot 没坏，这是半砖，可以用 TTL 线连路由器，通过 U-Boot 的功能刷好 firmware。如果两者都坏了，叫全砖，只能把 Flash 拆下来，用编程器刷好 U-Boot 和 firmware。不死 U-Boot 就是修改了 U-Boot 的实现，使我们可以用 RJ-45 网线来救砖，省去拆机搭 TTL 线的麻烦。</p>
 <p>本质上说，这东西并非真的不死，只要 U-Boot 被刷坏，还是会死，不过几率不大，因为 OpenWRT 官方发行的 ROM 全都是保护 U-Boot 区域的，根据 UMU 的经验，只有三个情况会不小心或故意刷坏：</p>
 <ol>
 <li>从原厂固件刷不良固件；</li>
@@ -173,15 +173,15 @@
 <p>如果您真的这么蛋疼，还是准备编程器吧，只要是软件问题，在编程器面前没有砖的概念。（JTAG 也是救砖神器，但不是每台路由器都有，比如 DIR-505 就没有！）</p>
 <p>由于 UMU 是 Windows 程序员，平时没有安装 Linux 桌面的习惯，蛋似由于做快游项目，买了不少服务器，都是 CentOS，所以第一步就是在 CentOS 上尝试编译，后来，您们懂的，爆出各种 213 码！服务器系统还是不适合开发！</p>
 <p>不得已就在 Hyper-V Server 2012 上安装了 Ubuntu 12.04.1-desktop-i386，本来是想安装 x64 版本的，但又怕这些嵌入式的东西对 x64 可能支持不够好，算了，不要装 13 了。</p>
-<p>接下来是选择编译环境了，按照 UMU 对 OpenWRT 的好感，明显是选择 <a target="_blank" rel="noopener" href="http://downloads.openwrt.org/attitude_adjustment/12.09/ar71xx/generic/OpenWrt-Toolchain-ar71xx-for-mips_r2-gcc-4.6-linaro_uClibc-0.9.33.2.tar.bz2">OpenWrt Toolchain for AR71xx MIPS</a>，然后开始编译，哗哗哗，编译好了……最后编译出来的 bin 却是 64KB+110B，尼玛，这 size 超标了，刷进去不是不死，是立刻死！</p>
-<p>试验 <a target="_blank" rel="noopener" href="https://sourcery.mentor.com/GNUToolchain/subscription3130?lite=MIPS">Sourcery CodeBench Lite Edition for MIPS GNU/Linux</a> 可行。推测作者其实并没有用 OpenWrt Toolchain 编译过，而是用 Sourcery CodeBench，所以……为了节省时间，还是用后者吧！吐槽一下，这是商业软件，虽然有免费的 Lite 版本……</p>
+<p>接下来是选择编译环境了，按照 UMU 对 OpenWRT 的好感，明显是选择 <a href="http://downloads.openwrt.org/attitude_adjustment/12.09/ar71xx/generic/OpenWrt-Toolchain-ar71xx-for-mips_r2-gcc-4.6-linaro_uClibc-0.9.33.2.tar.bz2" target="_blank" rel="noopener">OpenWrt Toolchain for AR71xx MIPS</a>，然后开始编译，哗哗哗，编译好了……最后编译出来的 bin 却是 64KB+110B，尼玛，这 size 超标了，刷进去不是不死，是立刻死！</p>
+<p>试验 <a href="https://sourcery.mentor.com/GNUToolchain/subscription3130?lite=MIPS" target="_blank" rel="noopener">Sourcery CodeBench Lite Edition for MIPS GNU/Linux</a> 可行。推测作者其实并没有用 OpenWrt Toolchain 编译过，而是用 Sourcery CodeBench，所以……为了节省时间，还是用后者吧！吐槽一下，这是商业软件，虽然有免费的 Lite 版本……</p>
 <p>make dlink_dir505 一下，顺利编译出来，UMU 还小修改了一下 Web 界面，加入了自己的特色，不过要提醒一下，不要加太多，会爆……只有 64KB 的空间！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/21/umutech-openwrt-advanced-1-compiling-uboot/" data-id="ckj637pph00gux078gt5s3u7a" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇1）：编译不死 U-Boot">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/21/umutech-openwrt-advanced-1-compiling-uboot/" data-id="ckdw5bbus00h91sij1etuczh8" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇1）：编译不死 U-Boot">分享到</a>
       
 
       
@@ -225,15 +225,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>从 Win7 到 Win8，部分 WiFi 属性被隐藏掉了，在图形界面上看不到……只好用命令行了：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh wlan show networks <span class="built_in">mode</span>=bssid</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh wlan show networks <span class="built_in">mode</span>=bssid</span><br></pre></td></tr></table></figure></p>
 <p>OpenWRT 上是：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iw dev wlan0 scan</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iw dev wlan0 scan</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/14/umutech-scan-wifi-on-windows-8-and-openwrt/" data-id="ckj637ppg00grx078hp2v745s" class="article-share-link" data-share="baidu" data-title="Windows 8 和 OpenWRT 下查看 WiFi 属性">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/14/umutech-scan-wifi-on-windows-8-and-openwrt/" data-id="ckdw5bbun00gs1sije7ybe5st" class="article-share-link" data-share="baidu" data-title="Windows 8 和 OpenWRT 下查看 WiFi 属性">分享到</a>
       
 
       
@@ -277,19 +277,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·RTX2》：性浪微博压腾讯，微云不如百毒云。美拍强势日微视，山寨帝国有点逊。</p>
-<p>性浪微博压腾讯，<br>
-微云不如百毒云。<br>
-美拍强势日微视，<br>
+<p>性浪微博压腾讯，
+微云不如百毒云。
+美拍强势日微视，
 山寨帝国囧又逊。</p>
-<h2 id="注解">注解</h2>
-<p>RTX：腾讯的一套办公聊天软件，但这里是“日腾讯”的意思。之前用过这个标题，所以加个 2。<br>
+<h2>注解</h2>
+<p>RTX：腾讯的一套办公聊天软件，但这里是“日腾讯”的意思。之前用过这个标题，所以加个 2。
 人无完人，腾讯也不是抄啥都能抄成的！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/12/reconstructionism-poet-rtx-2/" data-id="ckj637ppf00gox078047i0213" class="article-share-link" data-share="baidu" data-title="诗盗·RTX2">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/12/reconstructionism-poet-rtx-2/" data-id="ckdw5bbup00gz1sij9j3794c3" class="article-share-link" data-share="baidu" data-title="诗盗·RTX2">分享到</a>
       
 
       
@@ -333,14 +333,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·电机》：爱疯街机就是好，金属外壳逼格高。充电还能边放电，乔爷建议带个套。</p>
-<h2 id="注解">注解</h2>
+<h2>注解</h2>
 <p>评“iPhone 电死人”事件。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/06/reconstructionism-poet-electrocuted-by-iphone/" data-id="ckj637ppf00glx078fsx0dzrl" class="article-share-link" data-share="baidu" data-title="诗盗·电机">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/06/reconstructionism-poet-electrocuted-by-iphone/" data-id="ckdw5bbum00gp1sijdqpabo49" class="article-share-link" data-share="baidu" data-title="诗盗·电机">分享到</a>
       
 
       
@@ -389,7 +389,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/04/reconstructionism-poet-xiaomi-scalper/" data-id="ckj637ppe00gfx078b8x502cc" class="article-share-link" data-share="baidu" data-title="诗盗·黄米">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/04/reconstructionism-poet-xiaomi-scalper/" data-id="ckdw5bbul00gm1sij5ohwfbre" class="article-share-link" data-share="baidu" data-title="诗盗·黄米">分享到</a>
       
 
       
@@ -438,7 +438,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/04/25/reconstructionism-poet-atx780/" data-id="ckj637ppe00gix0789wnf6png" class="article-share-link" data-share="baidu" data-title="诗盗·ATX780脚力车">分享到</a>
+        <a data-url="//blog.umu618.com/2014/04/25/reconstructionism-poet-atx780/" data-id="ckdw5bbuh00ga1sijc437by0p" class="article-share-link" data-share="baidu" data-title="诗盗·ATX780脚力车">分享到</a>
       
 
       
@@ -482,15 +482,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·转机》：软硬撮，大屏果。王者归来，共诛翔卓。</p>
-<h2 id="注解">注解</h2>
-<p>软硬撮：微软收购诺基亚。<br>
+<h2>注解</h2>
+<p>软硬撮：微软收购诺基亚。
 大屏果：苹果发布大屏手机，必定抢走安卓更多市场！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/04/05/reconstructionism-poet-turnaround/" data-id="ckj637ppd00gcx0780h0o7l2u" class="article-share-link" data-share="baidu" data-title="诗盗#·转机">分享到</a>
+        <a data-url="//blog.umu618.com/2014/04/05/reconstructionism-poet-turnaround/" data-id="ckdw5bbuk00gj1sij4xa561hn" class="article-share-link" data-share="baidu" data-title="诗盗#·转机">分享到</a>
       
 
       
@@ -534,18 +534,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·最近百度没鸟事》：数字至贱插，腾讯大钱砸。阿里一声叹，百度无鸡吧！/偷笑</p>
-<h2 id="注解">注解</h2>
-<p>数字：360<br>
-至贱：智键。稣会告诉您“手机装数字至贱App，放在上衣口袋，摄像头露出来，用耳机线控制抓拍，这就是偷拍利器”吗？<br>
-腾讯大钱砸：腾讯将旗下 QQ 网购与拍拍网的全部资产“嫁入”京东，并陪上 2.15 亿美元的“嫁妆”，换得京东 15% 的股权，未来腾讯还可以招股价认购京东额外的 5% 股份。腾讯总裁刘炽平将加入京东集团董事会。易迅将继续独立运营，并跟京东一起探讨落实日后的深度合作。京东将投资易迅成为少数股权股东，并获得认购余下股权的权利。此外，腾讯还将向京东提供微信和手机 QQ 客户端的一级入口位置及其他主要平台的支持。<br>
-阿里一声叹：腾讯放大招，阿里应该有压力了。<br>
+<h2>注解</h2>
+<p>数字：360
+至贱：智键。稣会告诉您“手机装数字至贱App，放在上衣口袋，摄像头露出来，用耳机线控制抓拍，这就是偷拍利器”吗？
+腾讯大钱砸：腾讯将旗下 QQ 网购与拍拍网的全部资产“嫁入”京东，并陪上 2.15 亿美元的“嫁妆”，换得京东 15% 的股权，未来腾讯还可以招股价认购京东额外的 5% 股份。腾讯总裁刘炽平将加入京东集团董事会。易迅将继续独立运营，并跟京东一起探讨落实日后的深度合作。京东将投资易迅成为少数股权股东，并获得认购余下股权的权利。此外，腾讯还将向京东提供微信和手机 QQ 客户端的一级入口位置及其他主要平台的支持。
+阿里一声叹：腾讯放大招，阿里应该有压力了。
 百度无鸡吧：百度贴吧，十二生肖的吧都有，唯独没有鸡……</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/04/01/reconstructionism-poet-none-of-baidus-business/" data-id="ckj637ppc00g9x0782gj4a219" class="article-share-link" data-share="baidu" data-title="诗盗·最近百度没鸟事">分享到</a>
+        <a data-url="//blog.umu618.com/2014/04/01/reconstructionism-poet-none-of-baidus-business/" data-id="ckdw5bbuo00gv1sij1hhmbf27" class="article-share-link" data-share="baidu" data-title="诗盗·最近百度没鸟事">分享到</a>
       
 
       
@@ -589,17 +589,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·马逼》：马年马二逼，文马姚三匹。挺婷也属马，不可披碧玺！</p>
-<h2 id="注解">注解</h2>
-<p>文马姚：文章、马伊琍、姚笛<br>
-三匹：Three Persons<br>
-挺婷：赖婷婷<br>
+<h2>注解</h2>
+<p>文马姚：文章、马伊琍、姚笛
+三匹：Three Persons
+挺婷：赖婷婷
 披碧玺：PBC</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/03/31/reconstructionism-poet-horse-b/" data-id="ckj637ppc00g5x078dpeo9hnk" class="article-share-link" data-share="baidu" data-title="诗盗·马逼">分享到</a>
+        <a data-url="//blog.umu618.com/2014/03/31/reconstructionism-poet-horse-b/" data-id="ckdw5bbug00g71sija3skh6qx" class="article-share-link" data-share="baidu" data-title="诗盗·马逼">分享到</a>
       
 
       

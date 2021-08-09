@@ -14,7 +14,7 @@
 <meta property="og:description" content="问题 我怀疑有人在用工具穷举我的 WiFi 密码，我该怎么确认？ 解决 运行 iw event，如果看到频繁出现 new station 和 del station 的 log，说明有设备在频繁连接和断开。 如果您的路由器是小米路由器 Pro，则可以用 iwevent 代替 iw event，密码不对的 log 是 had deauthenticated，断开是 had disassociated">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-27T15:49:22.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.683Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.994Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="embedded">
 <meta property="article:tag" content="linux">
@@ -43,7 +43,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -117,19 +117,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="问题">问题</h2>
+        <h2>问题</h2>
 <p>我怀疑有人在用工具穷举我的 WiFi 密码，我该怎么确认？</p>
-<h2 id="解决">解决</h2>
+<h2>解决</h2>
 <p>运行 <code>iw event</code>，如果看到频繁出现 <code>new station</code> 和 <code>del station</code> 的 log，说明有设备在频繁连接和断开。</p>
 <p>如果您的路由器是小米路由器 Pro，则可以用 <code>iwevent</code> 代替 <code>iw event</code>，密码不对的 log 是 <code>had deauthenticated</code>，断开是 <code>had disassociated</code>。</p>
-<h2 id="安全建议">安全建议</h2>
+<h2>安全建议</h2>
 <p>设置密码时，应该检查一下您的密码是否在“字典”里。字典参考：</p>
 <ul>
 <li>
-<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/wjburns/common-password-list-rockyoutxt">https://www.kaggle.com/wjburns/common-password-list-rockyoutxt</a></p>
+<p><a href="https://www.kaggle.com/wjburns/common-password-list-rockyoutxt" target="_blank" rel="noopener">https://www.kaggle.com/wjburns/common-password-list-rockyoutxt</a></p>
 </li>
 <li>
-<p><a target="_blank" rel="noopener" href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Leaked-Databases/rockyou.txt.tar.gz">https://github.com/danielmiessler/SecLists/blob/master/Passwords/Leaked-Databases/rockyou.txt.tar.gz</a></p>
+<p><a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Leaked-Databases/rockyou.txt.tar.gz" target="_blank" rel="noopener">https://github.com/danielmiessler/SecLists/blob/master/Passwords/Leaked-Databases/rockyou.txt.tar.gz</a></p>
 </li>
 </ul>
 <blockquote>
@@ -137,35 +137,35 @@
 </blockquote>
 <p>举个例子吧！稣打算用 10 个 0 做密码，先查一下……嗯哼！</p>
 <blockquote>
-<p>valentine<br>
-idontknow<br>
-pikachu<br>
-little<br>
-diamond1<br>
-iloveu1<br>
-babyphat<br>
-peanut1<br>
-kittens<br>
-goddess<br>
-ballet<br>
-damien<br>
-nascar<br>
-171717<br>
-rangers1<br>
-winston<br>
-<strong>0000000000</strong><br>
-rocky1<br>
-coolgirl<br>
-maymay<br>
-charlene<br>
-caramelo<br>
-selena<br>
-lucero<br>
-wendy<br>
-volcom<br>
-1435254<br>
-copper<br>
-cindy<br>
+<p>valentine
+idontknow
+pikachu
+little
+diamond1
+iloveu1
+babyphat
+peanut1
+kittens
+goddess
+ballet
+damien
+nascar
+171717
+rangers1
+winston
+<strong>0000000000</strong>
+rocky1
+coolgirl
+maymay
+charlene
+caramelo
+selena
+lucero
+wendy
+volcom
+1435254
+copper
+cindy
 baby123</p>
 </blockquote>
 <p>地球真危险！稣回月球了……</p>
@@ -174,7 +174,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2020/04/27/umutech-openwrt-primer-19-detect-wifi-hacking/" data-id="ckj637ptv010lx0780yyn7boa" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇19）：检测 WiFi 入侵">分享到</a>
+        <a data-url="//blog.umu618.com/2020/04/27/umutech-openwrt-primer-19-detect-wifi-hacking/" data-id="ckdw5bc6001ae1sijf8gla4tj" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇19）：检测 WiFi 入侵">分享到</a>
       
 
       

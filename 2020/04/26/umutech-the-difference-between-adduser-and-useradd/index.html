@@ -14,7 +14,7 @@
 <meta property="og:description" content="需求 在 armbian 系统里新建个账号。 这当然是个简单的任务，问题是发现居然同时存在 adduser 和 useradd 两个命令。 解决选择恐惧症  adduser 不是可执行程序。  12345which adduser&#x2F;usr&#x2F;sbin&#x2F;adduserldd &#x2F;usr&#x2F;sbin&#x2F;adduser        not a dynamic executable  useradd 是可执行程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-25T16:40:03.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.683Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.994Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ops">
@@ -41,7 +41,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -115,22 +115,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="需求">需求</h2>
+        <h2>需求</h2>
 <p>在 armbian 系统里新建个账号。</p>
 <p>这当然是个简单的任务，问题是发现居然同时存在 adduser 和 useradd 两个命令。</p>
-<h2 id="解决选择恐惧症">解决选择恐惧症</h2>
+<h2>解决选择恐惧症</h2>
 <ol>
 <li>adduser 不是可执行程序。</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> adduser</span><br><span class="line">/usr/sbin/adduser</span><br><span class="line"></span><br><span class="line">ldd /usr/sbin/adduser</span><br><span class="line">        not a dynamic executable</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> adduser</span><br><span class="line">/usr/sbin/adduser</span><br><span class="line"></span><br><span class="line">ldd /usr/sbin/adduser</span><br><span class="line">        not a dynamic executable</span><br></pre></td></tr></table></figure></p>
 <ol start="2">
 <li>useradd 是可执行程序。</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> useradd</span><br><span class="line">/usr/sbin/useradd</span><br><span class="line"></span><br><span class="line">ldd /usr/sbin/useradd</span><br><span class="line">        linux-vdso.so.1 (0xbea59000)</span><br><span class="line">        libaudit.so.1 =&gt; /lib/arm-linux-gnueabihf/libaudit.so.1 (0xb6ea1000)</span><br><span class="line">        libselinux.so.1 =&gt; /lib/arm-linux-gnueabihf/libselinux.so.1 (0xb6e77000)</span><br><span class="line">        libsemanage.so.1 =&gt; /usr/lib/arm-linux-gnueabihf/libsemanage.so.1 (0xb6e3f000)</span><br><span class="line">        libc.so.6 =&gt; /lib/arm-linux-gnueabihf/libc.so.6 (0xb6d45000)</span><br><span class="line">        /lib/ld-linux-armhf.so.3 (0xb6efb000)</span><br><span class="line">        libcap-ng.so.0 =&gt; /lib/arm-linux-gnueabihf/libcap-ng.so.0 (0xb6d31000)</span><br><span class="line">        libpcre.so.3 =&gt; /lib/arm-linux-gnueabihf/libpcre.so.3 (0xb6cd4000)</span><br><span class="line">        libdl.so.2 =&gt; /lib/arm-linux-gnueabihf/libdl.so.2 (0xb6cc1000)</span><br><span class="line">        libsepol.so.1 =&gt; /lib/arm-linux-gnueabihf/libsepol.so.1 (0xb6c44000)</span><br><span class="line">        libbz2.so.1.0 =&gt; /lib/arm-linux-gnueabihf/libbz2.so.1.0 (0xb6c28000)</span><br><span class="line">        libpthread.so.0 =&gt; /lib/arm-linux-gnueabihf/libpthread.so.0 (0xb6c03000)</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> useradd</span><br><span class="line">/usr/sbin/useradd</span><br><span class="line"></span><br><span class="line">ldd /usr/sbin/useradd</span><br><span class="line">        linux-vdso.so.1 (0xbea59000)</span><br><span class="line">        libaudit.so.1 =&gt; /lib/arm-linux-gnueabihf/libaudit.so.1 (0xb6ea1000)</span><br><span class="line">        libselinux.so.1 =&gt; /lib/arm-linux-gnueabihf/libselinux.so.1 (0xb6e77000)</span><br><span class="line">        libsemanage.so.1 =&gt; /usr/lib/arm-linux-gnueabihf/libsemanage.so.1 (0xb6e3f000)</span><br><span class="line">        libc.so.6 =&gt; /lib/arm-linux-gnueabihf/libc.so.6 (0xb6d45000)</span><br><span class="line">        /lib/ld-linux-armhf.so.3 (0xb6efb000)</span><br><span class="line">        libcap-ng.so.0 =&gt; /lib/arm-linux-gnueabihf/libcap-ng.so.0 (0xb6d31000)</span><br><span class="line">        libpcre.so.3 =&gt; /lib/arm-linux-gnueabihf/libpcre.so.3 (0xb6cd4000)</span><br><span class="line">        libdl.so.2 =&gt; /lib/arm-linux-gnueabihf/libdl.so.2 (0xb6cc1000)</span><br><span class="line">        libsepol.so.1 =&gt; /lib/arm-linux-gnueabihf/libsepol.so.1 (0xb6c44000)</span><br><span class="line">        libbz2.so.1.0 =&gt; /lib/arm-linux-gnueabihf/libbz2.so.1.0 (0xb6c28000)</span><br><span class="line">        libpthread.so.0 =&gt; /lib/arm-linux-gnueabihf/libpthread.so.0 (0xb6c03000)</span><br></pre></td></tr></table></figure></p>
 <ol start="3">
 <li>推测 adduser 是脚本，内部调用 useradd。求证之！</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">head -1 /usr/sbin/adduser</span><br><span class="line"><span class="meta">#!/usr/bin/perl</span></span><br><span class="line"></span><br><span class="line">grep useradd /usr/sbin/adduser</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">&#x27;useradd&#x27;</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">&#x27;-d&#x27;</span>, <span class="variable">$home_dir</span>, <span class="string">&#x27;-g&#x27;</span>, <span class="variable">$ingroup_name</span>, <span class="string">&#x27;-s&#x27;</span>,</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">&#x27;useradd&#x27;</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">&#x27;-d&#x27;</span>, <span class="variable">$home_dir</span>, <span class="string">&#x27;-g&#x27;</span>, <span class="variable">$ingroup_name</span>, <span class="string">&#x27;-s&#x27;</span>,</span><br><span class="line">    <span class="comment"># useradd without -p has left the account disabled (password string is &#x27;!&#x27;)</span></span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">head -1 /usr/sbin/adduser</span><br><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br><span class="line"></span><br><span class="line">grep useradd /usr/sbin/adduser</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">'useradd'</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">'-d'</span>, <span class="variable">$home_dir</span>, <span class="string">'-g'</span>, <span class="variable">$ingroup_name</span>, <span class="string">'-s'</span>,</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">'useradd'</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">'-d'</span>, <span class="variable">$home_dir</span>, <span class="string">'-g'</span>, <span class="variable">$ingroup_name</span>, <span class="string">'-s'</span>,</span><br><span class="line">    <span class="comment"># useradd without -p has left the account disabled (password string is '!')</span></span><br></pre></td></tr></table></figure></p>
 <p>这说明 adduser 是 perl 脚本，内部确实调用 useradd。</p>
 <ol start="4">
 <li>直觉告诉 UMU，应该用 adduser，如果 useradd 很好用，不会有 adduser 存在的必要。</li>
@@ -140,7 +140,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2020/04/26/umutech-the-difference-between-adduser-and-useradd/" data-id="ckj637ptv010ix078caud75nx" class="article-share-link" data-share="baidu" data-title="adduser 和 useradd 的区别">分享到</a>
+        <a data-url="//blog.umu618.com/2020/04/26/umutech-the-difference-between-adduser-and-useradd/" data-id="ckdw5bc5s019x1sij6tdp9rzj" class="article-share-link" data-share="baidu" data-title="adduser 和 useradd 的区别">分享到</a>
       
 
       

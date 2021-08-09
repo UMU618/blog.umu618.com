@@ -14,7 +14,7 @@
 <meta property="og:description" content="需求 在 OpenWRT 路由器 C 用公钥验证方式登录另一台 OpenWRT 路由器 S。 问题 一开始配置完很顺利登录，后来进行一些操作后，居然登录不了，提示输入密码…… 类似情况：https:&#x2F;&#x2F;github.com&#x2F;rssnsj&#x2F;openwrt-hc5x61&#x2F;issues&#x2F;99 分析 一开始也以为是 OpenWRT 版本的问题，从 dd trunk 降到 cc，无用。再降到 bb，发现没问">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-05-26T02:12:44.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.614Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.884Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="embedded">
 <meta property="article:tag" content="linux">
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,22 +116,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="需求">需求</h2>
+        <h2>需求</h2>
 <p>在 OpenWRT 路由器 C 用公钥验证方式登录另一台 OpenWRT 路由器 S。</p>
-<h2 id="问题">问题</h2>
+<h2>问题</h2>
 <p>一开始配置完很顺利登录，后来进行一些操作后，居然登录不了，提示输入密码……</p>
-<p>类似情况：<a target="_blank" rel="noopener" href="https://github.com/rssnsj/openwrt-hc5x61/issues/99">https://github.com/rssnsj/openwrt-hc5x61/issues/99</a></p>
-<h2 id="分析">分析</h2>
+<p>类似情况：<a href="https://github.com/rssnsj/openwrt-hc5x61/issues/99" target="_blank" rel="noopener">https://github.com/rssnsj/openwrt-hc5x61/issues/99</a></p>
+<h2>分析</h2>
 <p>一开始也以为是 OpenWRT 版本的问题，从 dd trunk 降到 cc，无用。再降到 bb，发现没问题了，因为 bb 没有 sshtunnel，最后把怀疑对象锁定到 sshtunnel。</p>
 <p>sshtunnel 是基于 openssh 的，在装 sshtunnel 时，openssh 会作为依赖项被装上，然后替换了系统自带的 dropbear 客户端，所以后来使用的 ssh 是 openssh，但私钥文件却是一开始用 dropbearkey 产生的。两者格式并不兼容。</p>
-<h2 id="解决方案">解决方案</h2>
+<h2>解决方案</h2>
 <p>装上 openssh-keygen，然后用 ssh-keygen 产生新的私钥，再用 ssh-keygen -y -f ~/.ssh/id_rsa 打印公钥。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2016/05/26/umutech-resolve-the-conflict-over-dropbear-and-openssh/" data-id="ckj637prb00pcx078hkzb9f0h" class="article-share-link" data-share="baidu" data-title="解决 dropbear 和 openssh 的冲突">分享到</a>
+        <a data-url="//blog.umu618.com/2016/05/26/umutech-resolve-the-conflict-over-dropbear-and-openssh/" data-id="ckdw5bbxq00pa1sijc3w1dt3z" class="article-share-link" data-share="baidu" data-title="解决 dropbear 和 openssh 的冲突">分享到</a>
       
 
       

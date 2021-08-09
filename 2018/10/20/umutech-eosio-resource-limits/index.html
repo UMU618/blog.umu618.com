@@ -14,7 +14,7 @@
 <meta property="og:description" content="本文为 MEET.ONE 发布的《EOSIO CPU 资源分配原理分析》 的个人版本，稣是其主要编辑之一。 1. 相关概念 您没看错，以下要介绍的几个概念，都是金融词汇。稣的柚子系列文章，又名《程序员转行做金融》，并兼职卖柚子……   存款准备金率 Deposit-reserve Ratio。存款准备金是指金融机构为保证客户提取存款和资金清算需要而准备的，是缴存在中央银行的存款，中央银行要求的存款">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-10-20T07:53:38.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.636Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.919Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="调研">
 <meta property="article:tag" content="金融">
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,8 +116,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文为 MEET.ONE 发布的<a target="_blank" rel="noopener" href="https://github.com/meet-one/documentation/blob/master/EOSIO-CPU.md">《EOSIO CPU 资源分配原理分析》</a> 的个人版本，稣是其主要编辑之一。</p>
-<h2 id="1-相关概念">1. 相关概念</h2>
+        <p>本文为 MEET.ONE 发布的<a href="https://github.com/meet-one/documentation/blob/master/EOSIO-CPU.md" target="_blank" rel="noopener">《EOSIO CPU 资源分配原理分析》</a> 的个人版本，稣是其主要编辑之一。</p>
+<h2>1. 相关概念</h2>
 <p>您没看错，以下要介绍的几个概念，都是金融词汇。稣的柚子系列文章，又名《程序员转行做金融》，并兼职卖柚子……</p>
 <ul>
 <li>
@@ -139,7 +139,7 @@
 <p>又称“分时电价”，也很好理解。再举个类似的例子：下班高峰期打的，不加价基本打不到，因为别人加价优先接单。</p>
 </li>
 </ul>
-<h2 id="2-资源分配基本原则">2. 资源分配基本原则</h2>
+<h2>2. 资源分配基本原则</h2>
 <p>EOS 账户可用资源与其抵押给资源的柚子数量的关系是：可用资源 = 总可用资源 * 本用户抵押数量 / 全体用户抵押数量。从这个关系上看，存在两个风险：</p>
 <ul>
 <li>大户挤兑散民；</li>
@@ -155,22 +155,22 @@
 所以 max_block_cpu_usage * (account_cpu_usage_average_window_ms / block_interval_ms) = 34560000000
 </code></pre>
 <p>以主网 2018-10-19 为例，CPU 总质押量为 280053493.80756617 EOS，所以每个 EOS 可用 123.40 us。注意：这个数值是没有放大过的。</p>
-<h2 id="3-堵车问题">3. 堵车问题</h2>
+<h2>3. 堵车问题</h2>
 <p>EOS 定义了两种资源使用状态：拥堵、空闲，由过去一分钟每个块的平均使用量来界定。还是用 CPU 说事：大于 max_block_cpu_usage * target_block_cpu_usage_pct 则进入拥堵。</p>
 <p>两个状态下的可用量本来应该有 1000 倍的差距，但因为有涨跌停板保护，并不会直上直下。每一分钟，只能跌到 99/100，只能涨到 1000/999。所以从拥堵开始到绝对拥堵，有 log(0.001) / log(0.99) = 687 分钟之长；从绝对拥堵完全恢复更慢，是 log(1000) / log(1000/999) = 6904 分钟。目前的 target_block_cpu_usage_pct 已经从 10% 调整到 20%，它提高了总使用量临界值，使拥堵状态更难触碰。</p>
 <p>可用量的变化过程是可能随时改变方向的，类似多头和空头拉锯。比如拥堵时，可用量变少，能够使用资源的用户也随之减少，使用量降到阈值以下，可用量又会开始慢慢上升。</p>
-<h2 id="4-阈值的设定">4. 阈值的设定</h2>
+<h2>4. 阈值的设定</h2>
 <p>max_block_cpu_usage 和 target_block_cpu_usage_pct 都是可以配置的，为什么不一次性配高点呢？主要考虑的因素是，目前各个 BP 的机器性能参差不齐，如果冒然的把这两个值调高，可能会导致节点 replay 变慢，同时对于配置低的机器来说，同步区块也会很吃力。别忘了，我们的准备金率才 1‰，属于严重超发，提高可用率，虽然会使拥堵来得晚点，但真到拥堵的那刻，爆发的能量可是更大的哦！</p>
 <p>总之，还是稳一点好，慢慢涨经验。目前来看昨天的调整，对节点之间的同步、CPU 使用率没有太大影响。</p>
-<h2 id="5-参考">5. 参考</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/EOSIO/eos/blob/master/libraries/chain/resource_limits.cpp">EOSIO 代码</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f914fefa512f">EOS资源模型</a></p>
+<h2>5. 参考</h2>
+<p><a href="https://github.com/EOSIO/eos/blob/master/libraries/chain/resource_limits.cpp" target="_blank" rel="noopener">EOSIO 代码</a></p>
+<p><a href="https://www.jianshu.com/p/f914fefa512f" target="_blank" rel="noopener">EOS资源模型</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/10/20/umutech-eosio-resource-limits/" data-id="ckj637psy00wlx078bitn3g5u" class="article-share-link" data-share="baidu" data-title="EOSIO 资源分配机制">分享到</a>
+        <a data-url="//blog.umu618.com/2018/10/20/umutech-eosio-resource-limits/" data-id="ckdw5bc0j00ws1sij4fhu5wus" class="article-share-link" data-share="baidu" data-title="EOSIO 资源分配机制">分享到</a>
       
 
       

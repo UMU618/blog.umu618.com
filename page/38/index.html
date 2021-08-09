@@ -35,7 +35,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -112,14 +112,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·拖坨妥唾》：旗舰有强弱，锤子无现货。小米比华为，最后买苹果。</p>
-<h2 id="注解">注解</h2>
+<h2>注解</h2>
 <p>有感于锤子因为产能问题各种二逼……</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/25/reconstructionism-poet-delayed-release-has-been-spurned/" data-id="ckj637ppu00irx0784c2j8d00" class="article-share-link" data-share="baidu" data-title="诗盗·拖坨妥唾">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/25/reconstructionism-poet-delayed-release-has-been-spurned/" data-id="ckdw5bbvb00io1sijes4vh3wf" class="article-share-link" data-share="baidu" data-title="诗盗·拖坨妥唾">分享到</a>
       
 
       
@@ -171,7 +171,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/22/ghost/" data-id="ckj637ppt00iox078g4swca3b" class="article-share-link" data-share="baidu" data-title="鬼">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/22/ghost/" data-id="ckdw5bbv800if1sijhmpma64u" class="article-share-link" data-share="baidu" data-title="鬼">分享到</a>
       
 
       
@@ -214,22 +214,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="需求">需求</h2>
+        <h2>需求</h2>
 <p>在《<a href="/2014/07/14/umutech-openwrt-primer-8-webcam">跟 UMU 一起玩 OpenWRT（入门篇8）：网络摄像机</a>》介绍的 mjpg_streamer 并不能传输声音，所以有了本文！</p>
-<h2 id="参考">参考</h2>
-<p><a target="_blank" rel="noopener" href="http://forum.anywlan.com/thread-282658-1-1.html">http://forum.anywlan.com/thread-282658-1-1.html</a></p>
-<h2 id="安装">安装</h2>
-<h3 id="1-示例硬件信息">1. 示例硬件信息</h3>
+<h2>参考</h2>
+<p><a href="http://forum.anywlan.com/thread-282658-1-1.html" target="_blank" rel="noopener">http://forum.anywlan.com/thread-282658-1-1.html</a></p>
+<h2>安装</h2>
+<h3>1. 示例硬件信息</h3>
 <p>硬件还是选用微软 LifeCam HD-3000，您也可以去淘个便宜的带麦克风的 USB 声卡。</p>
-<h3 id="2-安装程序">2. 安装程序</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-usb-audio</span><br><span class="line">opkg install icecast</span><br></pre></td></tr></table></figure>
+<h3>2. 安装程序</h3>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-usb-audio</span><br><span class="line">opkg install icecast</span><br></pre></td></tr></table></figure></p>
 <p>如果您打算使用 ogg 格式则安装 ices：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install ices</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install ices</span><br></pre></td></tr></table></figure></p>
 <p>用 mp3 格式则安装 darkice：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install darkice</span><br></pre></td></tr></table></figure>
-<h3 id="3-配置">3. 配置</h3>
-<p>ices 的配置文件（ices-oss.xml）可以去官网（<a target="_blank" rel="noopener" href="http://www.icecast.org/ices.php">http://www.icecast.org/ices.php</a>）下载整个压缩包，里面有。</p>
-<h2 id="经验">经验</h2>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install darkice</span><br></pre></td></tr></table></figure></p>
+<h3>3. 配置</h3>
+<p>ices 的配置文件（ices-oss.xml）可以去官网（<a href="http://www.icecast.org/ices.php" target="_blank" rel="noopener">http://www.icecast.org/ices.php</a>）下载整个压缩包，里面有。</p>
+<h2>经验</h2>
 <p>由于涉及声音编码，需要大量计算，经过实践，CPU 才 400MHz 的 DIR-505，无论是 ogg 还是 MP3 格式都卡成翔……</p>
 <p>请用配置更好的路由器测试，比如如意云 RY-01 的 CPU 是 600MHz 的，勉强可行。</p>
 
@@ -237,7 +237,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/21/umutech-openwrt-primer-9-remote-monitoring/" data-id="ckj637ppt00ilx0787ogud66e" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇9）：远程监听">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/21/umutech-openwrt-primer-9-remote-monitoring/" data-id="ckdw5bbvc00ir1sij5fnq4d38" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇9）：远程监听">分享到</a>
       
 
       
@@ -280,14 +280,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="需求">需求</h2>
+        <h2>需求</h2>
 <p>买了一个微软 LifeCam HD-3000，已经过了视频聊天的年纪，插到 DIR-505 玩一下吧。</p>
-<h2 id="安装">安装</h2>
+<h2>安装</h2>
 <p>安装过程出奇简单：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-video-uvc</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-video-uvc</span><br></pre></td></tr></table></figure></p>
 <p>如果安装失败，看看是不是固件应该升级了，请参考《<a href="/2014/06/20/umutech-openwrt-primer-5-sysupgrade">跟 UMU 一起玩 OpenWRT（入门篇5）：升级固件</a>》。</p>
 <p>插上摄像头，检查一下 /dev/video0 是否存在，如果不存在，<code>reboot</code> 一下，如果存在，接下来安装和运行应用：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">opkg install mjpg_streamer</span><br><span class="line"><span class="comment"># 使用 MJPG 格式，推荐：</span></span><br><span class="line">mjpg_streamer -i <span class="string">&quot;input_uvc.so -d /dev/video0&quot;</span> -o <span class="string">&quot;output_http.so -p 8080 -w /www/webcam&quot;</span></span><br><span class="line"><span class="comment"># 使用 YUV 格式，多了一个 -y 参数，比较慢，不推荐： </span></span><br><span class="line">mjpg_streamer -i <span class="string">&quot;input_uvc.so -y -d /dev/video0&quot;</span> -o <span class="string">&quot;output_http.so -p 8080 -w /www/webcam&quot;</span></span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">opkg install mjpg_streamer</span><br><span class="line"><span class="comment"># 使用 MJPG 格式，推荐：</span></span><br><span class="line">mjpg_streamer -i <span class="string">"input_uvc.so -d /dev/video0"</span> -o <span class="string">"output_http.so -p 8080 -w /www/webcam"</span></span><br><span class="line"><span class="comment"># 使用 YUV 格式，多了一个 -y 参数，比较慢，不推荐： </span></span><br><span class="line">mjpg_streamer -i <span class="string">"input_uvc.so -y -d /dev/video0"</span> -o <span class="string">"output_http.so -p 8080 -w /www/webcam"</span></span><br></pre></td></tr></table></figure></p>
 <p>其它可选输入参数，例如：</p>
 <blockquote>
 <p>-r 320x240 设置分辨率为320x240</p>
@@ -297,15 +297,15 @@
 <blockquote>
 <p>-c user:password</p>
 </blockquote>
-<h2 id="调试">调试</h2>
-<p>打开浏览器，输入 <a href="Mhttp://192.168.1.1:8080/">Mhttp://192.168.1.1:8080/</a>，如果没问题，参考网页上的说明操作即可。</p>
+<h2>调试</h2>
+<p>打开浏览器，输入 &lt;Mhttp://192.168.1.1:8080/&gt;，如果没问题，参考网页上的说明操作即可。</p>
 <p>由于 DIR-505 性能一般，效果可能不理想，建议在更高配置的路由器上尝试。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/14/umutech-openwrt-primer-8-webcam/" data-id="ckj637pps00iix0781rfmf92k" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇8）：网络摄像机">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/14/umutech-openwrt-primer-8-webcam/" data-id="ckdw5bbvf00j01sij52id4dzi" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇8）：网络摄像机">分享到</a>
       
 
       
@@ -348,14 +348,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="优点">优点</h2>
+        <h2>优点</h2>
 <p>玩了好多个路由器，有传统，有所谓智能，还是比较赞赏如意云，相反的，之前已经吐槽过小米和圾路由。下面就来说说如意云的好处吧！</p>
 <ol>
 <li>
 <p>生态完善，支持的移动设备多，连 WP8/8.1 都支持了，UMU 主要手机是 Lumia 822，这个很满足，还有 PC 客户端，方便 PC 和移动设备之间同步数据。插件齐全，虽然很多插件没具体玩过，但至少看数量是不输圾路由的。</p>
 </li>
 <li>
-<p>很好滴继承 OpenWRT 的开放性，天生 root 了，或者专业点说，SSH 服务没关闭，直接连，省去很多烦恼，用小米或圾路由，老是怕一升级就要重新 root，好讨厌的感觉……还可以刷 PandoraBox：<a target="_blank" rel="noopener" href="http://downloads.openwrt.org.cn/PandoraBox/RY-1/">http://downloads.openwrt.org.cn/PandoraBox/RY-1/</a></p>
+<p>很好滴继承 OpenWRT 的开放性，天生 root 了，或者专业点说，SSH 服务没关闭，直接连，省去很多烦恼，用小米或圾路由，老是怕一升级就要重新 root，好讨厌的感觉……还可以刷 PandoraBox：<a href="http://downloads.openwrt.org.cn/PandoraBox/RY-1/" target="_blank" rel="noopener">http://downloads.openwrt.org.cn/PandoraBox/RY-1/</a></p>
 </li>
 <li>
 <p>性价比不错，RY-01 才 81 元，从配置、功能、稳定性来比，差不多价位的传统路由完全不必考虑了。虽说运行内存和外壳材料方面不如圾 1S，但 USB 接口带来不少扩展性是圾 1S 没有的，而且 1S 要 109 元。</p>
@@ -365,7 +365,7 @@
 <p>这不是广告：要买的话，千万不要去迅雷商城，那边是 99 元，苏宁还是 81 元。</p>
 </li>
 </ol>
-<h2 id="槽点">槽点</h2>
+<h2>槽点</h2>
 <ol>
 <li>
 <p>很丑……一股廉价感，还真是对得起价格；</p>
@@ -382,7 +382,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/10/xcloud/" data-id="ckj637pps00ifx078gbxq5q0m" class="article-share-link" data-share="baidu" data-title="如意云使用经验">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/10/xcloud/" data-id="ckdw5bbva00il1sijh9wva9ri" class="article-share-link" data-share="baidu" data-title="如意云使用经验">分享到</a>
       
 
       
@@ -426,14 +426,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·青春》：文青迷情自耽误，愤青难行官仕途。闷骚青年没故事，二逼青年欢乐度。</p>
-<h2 id="注解">注解</h2>
+<h2>注解</h2>
 <p>有感于身边各种奇葩青年，各行其道。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/05/reconstructionism-poet-youth/" data-id="ckj637ppr00icx0788fcfe2lh" class="article-share-link" data-share="baidu" data-title="诗盗·青春">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/05/reconstructionism-poet-youth/" data-id="ckdw5bbv200i01sijgyjb8fzq" class="article-share-link" data-share="baidu" data-title="诗盗·青春">分享到</a>
       
 
       
@@ -477,14 +477,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·垃圾路由》：智能路由器，用了就来气。没人聊智能，都在喷垃圾。</p>
-<h2 id="注解">注解</h2>
+<h2>注解</h2>
 <p>圾路由确实乐射……法语叫做 La 圾路由。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/06/28/reconstructionism-poet-refuse-router/" data-id="ckj637ppr00i9x078d8a6fvfn" class="article-share-link" data-share="baidu" data-title="诗盗·垃圾路由">分享到</a>
+        <a data-url="//blog.umu618.com/2014/06/28/reconstructionism-poet-refuse-router/" data-id="ckdw5bbv600i91sijfrui8dhm" class="article-share-link" data-share="baidu" data-title="诗盗·垃圾路由">分享到</a>
       
 
       
@@ -528,21 +528,21 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>UMU 不推荐安装 LUCI，还是多打命令好，可以学习更多东西，而且 LUCI 比较浪费存储空间！</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install luci-ssl</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install luci-ssl</span><br></pre></td></tr></table></figure></p>
 <p>推荐使用 SSL 版本，比较安全，但比较大，如果装不下可以试试不带 SSL 的：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci</span><br></pre></td></tr></table></figure></p>
 <p>您可能不习惯默认的主题（luci-theme-bootstrap），Flash 够大的话，还是装个常用的：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-theme-openwrt</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install luci-theme-openwrt</span><br></pre></td></tr></table></figure></p>
 <p>开启服务：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/uhttpd start</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/uhttpd start</span><br></pre></td></tr></table></figure></p>
 <p>设置开机自动运行（不推荐）：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/uhttpd <span class="built_in">enable</span></span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/uhttpd <span class="built_in">enable</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/06/26/umutech-openwrt-primer-7-install-luci/" data-id="ckj637ppq00i6x0786ohk1nt5" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇7）：安装 LUCI">分享到</a>
+        <a data-url="//blog.umu618.com/2014/06/26/umutech-openwrt-primer-7-install-luci/" data-id="ckdw5bbv900ii1sij00hj4e6f" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇7）：安装 LUCI">分享到</a>
       
 
       
@@ -586,14 +586,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·古割》：民言没九重，万里横狱封。难书锁国恨，笑看出墙红。</p>
-<h2 id="注解">注解</h2>
+<h2>注解</h2>
 <p>有感于古割被墙，不少人用红杏来出墙~</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/06/25/reconstructionism-poet-google/" data-id="ckj637ppp00i3x0783m4q8tbs" class="article-share-link" data-share="baidu" data-title="诗盗·古割">分享到</a>
+        <a data-url="//blog.umu618.com/2014/06/25/reconstructionism-poet-google/" data-id="ckdw5bbv400i61sij6yyt2tcj" class="article-share-link" data-share="baidu" data-title="诗盗·古割">分享到</a>
       
 
       
@@ -636,47 +636,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="需求">需求</h2>
-<p>DIR-505 有一个 USB2.0 接口，给它带来了很大的扩展性，我们可以插 U 盘、移动硬盘等，来做文件共享，或者离线下载等。接下来就先搞定 U 盘，主要参考资料：<a target="_blank" rel="noopener" href="http://wiki.openwrt.org/doc/howto/usb.storage">http://wiki.openwrt.org/doc/howto/usb.storage</a></p>
-<h2 id="安装">安装</h2>
-<h3 id="1-安装-USB-和存储器的内核模块">1. 安装 USB 和存储器的内核模块</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-usb-storage</span><br><span class="line">opkg install kmod-scsi-generic</span><br></pre></td></tr></table></figure>
-<h3 id="2-安装文件系统内核模块">2. 安装文件系统内核模块</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install kmod-fs-ext4</span><br></pre></td></tr></table></figure>
-<h3 id="3-安装应用工具">3. 安装应用工具</h3>
+        <h2>需求</h2>
+<p>DIR-505 有一个 USB2.0 接口，给它带来了很大的扩展性，我们可以插 U 盘、移动硬盘等，来做文件共享，或者离线下载等。接下来就先搞定 U 盘，主要参考资料：<a href="http://wiki.openwrt.org/doc/howto/usb.storage" target="_blank" rel="noopener">http://wiki.openwrt.org/doc/howto/usb.storage</a></p>
+<h2>安装</h2>
+<h3>1. 安装 USB 和存储器的内核模块</h3>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install kmod-usb-storage</span><br><span class="line">opkg install kmod-scsi-generic</span><br></pre></td></tr></table></figure></p>
+<h3>2. 安装文件系统内核模块</h3>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install kmod-fs-ext4</span><br></pre></td></tr></table></figure></p>
+<h3>3. 安装应用工具</h3>
 <p>USB 辅助工具、分区、格式化工具，这些非必要，看情况安装：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install usbutils fdisk e2fsprogs</span><br></pre></td></tr></table></figure>
-<h2 id="调试">调试</h2>
-<h3 id="1-测试能否识别-U-盘">1. 测试能否识别 U 盘</h3>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install usbutils fdisk e2fsprogs</span><br></pre></td></tr></table></figure></p>
+<h2>调试</h2>
+<h3>1. 测试能否识别 U 盘</h3>
 <p>不插 U 盘时，输入 <code>lsusb</code>，显示如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure></p>
 <p>插入 U 盘后，再 <code>lsusb</code>，发现多了一条，这说明工作正常：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bus 001 Device 002: ID 0603:0908 Novatek Microelectronics Corp.</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure>
-<h3 id="2-分区">2. 分区</h3>
-<p>如果 U 盘需要重新分区，请用 <code>fdisk</code>，这里不具体介绍，也可以在 Windows 上用 <code>diskpart</code> 完成，如果您还在路由器上操作，可以参考这个：<a target="_blank" rel="noopener" href="http://www.leiphone.com/diy-a-smart-router-topic-increase-memory-3.html">http://www.leiphone.com/diy-a-smart-router-topic-increase-memory-3.html</a>，第一步: 对设备进行分区。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bus 001 Device 002: ID 0603:0908 Novatek Microelectronics Corp.</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure></p>
+<h3>2. 分区</h3>
+<p>如果 U 盘需要重新分区，请用 <code>fdisk</code>，这里不具体介绍，也可以在 Windows 上用 <code>diskpart</code> 完成，如果您还在路由器上操作，可以参考这个：<a href="http://www.leiphone.com/diy-a-smart-router-topic-increase-memory-3.html" target="_blank" rel="noopener">http://www.leiphone.com/diy-a-smart-router-topic-increase-memory-3.html</a>，第一步: 对设备进行分区。</p>
 <p>分区完后，查看一下 /dev 目录里有没有出现硬盘符和分区符：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /dev | grep sd</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /dev | grep sd</span><br></pre></td></tr></table></figure></p>
 <p>上面装了 ext4 文件系统的驱动，因为这个对 OpenWRT 最合适，如果原来不是这个格式，那么安装了 e2fsprogs 后就可以用下面命令格式化了：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/sda1</span><br></pre></td></tr></table></figure>
-<h3 id="3-挂载">3. 挂载</h3>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/sda1</span><br></pre></td></tr></table></figure></p>
+<h3>3. 挂载</h3>
 <p>接下来用 mount 挂接，头尾行是必须，中间的三行是一种防止未挂接好就被写入的机制：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/usb</span><br><span class="line">touch /mnt/usb/USB_DISK_NOT_PRESENT</span><br><span class="line">chmod 555 /mnt/usb</span><br><span class="line">chmod 444 /mnt/usb/USB_DISK_NOT_PRESENT</span><br><span class="line">mount /dev/sda1 /mnt/usb</span><br></pre></td></tr></table></figure>
-<p>到这里就可以通过 /mnt/usb 来访问 U 盘了，不过工作才完成一半而已……下面还要让 U 盘能开机自动加载，主要参考：<a target="_blank" rel="noopener" href="http://wiki.openwrt.org/doc/techref/block_mount">http://wiki.openwrt.org/doc/techref/block_mount</a> 和 <a target="_blank" rel="noopener" href="http://wiki.openwrt.org/doc/uci/fstab">http://wiki.openwrt.org/doc/uci/fstab</a>。先安装程序：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install block-mount blkid</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/usb</span><br><span class="line">touch /mnt/usb/USB_DISK_NOT_PRESENT</span><br><span class="line">chmod 555 /mnt/usb</span><br><span class="line">chmod 444 /mnt/usb/USB_DISK_NOT_PRESENT</span><br><span class="line">mount /dev/sda1 /mnt/usb</span><br></pre></td></tr></table></figure></p>
+<p>到这里就可以通过 /mnt/usb 来访问 U 盘了，不过工作才完成一半而已……下面还要让 U 盘能开机自动加载，主要参考：<a href="http://wiki.openwrt.org/doc/techref/block_mount" target="_blank" rel="noopener">http://wiki.openwrt.org/doc/techref/block_mount</a> 和 <a href="http://wiki.openwrt.org/doc/uci/fstab" target="_blank" rel="noopener">http://wiki.openwrt.org/doc/uci/fstab</a>。先安装程序：</p>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install block-mount blkid</span><br></pre></td></tr></table></figure></p>
 <p>如果您比较珍惜存储空间，可以不用安装 blkid，block-mount 就行。用 <code>blkid</code> 或 <code>block info</code>，查看分区的 UUID。比如用 <code>blkid</code>，则 UMU 的 U 盘是显示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;dev&#x2F;mtdblock7: TYPE&#x3D;&quot;squashfs&quot;</span><br><span class="line">&#x2F;dev&#x2F;sda1: UUID&#x3D;&quot;16e381bc-d9bb-40fd-9e98-410b346931ef&quot; TYPE&#x3D;&quot;ext4&quot;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;dev&#x2F;mtdblock7: TYPE&#x3D;&quot;squashfs&quot;</span><br><span class="line">&#x2F;dev&#x2F;sda1: UUID&#x3D;&quot;16e381bc-d9bb-40fd-9e98-410b346931ef&quot; TYPE&#x3D;&quot;ext4&quot;</span><br></pre></td></tr></table></figure></p>
 <p>接下来输入 <code>block detect</code> 查看一下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">config &#39;global&#39;</span><br><span class="line">    option anon_swap &#39;0&#39;</span><br><span class="line">    option anon_mount &#39;0&#39;</span><br><span class="line">    option auto_swap &#39;1&#39;</span><br><span class="line">    option auto_mount &#39;1&#39;</span><br><span class="line">    option delay_root &#39;5&#39;</span><br><span class="line">    option check_fs &#39;0&#39;</span><br><span class="line">config &#39;mount&#39;</span><br><span class="line">    option target &#39;&#x2F;mnt&#x2F;sda1&#39;</span><br><span class="line">    option uuid &#39;16e381bc-d9bb-40fd-9e98-410b346931ef&#39;</span><br><span class="line">    option enabled &#39;0&#39;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">config &#39;global&#39;</span><br><span class="line">    option anon_swap &#39;0&#39;</span><br><span class="line">    option anon_mount &#39;0&#39;</span><br><span class="line">    option auto_swap &#39;1&#39;</span><br><span class="line">    option auto_mount &#39;1&#39;</span><br><span class="line">    option delay_root &#39;5&#39;</span><br><span class="line">    option check_fs &#39;0&#39;</span><br><span class="line">config &#39;mount&#39;</span><br><span class="line">    option target &#39;&#x2F;mnt&#x2F;sda1&#39;</span><br><span class="line">    option uuid &#39;16e381bc-d9bb-40fd-9e98-410b346931ef&#39;</span><br><span class="line">    option enabled &#39;0&#39;</span><br></pre></td></tr></table></figure></p>
 <p>生成配置文件，并把上面的 target 改为您想要的，enabled 值改为 1：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">block detect &gt; /etc/config/fstab</span><br><span class="line">uci <span class="built_in">set</span> fstab.@mount[-1].target=<span class="string">&#x27;/mnt/usb&#x27;</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.@mount[-1].enabled=1</span><br><span class="line">uci commit fstab</span><br></pre></td></tr></table></figure>
-<h2 id="参考">参考</h2>
-<p>本文介绍的都是精简过的必须操作，其它可选项请自行参考：<a target="_blank" rel="noopener" href="http://wiki.openwrt.org/doc/uci/fstab">http://wiki.openwrt.org/doc/uci/fstab</a>。</p>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">block detect &gt; /etc/config/fstab</span><br><span class="line">uci <span class="built_in">set</span> fstab.@mount[-1].target=<span class="string">'/mnt/usb'</span></span><br><span class="line">uci <span class="built_in">set</span> fstab.@mount[-1].enabled=1</span><br><span class="line">uci commit fstab</span><br></pre></td></tr></table></figure></p>
+<h2>参考</h2>
+<p>本文介绍的都是精简过的必须操作，其它可选项请自行参考：<a href="http://wiki.openwrt.org/doc/uci/fstab" target="_blank" rel="noopener">http://wiki.openwrt.org/doc/uci/fstab</a>。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/06/23/umutech-openwrt-primer-6-mount-usb-storage/" data-id="ckj637ppp00i0x078faoh2qbm" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇6）：挂接 U 盘">分享到</a>
+        <a data-url="//blog.umu618.com/2014/06/23/umutech-openwrt-primer-6-mount-usb-storage/" data-id="ckdw5bbv700ic1sij96vvhvfa" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇6）：挂接 U 盘">分享到</a>
       
 
       

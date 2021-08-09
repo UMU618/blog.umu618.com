@@ -16,7 +16,7 @@
 <meta property="og:image" content="//blog.umu618.com/images/20140524-dir-505-cn.jpg">
 <meta property="og:image" content="//blog.umu618.com/images/20140524-dir-505-def.jpg">
 <meta property="article:published_time" content="2014-05-23T17:14:14.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.588Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.846Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="embedded">
 <meta property="article:tag" content="linux">
@@ -45,7 +45,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -119,7 +119,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>看了《<a target="_blank" rel="noopener" href="https://www.leiphone.com/news/201406/diy-a-smart-router.html">跟hoowa学做智能路由</a>》系列，也想写点自己的经验。</p>
+        <p>看了《<a href="https://www.leiphone.com/news/201406/diy-a-smart-router.html" target="_blank" rel="noopener">跟hoowa学做智能路由</a>》系列，也想写点自己的经验。</p>
 <p>UMU 用的第一款硬件是 D-Link DIR-505。首先声明，UMU 不是 D-Link 员工，也不卖 DIR-505，用它完全是当下对比几个可选项筛选后的结果。理由：</p>
 <ol>
 <li>
@@ -137,7 +137,7 @@
 </ol>
 <p>也说一下它的缺点：没有外接天线，所以您懂的，信号必然比较弱，不适合“穿墙”族……然后 RJ45 口只有一个，有时候会不太方便。它最适合的使用场景是研究 OpenWRT、短距离和出差便捷使用。</p>
 <p><strong>请自行根据当下情况选择，毕竟新的硬件总是越来越强大，还越来越便宜。</strong></p>
-<p>接下来就刷个 OpenWRT 先~目前没有稳定发行版支持 DIR-505，所以要在 trunk 下找，下载目录是：<a target="_blank" rel="noopener" href="http://downloads.openwrt.org/snapshots/trunk/ar71xx/">http://downloads.openwrt.org/snapshots/trunk/ar71xx/</a>。如果直接开刷，很可能失败，因为 D-Link 是有锁区的，<a target="_blank" rel="noopener" href="http://OpenWRT.org">OpenWRT.org</a> 编译的 ROM 不是为中国版准备的，所以要动一下手脚先。上 WinHex 改 ROM，下面两张图分别是中国版和国际版：</p>
+<p>接下来就刷个 OpenWRT 先~目前没有稳定发行版支持 DIR-505，所以要在 trunk 下找，下载目录是：<a href="http://downloads.openwrt.org/snapshots/trunk/ar71xx/" target="_blank" rel="noopener">http://downloads.openwrt.org/snapshots/trunk/ar71xx/</a>。如果直接开刷，很可能失败，因为 D-Link 是有锁区的，OpenWRT.org 编译的 ROM 不是为中国版准备的，所以要动一下手脚先。上 WinHex 改 ROM，下面两张图分别是中国版和国际版：</p>
 <p><img src="/images/20140524-dir-505-cn.jpg" alt="中国版"></p>
 <p><img src="/images/20140524-dir-505-def.jpg" alt="国际版"></p>
 <p>两者只是图片指出的位置不同而已，可以自己改，如果把 OpenWRT 的 ROM 改为 CN 也无法在原厂 ROM 下刷成功的话，可以先找个官方的 DEF ROM 改为 CN，刷一下，再刷 OpenWRT 原版的 DEF ROM。</p>
@@ -146,7 +146,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/24/umutech-openwrt-primer-1-choose-hardware/" data-id="ckj637ppi00h4x0788e48goaa" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇1）：硬件选型和刷机">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/24/umutech-openwrt-primer-1-choose-hardware/" data-id="ckdw5bbuw00hi1sij63n7fdps" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇1）：硬件选型和刷机">分享到</a>
       
 
       

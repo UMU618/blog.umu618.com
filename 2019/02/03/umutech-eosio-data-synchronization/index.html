@@ -14,7 +14,7 @@
 <meta property="og:description" content="作者: UMU @ MEET.ONE 实验  最近三个月尝试各种方案把 EOSIO 链上交易数据同步到数据库中，踩了不少坑，现总结一下经验。 1. 使用 MongoDB 插件同步 transaction_traces 和 action_traces 原始需求是要链上交易数据，所以先是把 transaction_traces 和 action_traces 都同步。 踩坑：无奈地发现速度跟不上，服">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-02-03T15:40:00.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.648Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.937Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="调研">
 <meta property="article:tag" content="ops">
@@ -43,7 +43,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -121,22 +121,22 @@
 <p>作者: UMU @ MEET.ONE 实验</p>
 </blockquote>
 <p>最近三个月尝试各种方案把 EOSIO 链上交易数据同步到数据库中，踩了不少坑，现总结一下经验。</p>
-<h2 id="1-使用-MongoDB-插件同步-transaction-traces-和-action-traces">1. 使用 MongoDB 插件同步 transaction_traces 和 action_traces</h2>
+<h2>1. 使用 MongoDB 插件同步 transaction_traces 和 action_traces</h2>
 <p>原始需求是要链上交易数据，所以先是把 transaction_traces 和 action_traces 都同步。</p>
 <p><strong>踩坑</strong>：无奈地发现速度跟不上，服务器的时间成本比较高，只能舍弃。</p>
-<h2 id="2-使用-MongoDB-插件同步-transaction-traces">2. 使用 MongoDB 插件同步 transaction_traces</h2>
+<h2>2. 使用 MongoDB 插件同步 transaction_traces</h2>
 <p>研究插件代码，发现 action_traces 是从 transaction_traces 拆出来的，是重复的，所以把 action_traces 去掉，这次成功追上主网区块高度。</p>
 <p><strong>踩坑</strong>：transaction_traces 在查询 actions 时不太方便，因为 actions 是放到 transaction_traces 内部的一个数组，要查询具体一个 action 就得分两步走，先在 MongoDB 查询出某个 trx，然后再 actions 数组里遍历。数据库使用端的工程师觉得这样太麻烦，无奈继续放弃这到手的肥肉。</p>
-<h2 id="3-使用-MongoDB-插件同步-action-traces">3. 使用 MongoDB 插件同步 action_traces</h2>
+<h2>3. 使用 MongoDB 插件同步 action_traces</h2>
 <p>明确 action_traces 才是客户端想要的后，就只同步 action_traces。</p>
 <p><strong>踩坑</strong>：action_traces 条数比 transaction_traces 多了三倍以上，又出现追不上区块的问题……</p>
-<h2 id="4-使用-MongoDB-插件同步-action-traces，但只要-transfer-数据">4. 使用 MongoDB 插件同步 action_traces，但只要 transfer 数据</h2>
+<h2>4. 使用 MongoDB 插件同步 action_traces，但只要 transfer 数据</h2>
 <p>客户端最关心的是 transfer 数据，既然跟不上，就舍弃其它数据。</p>
 <p><strong>踩坑</strong>：舍弃的数据后期不好补。</p>
-<h2 id="5-考虑-kafka-plugin">5. 考虑 kafka_plugin</h2>
+<h2>5. 考虑 kafka_plugin</h2>
 <p>有人说 kafka_plugin 同步数据很快，可以追上主网区块。</p>
 <p><strong>踩坑</strong>：从 kafka_plugin 代码就能看出它没有处理 action_traces，如果还要去后端再拿出来处理，再插入到 MongoDB 里，那开发成本和服务器成本一样又上去了。</p>
-<h2 id="6-从-2019-年的区块开始同步">6. 从 2019 年的区块开始同步</h2>
+<h2>6. 从 2019 年的区块开始同步</h2>
 <p>从 35058781 块开始，插入数据库。之前的区块（1 - 35058780）处理后，仅插入数据量相对很小的 account_controls、accounts、pub_keys，其它数据量大的表不插入。</p>
 <p>做这个尝试很重要，因为发现重要的线索：</p>
 <ul>
@@ -147,7 +147,7 @@
 <p>在 1 开始的早期区块阶段，同时插入 transaction_traces 和 action_traces，并不能看出比只插入 action_traces 慢，说明 MongoDB 端压力很小。</p>
 </li>
 </ul>
-<h2 id="7-结论">7. 结论</h2>
+<h2>7. 结论</h2>
 <ul>
 <li>
 <p>要追上主网区块高度，nodeos 机器性能要好，2.5GHz CPU 不够用。之前听闻 BOS 要求 BP 使用 4.0GHz 的 CPU，现在看起来也是有道理的……以性能成本换取时间。</p>
@@ -175,7 +175,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/02/03/umutech-eosio-data-synchronization/" data-id="ckj637pv10155x07823dgesjn" class="article-share-link" data-share="baidu" data-title="EOSIO 数据同步">分享到</a>
+        <a data-url="//blog.umu618.com/2019/02/03/umutech-eosio-data-synchronization/" data-id="ckdw5bc1r00zr1sij3w5m4qp3" class="article-share-link" data-share="baidu" data-title="EOSIO 数据同步">分享到</a>
       
 
       

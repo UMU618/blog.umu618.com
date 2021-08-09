@@ -14,7 +14,7 @@
 <meta property="og:description" content="结论先行：从语法上说，Rust 基本无敌。 1. ++ 和 --    语言 有无 ++、-- 语法     C&#x2F;C++&#x2F;C#&#x2F;Java 有   Go 只支持放变量后，不支持放变量前   Python&#x2F;Rust&#x2F;Scala 无    ++、-- 一般是 +&#x3D;、-&#x3D; 的特例（除了 C++ 的迭代器），没有必要单独支持，新语言倾向于语法的单一性。 Python 的情况比较有意思，放后面是语法错误，放前">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-12T10:43:02.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.673Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.979Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="optimization">
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -117,7 +117,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>结论先行：<strong>从语法上说，Rust 基本无敌。</strong></p>
-<h2 id="1-和">1. ++ 和 --</h2>
+<h2>1. ++ 和 --</h2>
 <table>
 <thead>
 <tr>
@@ -142,7 +142,7 @@
 </table>
 <p>++、-- 一般是 +=、-= 的特例（除了 C++ 的迭代器），没有必要单独支持，新语言倾向于语法的单一性。</p>
 <p>Python 的情况比较有意思，放后面是语法错误，放前面其实就是正负号，+ 写两次还是原来的数，- 写两次是负负得正，也还是原来的数。</p>
-<h2 id="2-三目运算符（-）">2. 三目运算符（?:）</h2>
+<h2>2. 三目运算符（?:）</h2>
 <table>
 <thead>
 <tr>
@@ -162,7 +162,7 @@
 </tbody>
 </table>
 <p>Rust 的 <code>let = if else</code> 就有 C 语言 <code>?:</code> 的功能，即判断语句的子语句块可以有返回值。</p>
-<h2 id="3-条件无需括号">3. 条件无需括号</h2>
+<h2>3. 条件无需括号</h2>
 <table>
 <thead>
 <tr>
@@ -182,7 +182,7 @@
 </tbody>
 </table>
 <p>字符是能少打一个是一个，有效预防鼠标手。另外，Go 和 Rust 的语句块必须包含于 {}。</p>
-<h2 id="4-异常处理">4. 异常处理</h2>
+<h2>4. 异常处理</h2>
 <table>
 <thead>
 <tr>
@@ -193,15 +193,15 @@
 <tbody>
 <tr>
 <td style="text-align:left">C/C++</td>
-<td style="text-align:left">编译器扩展 __try…__except…__finally, __leave</td>
+<td style="text-align:left">编译器扩展 __try...__except...__finally, __leave</td>
 </tr>
 <tr>
 <td style="text-align:left">C++/C#/Java/Scala/Swift</td>
-<td style="text-align:left">throw, try…catch…finally</td>
+<td style="text-align:left">throw, try...catch...finally</td>
 </tr>
 <tr>
 <td style="text-align:left">Python</td>
-<td style="text-align:left">raise, try…except…else, try…finally</td>
+<td style="text-align:left">raise, try...except...else, try...finally</td>
 </tr>
 <tr>
 <td style="text-align:left">Go/Rust</td>
@@ -209,7 +209,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="5-换行符（-）">5. 换行符（;）</h2>
+<h2>5. 换行符（;）</h2>
 <table>
 <thead>
 <tr>
@@ -238,7 +238,7 @@
 </table>
 <p>Rust 有分号的是语句（statement），返回值是 ()，即没有返回值。而没分号的是表达式（expression），返回值就是自身的值。</p>
 <p>其实想说的是：有的 return 被简化掉了。省略 ; 就是省略 return，真香。但是，由于隐含 return，所以只能用于语句块的最后一行。</p>
-<h2 id="6-case-隐含-break">6. case 隐含 break</h2>
+<h2>6. case 隐含 break</h2>
 <table>
 <thead>
 <tr>
@@ -263,7 +263,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/12/12/umutech-learn-rust-1-what-simplified/" data-id="ckj637px001cox078gorcgsb3" class="article-share-link" data-share="baidu" data-title="学习 Rust【1】简化掉什么？">分享到</a>
+        <a data-url="//blog.umu618.com/2019/12/12/umutech-learn-rust-1-what-simplified/" data-id="ckdw5bc4u017g1sij9tgufejo" class="article-share-link" data-share="baidu" data-title="学习 Rust【1】简化掉什么？">分享到</a>
       
 
       
@@ -289,9 +289,9 @@
     </a>
   
   
-    <a href="/2019/12/12/reconstructionism-poet-shanpoyang-producers/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/12/12/reconstructionism-poet-shuilongyin-rewards-bugs/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">旧文</strong>
-      <div class="article-nav-title">诗盗·山坡羊·欠牛日生产基</div>
+      <div class="article-nav-title">诗盗·水龙头·无疑福报无尽天坑</div>
     </a>
   
 </nav>

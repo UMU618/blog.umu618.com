@@ -14,7 +14,7 @@
 <meta property="og:description" content="UMU 2010 年初就玩 OpenWRT&#x2F;DD-WRT 了，蛋似编译东西还是初学者，本文纯属蛋疼的过程，欢迎批评教育，谢谢…… 首先到 https:&#x2F;&#x2F;github.com&#x2F;pepe2k&#x2F;u-boot_mod 看明白作者的说明。这里简单说一下原理：固件（firmware）刷坏，但 U-Boot 没坏，这是半砖，可以用 TTL 线连路由器，通过 U-Boot 的功能刷好 firmware。如果两者">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2014-05-21T08:14:31.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.587Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.844Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="embedded">
 <meta property="article:tag" content="linux">
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -117,7 +117,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>UMU 2010 年初就玩 OpenWRT/DD-WRT 了，蛋似编译东西还是初学者，本文纯属蛋疼的过程，欢迎批评教育，谢谢……</p>
-<p>首先到 <a target="_blank" rel="noopener" href="https://github.com/pepe2k/u-boot_mod">https://github.com/pepe2k/u-boot_mod</a> 看明白作者的说明。这里简单说一下原理：固件（firmware）刷坏，但 U-Boot 没坏，这是半砖，可以用 TTL 线连路由器，通过 U-Boot 的功能刷好 firmware。如果两者都坏了，叫全砖，只能把 Flash 拆下来，用编程器刷好 U-Boot 和 firmware。不死 U-Boot 就是修改了 U-Boot 的实现，使我们可以用 RJ-45 网线来救砖，省去拆机搭 TTL 线的麻烦。</p>
+<p>首先到 <a href="https://github.com/pepe2k/u-boot_mod" target="_blank" rel="noopener">https://github.com/pepe2k/u-boot_mod</a> 看明白作者的说明。这里简单说一下原理：固件（firmware）刷坏，但 U-Boot 没坏，这是半砖，可以用 TTL 线连路由器，通过 U-Boot 的功能刷好 firmware。如果两者都坏了，叫全砖，只能把 Flash 拆下来，用编程器刷好 U-Boot 和 firmware。不死 U-Boot 就是修改了 U-Boot 的实现，使我们可以用 RJ-45 网线来救砖，省去拆机搭 TTL 线的麻烦。</p>
 <p>本质上说，这东西并非真的不死，只要 U-Boot 被刷坏，还是会死，不过几率不大，因为 OpenWRT 官方发行的 ROM 全都是保护 U-Boot 区域的，根据 UMU 的经验，只有三个情况会不小心或故意刷坏：</p>
 <ol>
 <li>从原厂固件刷不良固件；</li>
@@ -127,15 +127,15 @@
 <p>如果您真的这么蛋疼，还是准备编程器吧，只要是软件问题，在编程器面前没有砖的概念。（JTAG 也是救砖神器，但不是每台路由器都有，比如 DIR-505 就没有！）</p>
 <p>由于 UMU 是 Windows 程序员，平时没有安装 Linux 桌面的习惯，蛋似由于做快游项目，买了不少服务器，都是 CentOS，所以第一步就是在 CentOS 上尝试编译，后来，您们懂的，爆出各种 213 码！服务器系统还是不适合开发！</p>
 <p>不得已就在 Hyper-V Server 2012 上安装了 Ubuntu 12.04.1-desktop-i386，本来是想安装 x64 版本的，但又怕这些嵌入式的东西对 x64 可能支持不够好，算了，不要装 13 了。</p>
-<p>接下来是选择编译环境了，按照 UMU 对 OpenWRT 的好感，明显是选择 <a target="_blank" rel="noopener" href="http://downloads.openwrt.org/attitude_adjustment/12.09/ar71xx/generic/OpenWrt-Toolchain-ar71xx-for-mips_r2-gcc-4.6-linaro_uClibc-0.9.33.2.tar.bz2">OpenWrt Toolchain for AR71xx MIPS</a>，然后开始编译，哗哗哗，编译好了……最后编译出来的 bin 却是 64KB+110B，尼玛，这 size 超标了，刷进去不是不死，是立刻死！</p>
-<p>试验 <a target="_blank" rel="noopener" href="https://sourcery.mentor.com/GNUToolchain/subscription3130?lite=MIPS">Sourcery CodeBench Lite Edition for MIPS GNU/Linux</a> 可行。推测作者其实并没有用 OpenWrt Toolchain 编译过，而是用 Sourcery CodeBench，所以……为了节省时间，还是用后者吧！吐槽一下，这是商业软件，虽然有免费的 Lite 版本……</p>
+<p>接下来是选择编译环境了，按照 UMU 对 OpenWRT 的好感，明显是选择 <a href="http://downloads.openwrt.org/attitude_adjustment/12.09/ar71xx/generic/OpenWrt-Toolchain-ar71xx-for-mips_r2-gcc-4.6-linaro_uClibc-0.9.33.2.tar.bz2" target="_blank" rel="noopener">OpenWrt Toolchain for AR71xx MIPS</a>，然后开始编译，哗哗哗，编译好了……最后编译出来的 bin 却是 64KB+110B，尼玛，这 size 超标了，刷进去不是不死，是立刻死！</p>
+<p>试验 <a href="https://sourcery.mentor.com/GNUToolchain/subscription3130?lite=MIPS" target="_blank" rel="noopener">Sourcery CodeBench Lite Edition for MIPS GNU/Linux</a> 可行。推测作者其实并没有用 OpenWrt Toolchain 编译过，而是用 Sourcery CodeBench，所以……为了节省时间，还是用后者吧！吐槽一下，这是商业软件，虽然有免费的 Lite 版本……</p>
 <p>make dlink_dir505 一下，顺利编译出来，UMU 还小修改了一下 Web 界面，加入了自己的特色，不过要提醒一下，不要加太多，会爆……只有 64KB 的空间！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/21/umutech-openwrt-advanced-1-compiling-uboot/" data-id="ckj637pph00gux078gt5s3u7a" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇1）：编译不死 U-Boot">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/21/umutech-openwrt-advanced-1-compiling-uboot/" data-id="ckdw5bbus00h91sij1etuczh8" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇1）：编译不死 U-Boot">分享到</a>
       
 
       

@@ -14,7 +14,7 @@
 <meta property="og:description" content="常规教材 Bash 循环有三种写法。 1. 类 C 语言语法 12345for ((i &#x3D; 1; i &lt;&#x3D; 10000000; ++i))do  echo $idone 2. for in 语法 1234for i in &amp;#123;1..10000000&amp;#125;do  echo $idone 3. 使用外部命令 seq 1234for i in &#96;seq 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-07-30T15:25:57.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.667Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.968Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="optimization">
@@ -41,7 +41,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -115,20 +115,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="常规教材">常规教材</h2>
+        <h2>常规教材</h2>
 <p>Bash 循环有三种写法。</p>
-<h3 id="1-类-C-语言语法">1. 类 C 语言语法</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">for ((i &#x3D; 1; i &lt;&#x3D; 10000000; ++i))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="2-for-in-语法">2. for in 语法</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10000000&#125;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="3-使用外部命令-seq">3. 使用外部命令 seq</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#96;seq 1 10000000&#96;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h2 id="分析">分析</h2>
+<h3>1. 类 C 语言语法</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">for ((i &#x3D; 1; i &lt;&#x3D; 10000000; ++i))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h3>2. for in 语法</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10000000&#125;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h3>3. 使用外部命令 seq</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#96;seq 1 10000000&#96;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h2>分析</h2>
 <p>这三种方法中，性能最好的是第一种，最差的是第三种。</p>
 <p>方法 1 是语言层面的循环语法，循环会<strong>立刻</strong>开始，而后两种，作为对比，并不会<strong>立刻</strong>开始！</p>
-<p>方法 2 中的 <code>&#123;1..10000000&#125;</code> 会产生一个 1 到 10000000 的序列，然后再开始循环。</p>
+<p>方法 2 中的 <code>{1..10000000}</code> 会产生一个 1 到 10000000 的序列，然后再开始循环。</p>
 <p>方法 3 中的 <code>seq 1 10000000</code> 是调用 <code>seq</code> 产生一个 1 到 10000000 的序列，然后再开始循环。涉及到外部进程调用和管道传递，所以比方法 2 更慢。</p>
-<h3 id="总结">总结</h3>
+<h3>总结</h3>
 <ul>
 <li>
 <p>方法 1 写起来最麻烦，性能却是最好的。<strong>“做一件事，有很多种方式”，有时候不是好事，有对比，就有伤害……优化往往是和人性作对！</strong></p>
@@ -137,14 +137,14 @@
 <p>语言原生的方法一般比调用外部命令好。</p>
 </li>
 </ul>
-<h2 id="同类经验">同类经验</h2>
+<h2>同类经验</h2>
 <p>Java 的 for 和 while 本质上一样（其实 while 可以去掉），而同是 JVM 语言的 Scala 的 for 却不同于 while。Scala 的 <code>for &lt;-</code> 也会先产生序列，再循环，所以超大规模循环时，for 性能不如 while。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/30/umutech-optimization-thinking-4-bash-for-loop/" data-id="ckj637pwh01aqx0789tmmgrrl" class="article-share-link" data-share="baidu" data-title="优化思维【4】Bash for 循环">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/30/umutech-optimization-thinking-4-bash-for-loop/" data-id="ckdw5bc42015c1sijgjqobvjz" class="article-share-link" data-share="baidu" data-title="优化思维【4】Bash for 循环">分享到</a>
       
 
       

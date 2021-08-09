@@ -14,7 +14,7 @@
 <meta property="og:description" content="实用参考   云游戏的架构设计和技术实现 https:&#x2F;&#x2F;blog.csdn.net&#x2F;RA681t58CJxsgCkJ31&#x2F;article&#x2F;details&#x2F;79226317   GamingAnywhere http:&#x2F;&#x2F;www.gaminganywhere.org   OBS Studio https:&#x2F;&#x2F;github.com&#x2F;obsproject&#x2F;obs-studio   服务器架构   NV">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-04-14T14:27:45.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.655Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.949Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="作品">
 <meta property="article:tag" content="调研">
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,22 +116,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="实用参考">实用参考</h2>
+        <h2>实用参考</h2>
 <ol>
 <li>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/RA681t58CJxsgCkJ31/article/details/79226317">云游戏的架构设计和技术实现</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/RA681t58CJxsgCkJ31/article/details/79226317">https://blog.csdn.net/RA681t58CJxsgCkJ31/article/details/79226317</a></p>
+<p><a href="https://blog.csdn.net/RA681t58CJxsgCkJ31/article/details/79226317" target="_blank" rel="noopener">云游戏的架构设计和技术实现</a></p>
+<p><a href="https://blog.csdn.net/RA681t58CJxsgCkJ31/article/details/79226317" target="_blank" rel="noopener">https://blog.csdn.net/RA681t58CJxsgCkJ31/article/details/79226317</a></p>
 </li>
 <li>
-<p><a target="_blank" rel="noopener" href="http://www.gaminganywhere.org">GamingAnywhere</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.gaminganywhere.org">http://www.gaminganywhere.org</a></p>
+<p><a href="http://www.gaminganywhere.org" target="_blank" rel="noopener">GamingAnywhere</a></p>
+<p><a href="http://www.gaminganywhere.org" target="_blank" rel="noopener">http://www.gaminganywhere.org</a></p>
 </li>
 <li>
-<p><a target="_blank" rel="noopener" href="https://github.com/obsproject/obs-studio">OBS Studio</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/obsproject/obs-studio">https://github.com/obsproject/obs-studio</a></p>
+<p><a href="https://github.com/obsproject/obs-studio" target="_blank" rel="noopener">OBS Studio</a></p>
+<p><a href="https://github.com/obsproject/obs-studio" target="_blank" rel="noopener">https://github.com/obsproject/obs-studio</a></p>
 </li>
 </ol>
-<h2 id="服务器架构">服务器架构</h2>
+<h2>服务器架构</h2>
 <ul>
 <li>
 <p>NVIDIA Grid 显卡</p>
@@ -144,7 +144,7 @@
 </li>
 </ul>
 <p>一份授权 Windows 系统大约可以运行 40~50 个游戏实例。</p>
-<h2 id="音频">音频</h2>
+<h2>音频</h2>
 <ul>
 <li>
 <p>服务器上设置 48000Hz 采样率；</p>
@@ -155,7 +155,7 @@
 <li>
 <p>音频编码的延迟：需要一个 frame 才能编码，而等待一个 frame 需要时间。比如，48000Hz 的 samplerate 编码到 1024 samples/frame 的 AAC，一个 frame 需要的采集时间是 1000 * 1024 / 48000 = 21.3ms，这个只是采集的理论时间，应用程序的采集间隔还可能增大这个采集延迟，然后还有编码、传输、解码、播放延迟。</p>
 <p>Opus 的 frame size 默认是 960，相比 1024 的 AAC 理论上可以减少一点点延迟，1000 * 960 / 48000 = 20ms。</p>
-<p>Opus 的 frame size 还可以更小，比如 120，但不建议使用，因为 Windows 一次采集 480 samples，frame_size = 120 时，一次采集包含 4 frames，所以延迟和 frame_size = 480 其实是一样的。另外，<a target="_blank" rel="noopener" href="http://www.live555.com/">live555</a> 最小发送单位是 packet，而不是 frame，并且实现上 packet 要等待 960 samples 时长。</p>
+<p>Opus 的 frame size 还可以更小，比如 120，但不建议使用，因为 Windows 一次采集 480 samples，frame_size = 120 时，一次采集包含 4 frames，所以延迟和 frame_size = 480 其实是一样的。另外，<a href="http://www.live555.com/" target="_blank" rel="noopener">live555</a> 最小发送单位是 packet，而不是 frame，并且实现上 packet 要等待 960 samples 时长。</p>
 <p>128kpbs 的 Opus 音质几乎已经顶天了，人耳很难分辨，比 mp3 好太多了，网络上流行的高音质 mp3 都是 320kpbs 的。</p>
 </li>
 <li>
@@ -164,14 +164,14 @@
 </ol>
 </li>
 </ul>
-<h2 id="流传输协议">流传输协议</h2>
+<h2>流传输协议</h2>
 <ul>
 <li>
 <p>RTSP</p>
 </li>
 <li>
-<p><a target="_blank" rel="noopener" href="http://www.live555.com/">live555</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.live555.com/">http://www.live555.com/</a></p>
+<p><a href="http://www.live555.com/" target="_blank" rel="noopener">live555</a></p>
+<p><a href="http://www.live555.com/" target="_blank" rel="noopener">http://www.live555.com/</a></p>
 <p>UMU 之前用 live555 2017.07.18 版本时，发现它对 Opus 支持不好，需要改进，当前版本未测。</p>
 </li>
 </ul>
@@ -180,7 +180,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/04/14/umutech-a-developer-s-guide-to-cloud-gaming-1/" data-id="ckj637pvl017dx078cpyg5mp9" class="article-share-link" data-share="baidu" data-title="云游戏开发指南【1】">分享到</a>
+        <a data-url="//blog.umu618.com/2019/04/14/umutech-a-developer-s-guide-to-cloud-gaming-1/" data-id="ckdw5bc2n011t1sij3zx8e9gr" class="article-share-link" data-share="baidu" data-title="云游戏开发指南【1】">分享到</a>
       
 
       

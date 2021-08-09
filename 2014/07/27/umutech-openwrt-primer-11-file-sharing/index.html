@@ -14,7 +14,7 @@
 <meta property="og:description" content="需求 组建文件共享服务。 解决 文件共享可以通过 FTP&#x2F;FTPS、SFTP、NFS、Windows 文件共享（网上邻居）。其中 FTP&#x2F;FTPS、SFTP 需要先下载，无法“直接打开”，实用性较差就不介绍了，重点放在 Windows 文件共享，最后再简单介绍一下 NFS。 Windows 文件共享 OpenWRT 使用 samba 提供 Windows 文件共享服务。如有条件应该使用 samba">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2014-07-26T16:52:14.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.593Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.854Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="embedded">
 <meta property="article:tag" content="linux">
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,32 +116,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="需求">需求</h2>
+        <h2>需求</h2>
 <p>组建文件共享服务。</p>
-<h2 id="解决">解决</h2>
+<h2>解决</h2>
 <p>文件共享可以通过 FTP/FTPS、SFTP、NFS、Windows 文件共享（网上邻居）。其中 FTP/FTPS、SFTP 需要先下载，无法“直接打开”，实用性较差就不介绍了，重点放在 Windows 文件共享，最后再简单介绍一下 NFS。</p>
-<h3 id="Windows-文件共享">Windows 文件共享</h3>
+<h3>Windows 文件共享</h3>
 <p>OpenWRT 使用 samba 提供 Windows 文件共享服务。如有条件应该使用 samba4，安装命令为：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install samba4-server</span><br><span class="line"><span class="comment"># 如果 samba4 不可用，则安装 samba3.6</span></span><br><span class="line"><span class="comment"># opkg install samba36-server</span></span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install samba4-server</span><br><span class="line"><span class="comment"># 如果 samba4 不可用，则安装 samba3.6</span></span><br><span class="line"><span class="comment"># opkg install samba36-server</span></span><br></pre></td></tr></table></figure></p>
 <p>参考：</p>
 <ul>
 <li>
-<p><a target="_blank" rel="noopener" href="https://openwrt.org/docs/guide-user/services/nas/samba">Samba (smb)</a></p>
+<p><a href="https://openwrt.org/docs/guide-user/services/nas/samba" target="_blank" rel="noopener">Samba (smb)</a></p>
 </li>
 <li>
-<p><a target="_blank" rel="noopener" href="https://www.leiphone.com/news/201406/diy-a-smart-router-topic-share.html">【硬创邦】跟hoowa学做智能路由(十一)：实现网络存储与文件共享</a> 的“安装 Windows 文件共享”章节。</p>
+<p><a href="https://www.leiphone.com/news/201406/diy-a-smart-router-topic-share.html" target="_blank" rel="noopener">【硬创邦】跟hoowa学做智能路由(十一)：实现网络存储与文件共享</a> 的“安装 Windows 文件共享”章节。</p>
 </li>
 </ul>
-<p>如果配置后，无法正常访问，您可以参考一下《<a target="_blank" rel="noopener" href="https://www.win7china.com/html/5956.html">Windows 7 无法访问 NAS 或 Samba 服务器之解决</a>》。</p>
-<h3 id="NFS">NFS</h3>
+<p>如果配置后，无法正常访问，您可以参考一下《<a href="https://www.win7china.com/html/5956.html" target="_blank" rel="noopener">Windows 7 无法访问 NAS 或 Samba 服务器之解决</a>》。</p>
+<h3>NFS</h3>
 <p>NFS 和 Windows 文件共享是两大文件共享服务，NFS 在 Linux 设备之间的传输效率高于 samba，但大部分客户端都是 Windows，所以 UMU 更推荐 samba。</p>
 <p>参考：</p>
 <ul>
 <li>
-<p>OpenWRT 安装 NFS 服务端：官方文档 <a target="_blank" rel="noopener" href="https://openwrt.org/docs/guide-user/services/nas/nfs.server">Network File System (NFS)</a>；</p>
+<p>OpenWRT 安装 NFS 服务端：官方文档 <a href="https://openwrt.org/docs/guide-user/services/nas/nfs.server" target="_blank" rel="noopener">Network File System (NFS)</a>；</p>
 </li>
 <li>
-<p>Windows 安装 NFS 客户端：《<a target="_blank" rel="noopener" href="https://www.cnblogs.com/itech/archive/2012/06/17/2552514.html">win7 中使用NFS共享</a>》。</p>
+<p>Windows 安装 NFS 客户端：《<a href="https://www.cnblogs.com/itech/archive/2012/06/17/2552514.html" target="_blank" rel="noopener">win7 中使用NFS共享</a>》。</p>
 </li>
 </ul>
 
@@ -149,7 +149,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/27/umutech-openwrt-primer-11-file-sharing/" data-id="ckj637ppv00ixx07853rd0873" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇11）：文件共享">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/27/umutech-openwrt-primer-11-file-sharing/" data-id="ckdw5bbvi00j91sij8qxratft" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇11）：文件共享">分享到</a>
       
 
       

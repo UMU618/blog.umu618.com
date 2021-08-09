@@ -14,11 +14,11 @@
 <meta property="og:description" content="做题 以下代码打印什么？ 1234567auto count &#x3D; sizeof (int);if (count &gt; -1) &amp;#123;  std::cout &lt;&lt; &quot;&gt; -1&quot;;&amp;#125;else &amp;#123;  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;&amp;#125; 答案是：&lt;&#x3D; -1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-05-16T15:07:02.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.659Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.954Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
-<meta property="article:tag" content="optimization">
 <meta property="article:tag" content="cpp">
+<meta property="article:tag" content="optimization">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@UMU618">
   
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,25 +116,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="做题">做题</h2>
+        <h2>做题</h2>
 <p>以下代码打印什么？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto count &#x3D; sizeof (int);</span><br><span class="line">if (count &gt; -1) &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&gt; -1&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto count &#x3D; sizeof (int);</span><br><span class="line">if (count &gt; -1) &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&gt; -1&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>答案是：<code>&lt;= -1</code>，因为 sizeof (int) 是无符号的，把 <code>auto</code> 改为 <code>int</code> 则结果是 <code>&gt; -1</code>。</p>
-<h2 id="本质论">本质论</h2>
+<h2>本质论</h2>
 <p>当我们声明 <code>unsigned/signed int count</code> 时，<code>unsigned/signed</code> 是变量 <code>count</code> 的使用属性，<code>int</code> 是其容量属性。</p>
 <p>所谓使用属性，就是当它存在寄存器或内存时，不管是 <code>unsigned</code> 还是 <code>signed</code> 本质是一样的，但对它进行访问时，就区别对待。</p>
 <p>比如对 <code>count</code> 进行加法，<code>unsigned</code> 时用的是 <code>ADD</code> 指令，<code>signed</code> 时用的是 <code>ADC</code> 指令，其余减乘除也都类似地使用不同指令。</p>
 <p>再来一个问题：把一个变量保存到文件里，再读出来，怎么知道它是有符号还是无符号？</p>
 <p>答案是：如果你不在序列化时考虑符号，则反序列化时，无法知道原来的符号，把它赋值给什么类型的变量它就变成什么类型。</p>
 <p>这也是 JSON 文本转对象后，要自己选择数据类型的原因，因为 JSON 文本没表示符号的语法。</p>
-<h2 id="结论">结论</h2>
+<h2>结论</h2>
 <p><strong>优化思路：理解本质，就能了解限制和优化方向。</strong></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/16/umutech-optimization-thinking-2-signed-and-unsigned/" data-id="ckj637pvv018dx0788bgmgkq8" class="article-share-link" data-share="baidu" data-title="优化思维【2】有符号和无符号的本质区别">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/16/umutech-optimization-thinking-2-signed-and-unsigned/" data-id="ckdw5bc2z012n1sij69p42qvu" class="article-share-link" data-share="baidu" data-title="优化思维【2】有符号和无符号的本质区别">分享到</a>
       
 
       

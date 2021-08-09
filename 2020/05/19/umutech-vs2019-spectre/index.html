@@ -6,19 +6,19 @@
   
   <title>用 VS2019 应该尽量链接带有 Spectre 缓解措施的库 | UMU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="问题 愉快地装完 VS2019，编译一个使用 ATL 的工程，结果失败。  LINK : fatal error LNK1104: cannot open file ‘atls.lib’  分析 看 VC++ Directories 里的 Library Directories，有一个 C:\Program Files (x86)\Microsoft Visual Studio\2019\Comm">
+  <meta name="description" content="问题 愉快地装完 VS2019，编译一个使用 ATL 的工程，结果失败。  LINK : fatal error LNK1104: cannot open file &#39;atls.lib&#39;  分析 看 VC++ Directories 里的 Library Directories，有一个 C:\Program Files (x86)\Microsoft Visual Studio\2019\Comm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用 VS2019 应该尽量链接带有 Spectre 缓解措施的库">
 <meta property="og:url" content="//blog.umu618.com/2020/05/19/umutech-vs2019-spectre/">
 <meta property="og:site_name" content="UMU">
-<meta property="og:description" content="问题 愉快地装完 VS2019，编译一个使用 ATL 的工程，结果失败。  LINK : fatal error LNK1104: cannot open file ‘atls.lib’  分析 看 VC++ Directories 里的 Library Directories，有一个 C:\Program Files (x86)\Microsoft Visual Studio\2019\Comm">
+<meta property="og:description" content="问题 愉快地装完 VS2019，编译一个使用 ATL 的工程，结果失败。  LINK : fatal error LNK1104: cannot open file &#39;atls.lib&#39;  分析 看 VC++ Directories 里的 Library Directories，有一个 C:\Program Files (x86)\Microsoft Visual Studio\2019\Comm">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-19T09:29:35.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.684Z">
+<meta property="article:modified_time" content="2020-06-18T04:05:41.675Z">
 <meta property="article:author" content="圣小开">
+<meta property="article:tag" content="debug">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
-<meta property="article:tag" content="debug">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@UMU618">
   
@@ -42,7 +42,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -116,22 +116,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="问题">问题</h2>
+        <h2>问题</h2>
 <p>愉快地装完 VS2019，编译一个使用 ATL 的工程，结果失败。</p>
 <blockquote>
-<p>LINK : fatal error LNK1104: cannot open file ‘atls.lib’</p>
+<p>LINK : fatal error LNK1104: cannot open file 'atls.lib'</p>
 </blockquote>
-<h2 id="分析">分析</h2>
+<h2>分析</h2>
 <p>看 VC++ Directories 里的 Library Directories，有一个 <code>C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\atlmfc\lib\spectre\x64</code>，但这个目录并没有 <code>atls.lib</code>。</p>
 <p>反而 <code>C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\atlmfc\lib\x64</code> 目录下有 <code>atls.lib</code>。</p>
-<h2 id="解决">解决</h2>
+<h2>解决</h2>
 <p>安装 VS 时，应该选择“带有 Spectre 缓解措施、适用于最新 v142 生成工具的 C++ ATL (x86 和 x64)”。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2020/05/19/umutech-vs2019-spectre/" data-id="ckj637pu00113x0785z3h1qys" class="article-share-link" data-share="baidu" data-title="用 VS2019 应该尽量链接带有 Spectre 缓解措施的库">分享到</a>
+        <a data-url="//blog.umu618.com/2020/05/19/umutech-vs2019-spectre/" data-id="ckdw5bc6701au1sij0vow501p" class="article-share-link" data-share="baidu" data-title="用 VS2019 应该尽量链接带有 Spectre 缓解措施的库">分享到</a>
       
 
       

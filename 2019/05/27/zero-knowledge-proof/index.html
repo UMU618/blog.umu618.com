@@ -14,7 +14,7 @@
 <meta property="og:description" content="定义 零知识证明（Zero—Knowledge Proof）起源于最小泄露证明。  设 P（Prover）表示掌握某些信息，并希望证实这一事实的实体； 设 V（Verifier）是验证这一事实的实体。  假如某个协议向 V 证明 P 的确掌握某些信息，但 V 无法推断出这些信息是什么，我们称 P 实现了最小泄露证明。 如果 V 除了知道 P 能够证明某一事实外，不能够得到其他任何知识，我们称 P">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-05-27T08:39:12.000Z">
-<meta property="article:modified_time" content="2020-12-26T15:26:53.661Z">
+<meta property="article:modified_time" content="2020-05-17T14:58:48.959Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="cryptology">
 <meta name="twitter:card" content="summary">
@@ -40,7 +40,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -114,7 +114,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="定义">定义</h2>
+        <h2>定义</h2>
 <p>零知识证明（Zero—Knowledge Proof）起源于最小泄露证明。</p>
 <ul>
 <li>设 P（Prover）表示掌握某些信息，并希望证实这一事实的实体；</li>
@@ -134,9 +134,9 @@
 <p>零知识性：V 无法获取任何额外的知识。</p>
 </li>
 </ol>
-<h2 id="本质">本质</h2>
+<h2>本质</h2>
 <p>零知识证明并不是数学意义上的证明，因为它存在小概率的误差，欺骗者有可能通过虚假陈述骗过证明者。换句话来说，零知识证明是概率证明而不是确定性证明。但是也存在有技术能将误差降低到可以忽略的值。</p>
-<h2 id="举例">举例</h2>
+<h2>举例</h2>
 <ol>
 <li>
 <p>16 世纪的文艺复兴时期，意大利有两位数学家为竞争一元三次方程求根公式发现者的桂冠，就采用了零知识证明的方法。当时，数学家塔尔塔里雅和菲奥都宣称自己掌握了这个求根公式，为了证明自己没有说谎，又不把公式的具体内容公布出来，他们摆开了擂台：双方各出 30 个一元三次方程给对方解，谁能全部解出，就说明谁掌握了这个公式。比赛结果显示，塔尔塔里雅解出了菲奥出的全部 30 个方程，而菲奥一个也解不出。于是人们相信塔尔塔里雅是一元三次方程求根公式的真正发现者，虽然当时除了塔尔塔里雅外，谁也不知道这个公式到底是个什么样子。</p>
@@ -145,18 +145,18 @@
 <p>稣吹牛说自己掌握椭圆曲线的除法，即可以通过公钥计算私钥。</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">公钥 &#x3D; G * 私钥</span><br><span class="line"></span><br><span class="line">私钥 &#x3D; 公钥 &#x2F; G</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">公钥 &#x3D; G * 私钥</span><br><span class="line"></span><br><span class="line">私钥 &#x3D; 公钥 &#x2F; G</span><br></pre></td></tr></table></figure></p>
 <p>但是这个技术价值千亿美元，稣当然不可能开源，所以稣把中本聪的私钥算出来，然后：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">稣 !&#x3D; 中本聪</span><br><span class="line"></span><br><span class="line">&#x3D;&gt; 稣没有中本聪的私钥</span><br><span class="line"></span><br><span class="line">&#x3D;&gt; 中本聪的私钥是计算出来的</span><br><span class="line"></span><br><span class="line">&#x3D;&gt; 稣定义了椭圆曲线的除法</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">稣 !&#x3D; 中本聪</span><br><span class="line"></span><br><span class="line">&#x3D;&gt; 稣没有中本聪的私钥</span><br><span class="line"></span><br><span class="line">&#x3D;&gt; 中本聪的私钥是计算出来的</span><br><span class="line"></span><br><span class="line">&#x3D;&gt; 稣定义了椭圆曲线的除法</span><br></pre></td></tr></table></figure></p>
 <p>注意：这个除法目前并不存在，只是吹牛。</p>
-<h2 id="参考">参考</h2>
-<p>大海捞针是不靠谱的：<a target="_blank" rel="noopener" href="https://thippo.github.io/">https://thippo.github.io/</a></p>
+<h2>参考</h2>
+<p>大海捞针是不靠谱的：<a href="https://thippo.github.io/" target="_blank" rel="noopener">https://thippo.github.io/</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/27/zero-knowledge-proof/" data-id="ckj637pw0018yx0784mzv28q5" class="article-share-link" data-share="baidu" data-title="零知识证明">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/27/zero-knowledge-proof/" data-id="ckdw5bc3d013n1sijdbvjcwl8" class="article-share-link" data-share="baidu" data-title="零知识证明">分享到</a>
       
 
       
