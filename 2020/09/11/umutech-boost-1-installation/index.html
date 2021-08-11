@@ -14,7 +14,7 @@
 <meta property="og:description" content="软件环境   Windows 10   VS2019   其它系统的安装、编译过程都类似。即使您使用其它系统，本文仍然有参考意义。 其它系统请参考：   《Boost【3】在 Linux 上安装》   《Boost【4】在 macOS 上安装》   1. 下载 官网：https:&#x2F;&#x2F;www.boost.org&#x2F;，当前（2020-09-11）最新版本是 1.74.0。 在国内直接下载可能比较慢，您可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-11T06:22:09.000Z">
-<meta property="article:modified_time" content="2021-08-09T04:55:22.026Z">
+<meta property="article:modified_time" content="2021-08-11T03:23:05.146Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
@@ -43,7 +43,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -184,7 +184,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\b2.exe address<span class="literal">-model</span>=<span class="number">64</span> runtime<span class="literal">-link</span>=<span class="keyword">static</span></span><br></pre></td></tr></table></figure>
 <p>它编译出来的 lib 文件名中会带有 <code>-mt-s-x64</code>，例如：libboost_program_options-vc142-mt-s-x64-1_75.lib。</p>
 <p>编译完毕之后：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> ./project<span class="literal">-config</span>.jam <span class="variable">$HOME</span>/user<span class="literal">-config</span>.jam</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> .\project<span class="literal">-config</span>.jam <span class="variable">$HOME</span>\user<span class="literal">-config</span>.jam</span><br></pre></td></tr></table></figure>
 <h2 id="6-测试编译">6. 测试编译</h2>
 <p>可以用以下仓库验证前面操作是否正确：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/UMU618/test_boost">https://github.com/UMU618/test_boost</a></p>
@@ -229,7 +229,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2020/09/11/umutech-boost-1-installation/" data-id="ckidb0pv0000nl0krfw3h2ama" class="article-share-link" data-share="baidu" data-title="Boost【1】安装">分享到</a>
+        <a data-url="//blog.umu618.com/2020/09/11/umutech-boost-1-installation/" data-id="ckj637puc012bx078a8u1fxtr" class="article-share-link" data-share="baidu" data-title="Boost【1】安装">分享到</a>
       
 
       
