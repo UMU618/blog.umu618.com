@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-04-10T17:56:03.039Z</updated>
+  <updated>2022-04-16T04:27:19.818Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设置 Debian 不自动进入桌面</title>
+    <link href="//blog.umu618.com/2022/04/16/umutech-debian-do-not-automatically-enter-desktop/"/>
+    <id>//blog.umu618.com/2022/04/16/umutech-debian-do-not-automatically-enter-desktop/</id>
+    <published>2022-04-16T03:56:06.000Z</published>
+    <updated>2022-04-16T04:27:19.818Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>在 Debian 上装了 KDE Plasma 桌面，但使用率不高，毕竟主要是当服务器使用，所以不想每次启动都自动进入桌面，以节约内存。</p><h2 id="解决">解决</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl set-default multi-user.target</span><br></pre></td></tr></table></figure><p>重启后就是默认的控制台登陆。如果想直接以当前控制台登陆的身份进入桌面，运行 <code>startx</code> 即可。但这种方式桌面是跑在当前控制台上，不是第 7 个控制台（Ctrl+Alt+F7），如果想尽量保持和原来自动启动桌面的环境一样，应该用：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl isolate graphical.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者更直接地【不建议使用】</span></span><br><span class="line">sudo systemctl start sddm.service</span><br></pre></td></tr></table></figure><p>这将以服务身份进入桌面，后面还要再通过图形界面登陆一次。</p><p>如想恢复自动进入图形界面：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl set-default graphical.target</span><br></pre></td></tr></table></figure><p>如想知道当前处于哪种方式，可使用：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl get-default</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;需求&quot;&gt;需求&lt;/h2&gt;
+&lt;p&gt;在 Debian 上装了 KDE Plasma 桌面，但使用率不高，毕竟主要是当服务器使用，所以不想每次启动都自动进入桌面，以节约内存。&lt;/p&gt;
+&lt;h2 id=&quot;解决&quot;&gt;解决&lt;/h2&gt;
+&lt;figure class=&quot;highlight</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="optimization" scheme="//blog.umu618.com/tags/optimization/"/>
+    
+    <category term="linux" scheme="//blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="//blog.umu618.com/tags/ops/"/>
+    
+    <category term="debian" scheme="//blog.umu618.com/tags/debian/"/>
+    
+  </entry>
   
   <entry>
     <title>红米 AX6S 刷 OpenWRT</title>
@@ -14122,6 +14155,32 @@ friend with benefit&lt;/p&gt;
     <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
     
     <category term="windows" scheme="//blog.umu618.com/tags/windows/"/>
+    
+    <category term="调研" scheme="//blog.umu618.com/tags/%E8%B0%83%E7%A0%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>协议加速的三个时代</title>
+    <link href="//blog.umu618.com/2013/03/16/umutech-three-eras-of-protocol-acceleration/"/>
+    <id>//blog.umu618.com/2013/03/16/umutech-three-eras-of-protocol-acceleration/</id>
+    <published>2013-03-16T07:51:08.000Z</published>
+    <updated>2022-04-16T05:24:12.892Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里要说的是基于反向代理＋缓存的加速。位于客户端和服务端之间的加速系统，理解某些协议，并对这些协议进行处理，使客户端不需要做任何改动的前提下，其请求被重定向到更“近”的“代理服务器”上。</p><h2 id="普通时代">普通时代</h2><p>主要处理公开的协议，最明显的例子是 HTTP 下载，加速系统理解 HTTP 协议，当收到 GET 请求时，伪造 302 等跳转回应，使客户端改向加速系统提供的“代理服务器”下载。</p><p>当一个域名只用于 HTTP 服务时，还可以对这个域名做文章……DNS 协议也是公开的。</p><h2 id="文艺时代">文艺时代</h2><p>各种下载器、视频应用开始采用私有协议……所以，逆向就必不可少了，这个时代加速服务提供商必须有一定开发实力，不能再用一些开源代码整合就了事。</p><h2 id="二逼时代">二逼时代</h2><p>某些下载器的公司出于各种原因不希望别人假扮自己的“服务器”，于是做出了艰难的决定，下载协议使用非对称算法加密，这样一来，即使那些逆向高手把整个下载器客户端都逆向了，那也只是做出一个客户端，无法扮演服务端，于是乎……加速服务公司都 2B 了，要私钥吗？分点钱吧！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;这里要说的是基于反向代理＋缓存的加速。位于客户端和服务端之间的加速系统，理解某些协议，并对这些协议进行处理，使客户端不需要做任何改动的前提下，其请求被重定向到更“近”的“代理服务器”上。&lt;/p&gt;
+&lt;h2 id=&quot;普通时代&quot;&gt;普通时代&lt;/h2&gt;
+&lt;p&gt;主要处理公开的协议，最明</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
     
     <category term="调研" scheme="//blog.umu618.com/tags/%E8%B0%83%E7%A0%94/"/>
     
