@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-04-24T17:39:19.532Z</updated>
+  <updated>2022-04-25T13:07:36.802Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="//blog.umu618.com/2022/04/25/umutech-linux-desktop/"/>
     <id>//blog.umu618.com/2022/04/25/umutech-linux-desktop/</id>
     <published>2022-04-24T16:00:20.000Z</published>
-    <updated>2022-04-24T17:39:19.532Z</updated>
+    <updated>2022-04-25T13:07:36.802Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="问题">问题</h2><ul><li><p>那么多 Linux 发行版，哪个桌面最好用？</p></li><li><p>i3wm 到底是不是反人类？</p></li><li><p>FreeOffice 究竟是不是免费？</p></li><li><p>以极客理念做的产品，究竟是不是坑人的？</p></li><li><p>国产 OS 到底有没有戏？</p></li></ul><h2 id="体验">体验</h2><table><thead><tr><th style="text-align:left">系列</th><th style="text-align:left">包管理器</th><th style="text-align:left">防火墙</th><th style="text-align:left">经验</th><th style="text-align:left">主观感到的坑</th></tr></thead><tbody><tr><td style="text-align:left">OpenWRT</td><td style="text-align:left">opkg</td><td style="text-align:left">很容易理解的文件配置：<code>vi /etc/config/firewall</code> 或者 <code>uci</code>，然后 <code>/etc/init.d/firewall reload</code></td><td style="text-align:left">从 2010 年初开始一直在用，能刷它的路由器没有一台能逃过。轻量是它的特点。</td><td style="text-align:left"><code>ash</code> 不够智能，当然如果硬件允许，可以装 <code>zsh</code>；不适合做桌面，但其实也可以哦（肯定是坑）！</td></tr><tr><td style="text-align:left">Ubuntu/Debian、Armbian</td><td style="text-align:left"><code>apt</code></td><td style="text-align:left">好用的：<code>ufw</code></td><td style="text-align:left">大学就见好多学长用 Ubuntu，默认情况下，它的桌面比 Debian 漂亮，Debian 比较适合当服务器，实际上稣一般使用 Debian。物理机装了好多台，一些电视盒子也刷成 Armbian 在做测试机。</td><td style="text-align:left">目前 Bullseye 用的内核是 5.10，比较保守。默认桌面都很丑。</td></tr><tr><td style="text-align:left">CentOS（后续 RockyLinux、AlmaLinux）</td><td style="text-align:left"><code>yum</code></td><td style="text-align:left">有点忘记了，是不是有个 <code>firewall-cmd</code>？</td><td style="text-align:left">很久以前被迫用过……</td><td style="text-align:left">就是没好感，反正也挂了（才怪）。</td></tr><tr><td style="text-align:left">Manjaro/ArchLinux</td><td style="text-align:left"><code>pacman</code>、<code>yay</code></td><td style="text-align:left">好用的：<code>ufw</code></td><td style="text-align:left">Manjaro 桌面体验很好，ArchLinux 只在虚拟机里体验。内核 5.15 是比 Debian 新。</td><td style="text-align:left">i3 版装完中文支持有问题，KDE 则没问题。</td></tr><tr><td style="text-align:left">PostMarketOS/AlpineLinux</td><td style="text-align:left"><code>apk</code>（真的不是安卓啊～）</td><td style="text-align:left">不知道怎么喷的：<code>awall</code></td><td style="text-align:left">也是内核 5.15，和 OpenWRT 的理念很像，而且注重轻量和安全。AlpineLinux 适合做容器的基础镜像。</td><td style="text-align:left">对中文真不友好。进入系统后还是把 <code>ash</code> 换成 <code>zsh</code> 吧。还有这个 <code>awall</code>……和 <code>ufw</code> 比，真的很想说 ashit！</td></tr></tbody></table><p>列这个表其实想说几个感受：</p><ol><li><p>体验这么多不同发行版真浪费生命。尤其想说：包管理器有必要这么多吗？对软件开发商来说，真的很无语呀！</p></li><li><p>在用 Manjaro 时发现，网易云音乐这个软件，其实是来自 Debian 系的 deb 包，国产的 OS 大部分也都是基于 Debian 的。也就是说：如果有流行的软件，会有人重新打包成其它包。怎么说呢……国产 OS 如果开发了啥国民软件，是不是 Manjaro 也会吸收过去？那国产 OS 岂不是又没啥优势了？</p></li><li><p>如果习惯 Windows 或者 macOS，最好还是选择 KDE Plasma，然后装合适的主题，让它更像 Windows 或者 macOS。i3wm 这种极客型的产品，不适合大部分人。而且 Manjaro i3 是个社区版，不是官方版，中文支持是有问题的。</p></li><li><p>有小伙伴问稣：怎么会用 <a href="https://postmarketos.org/">PostMarketOS</a> 这种乱七八糟的东西？稣内牛满面，还不是因为很早以前买了台 <a href="https://openrt.gitbook.io/open-surfacert/">Surface RT</a>……自从微软抛弃它之后，稣挣扎过一次，装了 Windows 10 ARM，可现在不是已经 11 了吗？于是一不做二不休装 Linux，然后就装了这个奇怪的 <a href="https://openrt.gitbook.io/open-surfacert/surface-rt/linux/root-filesystem/distros/postmarketos">PostMarketOS</a>。当然后悔了，它能刷 <a href="https://wiki.ubuntu.com/ARM/SurfaceRT">Ubuntu Server</a> 的，真是脸疼……</p></li><li><p>Wayland 吗？不了，谢谢，稣用 X11 就行。</p></li><li><p>最后一个问题：稣叛变到 Arch 系了吗？没有！选 Linux，稣还是用 Debian，毕竟要支持国产嘛（间接）！</p></li></ol>]]></content>
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><ul><li><p>那么多 Linux 发行版，哪个桌面最好用？</p></li><li><p>i3wm 到底是不是反人类？</p></li><li><p>FreeOffice 究竟是不是免费？</p></li><li><p>以极客理念做的产品，究竟是不是坑人的？</p></li><li><p>国产 OS 到底有没有戏？</p></li></ul><h2 id="体验">体验</h2><table><thead><tr><th style="text-align:left">系列</th><th style="text-align:left">包管理器</th><th style="text-align:left">防火墙</th><th style="text-align:left">经验</th><th style="text-align:left">主观感到的坑</th></tr></thead><tbody><tr><td style="text-align:left">OpenWRT</td><td style="text-align:left"><code>opkg</code></td><td style="text-align:left">很容易理解的文件配置：<code>vi /etc/config/firewall</code> 或者 <code>uci</code>，然后 <code>/etc/init.d/firewall reload</code></td><td style="text-align:left">从 2010 年初开始一直在用，能刷它的路由器没有一台能逃过。轻量是它的特点。</td><td style="text-align:left"><code>ash</code> 不够智能，当然如果硬件允许，可以装 <code>zsh</code>；不适合做桌面，但其实也可以哦（肯定是坑）！</td></tr><tr><td style="text-align:left">Ubuntu/Debian、Armbian</td><td style="text-align:left"><code>apt</code></td><td style="text-align:left">好用的：<code>ufw</code></td><td style="text-align:left">大学就见好多学长用 Ubuntu，默认情况下，它的桌面比 Debian 漂亮，Debian 比较适合当服务器，实际上稣一般使用 Debian。物理机装了好多台，一些电视盒子也刷成 Armbian 在做测试机。</td><td style="text-align:left">目前 Bullseye 用的内核是 5.10，比较保守。默认桌面都很丑。</td></tr><tr><td style="text-align:left">CentOS（后续 RockyLinux、AlmaLinux）</td><td style="text-align:left"><code>yum</code></td><td style="text-align:left">有点忘记了，是不是有个 <code>firewall-cmd</code>？</td><td style="text-align:left">很久以前被迫用过……</td><td style="text-align:left">就是没好感，反正也挂了（才怪）。</td></tr><tr><td style="text-align:left">Manjaro/ArchLinux</td><td style="text-align:left"><code>pacman</code>、<code>yay</code></td><td style="text-align:left">好用的：<code>ufw</code></td><td style="text-align:left">Manjaro 桌面体验很好，ArchLinux 只在虚拟机里体验。内核 5.15 是比 Debian 新。</td><td style="text-align:left">i3 版装完中文支持有问题，KDE 则没问题。</td></tr><tr><td style="text-align:left">PostMarketOS/AlpineLinux</td><td style="text-align:left"><code>apk</code>（真的不是安卓啊～）</td><td style="text-align:left">不知道怎么喷的：<code>awall</code></td><td style="text-align:left">也是内核 5.15，和 OpenWRT 的理念很像，而且注重轻量和安全。AlpineLinux 适合做容器的基础镜像。</td><td style="text-align:left">对中文真不友好。进入系统后还是把 <code>ash</code> 换成 <code>zsh</code> 吧。还有这个 <code>awall</code>……和 <code>ufw</code> 比，真的很想说 ashit！</td></tr></tbody></table><p>列这个表其实想说几个感受：</p><ol><li><p>体验这么多不同发行版真浪费生命。尤其想说：包管理器有必要这么多吗？对软件开发商来说，真的很无语呀！</p></li><li><p>在用 Manjaro 时发现，网易云音乐这个软件，其实是来自 Debian 系的 deb 包，国产的 OS 大部分也都是基于 Debian 的。也就是说：如果有流行的软件，会有人重新打包成其它包。怎么说呢……国产 OS 如果开发了啥国民软件，是不是 Manjaro 也会吸收过去？那国产 OS 岂不是又没啥优势了？</p></li><li><p>如果习惯 Windows 或者 macOS，最好还是选择 KDE Plasma，然后装合适的主题，让它更像 Windows 或者 macOS。i3wm 这种极客型的产品，不适合大部分人。而且 Manjaro i3 是个社区版，不是官方版，中文支持是有问题的。</p></li><li><p>有小伙伴问稣：怎么会用 <a href="https://postmarketos.org/">PostMarketOS</a> 这种乱七八糟的东西？稣内牛满面，还不是因为很早以前买了台 <a href="https://openrt.gitbook.io/open-surfacert/">Surface RT</a>……自从微软抛弃它之后，稣挣扎过一次，装了 Windows 10 ARM，可现在不是已经 11 了吗？于是一不做二不休装 Linux，然后就装了这个奇怪的 <a href="https://openrt.gitbook.io/open-surfacert/surface-rt/linux/root-filesystem/distros/postmarketos">PostMarketOS</a>。当然后悔了，它能刷 <a href="https://wiki.ubuntu.com/ARM/SurfaceRT">Ubuntu Server</a> 的，真是脸疼……</p></li><li><p>Wayland 吗？不了，谢谢，稣用 X11 就行。</p></li><li><p>最后一个问题：稣叛变到 Arch 系了吗？没有！选 Linux，稣还是用 Debian，毕竟要支持国产嘛（间接）！</p></li></ol>]]></content>
     
     
       
@@ -50,6 +50,37 @@
     <category term="linux" scheme="//blog.umu618.com/tags/linux/"/>
     
     <category term="ops" scheme="//blog.umu618.com/tags/ops/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>诗盗·僵军</title>
+    <link href="//blog.umu618.com/2022/04/24/reconstructionism-poet-zombie-army/"/>
+    <id>//blog.umu618.com/2022/04/24/reconstructionism-poet-zombie-army/</id>
+    <published>2022-04-24T05:24:00.000Z</published>
+    <updated>2022-04-25T13:07:47.263Z</updated>
+    
+    <content type="html"><![CDATA[<p>《#诗盗#·僵军》：资本竞灭民工丧，回首无钱治愁肠。苍茫挨踢问谁主，无产伏首卷中皇。</p><h2 id="注解">注解</h2><p>改编自霹雳角色“驭能天”的诗号。</p><blockquote><p>狼辰竞灭忌孤丧，回首无人斩空霜。<br>苍茫天地问谁主，日月伏首刀中皇。</p></blockquote><h2 id="创作故事">创作故事</h2><p>两个人一起在非洲穷游，突然在草原上遇到狮子。</p><p>甲立刻弯腰整理鞋子。</p><p>乙嘲笑道：还整什么鞋子！哪有人跑得过狮子？</p><p>甲微笑地答：我只需要跑赢你。</p><p>乙也哈哈狞笑：你有木有听过，天下大势浩浩荡荡，顺之者昌，逆之者亡？</p><p>甲不解：请说人话！</p><p>乙绝望地说：草，里，那是一群…狮子！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;《#诗盗#·僵军》：资本竞灭民工丧，回首无钱治愁肠。苍茫挨踢问谁主，无产伏首卷中皇。&lt;/p&gt;
+&lt;h2 id=&quot;注解&quot;&gt;注解&lt;/h2&gt;
+&lt;p&gt;改编自霹雳角色“驭能天”的诗号。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;狼辰竞灭忌孤丧，回首无人斩空霜。&lt;br&gt;
+苍茫天地问谁主，日</summary>
+      
+    
+    
+    
+    <category term="诗盗" scheme="//blog.umu618.com/categories/%E8%AF%97%E7%9B%97/"/>
+    
+    
+    <category term="七律" scheme="//blog.umu618.com/tags/%E4%B8%83%E5%BE%8B/"/>
+    
+    <category term="挨踢" scheme="//blog.umu618.com/tags/%E6%8C%A8%E8%B8%A2/"/>
     
   </entry>
   
