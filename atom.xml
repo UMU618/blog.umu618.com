@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-04-25T13:07:36.802Z</updated>
+  <updated>2022-05-08T09:11:27.578Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>管理 macOS 的登录项</title>
+    <link href="//blog.umu618.com/2022/05/08/umutech-manage-macos-login-items/"/>
+    <id>//blog.umu618.com/2022/05/08/umutech-manage-macos-login-items/</id>
+    <published>2022-05-08T08:22:29.000Z</published>
+    <updated>2022-05-08T09:11:27.578Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>稣在 macOS 上装了「Free Download Manager」，结果每次系统重启登录后它都会自启动，稣明明没让它这么做的！以下图形界面下的方法都试过，还是自启动！</p><ul><li><p>在「Dock 栏」右击「Free Download Manager」的图标，选择「选项」，确认「登录时打开」没有打勾。</p></li><li><p>「系统偏好设置」-「用户与群组」-「登录项」里面也没有「Free Download Manager」。</p></li></ul><h2 id="学习">学习</h2><ol><li><p>从苹果官方文档开始，第一篇相关文档：<a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/DesigningDaemons.html#//apple_ref/doc/uid/10000172i-SW4-BBCBHBFB">Designing Daemons and Services</a> 说有图形界面的自启动机制叫做 Login item。</p></li><li><p>于是转到 <a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLoginItems.html#//apple_ref/doc/uid/10000172i-SW5-BAJJBJEG">Adding Login Items</a>，这篇文章说明添加「登录项」有两种方式，具体方法已经是给开发者用的了，对于咱们反向操作（删掉它）帮助不大。</p></li><li><p>但是通过搜索 <code>SMLoginItemSetEnabled</code> 可以知道相关路径为 <code>XX/Library/LaunchAgents</code>。</p></li></ol><h2 id="操作">操作</h2><ol><li>首先要得到「Free Download Manager」的程序 ID：</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ls /Applications | grep <span class="string">&#x27;Free Download Manager&#x27;</span></span><br><span class="line">Free Download Manager.app</span><br><span class="line"></span><br><span class="line">$ ls /Applications/Free\ Download\ Manager.app/Contents</span><br><span class="line">Frameworks     Info.plist     MacOS          PkgInfo        PlugIns        Resources      _CodeSignature translations</span><br><span class="line"></span><br><span class="line">$ grep -A1 CFBundleIdentifier /Applications/Free\ Download\ Manager.app/Contents/Info.plist</span><br><span class="line">        &lt;key&gt;CFBundleIdentifier&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;org.freedownloadmanager.fdm6&lt;/string&gt;</span><br></pre></td></tr></table></figure><p>以上，专业的一条命令为：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ defaults <span class="built_in">read</span> /Applications/Free\ Download\ Manager.app/Contents/Info.plist CFBundleIdentifier</span><br><span class="line">org.freedownloadmanager.fdm6</span><br></pre></td></tr></table></figure><ol start="2"><li>查找 <code>org.freedownloadmanager.fdm6</code> 有没有在 <code>XX/Library/LaunchAgents</code></li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ find ~/Library/LaunchAgents /Library/LaunchAgents /System/Library/LaunchAgents -name org.freedownloadmanager.fdm6\*</span><br><span class="line">/Users/YourUserName/Library/LaunchAgents/org.freedownloadmanager.fdm6.plist</span><br></pre></td></tr></table></figure><ol start="3"><li>改 <code>org.freedownloadmanager.fdm6.plist</code> 禁止自启动</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ defaults <span class="built_in">read</span> ~/Library/LaunchAgents/org.freedownloadmanager.fdm6.plist RunAtLoad</span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">$ defaults write ~/Library/LaunchAgents/org.freedownloadmanager.fdm6.plist RunAtLoad 0</span><br><span class="line"></span><br><span class="line">$ defaults <span class="built_in">read</span> ~/Library/LaunchAgents/org.freedownloadmanager.fdm6.plist RunAtLoad</span><br><span class="line">0</span><br></pre></td></tr></table></figure><p>搞定。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+&lt;p&gt;稣在 macOS 上装了「Free Download Manager」，结果每次系统重启登录后它都会自启动，稣明明没让它这么做的！以下图形界面下的方法都试过，还是自启动！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在「Dock 栏」右击「Fr</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="debug" scheme="//blog.umu618.com/tags/debug/"/>
+    
+    <category term="ops" scheme="//blog.umu618.com/tags/ops/"/>
+    
+    <category term="macOS" scheme="//blog.umu618.com/tags/macOS/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux 桌面玩稣</title>
@@ -7810,6 +7842,38 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="ops" scheme="//blog.umu618.com/tags/ops/"/>
     
     <category term="mongodb" scheme="//blog.umu618.com/tags/mongodb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ceph 慢盘原因分析一例：CPU 偷懒了！</title>
+    <link href="//blog.umu618.com/2018/02/02/umutech-cpufreq-governor-ondemand-causes-ceph-osd-slowly/"/>
+    <id>//blog.umu618.com/2018/02/02/umutech-cpufreq-governor-ondemand-causes-ceph-osd-slowly/</id>
+    <published>2018-02-02T09:36:30.000Z</published>
+    <updated>2022-04-28T15:58:15.688Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>Ceph 运维发现一个 osd 慢了。</p><h2 id="分析">分析</h2><h3 id="1-硬件配置对比">1. 硬件配置对比</h3><p>找了一台参照机器，上面也一样跑了 15 个 osd，发现 CPU、内存、主板、内存、硬盘的型号都一样，参数也没看出明显差别。但磁盘有点毛病，用 smartctl 看不出通电时长，所以也没有法断定不是磁盘之间的差异。</p><blockquote><p>ProLiant DL380e Gen8</p><p>Intel® Xeon® CPU E5-2470 0 @ 2.30GHz</p><p>16G DDR3 1333 MHz * 10</p></blockquote><h3 id="2-排除配置差异">2. 排除配置差异</h3><p>确实找出一个差异来，这个慢的 osd 的磁盘分区和别的 osd 不一样，前面 14 个 osd 的 journal 分区占整个硬盘的比例是 20%，这个慢的 osd 则是 10%。</p><p>但后来发现，其它 14 个是普通的 osd，慢的那个是 bucket index osd，所以是故意那样分区的。</p><h3 id="3-发现-mcelog-大了很多">3. 发现 mcelog 大了很多</h3><p>慢盘的 mcelog 比参照机器上的大了 20G，后来确认是很早以前有内存错误打的，不是最近发生。</p><h3 id="4-怀疑内存还是有毛病，毕竟曾经有过毛病">4. 怀疑内存还是有毛病，毕竟曾经有过毛病</h3><p>测试逐字节内存填写，结果发现慢盘机器总是比参照机器慢一些，而且浮动比较大，所以怀疑是整机性能不行，并非就那个 bucket index osd 慢，只是 bucket index osd 慢得比较明显。后来，另一名同事确认了这点，15 个 osd 都比参照机器上的 15 个 osd 慢。</p><h3 id="5-在另一名同事的协助下，发现-CPU-降频了……">5. 在另一名同事的协助下，发现 CPU 降频了……</h3><p>用 <code>cpufreq-info</code> 查看，发现这个问题机器的 CPU 是 ondemand 模式，降频后，没有及时恢复！后来改为性能模式，问题解决。至于为什么 CPU 不能恢复高频模式，有点怀疑是 pcc-cpufreq.ko 这个 cpufreq_driver 的 bug，但没仔细研究了，直接听取前辈的经验：使用 ondemand 模式，可能导致莫名其妙的问题，而且并不能省多少电，意义不大。</p><p>单说 CPU，省电的关键应该是把工作电压降低了，功率下降肯定能省电；只把频率降低（能提高电阻？），效果目测是不会很明显。这个研究不深，欢迎指教。</p><h3 id="6-为什么参照机器没有问题？">6. 为什么参照机器没有问题？</h3><p>两个可能性：</p><p>（1）BIOS ROM 版本不一样，参照机器更高：P73 08/20/2012，问题机器：P73 06/01/2012。</p><p>（2）BIOS 参数可能也不一样。（服务器不能，无法查看……）</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+&lt;p&gt;Ceph 运维发现一个 osd 慢了。&lt;/p&gt;
+&lt;h2 id=&quot;分析&quot;&gt;分析&lt;/h2&gt;
+&lt;h3 id=&quot;1-硬件配置对比&quot;&gt;1. 硬件配置对比&lt;/h3&gt;
+&lt;p&gt;找了一台参照机器，上面也一样跑了 15 个 osd，发现 CPU、内存、主</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="ops" scheme="//blog.umu618.com/tags/ops/"/>
+    
+    <category term="mongodb" scheme="//blog.umu618.com/tags/mongodb/"/>
+    
+    <category term="ceph" scheme="//blog.umu618.com/tags/ceph/"/>
     
   </entry>
   
