@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="//blog.umu618.com/images/20220515-clock.jpg">
 <meta property="article:published_time" content="2022-05-14T16:06:18.000Z">
-<meta property="article:modified_time" content="2022-05-14T14:21:49.691Z">
+<meta property="article:modified_time" content="2022-05-15T05:15:47.587Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="linux">
@@ -231,14 +231,17 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/UMU618/sddm-theme-clock">https://github.com/UMU618/sddm-theme-clock</a></p>
 <p><a target="_blank" rel="noopener" href="https://gitee.com/umu618/sddm-theme-clock">https://gitee.com/umu618/sddm-theme-clock</a></p>
 <p>没错，这两个链接在本文出现了两次！</p>
-<h3 id="6-安装迅雷">6. 安装迅雷</h3>
+<h3 id="6-安装远程桌面服务">6. 安装远程桌面服务</h3>
+<p>时钟挂在墙上，主要的使用方式当然是 SSH 或远程桌面（RDP）过去。使用迅雷这样有界面的程序，最好就是通过远程桌面。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install xrdp</span><br></pre></td></tr></table></figure>
+<h3 id="7-安装迅雷">7. 安装迅雷</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.kylinos.cn/kylin/partner/pool/com.xunlei.download_1.0.0.1_amd64.deb</span><br><span class="line">sudo dpkg -i com.xunlei.download_1.0.0.1_amd64.deb</span><br><span class="line">sudo apt install libgtk2.0-0 libnss3 libdbus-glib-1-2</span><br></pre></td></tr></table></figure>
 <p>迅雷的启动命令是：<code>/opt/apps/com.xunlei.download/files/start.sh</code></p>
-<h3 id="7-安装做共享用的-Samba">7. 安装做共享用的 Samba</h3>
+<h3 id="8-安装做共享用的-Samba">8. 安装做共享用的 Samba</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
 <p>来个配置例子：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat /etc/samba/smb.conf</span></span><br><span class="line">[movie]</span><br><span class="line">   comment = Movie</span><br><span class="line">   browseable = yes</span><br><span class="line">   path = /mnt/sd/movie</span><br><span class="line">   <span class="built_in">read</span> only = yes</span><br><span class="line">   guest ok = yes</span><br></pre></td></tr></table></figure>
-<h3 id="8-全家出动录音做闹钟声">8. 全家出动录音做闹钟声</h3>
+<h3 id="9-全家出动录音做闹钟声">9. 全家出动录音做闹钟声</h3>
 <p>直接在平板电脑上用 <code>arecord</code> 录有点麻烦，建议在 PC 上录再用 <code>scp</code> 或 <code>rz</code> 上传，wav 格式的就行。</p>
 <p>调节音量可以用：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install alsa-utils</span><br><span class="line">alsamixer</span><br></pre></td></tr></table></figure>
@@ -251,7 +254,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">CD=<span class="string">&quot;<span class="subst">$(cd $(dirname $0)</span> &amp;&amp; pwd)&quot;</span></span><br><span class="line">/usr/bin/aplay -D plughw:1,0 <span class="variable">$&#123;CD&#125;</span>/chime.wav</span><br><span class="line"></span><br><span class="line">FILE=<span class="string">&quot;<span class="variable">$&#123;CD&#125;</span>/<span class="subst">$(date +%H%M)</span>.wav&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="variable">$FILE</span> ]; <span class="keyword">then</span></span><br><span class="line">	/usr/bin/aplay -D plughw:1,0 <span class="variable">$&#123;FILE&#125;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 <p>near_alarm.sh 脚本：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;#1&#125;</span> -ge 4 ]; <span class="keyword">then</span></span><br><span class="line">	CD=<span class="string">&quot;<span class="subst">$(cd $(dirname $0)</span> &amp;&amp; pwd)&quot;</span></span><br><span class="line">	FILE=<span class="string">&quot;<span class="variable">$&#123;CD&#125;</span>/near_<span class="variable">$&#123;1&#125;</span>.wav&quot;</span></span><br><span class="line">	<span class="keyword">if</span> [ -f <span class="variable">$FILE</span> ]; <span class="keyword">then</span></span><br><span class="line">		/usr/bin/aplay -D plughw:1,0 <span class="variable">$&#123;FILE&#125;</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;Invalid parameter!&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-<h3 id="9-高级功能">9. 高级功能</h3>
+<h3 id="10-高级功能">10. 高级功能</h3>
 <ul>
 <li>
 <p>旋转屏幕：<code>xrandr</code></p>
