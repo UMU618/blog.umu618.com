@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-05-15T15:34:10.124Z</updated>
+  <updated>2022-05-21T06:56:34.165Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用华为擎云 L420 体验国产操作系统（UOS 和银河麒麟）</title>
+    <link href="//blog.umu618.com/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/"/>
+    <id>//blog.umu618.com/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/</id>
+    <published>2022-05-21T04:45:55.000Z</published>
+    <updated>2022-05-21T06:56:34.165Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="用户故事">用户故事</h2><p>稣很爱国！从 2019 年起，就不时想用国产操作系统，但基本停留在虚拟机体验的层次，今年终于在物理机长期实践了。</p><h2 id="硬件环境">硬件环境</h2><p>华为擎云 L420 工程机，型号是 KLVV W5821。</p><p>某鱼上捡的，外观惨不忍睹，而且就一个主机，配件全无。</p><p>到手时，是残缺状态的 UOS 20 1022，基本不能用，只能开机看个寂寞。也是，要不然也不可能 2000 块以内买到……</p><h2 id="体验-UOS-20-1041">体验 UOS 20 1041</h2><p>加了统信两个微信群，好不容易要到了一个 iso，然而根本不能启动，稣激动地插入 U 盘，结果它直接黑屏死掉！</p><p>机智如稣，立刻想到原来的系统可以启动，把旧系统的内核拿来用不就行了？em，这么干确实成功启动。</p><p>之前的系统缺失应用商店等系统组件，装完系统后，总算是一个完整的 UOS 了。然而内核还是旧的，所以……八哥如下：</p><ol><li><p>内建显示器无法调节亮度，只有关闭和中等亮度两个状态。【稣含着泪，倔强地说道：稣就当服务器用，要什么内建显示器？】</p></li><li><p>外接显示器没反应。【稣含着泪，倔强地说道：稣就当服务器用，要什么外接显示器？】</p></li><li><p>偶尔没声音。不过注销一下，再登录就能恢复。【稣含着泪，倔强地说道：稣就当服务器用，要什么扬声器？】</p></li><li><p>从待机状态恢复后，有概率内建键盘失灵或内建触摸板控制不了光标。但外接键鼠没问题。【稣含着泪，倔强地说道：稣就当服务器用，要什么键鼠？】</p></li></ol><p>好吧，以上问题都是因为固件都版本太低，只能用充满八哥的低版本内核，只要升级固件，再升级相应的内核就可以解决。但是升级固件这个事太难了……这可是一个奇怪的工程机啊！正规手段都是各种失败，即使是手动运行 BIOSEC，让它分离出 Firmware.bin 和 Update.txt，也失败！把 Firmware.bin 拿去 BIOS 界面升级固件，依然失败！</p><p>BIOS 是百敖 0.09，果然难搞！好吧，没刷成砖头就好。咱们来日方长……【稣含着泪，倔强地说道：学习是终生的，而问题都是一时的！】</p><p>接下来说说系统本身的问题：其实 UOS 本身没问题，稣很满意，还是个适配的问题。</p><p>L420 使用的 mali GPU 的用户态驱动是闭源的，只支持 wayland 不支持 x11，这导致部分稣常用的软件无法正常工作，比如远程桌面客户端，em……目前还没发现能用的。【稣含着泪，倔强地说道：稣就当服务器用，要什么客户端？】</p><h2 id="体验银河麒麟桌面操作系统-V10">体验银河麒麟桌面操作系统 V10</h2><p>听说银河麒麟更爱国，稣从它的壁纸就可以看出来，这绝对是真的！</p><p><img src="/images/20220521-desktop.jpg" alt="银河麒麟桌面"></p><p>还是熟悉的味道，原版 iso 无法启动，换内核，启动正常，安装也正常。</p><p>银河麒麟不愧是上个世纪就诞生的国产操作系统，十分满意，默认设置，只有一个地方稣无法忍受——居然不是默认开起——自然滚动！而且，图形界面下居然没地方设置？不知道和没激活有没有关系？</p><p><img src="/images/20220521-touchpad.png" alt="银河麒麟-设置-设备-触摸板"></p><p>但是这对使用 Debian 4 年以上经验的稣来说，简直易如反掌，命令行搞定，注销重新登录生效：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gsettings <span class="built_in">set</span> org.ukui.peripherals-touchpad natural-scroll <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>在另一台机器（非 L420）安装银河麒麟后，又发现一个问题比较难以接受：外接显示器的放大比例无法独立设置！</p><p><img src="/images/20220521-display.png" alt="银河麒麟-设置-系统-显示器"></p><p>任务栏这个风格也不太方便，还是合并到一起好。</p><p><img src="/images/20220521-taskbar.png" alt="银河麒麟-任务栏"></p><p>另外有一个惊喜，文件浏览器借鉴了 macOS 的做法，有个颜色分类功能，很不错！（访达少数满意的地方）</p><p><img src="/images/20220521-finder.png" alt="银河麒麟-文件浏览器"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;用户故事&quot;&gt;用户故事&lt;/h2&gt;
+&lt;p&gt;稣很爱国！从 2019 年起，就不时想用国产操作系统，但基本停留在虚拟机体验的层次，今年终于在物理机长期实践了。&lt;/p&gt;
+&lt;h2 id=&quot;硬件环境&quot;&gt;硬件环境&lt;/h2&gt;
+&lt;p&gt;华为擎云 L420 工程机，型号是 KLVV W5</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="debug" scheme="//blog.umu618.com/tags/debug/"/>
+    
+    <category term="linux" scheme="//blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="//blog.umu618.com/tags/ops/"/>
+    
+    <category term="debian" scheme="//blog.umu618.com/tags/debian/"/>
+    
+  </entry>
   
   <entry>
     <title>智能时钟</title>
