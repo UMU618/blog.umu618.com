@@ -117,7 +117,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/25/reconstructionism-poet-fried-bean-sprouts-and-black-fungus/" data-id="cl35envvc00hq5g6y6xjfd5x0" class="article-share-link" data-share="baidu" data-title="诗盗·豆芽炒黑木耳">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/25/reconstructionism-poet-fried-bean-sprouts-and-black-fungus/" data-id="ckj637ppj00h8x0783bmj156h" class="article-share-link" data-share="baidu" data-title="诗盗·豆芽炒黑木耳">分享到</a>
       
 
       
@@ -187,7 +187,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/24/umutech-openwrt-primer-1-choose-hardware/" data-id="cl35envvb00hc5g6y01e0bsys" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇1）：硬件选型和刷机">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/24/umutech-openwrt-primer-1-choose-hardware/" data-id="ckj637ppi00h4x0788e48goaa" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇1）：硬件选型和刷机">分享到</a>
       
 
       
@@ -236,7 +236,7 @@
 <p><code>&lt;openwrt-svn-dir&gt;/trunk/scripts/download.pl 中的 wget -t5 --timeout=20 --no-check-certificate</code> 改为 <code>wget -t5 --timeout=120 --no-check-certificate</code></p>
 <p>第二天来，刷上，没问题，于是开始改代码去掉 U-Boot 写保护，参考这篇《<a target="_blank" rel="noopener" href="http://see.sl088.com/wiki/Openwrt_%E4%B8%AD%E5%88%B7%E5%86%99_uboot_art">Openwrt 中刷写 uboot ART</a>》<a target="_blank" rel="noopener" href="http://see.sl088.com/wiki/Openwrt_%E4%B8%AD%E5%88%B7%E5%86%99_uboot_art">http://see.sl088.com/wiki/Openwrt_中刷写_uboot_art</a>，但结果很不幸，型号不同嘛！</p>
 <p>接下来，凭自己的编程水平了，尝试改 <code>&lt;openwrt-svn-dir&gt;/trunk/target/linux/ar71xx/files/arch/mips/ath79/mach-dir-505-a1.c</code>，加入下面两个结构体：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">mtd_partition</span> <span class="title">dir505_partitions</span>[] =</span> &#123;</span><br><span class="line"> &#123;</span><br><span class="line">  .name  = <span class="string">&quot;u-boot&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line">  .mask_flags = <span class="number">0</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;art&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x010000</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;mac&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x020000</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;nvram&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x030000</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;language&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x040000</span>,</span><br><span class="line">  .size  = <span class="number">0x040000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;firmware&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x080000</span>,</span><br><span class="line">  .size  = <span class="number">0x780000</span>,</span><br><span class="line">  .mask_flags = <span class="number">0</span>,</span><br><span class="line"> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">flash_platform_data</span> <span class="title">dir505_flash_data</span> =</span> &#123;</span><br><span class="line"> .parts  = dir505_partitions,</span><br><span class="line"> .nr_parts       = ARRAY_SIZE(dir505_partitions),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">mtd_partition</span> <span class="title">dir505_partitions</span>[] = &#123;</span></span><br><span class="line"> &#123;</span><br><span class="line">  .name  = <span class="string">&quot;u-boot&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line">  .mask_flags = <span class="number">0</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;art&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x010000</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;mac&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x020000</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;nvram&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x030000</span>,</span><br><span class="line">  .size  = <span class="number">0x010000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;language&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x040000</span>,</span><br><span class="line">  .size  = <span class="number">0x040000</span>,</span><br><span class="line"> &#125;, &#123;</span><br><span class="line">  .name  = <span class="string">&quot;firmware&quot;</span>,</span><br><span class="line">  .offset  = <span class="number">0x080000</span>,</span><br><span class="line">  .size  = <span class="number">0x780000</span>,</span><br><span class="line">  .mask_flags = <span class="number">0</span>,</span><br><span class="line"> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">flash_platform_data</span> <span class="title">dir505_flash_data</span> = &#123;</span></span><br><span class="line"> .parts  = dir505_partitions,</span><br><span class="line"> .nr_parts       = ARRAY_SIZE(dir505_partitions),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>并将 dir_505_a1_setup 函数里的 <code>ath79_register_m25p80(NULL);</code> 改为 <code>ath79_register_m25p80(&amp;dir505_flash_data);</code></p>
 <p>测试还是无效……看来必须在源头上使 MTD_WRITEABLE 无效掉，<code>grep -r MTD_WRITEABLE &lt;openwrt-svn-dir&gt;/trunk/build_dir/target-mips_34kc_uClibc-0.9.33.2/linux-ar71xx_generic/linux-3.10.36/drivers/mtd</code>，看到几处关键的地方：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!(ubi-&gt;mtd-&gt;flags &amp; MTD_WRITEABLE)) &#123;</span><br></pre></td></tr></table></figure>
@@ -249,7 +249,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/23/umutech-openwrt-advanced-2-mtd-write-uboot-on-openwrt/" data-id="cl35envvb00h95g6y6legbei2" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇2）：不拆机刷不死 U-Boot">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/23/umutech-openwrt-advanced-2-mtd-write-uboot-on-openwrt/" data-id="ckj637ppi00h1x078cihc7wel" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇2）：不拆机刷不死 U-Boot">分享到</a>
       
 
       
@@ -300,7 +300,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/22/reconstructionism-poet-save-sth-to-waste-another/" data-id="cl35envvb00h65g6y99pw328r" class="article-share-link" data-share="baidu" data-title="诗盗·某些节约是另一种浪费">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/22/reconstructionism-poet-save-sth-to-waste-another/" data-id="ckj637pph00gyx078e59qdeko" class="article-share-link" data-share="baidu" data-title="诗盗·某些节约是另一种浪费">分享到</a>
       
 
       
@@ -362,7 +362,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/21/umutech-openwrt-advanced-1-compiling-uboot/" data-id="cl35envvb00h25g6ygr7o68t7" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇1）：编译不死 U-Boot">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/21/umutech-openwrt-advanced-1-compiling-uboot/" data-id="ckj637pph00gux078gt5s3u7a" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（高级篇1）：编译不死 U-Boot">分享到</a>
       
 
       
@@ -414,7 +414,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/14/umutech-scan-wifi-on-windows-8-and-openwrt/" data-id="cl35envva00gz5g6yd625cdok" class="article-share-link" data-share="baidu" data-title="Windows 8 和 OpenWRT 下查看 WiFi 属性">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/14/umutech-scan-wifi-on-windows-8-and-openwrt/" data-id="ckj637ppg00grx078hp2v745s" class="article-share-link" data-share="baidu" data-title="Windows 8 和 OpenWRT 下查看 WiFi 属性">分享到</a>
       
 
       
@@ -470,7 +470,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/12/reconstructionism-poet-rtx-2/" data-id="cl35envvc00hj5g6ygkw0et80" class="article-share-link" data-share="baidu" data-title="诗盗·RTX2">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/12/reconstructionism-poet-rtx-2/" data-id="ckj637ppf00gox078047i0213" class="article-share-link" data-share="baidu" data-title="诗盗·RTX2">分享到</a>
       
 
       
@@ -521,7 +521,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/06/reconstructionism-poet-electrocuted-by-iphone/" data-id="cl35envva00gw5g6y2xs741nh" class="article-share-link" data-share="baidu" data-title="诗盗·电机">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/06/reconstructionism-poet-electrocuted-by-iphone/" data-id="ckj637ppf00glx078fsx0dzrl" class="article-share-link" data-share="baidu" data-title="诗盗·电机">分享到</a>
       
 
       
@@ -570,7 +570,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/05/04/reconstructionism-poet-xiaomi-scalper/" data-id="cl35envva00gq5g6ybw6y9j6o" class="article-share-link" data-share="baidu" data-title="诗盗·黄米">分享到</a>
+        <a data-url="//blog.umu618.com/2014/05/04/reconstructionism-poet-xiaomi-scalper/" data-id="ckj637ppe00gfx078b8x502cc" class="article-share-link" data-share="baidu" data-title="诗盗·黄米">分享到</a>
       
 
       
@@ -619,7 +619,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/04/25/reconstructionism-poet-atx780/" data-id="cl35envva00gt5g6yajx443g8" class="article-share-link" data-share="baidu" data-title="诗盗·ATX780脚力车">分享到</a>
+        <a data-url="//blog.umu618.com/2014/04/25/reconstructionism-poet-atx780/" data-id="ckj637ppe00gix0789wnf6png" class="article-share-link" data-share="baidu" data-title="诗盗·ATX780脚力车">分享到</a>
       
 
       

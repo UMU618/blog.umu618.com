@@ -117,15 +117,15 @@
 <ul>
 <li>首先在 /etc/config/autossh 里增加一个 section，看起来如下：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">config autossh</span><br><span class="line">        option gatetime &#x27;0&#x27;</span><br><span class="line">        option monitorport &#x27;0&#x27;</span><br><span class="line">        option poll &#x27;600&#x27;</span><br><span class="line">        option ssh &#x27;-i /etc/dropbear/id_rsa -N -T -R 2222:localhost:22 root@Server1&#x27;</span><br><span class="line"></span><br><span class="line">config autossh</span><br><span class="line">        option gatetime &#x27;0&#x27;</span><br><span class="line">        option monitorport &#x27;0&#x27;</span><br><span class="line">        option poll &#x27;600&#x27;</span><br><span class="line">        option ssh &#x27;-i /etc/dropbear/id_rsa -N -T -R 2222:localhost:22 root@Server2&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">config autossh</span><br><span class="line">        option gatetime &#39;0&#39;</span><br><span class="line">        option monitorport &#39;0&#39;</span><br><span class="line">        option poll &#39;600&#39;</span><br><span class="line">        option ssh &#39;-i &#x2F;etc&#x2F;dropbear&#x2F;id_rsa -N -T -R 2222:localhost:22 root@Server1&#39;</span><br><span class="line"></span><br><span class="line">config autossh</span><br><span class="line">        option gatetime &#39;0&#39;</span><br><span class="line">        option monitorport &#39;0&#39;</span><br><span class="line">        option poll &#39;600&#39;</span><br><span class="line">        option ssh &#39;-i &#x2F;etc&#x2F;dropbear&#x2F;id_rsa -N -T -R 2222:localhost:22 root@Server2&#39;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>然后改进一下 /etc/init.d/autossh，让它支持多实例，给 start_instance() 函数增加两行：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export SERVICE_MATCH_NAME=1</span><br><span class="line">export SERVICE_NAME=&quot;$section&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export SERVICE_MATCH_NAME&#x3D;1</span><br><span class="line">export SERVICE_NAME&#x3D;&quot;$section&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>最终 start_instance() 函数看起来是这样：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">start_instance() &#123;</span><br><span class="line">	local section=&quot;$1&quot;</span><br><span class="line"></span><br><span class="line">	config_get ssh &quot;$section&quot; &#x27;ssh&#x27;</span><br><span class="line">	config_get gatetime &quot;$section&quot; &#x27;gatetime&#x27;</span><br><span class="line">	config_get monitorport &quot;$section&quot; &#x27;monitorport&#x27;</span><br><span class="line">	config_get poll &quot;$section&quot; &#x27;poll&#x27;</span><br><span class="line"></span><br><span class="line">	export AUTOSSH_GATETIME=&quot;$&#123;gatetime:-30&#125;&quot;</span><br><span class="line">	export AUTOSSH_POLL=&quot;$&#123;poll:-600&#125;&quot;</span><br><span class="line">	export SERVICE_MATCH_NAME=1</span><br><span class="line">	export SERVICE_NAME=&quot;$section&quot;</span><br><span class="line">	#export SERVICE_DEBUG=1</span><br><span class="line">	service_start /usr/sbin/autossh -M $&#123;monitorport:-20000&#125; -f $&#123;ssh&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">start_instance() &#123;</span><br><span class="line">	local section&#x3D;&quot;$1&quot;</span><br><span class="line"></span><br><span class="line">	config_get ssh &quot;$section&quot; &#39;ssh&#39;</span><br><span class="line">	config_get gatetime &quot;$section&quot; &#39;gatetime&#39;</span><br><span class="line">	config_get monitorport &quot;$section&quot; &#39;monitorport&#39;</span><br><span class="line">	config_get poll &quot;$section&quot; &#39;poll&#39;</span><br><span class="line"></span><br><span class="line">	export AUTOSSH_GATETIME&#x3D;&quot;$&#123;gatetime:-30&#125;&quot;</span><br><span class="line">	export AUTOSSH_POLL&#x3D;&quot;$&#123;poll:-600&#125;&quot;</span><br><span class="line">	export SERVICE_MATCH_NAME&#x3D;1</span><br><span class="line">	export SERVICE_NAME&#x3D;&quot;$section&quot;</span><br><span class="line">	#export SERVICE_DEBUG&#x3D;1</span><br><span class="line">	service_start &#x2F;usr&#x2F;sbin&#x2F;autossh -M $&#123;monitorport:-20000&#125; -f $&#123;ssh&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="注意事项">注意事项</h2>
 <p>这样改是有副作用的，您反复启动多次就知道了……启动的命令是：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/autossh start</span><br></pre></td></tr></table></figure>
@@ -134,7 +134,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2017/03/02/umutech-openwrt-primer-13-improve-autossh/" data-id="cl35envwo00wf5g6y198s8dmi" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇13）：改进 autossh 支持多实例">分享到</a>
+        <a data-url="//blog.umu618.com/2017/03/02/umutech-openwrt-primer-13-improve-autossh/" data-id="ckj637prr00rcx0788gg38zc3" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇13）：改进 autossh 支持多实例">分享到</a>
       
 
       
@@ -196,7 +196,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2017/03/01/umutech-openwrt-primer-12-ssh-port-forwarding/" data-id="cl35envwo00wc5g6yc6i11gc2" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇12）：SSH 端口转发（代理上 QQ）">分享到</a>
+        <a data-url="//blog.umu618.com/2017/03/01/umutech-openwrt-primer-12-ssh-port-forwarding/" data-id="ckj637prq00r9x078a1t97g2k" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇12）：SSH 端口转发（代理上 QQ）">分享到</a>
       
 
       
@@ -250,7 +250,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2017/02/11/reconstructionism-poet-quantum-heresy-2/" data-id="cl35envwo00w95g6y0yf1dksi" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说2">分享到</a>
+        <a data-url="//blog.umu618.com/2017/02/11/reconstructionism-poet-quantum-heresy-2/" data-id="ckj637prq00r6x07846rxaprj" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说2">分享到</a>
       
 
       
@@ -311,7 +311,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2017/02/09/reconstructionism-poet-superman/" data-id="cl35envwo00w65g6ycluacbjy" class="article-share-link" data-share="baidu" data-title="诗盗·非正常人类">分享到</a>
+        <a data-url="//blog.umu618.com/2017/02/09/reconstructionism-poet-superman/" data-id="ckj637prp00r3x078fqcdd5yq" class="article-share-link" data-share="baidu" data-title="诗盗·非正常人类">分享到</a>
       
 
       
@@ -355,11 +355,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>UMU 认为有一个目的是：<strong>需求细分</strong>（另外还有优化的目的）。考虑以下代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Movable</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Movable</span>() : <span class="built_in">i</span>(<span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">3</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; __FUNCTION__ &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Movable</span>(Movable&amp; m) : <span class="built_in">i</span>(m.i)</span><br><span class="line">	&#123;</span><br><span class="line">		m.i = <span class="literal">nullptr</span>; <span class="comment">// 这里改变值是可以的</span></span><br><span class="line">		std::cout &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>* i;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Movable</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Movable() : i(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	Movable(Movable&amp; m) : i(m.i)</span><br><span class="line">	&#123;</span><br><span class="line">		m.i = <span class="literal">nullptr</span>; <span class="comment">// 这里改变值是可以的</span></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>* i;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>因为 Movable&amp; m 没有用 const 修饰，所以可以在内部改变 m 的状态。如果加上 const 则不行：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Movable</span>(<span class="keyword">const</span> Movable&amp; m) : <span class="built_in">i</span>(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//m.i = nullptr; // 不能改变 m</span></span><br><span class="line">	std::cout &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Movable(<span class="keyword">const</span> Movable&amp; m) : i(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//m.i = nullptr; // 不能改变 m</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么没加 const 的集合，减去有 const 的集合，等于什么？答案就是：移动构造函数</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Movable</span>(Movable&amp;&amp; m) : <span class="built_in">i</span>(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	m.i = <span class="literal">nullptr</span>;</span><br><span class="line">	std::cout &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&amp;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Movable(Movable&amp;&amp; m) : i(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	m.i = <span class="literal">nullptr</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&amp;&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>分成 const Movable&amp; 和 Movable&amp;&amp; 两个，更严格、更清晰，这是好事。而 std::move 做的事情是为了正确调用移动构造函数（Movable&amp;&amp;），而不是被隐式转为 const 而错误地调用了复制构造函数（const Movable&amp;），不要在意什么左值、右值的，太烧脑了……</p>
 <p>扩展阅读：《从4行代码看右值引用》，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qicosmos/p/4283455.html">https://www.cnblogs.com/qicosmos/p/4283455.html</a></p>
 
@@ -367,7 +367,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2017/01/05/umutech-cpp-learning-notes-2-move-constructor/" data-id="cl35envwn00w35g6y4g1i8h3t" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 2] 为什么会有移动构造函数、std::move？">分享到</a>
+        <a data-url="//blog.umu618.com/2017/01/05/umutech-cpp-learning-notes-2-move-constructor/" data-id="ckptvi94i0001g478d7ph1ymm" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 2] 为什么会有移动构造函数、std::move？">分享到</a>
       
 
       
@@ -413,13 +413,12 @@
         <p>本文宣告 UMU 正式开始学习 C++。<s>之前只系统学过 C，自然地了解了一些 C++ 的皮毛（可以认为是 C+），然后就一直用着 C+ 开发，最近看了一些现代 C++ 代码，感觉是时候好好学习 C++ 了……后续会把学习中记的笔记发出来，尽量简短明了。</s></p>
 <p>当 ptr 指向的是基础类型数组时，delete ptr 和 delete [] ptr 等价。这好比用 free 释放 malloc 分配的内存，malloc 了多少，不必关心，free 知道要释放多长，因为 malloc 会维护这个长度信息。</p>
 <p>当 ptr 指向类对象数组时，两者的差别在于调用多少个析构函数，delete 只调用第一个元素的析构函数，delete [] 则调用所有元素的析构函数。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; __FUNCTION__ &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">Foo</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; __FUNCTION__ &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// bug: 只会析构一个元素</span></span><br><span class="line">    <span class="function">std::shared_ptr&lt;Foo&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> Foo[<span class="number">10</span>])</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Foo()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~Foo()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// bug: 只会析构一个元素</span></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Foo&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> Foo[<span class="number">10</span>])</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2017/01/04/umutech-cpp-learning-notes-1-delete/" data-id="cl35envwn00w05g6y9bju8d0z" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 1] delete 和 delete [] 的本质区别">分享到</a>
+        <a data-url="//blog.umu618.com/2017/01/04/umutech-cpp-learning-notes-1-delete/" data-id="ckptvi94f0000g478g01bdy3i" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 1] delete 和 delete [] 的本质区别">分享到</a>
       
 
       
@@ -474,7 +473,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2016/12/31/reconstructionism-poet-arya-avalokiteshvara/" data-id="cl35envwn00vx5g6ycdz7e34t" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说之观世寂莲宇督工">分享到</a>
+        <a data-url="//blog.umu618.com/2016/12/31/reconstructionism-poet-arya-avalokiteshvara/" data-id="ckj637pro00r0x078gyst6e54" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说之观世寂莲宇督工">分享到</a>
       
 
       
@@ -528,7 +527,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2016/12/27/reconstructionism-poet-boss/" data-id="cl35envwm00vu5g6y0a3s7y0m" class="article-share-link" data-share="baidu" data-title="诗盗·是个头">分享到</a>
+        <a data-url="//blog.umu618.com/2016/12/27/reconstructionism-poet-boss/" data-id="ckj637pro00qxx07831ihgdbo" class="article-share-link" data-share="baidu" data-title="诗盗·是个头">分享到</a>
       
 
       
@@ -579,7 +578,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2016/11/26/reconstructionism-poet-vicissitudes/" data-id="cl35envwm00vr5g6ya91e3ji9" class="article-share-link" data-share="baidu" data-title="诗盗·诡龄长生莫沧桑">分享到</a>
+        <a data-url="//blog.umu618.com/2016/11/26/reconstructionism-poet-vicissitudes/" data-id="ckj637prn00qux0788ikhdo6i" class="article-share-link" data-share="baidu" data-title="诗盗·诡龄长生莫沧桑">分享到</a>
       
 
       
@@ -632,7 +631,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2016/11/06/reconstructionism-poet-couplets-life/" data-id="cl35envwm00vo5g6y7qlfgxwu" class="article-share-link" data-share="baidu" data-title="诗盗·对联·人生">分享到</a>
+        <a data-url="//blog.umu618.com/2016/11/06/reconstructionism-poet-couplets-life/" data-id="ckj637prn00qrx0785trp6r26" class="article-share-link" data-share="baidu" data-title="诗盗·对联·人生">分享到</a>
       
 
       

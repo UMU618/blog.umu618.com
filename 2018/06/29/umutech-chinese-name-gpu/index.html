@@ -14,7 +14,7 @@
 <meta property="og:description" content="某游戏在 RemoteFX 远程桌面下无法正常运行。提示：  运行引擎需要DX11特征等级10.0  英文版提示：  DX11 feature level 10.0 is required to run the engine.  稣立刻调用 dxdiag 查看，结果 Feature Level 10.0 是支持的！ 然后决定自己写个 DX11 程序测试一下，于是找到这里例子：Tutorial 3:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-06-29T03:04:11.000Z">
-<meta property="article:modified_time" content="2020-12-27T07:28:48.157Z">
+<meta property="article:modified_time" content="2020-12-26T15:26:53.633Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
@@ -127,10 +127,10 @@
 <p>稣立刻调用 dxdiag 查看，结果 Feature Level 10.0 是支持的！</p>
 <p>然后决定自己写个 DX11 程序测试一下，于是找到这里例子：<a target="_blank" rel="noopener" href="http://www.rastertek.com/dx11s2tut03.html">Tutorial 3: Initializing DirectX 11</a>，稍加修改后运行，得到一个错误提示：</p>
 <blockquote>
-<p>MessageBox(hwnd, L&quot;Could not initialize Direct3D.“, L&quot;Error”, MB_OK);</p>
+<p>MessageBox(hwnd, L&quot;Could not initialize Direct3D.&quot;, L&quot;Error&quot;, MB_OK);</p>
 </blockquote>
 <p>接下来，仔细检查这个初始化过程，发现居然是因为 wcstombs_s 失败引起的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Convert the name of the video card to a character array and store it.</span><br><span class="line">error = wcstombs_s(&amp;stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Convert the name of the video card to a character array and store it.</span><br><span class="line">error &#x3D; wcstombs_s(&amp;stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);</span><br></pre></td></tr></table></figure>
 <p>原来是因为 RemoteFX 显卡的名字里有汉字……</p>
 <blockquote>
 <p>RemoteFX 3D 视频适配器</p>
@@ -145,7 +145,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/06/29/umutech-chinese-name-gpu/" data-id="cl35envw200q35g6y8hdm18fd" class="article-share-link" data-share="baidu" data-title="显卡名称包含汉字导致 DX11 程序无法正常工作">分享到</a>
+        <a data-url="//blog.umu618.com/2018/06/29/umutech-chinese-name-gpu/" data-id="ckj637psn00vex0782q162h37" class="article-share-link" data-share="baidu" data-title="显卡名称包含汉字导致 DX11 程序无法正常工作">分享到</a>
       
 
       

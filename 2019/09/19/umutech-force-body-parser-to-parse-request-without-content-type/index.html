@@ -14,7 +14,7 @@
 <meta property="og:description" content="需求 原版 EOS 历史 API 插件将数据都保存在内存，随着历史数据越来越多，内存消耗高达 T 级以上，使得这个插件失去实用性。于是出现很多替代产品，比如把数据同步到 MongoDB，然后用 Nodejs 对接 MongoDB 来实现 API 服务。 2019 年 3 月份，MEET.ONE 实现了一个基于 MongoDB 的 EOS 历史 API 服务。劣者将去掉 MongoDB 交互部分的框">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-09-19T14:59:56.000Z">
-<meta property="article:modified_time" content="2020-12-27T07:28:48.169Z">
+<meta property="article:modified_time" content="2020-12-26T15:26:53.671Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="debug">
@@ -133,7 +133,7 @@
 <p>使用以下命令启动服务：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEBUG=body-parser:* node app.js</span><br></pre></td></tr></table></figure>
 <p>发现有这样 2 行关键的调试信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">body-parser:json content-type undefined +0ms</span><br><span class="line">body-parser:json skip parsing +1ms</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">body-parser:json content-type undefined +0ms</span><br><span class="line">body-parser:json skip parsing +1ms</span><br></pre></td></tr></table></figure>
 <p>原来 body-parser 会检查 Content-Type，不符合它的预期，就不解析，于是 body 就不是 JSON 对象。</p>
 <h2 id="开发">开发</h2>
 <h3 id="暴力的解决方案">暴力的解决方案</h3>
@@ -153,7 +153,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/09/19/umutech-force-body-parser-to-parse-request-without-content-type/" data-id="cl35envyw01ev5g6y81f0gz6e" class="article-share-link" data-share="baidu" data-title="强制 body-parser 解析无 Content-Type 请求">分享到</a>
+        <a data-url="//blog.umu618.com/2019/09/19/umutech-force-body-parser-to-parse-request-without-content-type/" data-id="ckj637pws01bux0786jj2hf4r" class="article-share-link" data-share="baidu" data-title="强制 body-parser 解析无 Content-Type 请求">分享到</a>
       
 
       

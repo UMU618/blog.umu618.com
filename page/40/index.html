@@ -144,7 +144,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/27/umutech-openwrt-primer-11-file-sharing/" data-id="cl35envvh00j95g6y7ip35z3d" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇11）：文件共享">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/27/umutech-openwrt-primer-11-file-sharing/" data-id="ckj637ppv00ixx07853rd0873" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇11）：文件共享">分享到</a>
       
 
       
@@ -213,7 +213,7 @@
 <p>接下来登录到中转服务器（Linux Server，如果是 OpenWRT，要把以下的 <code>~/.ssh/authorized_keys</code> 换成 <code>/etc/dropbear/authorized_keys</code>），把公钥（<code>/tmp/pubkey</code>）上传：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;key 内容&quot;</span> &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line"><span class="comment">## 或者</span></span><br><span class="line"><span class="comment">#cat pubkey &gt;&gt; ~/.ssh/authorized_keys</span></span><br><span class="line">chmod 0700 ~/.ssh/</span><br><span class="line">chmod 0600 ~/.ssh/authorized_keys</span><br><span class="line">vi /etc/ssh/sshd_config</span><br><span class="line"><span class="comment">## 改为允许证书登录</span></span><br><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
 <p><code>/etc/ssh/sshd_config</code> 需要打开的有：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RSAAuthentication yes</span><br><span class="line"></span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"></span><br><span class="line">AuthorizedKeysFile .ssh/authorized_keys</span><br><span class="line"></span><br><span class="line">GatewayPorts yes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RSAAuthentication yes</span><br><span class="line"></span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"></span><br><span class="line">AuthorizedKeysFile .ssh&#x2F;authorized_keys</span><br><span class="line"></span><br><span class="line">GatewayPorts yes</span><br></pre></td></tr></table></figure>
 <p>到路由器上测试：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i /etc/dropbear/id_rsa -f -N -T -R 2222:localhost:22 &lt;user&gt;@&lt;cloud_ip&gt;</span><br></pre></td></tr></table></figure>
 <p>如果成功则大功告成，以后只需要 ssh 到中转服务器的 2222 端口就等于连接到路由器了。最后配合本地端口转发，可以连接很多内网机器了。如下图：</p>
@@ -224,7 +224,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/27/umutech-openwrt-primer-10-through-the-intranet/" data-id="cl35envvh00jc5g6y6c86ayfq" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇10）：穿透内网">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/27/umutech-openwrt-primer-10-through-the-intranet/" data-id="ckj637ppv00iux078h41u4ukv" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇10）：穿透内网">分享到</a>
       
 
       
@@ -275,7 +275,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/25/reconstructionism-poet-delayed-release-has-been-spurned/" data-id="cl35envvh00j65g6y086agbgx" class="article-share-link" data-share="baidu" data-title="诗盗·拖坨妥唾">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/25/reconstructionism-poet-delayed-release-has-been-spurned/" data-id="ckj637ppu00irx0784c2j8d00" class="article-share-link" data-share="baidu" data-title="诗盗·拖坨妥唾">分享到</a>
       
 
       
@@ -327,7 +327,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/22/ghost/" data-id="cl35envvg00j35g6y7g5g8683" class="article-share-link" data-share="baidu" data-title="鬼">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/22/ghost/" data-id="ckj637ppt00iox078g4swca3b" class="article-share-link" data-share="baidu" data-title="鬼">分享到</a>
       
 
       
@@ -393,7 +393,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/21/umutech-openwrt-primer-9-remote-monitoring/" data-id="cl35envvg00j05g6yckrtf5aj" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇9）：远程监听">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/21/umutech-openwrt-primer-9-remote-monitoring/" data-id="ckj637ppt00ilx0787ogud66e" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇9）：远程监听">分享到</a>
       
 
       
@@ -461,7 +461,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/14/umutech-openwrt-primer-8-webcam/" data-id="cl35envvg00ix5g6ycfwzax9s" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇8）：网络摄像机">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/14/umutech-openwrt-primer-8-webcam/" data-id="ckj637pps00iix0781rfmf92k" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇8）：网络摄像机">分享到</a>
       
 
       
@@ -538,7 +538,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/10/xcloud/" data-id="cl35envvg00iu5g6y5q886e0a" class="article-share-link" data-share="baidu" data-title="如意云使用经验">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/10/xcloud/" data-id="ckj637pps00ifx078gbxq5q0m" class="article-share-link" data-share="baidu" data-title="如意云使用经验">分享到</a>
       
 
       
@@ -589,7 +589,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/07/05/reconstructionism-poet-youth/" data-id="cl35envvg00ir5g6ycw07fg7y" class="article-share-link" data-share="baidu" data-title="诗盗·青春">分享到</a>
+        <a data-url="//blog.umu618.com/2014/07/05/reconstructionism-poet-youth/" data-id="ckj637ppr00icx0788fcfe2lh" class="article-share-link" data-share="baidu" data-title="诗盗·青春">分享到</a>
       
 
       
@@ -640,7 +640,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/06/28/reconstructionism-poet-refuse-router/" data-id="cl35envvf00io5g6yf1tx1533" class="article-share-link" data-share="baidu" data-title="诗盗·垃圾路由">分享到</a>
+        <a data-url="//blog.umu618.com/2014/06/28/reconstructionism-poet-refuse-router/" data-id="ckj637ppr00i9x078d8a6fvfn" class="article-share-link" data-share="baidu" data-title="诗盗·垃圾路由">分享到</a>
       
 
       
@@ -698,7 +698,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2014/06/26/umutech-openwrt-primer-7-install-luci/" data-id="cl35envvf00il5g6y5ai2avez" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇7）：安装 LUCI">分享到</a>
+        <a data-url="//blog.umu618.com/2014/06/26/umutech-openwrt-primer-7-install-luci/" data-id="ckj637ppq00i6x0786ohk1nt5" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇7）：安装 LUCI">分享到</a>
       
 
       

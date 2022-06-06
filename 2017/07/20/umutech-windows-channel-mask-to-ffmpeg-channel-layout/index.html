@@ -14,7 +14,7 @@
 <meta property="og:description" content="前情 最近写录音程序，发现 MBP 的扬声器是 4 频道的，然后在抓音频保存时，Opus 编码器居然不支持 4 个频道，avcodec_open2() 会返回错误码 -22，Invalid argument。解决方法就是 resample 成 AV_CH_LAYOUT_STEREO。搞定后就顺便细研了这个 ChannelLayout，UMU 的代码里需要把微软 CoreAudio 的一些参数转成">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-07-20T08:02:47.000Z">
-<meta property="article:modified_time" content="2021-01-01T06:13:26.831Z">
+<meta property="article:modified_time" content="2021-01-08T05:18:48.367Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
@@ -137,7 +137,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2017/07/20/umutech-windows-channel-mask-to-ffmpeg-channel-layout/" data-id="cl35envws00x95g6yhyjeerm9" class="article-share-link" data-share="baidu" data-title="Windows 的 ChannelMask 转 ffmpeg 的 ChannelLayout">分享到</a>
+        <a data-url="//blog.umu618.com/2017/07/20/umutech-windows-channel-mask-to-ffmpeg-channel-layout/" data-id="ckj637prx00s6x0785h8ffcjz" class="article-share-link" data-share="baidu" data-title="Windows 的 ChannelMask 转 ffmpeg 的 ChannelLayout">分享到</a>
       
 
       

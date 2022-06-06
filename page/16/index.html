@@ -118,10 +118,10 @@
 </blockquote>
 <h2 id="数学描述">数学描述</h2>
 <p>设鸡有 x 只，兔有 y 只，则：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x + y = 35</span><br><span class="line">2x + 4y = 94</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x + y &#x3D; 35</span><br><span class="line">2x + 4y &#x3D; 94</span><br></pre></td></tr></table></figure>
 <p>解这个方程组得 <code>x = 23, y = 12</code>。</p>
 <p>用矩阵表示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 1]  *  [x]  =  [35]</span><br><span class="line">[2, 4]     [y]     [94]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 1]  *  [x]  &#x3D;  [35]</span><br><span class="line">[2, 4]     [y]     [94]</span><br></pre></td></tr></table></figure>
 <h2 id="Python-代码">Python 代码</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.mat([[<span class="number">1</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">4</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.mat([[<span class="number">35</span>], [<span class="number">94</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.I * b</span><br><span class="line">matrix([[<span class="number">23.</span>],</span><br><span class="line">        [<span class="number">12.</span>]])</span><br></pre></td></tr></table></figure>
 <p>再来一题三元版本：</p>
@@ -129,7 +129,7 @@
 <p>有蜘蛛，蜻蜓，蝉三种动物共 18 只，共有腿 118 条，翅膀 20 对，三种动物各几只？</p>
 </blockquote>
 <p>蜘蛛 8 条腿；蜻蜓 6 条腿， 2 对翅膀；蝉 6 条腿，1 对翅膀。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 1, 1]     [x]     [18]</span><br><span class="line">[8, 6, 6]  *  [y]  =  [118]</span><br><span class="line">[0, 2, 1]     [z]     [20]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 1, 1]     [x]     [18]</span><br><span class="line">[8, 6, 6]  *  [y]  &#x3D;  [118]</span><br><span class="line">[0, 2, 1]     [z]     [20]</span><br></pre></td></tr></table></figure>
 <p>代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.mat([[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">8</span>, <span class="number">6</span>, <span class="number">6</span>], [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.mat([[<span class="number">18</span>], [<span class="number">118</span>], [<span class="number">20</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.I * b</span><br><span class="line">matrix([[<span class="number">5.</span>],</span><br><span class="line">        [<span class="number">7.</span>],</span><br><span class="line">        [<span class="number">6.</span>]])</span><br></pre></td></tr></table></figure>
 
@@ -137,7 +137,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/" data-id="cl35envyg01bo5g6yh95zfmpi" class="article-share-link" data-share="baidu" data-title="鸡兔同笼问题的程序解法">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/" data-id="ckj637pvy018px0787zmvg22x" class="article-share-link" data-share="baidu" data-title="鸡兔同笼问题的程序解法">分享到</a>
       
 
       
@@ -196,7 +196,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/23/zero-sum-game/" data-id="cl35envyh01bu5g6yda0t2b62" class="article-share-link" data-share="baidu" data-title="零和博弈">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/23/zero-sum-game/" data-id="ckj637pw0018vx0785xs35z9a" class="article-share-link" data-share="baidu" data-title="零和博弈">分享到</a>
       
 
       
@@ -369,7 +369,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/19/god-of-debug-26/" data-id="cl35envyg01bl5g6y2hyh3yrf" class="article-share-link" data-share="baidu" data-title="八哥之神【26】">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/19/god-of-debug-26/" data-id="ckj637pvx018mx0782kkn4xjy" class="article-share-link" data-share="baidu" data-title="八哥之神【26】">分享到</a>
       
 
       
@@ -444,7 +444,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/18/probability-and-likelihood/" data-id="cl35envyf01bf5g6y9ntgdeq2" class="article-share-link" data-share="baidu" data-title="股神诞生记——概率和似然">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/18/probability-and-likelihood/" data-id="ckj637pvx018jx0786yb70sjf" class="article-share-link" data-share="baidu" data-title="股神诞生记——概率和似然">分享到</a>
       
 
       
@@ -502,7 +502,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/17/reconstructionism-poet-fall/" data-id="cl35envyf01bc5g6y0td17evz" class="article-share-link" data-share="baidu" data-title="诗盗·跌怜花">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/17/reconstructionism-poet-fall/" data-id="ckj637pvw018gx0787lr80p28" class="article-share-link" data-share="baidu" data-title="诗盗·跌怜花">分享到</a>
       
 
       
@@ -547,7 +547,7 @@
       
         <h2 id="做题">做题</h2>
 <p>以下代码打印什么？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto count = sizeof (int);</span><br><span class="line">if (count &gt; -1) &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&gt; -1&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&lt;= -1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto count &#x3D; sizeof (int);</span><br><span class="line">if (count &gt; -1) &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&gt; -1&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>答案是：<code>&lt;= -1</code>，因为 sizeof (int) 是无符号的，把 <code>auto</code> 改为 <code>int</code> 则结果是 <code>&gt; -1</code>。</p>
 <h2 id="本质论">本质论</h2>
 <p>当我们声明 <code>unsigned/signed int count</code> 时，<code>unsigned/signed</code> 是变量 <code>count</code> 的使用属性，<code>int</code> 是其容量属性。</p>
@@ -563,7 +563,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/16/umutech-optimization-thinking-2-signed-and-unsigned/" data-id="cl35envye01b65g6y6t29aiyd" class="article-share-link" data-share="baidu" data-title="优化思维【2】有符号和无符号的本质区别">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/16/umutech-optimization-thinking-2-signed-and-unsigned/" data-id="ckj637pvv018dx0788bgmgkq8" class="article-share-link" data-share="baidu" data-title="优化思维【2】有符号和无符号的本质区别">分享到</a>
       
 
       
@@ -638,7 +638,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/13/monk-tang/" data-id="cl35envyh01bx5g6y7exd3s4x" class="article-share-link" data-share="baidu" data-title="中年男唐僧">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/13/monk-tang/" data-id="ckj637pvu018ax078f34q4crh" class="article-share-link" data-share="baidu" data-title="中年男唐僧">分享到</a>
       
 
       
@@ -733,7 +733,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/12/how-to-speculate/" data-id="cl35envyf01bi5g6ybwjf283y" class="article-share-link" data-share="baidu" data-title="如何炒？">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/12/how-to-speculate/" data-id="ckj637pvt0187x0783r8t89zi" class="article-share-link" data-share="baidu" data-title="如何炒？">分享到</a>
       
 
       
@@ -858,7 +858,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/12/god-of-debug-side-story-4/" data-id="cl35envyc01ar5g6y5vqlhuz4" class="article-share-link" data-share="baidu" data-title="八哥之神【番外篇4】">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/12/god-of-debug-side-story-4/" data-id="ckj637pvt0184x078as7g89pn" class="article-share-link" data-share="baidu" data-title="八哥之神【番外篇4】">分享到</a>
       
 
       
@@ -941,7 +941,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/05/11/god-of-debug-25/" data-id="cl35envyd01b05g6yhrn05gj9" class="article-share-link" data-share="baidu" data-title="八哥之神【25】">分享到</a>
+        <a data-url="//blog.umu618.com/2019/05/11/god-of-debug-25/" data-id="ckj637pvr0181x0788grphh29" class="article-share-link" data-share="baidu" data-title="八哥之神【25】">分享到</a>
       
 
       

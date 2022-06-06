@@ -163,7 +163,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/05/19/noneuclidean-geometry/" data-id="cl35envw100pr5g6yb2l90nnu" class="article-share-link" data-share="baidu" data-title="小本科对非欧几里得几何学脱敏的故事">分享到</a>
+        <a data-url="//blog.umu618.com/2018/05/19/noneuclidean-geometry/" data-id="ckj637psj00uvx078gnxc6wqa" class="article-share-link" data-share="baidu" data-title="小本科对非欧几里得几何学脱敏的故事">分享到</a>
       
 
       
@@ -216,7 +216,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/05/12/umutech-prevent-licensing-ui/" data-id="cl35envw100po5g6y2vle2ear" class="article-share-link" data-share="baidu" data-title="你的 Windows 许可证即将过期">分享到</a>
+        <a data-url="//blog.umu618.com/2018/05/12/umutech-prevent-licensing-ui/" data-id="ckj637psi00usx078giks0yp0" class="article-share-link" data-share="baidu" data-title="你的 Windows 许可证即将过期">分享到</a>
       
 
       
@@ -286,7 +286,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/05/09/umutech-export-qzone-shuoshuo/" data-id="cl35envw400qh5g6ygbochaxf" class="article-share-link" data-share="baidu" data-title="批量导出 QQ 空间说说">分享到</a>
+        <a data-url="//blog.umu618.com/2018/05/09/umutech-export-qzone-shuoshuo/" data-id="ckj637psi00upx0781p6r7rs1" class="article-share-link" data-share="baidu" data-title="批量导出 QQ 空间说说">分享到</a>
       
 
       
@@ -349,7 +349,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/05/06/alien/" data-id="cl35envw000ph5g6yghtrc9c4" class="article-share-link" data-share="baidu" data-title="外星人">分享到</a>
+        <a data-url="//blog.umu618.com/2018/05/06/alien/" data-id="ckj637psh00umx078d0bg03mz" class="article-share-link" data-share="baidu" data-title="外星人">分享到</a>
       
 
       
@@ -392,7 +392,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string str = <span class="string">&quot;Meet the new boss...&quot;</span>;</span><br><span class="line">    std::<span class="keyword">size_t</span> str_hash = std::hash&lt;std::string&gt;&#123;&#125;(str);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; std::<span class="built_in">quoted</span>(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">&quot;Meet the new boss..;&quot;</span>;</span><br><span class="line">    str_hash = std::hash&lt;std::string&gt;&#123;&#125;(str);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; std::<span class="built_in">quoted</span>(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">&quot;Meet the new boss../&quot;</span>;</span><br><span class="line">    str_hash = std::hash&lt;std::string&gt;&#123;&#125;(str);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; std::<span class="built_in">quoted</span>(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">&quot;Meet the new boss..,&quot;</span>;</span><br><span class="line">    str_hash = std::hash&lt;std::string&gt;&#123;&#125;(str);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; std::<span class="built_in">quoted</span>(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> str = <span class="string">&quot;Meet the new boss...&quot;</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="keyword">size_t</span> str_hash = <span class="built_in">std</span>::hash&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;&#123;&#125;(str);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; <span class="built_in">std</span>::quoted(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">&quot;Meet the new boss..;&quot;</span>;</span><br><span class="line">    str_hash = <span class="built_in">std</span>::hash&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;&#123;&#125;(str);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; <span class="built_in">std</span>::quoted(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">&quot;Meet the new boss../&quot;</span>;</span><br><span class="line">    str_hash = <span class="built_in">std</span>::hash&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;&#123;&#125;(str);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; <span class="built_in">std</span>::quoted(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">&quot;Meet the new boss..,&quot;</span>;</span><br><span class="line">    str_hash = <span class="built_in">std</span>::hash&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;&#123;&#125;(str);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hash(&quot;</span> &lt;&lt; <span class="built_in">std</span>::quoted(str) &lt;&lt; <span class="string">&quot;) = &quot;</span> &lt;&lt; str_hash &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Windows,  VS 2017 的结果：</p>
 <blockquote>
 <p>hash(“Meet the new boss…”) = 5935324269489717502</p>
@@ -408,7 +408,7 @@
 <p>hash(“Meet the new boss…,”) = 15639609178671340058</p>
 </blockquote>
 <p>还好我们不会在生产环境，使用 Windows 部署 MongoDB……</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::size_t ShardId::Hasher::operator()(const ShardId&amp; shardId) const &#123;</span><br><span class="line">     return std::hash&lt;std::string&gt;()(shardId._shardId); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::size_t ShardId::Hasher::operator()(const ShardId&amp; shardId) const &#123;</span><br><span class="line">     return std::hash&lt;std::string&gt;()(shardId._shardId); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 <p>详见：<a target="_blank" rel="noopener" href="https://github.com/mongodb/mongo/blob/master/src/mongo/s/shard_id.cpp">https://github.com/mongodb/mongo/blob/master/src/mongo/s/shard_id.cpp</a></p>
 <p>这个 std::hash 在 x86 和 x64 下都不一样，所以，让我们看看 MongoDB 如何解决这个问题：</p>
 <p>MongoDB 3.4 no longer supports 32-bit x86 platforms.</p>
@@ -418,7 +418,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/04/24/umutech-mongodb-shard-id-hash/" data-id="cl35envw100pk5g6y0rghdr0i" class="article-share-link" data-share="baidu" data-title="MongoDB Shard ID hash 算法 std::hash 的跨平台性">分享到</a>
+        <a data-url="//blog.umu618.com/2018/04/24/umutech-mongodb-shard-id-hash/" data-id="ckj637psg00uix07871u55ahx" class="article-share-link" data-share="baidu" data-title="MongoDB Shard ID hash 算法 std::hash 的跨平台性">分享到</a>
       
 
       
@@ -487,7 +487,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/04/21/ten-years-in-wangsu/" data-id="cl35envw000pd5g6y1jq38l4w" class="article-share-link" data-share="baidu" data-title="十年生死两茫茫">分享到</a>
+        <a data-url="//blog.umu618.com/2018/04/21/ten-years-in-wangsu/" data-id="ckj637psf00ufx078blch705z" class="article-share-link" data-share="baidu" data-title="十年生死两茫茫">分享到</a>
       
 
       
@@ -562,7 +562,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/04/19/reconstructionism-poet-time-to-show-up/" data-id="cl35envw000pa5g6y0is0hyu9" class="article-share-link" data-share="baidu" data-title="诗盗·卧龙小成">分享到</a>
+        <a data-url="//blog.umu618.com/2018/04/19/reconstructionism-poet-time-to-show-up/" data-id="ckj637psf00ucx078890g81a1" class="article-share-link" data-share="baidu" data-title="诗盗·卧龙小成">分享到</a>
       
 
       
@@ -617,7 +617,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/04/12/cloud-storage/" data-id="cl35envvz00p65g6ydc3ed4e5" class="article-share-link" data-share="baidu" data-title="云存储">分享到</a>
+        <a data-url="//blog.umu618.com/2018/04/12/cloud-storage/" data-id="ckj637pse00u9x078hv4u4b9c" class="article-share-link" data-share="baidu" data-title="云存储">分享到</a>
       
 
       
@@ -670,7 +670,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/04/02/reconstructionism-poet-the-ghost-wife/" data-id="cl35envvz00oz5g6ygyctctmp" class="article-share-link" data-share="baidu" data-title="诗盗·白云凰">分享到</a>
+        <a data-url="//blog.umu618.com/2018/04/02/reconstructionism-poet-the-ghost-wife/" data-id="ckj637psd00u6x078eq5cba8t" class="article-share-link" data-share="baidu" data-title="诗盗·白云凰">分享到</a>
       
 
       
@@ -753,7 +753,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/04/01/the-ghost-wife/" data-id="cl35envvz00ow5g6y64lm57ih" class="article-share-link" data-share="baidu" data-title="白云凰">分享到</a>
+        <a data-url="//blog.umu618.com/2018/04/01/the-ghost-wife/" data-id="ckj637psc00u0x07817wnctwk" class="article-share-link" data-share="baidu" data-title="白云凰">分享到</a>
       
 
       

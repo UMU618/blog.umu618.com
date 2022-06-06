@@ -120,7 +120,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/01/13/reconstructionism-poet-two-ghosts/" data-id="cl35envxu016m5g6y8cf7bfey" class="article-share-link" data-share="baidu" data-title="诗盗·记一次见鬼吓醒">分享到</a>
+        <a data-url="//blog.umu618.com/2019/01/13/reconstructionism-poet-two-ghosts/" data-id="ckj637pup013qx0788afk4g2p" class="article-share-link" data-share="baidu" data-title="诗盗·记一次见鬼吓醒">分享到</a>
       
 
       
@@ -174,7 +174,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/01/12/reconstructionism-poet-haze/" data-id="cl35envxt016g5g6yghst95d1" class="article-share-link" data-share="baidu" data-title="诗盗·大霾苍蝇">分享到</a>
+        <a data-url="//blog.umu618.com/2019/01/12/reconstructionism-poet-haze/" data-id="ckj637puo013nx0782wvohfor" class="article-share-link" data-share="baidu" data-title="诗盗·大霾苍蝇">分享到</a>
       
 
       
@@ -228,7 +228,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/01/05/reconstructionism-poet-ceh/" data-id="cl35envxv016y5g6y71n32sac" class="article-share-link" data-share="baidu" data-title="诗盗·黑客求道">分享到</a>
+        <a data-url="//blog.umu618.com/2019/01/05/reconstructionism-poet-ceh/" data-id="ckj637pun013kx0782c7k1o60" class="article-share-link" data-share="baidu" data-title="诗盗·黑客求道">分享到</a>
       
 
       
@@ -290,7 +290,7 @@
 <p>但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了……</p>
 <h2 id="这不是-C-，这不是-C-，这真是不是-C">这不是 C++，这不是 C++，这真是不是 C++</h2>
 <p>不信？我们就来试一试：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: cannot use &#x27;try&#x27; with exceptions disabled</span><br><span class="line">        try &#123;</span><br><span class="line">        ^</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: cannot use &#39;try&#39; with exceptions disabled</span><br><span class="line">        try &#123;</span><br><span class="line">        ^</span><br></pre></td></tr></table></figure>
 <p>智能合约的编译目标是 WASM 文件，最终要在 WASM 的 VM 里运行，比如 <a target="_blank" rel="noopener" href="https://github.com/WebAssembly/wabt">wabt</a>，这和常规情况下使用原生 C++ 开发可执行程序、静态库、动态库等，有很大不同。</p>
 <p>受限部分包括：</p>
 <ul>
@@ -324,17 +324,17 @@
 <p>虽然现状是 C++ 一枝独秀，但未来可能会有人开发专门的编译器支持 Golang、Rust 等语言开发 EOS 智能合约。</p>
 <h3 id="2-WASM-逆向">2. WASM 逆向</h3>
 <p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode</a> 安装插件后可以直接打开 WASM 文件，显示 WAST 代码，比如我们随便打开一个 hello.wasm，滚动到末尾，可能会看到以下两行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(data (i32.const 8192) &quot;read\00&quot;)</span><br><span class="line">(data (i32.const 8197) &quot;get\00malloc_from_freed was designed to only be called after _heap was completely allocated\00&quot;))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(data (i32.const 8192) &quot;read\00&quot;)</span><br><span class="line">(data (i32.const 8197) &quot;get\00malloc_from_freed was designed to only be called after _heap was completely allocated\00&quot;))</span><br></pre></td></tr></table></figure>
 <p>下面我们写个 C++ 代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">char</span>*&gt;(<span class="number">8192</span>);</span><br><span class="line">eosio::<span class="built_in">print</span>(p);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">char</span>*&gt;(<span class="number">8192</span>);</span><br><span class="line">eosio::print(p);</span><br></pre></td></tr></table></figure>
 <p>以上代码，打印出 <code>read</code>。如果把 <code>8192</code> 改为 <code>8197</code>，则打印 <code>get</code>；改为 <code>8201</code>，打印 <code>malloc_from_freed was designed to only be called after _heap was completely allocated</code>。</p>
 <p>这个例子可能吓倒大家，特别交代下，一般开发中，较难遇到逆向……只是想说明 WASM 的内存管理和常规 C++ 开发的可执行程序是不同的，后者把指针指向 8192，是 Process Working Set 的地址，通常来说去读这么低的地址，后果极可能是读异常，挂掉。</p>
 <p><strong>划重点</strong>：虽然你用 C++ 写代码，但编译后是 WASM 二进制编码，运行时使用 VM，受控性很强，降低了开发难度，也杜绝很多安全问题。</p>
 <h3 id="3-性能问题">3. 性能问题</h3>
 <p>为了讨好 Python 程序员，下面用 Python 来写个开平方运算，有这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(math.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">print(math.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
 <p>也有这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(numpy.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">print(numpy.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
 <p>他们有个共同点——很快……相对 C++ 写的！！有点难以理解？</p>
 <p>Python 的 sqrt 函数，其实都是用 C 语言实现的，最终都是调用解释器里的本地代码，速度很快。</p>
 <p>原生 C++ 写的本地程序，几乎肯定是比 Python 快的，但我们前面说过：智能合约的 C++ 不是常规的 C++，当它被编译成 WASM 后，我们去看 WAST 代码，会发现 sqrt 的实现整个被塞进 WASM 里，它最终要用 VM 来执行，当然没有 Python 解释器快了！</p>
@@ -348,7 +348,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" data-id="cl35envxw01745g6y7gh5dnym" class="article-share-link" data-share="baidu" data-title="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">分享到</a>
+        <a data-url="//blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" data-id="ckj637pum013hx0784sn471mf" class="article-share-link" data-share="baidu" data-title="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">分享到</a>
       
 
       
@@ -412,7 +412,7 @@
 <p>nodeos 需要写入，使用有写入权限的 EOS 用户，其余情况使用只读权限的 EOSReader 用户，数据库安装之后就尽量不使用管理员用户。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use EOS</span><br><span class="line">db.createUser(&#123;<span class="string">&quot;user&quot;</span> : <span class="string">&quot;EOS&quot;</span>, <span class="string">&quot;pwd&quot;</span> : <span class="string">&quot;Password&quot;</span>, <span class="string">&quot;roles&quot;</span> : [&#123;<span class="attr">role</span> : <span class="string">&quot;readWrite&quot;</span>, <span class="string">&quot;db&quot;</span> : <span class="string">&quot;EOS&quot;</span>&#125;,<span class="string">&quot;dbOwner&quot;</span>]&#125;);</span><br><span class="line">db.createUser(&#123;<span class="string">&quot;user&quot;</span> : <span class="string">&quot;EOSReader&quot;</span>, <span class="string">&quot;pwd&quot;</span> : <span class="string">&quot;password&quot;</span>, <span class="string">&quot;roles&quot;</span> : [&#123;<span class="attr">role</span> : <span class="string">&quot;read&quot;</span>, <span class="string">&quot;db&quot;</span> : <span class="string">&quot;EOS&quot;</span>&#125;]&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="5-查询同步进度">5. 查询同步进度</h2>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use EOS</span><br><span class="line">db.transaction_traces.find(&#123;&#125;, &#123;<span class="string">&quot;block_num&quot;</span> : <span class="number">1</span>, <span class="string">&quot;block_time&quot;</span> : <span class="number">1</span>&#125;, -<span class="number">1</span>).sort(&#123;<span class="attr">$natural</span>:-<span class="number">1</span>&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use EOS</span><br><span class="line">db.transaction_traces.find(&#123;&#125;, &#123;<span class="string">&quot;block_num&quot;</span> : <span class="number">1</span>, <span class="string">&quot;block_time&quot;</span> : <span class="number">1</span>&#125;, <span class="number">-1</span>).sort(&#123;<span class="attr">$natural</span>:<span class="number">-1</span>&#125;).pretty()</span><br></pre></td></tr></table></figure>
 <h2 id="6-修复丢失数据">6. 修复丢失数据</h2>
 <p>参考《<a href="/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/">EOSIO MongoDB 插件系列：从 log 中找回丢</a>》</p>
 
@@ -420,7 +420,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-management-skills/" data-id="cl35envxu016j5g6y6k2kdy7z" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：管理技巧">分享到</a>
+        <a data-url="//blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-management-skills/" data-id="ckj637pum013ex0785y6f7cvs" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：管理技巧">分享到</a>
       
 
       
@@ -481,7 +481,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/" data-id="cl35envxt016a5g6y2ycwgc0l" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：从 log 中找回丢失的插入记录">分享到</a>
+        <a data-url="//blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/" data-id="ckj637pul013bx078a1ma96fx" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：从 log 中找回丢失的插入记录">分享到</a>
       
 
       
@@ -552,7 +552,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/12/30/umutech-numeric-eosio-name/" data-id="cl35envwc00sw5g6y58lghau4" class="article-share-link" data-share="baidu" data-title="纯数字 EOS 账号">分享到</a>
+        <a data-url="//blog.umu618.com/2018/12/30/umutech-numeric-eosio-name/" data-id="ckj637pt800xtx078aifz4wez" class="article-share-link" data-share="baidu" data-title="纯数字 EOS 账号">分享到</a>
       
 
       
@@ -604,7 +604,7 @@
 <h3 id="1-看抵押的实现代码">1. 看抵押的实现代码</h3>
 <p>从 <code>eosio.contracts/eosio.system/src/delegate_bandwidth.cpp</code> 的 <code>delegatebw</code> 函数开始分析。</p>
 <p>它调用了 <code>changebw</code>，其中的查表操作是这样的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">del_bandwidth_table     <span class="title">del_tbl</span><span class="params">( _self, from.value )</span></span>;</span><br><span class="line"><span class="keyword">auto</span> itr = del_tbl.<span class="built_in">find</span>( receiver.value );</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">del_bandwidth_table     <span class="title">del_tbl</span><span class="params">( _self, from.value )</span></span>;</span><br><span class="line"><span class="keyword">auto</span> itr = del_tbl.find( receiver.value );</span><br></pre></td></tr></table></figure>
 <p>scope 是 from，而 from 就是要求的未知项，直接粉碎我们用这路线继续求解的可能。</p>
 <h3 id="2-找交易记录">2. 找交易记录</h3>
 <p>MEET.ONE 之前发布过几篇关于 MongoDB 插件的文章，这些积累为我们继续求解提供了很大便利。</p>
@@ -617,7 +617,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/12/28/umutech-eosio-find-out-who-stakes-for-me/" data-id="cl35envwc00st5g6y57qt7lnz" class="article-share-link" data-share="baidu" data-title="EOSIO 找出谁为我质押">分享到</a>
+        <a data-url="//blog.umu618.com/2018/12/28/umutech-eosio-find-out-who-stakes-for-me/" data-id="ckj637pt700xqx078grl622xg" class="article-share-link" data-share="baidu" data-title="EOSIO 找出谁为我质押">分享到</a>
       
 
       
@@ -669,7 +669,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/12/22/reconstructionism-poet-dangerous-social-activity/" data-id="cl35envwc00sq5g6y6x4xes49" class="article-share-link" data-share="baidu" data-title="诗盗·记一次危险性社交活动">分享到</a>
+        <a data-url="//blog.umu618.com/2018/12/22/reconstructionism-poet-dangerous-social-activity/" data-id="ckj637pt600xnx078d3bje4fe" class="article-share-link" data-share="baidu" data-title="诗盗·记一次危险性社交活动">分享到</a>
       
 
       
@@ -721,7 +721,7 @@
 <h2 id="解决">解决</h2>
 <h3 id="定位代码">定位代码</h3>
 <p>反复测试发现，总是同一个地方抛出异常：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// insert action_traces</span></span><br><span class="line"><span class="keyword">if</span>( write_atraces ) &#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>( !bulk_action_traces.<span class="built_in">execute</span>() ) &#123;</span><br><span class="line">         <span class="built_in">EOS_ASSERT</span>( <span class="literal">false</span>, chain::mongo_db_insert_fail,</span><br><span class="line">                     <span class="string">&quot;Bulk action traces insert failed for transaction trace: $&#123;id&#125;&quot;</span>, (<span class="string">&quot;id&quot;</span>, t-&gt;id) );</span><br><span class="line">      &#125;</span><br><span class="line">   &#125; <span class="built_in"><span class="keyword">catch</span></span>( ... ) &#123;</span><br><span class="line">      <span class="built_in">handle_mongo_exception</span>( <span class="string">&quot;action traces insert&quot;</span>, __LINE__ );</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// insert action_traces</span></span><br><span class="line"><span class="keyword">if</span>( write_atraces ) &#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>( !bulk_action_traces.execute() ) &#123;</span><br><span class="line">         EOS_ASSERT( <span class="literal">false</span>, chain::mongo_db_insert_fail,</span><br><span class="line">                     <span class="string">&quot;Bulk action traces insert failed for transaction trace: $&#123;id&#125;&quot;</span>, (<span class="string">&quot;id&quot;</span>, t-&gt;id) );</span><br><span class="line">      &#125;</span><br><span class="line">   &#125; <span class="keyword">catch</span>( ... ) &#123;</span><br><span class="line">      handle_mongo_exception( <span class="string">&quot;action traces insert&quot;</span>, __LINE__ );</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>插入数据的代码很多，但就这个地方报错，说明 action_traces 表有特殊性。</p>
 <h3 id="分析异同">分析异同</h3>
 <p>action_traces 的 shard key 被定义为 _id，而其他没报错的表并不是 _id。</p>
@@ -735,7 +735,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2018/12/21/umutech-eosio-fix-cluster-writes-for-mongodb/" data-id="cl35envwd00sz5g6yfl1lfayh" class="article-share-link" data-share="baidu" data-title="改进 EOSIO MongoDB 插件对分片集群的插入性能">分享到</a>
+        <a data-url="//blog.umu618.com/2018/12/21/umutech-eosio-fix-cluster-writes-for-mongodb/" data-id="ckj637pt500xkx078dmdwhc2u" class="article-share-link" data-share="baidu" data-title="改进 EOSIO MongoDB 插件对分片集群的插入性能">分享到</a>
       
 
       

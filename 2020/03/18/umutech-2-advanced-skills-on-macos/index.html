@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="//blog.umu618.com/images/20200318-0.jpg">
 <meta property="article:published_time" content="2020-03-18T05:19:23.000Z">
-<meta property="article:modified_time" content="2020-12-27T07:28:48.171Z">
+<meta property="article:modified_time" content="2020-12-26T15:26:53.679Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="macos">
@@ -127,7 +127,7 @@
 <p><img src="/images/20200318-0.jpg" alt="ServerProfileManager"></p>
 <p>首先，找到 <code>~/Library/Application Support/X-NG/-local-config.json</code>，但这个文件里只有当前选择的项。</p>
 <p>然后，就看代码吧！Swift 写的，应该还好：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> defaults <span class="operator">=</span> <span class="type">UserDefaults</span>.standard</span><br><span class="line"><span class="keyword">let</span> keys <span class="operator">=</span> [</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> defaults = <span class="type">UserDefaults</span>.standard</span><br><span class="line"><span class="keyword">let</span> keys = [</span><br></pre></td></tr></table></figure>
 <p>根据代码线索找到：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults <span class="built_in">read</span> ~/Library/Preferences/com.yuzhou.X-NG.plist</span><br></pre></td></tr></table></figure>
 <p>哇~全部出来了！</p>
@@ -136,7 +136,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2020/03/18/umutech-2-advanced-skills-on-macos/" data-id="cl35envxa01265g6y3auf9ayw" class="article-share-link" data-share="baidu" data-title="macOS 研究经验【2】：简单的破解">分享到</a>
+        <a data-url="//blog.umu618.com/2020/03/18/umutech-2-advanced-skills-on-macos/" data-id="ckj637ptj00z6x078hcpv1zby" class="article-share-link" data-share="baidu" data-title="macOS 研究经验【2】：简单的破解">分享到</a>
       
 
       
