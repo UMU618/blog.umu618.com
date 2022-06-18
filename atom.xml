@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-06-15T15:10:45.616Z</updated>
+  <updated>2022-06-18T12:02:07.296Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>华为擎云 L410</title>
+    <link href="//blog.umu618.com/2022/06/18/umutech-huawei-qingyun-l410/"/>
+    <id>//blog.umu618.com/2022/06/18/umutech-huawei-qingyun-l410/</id>
+    <published>2022-06-18T11:01:56.000Z</published>
+    <updated>2022-06-18T12:02:07.296Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="用户故事">用户故事</h2><p>上个月写的<a href="/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/">《用华为擎云 L420 体验国产操作系统（UOS 和银河麒麟）》</a>导致本博客流量暴增，从默默无闻到有人访问，实在太荣幸了……</p><p>其实当时稣几乎是同时买 L410 和 L420 的，但由于 L410 的 UFS 是板载的，所以没怎么折腾，而是拿来日常使用，所以反而没写它。现在就来补一补。</p><p>先说结论：如果要买量产版的 L410 或 L420，建议后者。</p><ol><li><p>肉眼可感知 L420 比 L410 快；</p></li><li><p>L410 板载 UFS，而 L420 可更换，所以 L410 坏了更不好办；</p></li><li><p>L420 做工更好，尤其是触摸板可以明显感知。</p></li></ol><p>如果是买便宜很多的工程机，那务必小心咨询 BIOS 和 EC（Firmware）版本，太低的很可能无法升级，就只能一直忍受 bug 状态。</p><h2 id="硬件环境">硬件环境</h2><p>华为擎云 L410 工程机，型号是 KLVU-WDU0A。</p><ul><li>BIOS Revision: 1.30</li><li>Firmware Revision: 1.78</li><li>hisi Version: 2.0.0.17</li></ul><p>由于是打算日常使用的，特地选择 12G 内存+512G 存储的版本。外观比 L420 新，除了 A 面有不明显的小划痕外，没有其它问题。价格也来到惊人的 2000 人民币，真贵……</p><h2 id="软件环境">软件环境</h2><p>到手时，是个根本不能用的 UOS，要啥啥没有，比如：</p><ul><li><p>指纹解锁——没有！</p></li><li><p>外接显示器——没有任何反应！</p></li><li><p>播音乐——wma 无法播放，进度在走，就是没声音……mp4 倒是可以，莫名其妙。</p></li></ul><p>稣自己装上银河麒麟试用版 Desktop-V10-SP1-kirin990-Release-20211228，几乎是可以日常使用，然而只是几乎！八哥如下：</p><ul><li><p>如果没有在开机前就接着电源，那就无法充电。没错，就是开机后，中途想充电，没门！</p></li><li><p>睡眠或合上盖子屏幕关闭后，屏幕就再也无法亮起，只能重启恢复。不过这时候系统还是正常运行的，外接显示器可以正常使用。由于稣一般都是外接 4K 显示器使用，所以这点倒不是很致命。（多吐槽一句：稣的 L420 至今无法外接显示器！）</p></li><li><p>麒麟自带的固件升级工具无法使用，一运行就卡着，log 里大量反复的错误。</p></li><li><p>移动应用无法使用，因为 KMRE 启动不起来。不过稣也用不上这货……毕竟稣有小米平板 5 破落。</p></li></ul><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tail -3 /var/<span class="built_in">log</span>/hwupdate/checkapp.log</span><br><span class="line">[2022-06-18 19:39:13 379]INFO Entery timer</span><br><span class="line">[2022-06-18 19:39:13 417]INFO recv data size is null or fail</span><br><span class="line">[2022-06-18 19:39:13 417]INFO Entry IPCMessageClient::SendData</span><br></pre></td></tr></table></figure><h2 id="总结">总结</h2><p>这台 L410 的 BIOS 版本不算低，所以八哥没 BIOS 版本过低的 L420 多。</p><p>编译 C++ 代码还是挺好用的。尝试编译了一个 gcc13，速度感人，秒杀公司发的联想 L490。而且 512G 版本可以 Clone 好多仓库，所以稣认为性比价还行。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;用户故事&quot;&gt;用户故事&lt;/h2&gt;
+&lt;p&gt;上个月写的&lt;a href=&quot;/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/&quot;&gt;《用华为擎云 L420 体验国产操作系统（UOS 和银河麒麟）》&lt;/a&gt;导致本博客流量暴增</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="debug" scheme="//blog.umu618.com/tags/debug/"/>
+    
+    <category term="linux" scheme="//blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="//blog.umu618.com/tags/ops/"/>
+    
+    <category term="debian" scheme="//blog.umu618.com/tags/debian/"/>
+    
+  </entry>
   
   <entry>
     <title>诗盗·蝶恋花·轮回</title>
@@ -59,9 +90,9 @@
     <link href="//blog.umu618.com/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/"/>
     <id>//blog.umu618.com/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/</id>
     <published>2022-05-21T04:45:55.000Z</published>
-    <updated>2022-05-22T15:53:05.663Z</updated>
+    <updated>2022-06-18T11:48:59.856Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="用户故事">用户故事</h2><p>稣很爱国！从 2019 年起，就不时想用国产操作系统，但基本停留在虚拟机体验的层次，今年终于在物理机长期实践了。</p><h2 id="硬件环境">硬件环境</h2><p>华为擎云 L420 工程机，型号是 KLVV W5821。</p><p>某鱼上捡的，外观惨不忍睹，而且就一个主机，配件全无。</p><p>到手时，是残缺状态的 UOS 20 1022，基本不能用，只能开机看个寂寞。也是，要不然也不可能 2000 块以内买到……</p><h2 id="体验-UOS-20-1041">体验 UOS 20 1041</h2><p>加了统信两个企业微信群，好不容易要到了一个 iso，然而根本不能启动。稣激动地插入 U 盘，结果它直接黑屏死掉！</p><p>机智如稣，立刻想到原来的系统可以启动，把旧系统的内核拿来用不就行了？em，这么干确实成功启动。</p><p>之前的系统缺失应用商店等系统组件，装完系统后，总算是一个完整的 UOS 了。然而内核还是旧的，所以……八哥如下：</p><ol><li><p>内建显示器无法调节亮度，只有关闭和中等亮度两个状态。【稣含着泪，倔强地说道：稣就当服务器用，要什么内建显示器？】</p></li><li><p>外接显示器没反应。【稣含着泪，倔强地说道：稣就当服务器用，要什么外接显示器？】</p></li><li><p>偶尔开机后没声音。不过注销一下，再登录就能恢复。【稣含着泪，倔强地说道：稣就当服务器用，要什么扬声器？】</p></li><li><p>从待机状态恢复后，有小概率内建键盘失灵或内建触摸板控制不了光标。但外接键鼠没问题。【稣含着泪，倔强地说道：稣就当服务器用，要什么键鼠？】</p></li><li><p>拔下充电器后，任务栏的电池图标依然一直显示正在充电。</p></li></ol><p>好吧，以上问题都是因为固件的版本太低，只能用充满八哥的低版本内核。只要升级固件，再升级相应的内核就可以解决。但是升级固件这个事太难了……这可是一个奇怪的工程机啊！正规手段都是各种失败，即使是解开固件 deb 包，手动运行 BIOSEC，让它分离出 Firmware.bin 和 Update.txt，也失败！把 Firmware.bin 拿去 BIOS 界面升级固件，依然失败！</p><p>BIOS 是百敖 0.09，果然难搞！好吧，没刷成砖头就好。咱们来日方长……【稣含着泪，倔强地说道：学习是终生的，而问题都是一时的！】</p><p>接下来说说系统本身的问题：其实 UOS 本身没问题，稣很满意，还是个适配的问题。</p><p>L420 的显示服务器是 xwayland，因为其使用的 mali GPU 的用户态驱动是闭源的，只支持 wayland，不支持 x11。这导致部分稣常用的软件无法正常工作，比如远程桌面客户端，em……目前还没发现能用的。【稣含着泪，倔强地说道：稣就当服务器用，要什么客户端？】</p><h2 id="体验银河麒麟桌面操作系统-V10">体验银河麒麟桌面操作系统 V10</h2><p>听说银河麒麟更爱国，稣从它的壁纸就可以看出来，这绝对是真的！</p><p><img src="/images/20220521-desktop.jpg" alt="银河麒麟桌面"></p><p>还是熟悉的味道，原版 iso 无法启动，换内核，启动正常，安装也正常。</p><p>银河麒麟不愧是上个世纪就诞生的国产操作系统，十分满意，默认设置，只有一个地方稣无法忍受——居然不是默认开启「自然滚动」！而且，图形界面下居然没地方设置？不知道和没激活有没有关系？</p><p><img src="/images/20220521-touchpad.png" alt="银河麒麟-设置-设备-触摸板"></p><p>但是这对使用 Debian 4 年以上经验的稣来说，简直易如反掌，命令行搞定，注销重新登录生效：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gsettings <span class="built_in">set</span> org.ukui.peripherals-touchpad natural-scroll <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>在另一台机器（非 L420）安装银河麒麟后，又发现一个问题比较难以接受：外接显示器的放大比例无法独立设置！</p><p><img src="/images/20220521-display.png" alt="银河麒麟-设置-系统-显示器"></p><p>任务栏这个风格也不太方便，还是合并到一起好。</p><p><img src="/images/20220521-taskbar.png" alt="银河麒麟-任务栏"></p><p>另外有一个惊喜，文件管理器借鉴了 macOS 的做法，有个颜色分类功能，很不错！（访达少数满意的地方）</p><p><img src="/images/20220521-finder.png" alt="银河麒麟-文件管理器"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="用户故事">用户故事</h2><p>稣很爱国！从 2019 年起，就不时想用国产操作系统，但基本停留在虚拟机体验的层次，今年终于在物理机长期实践了。</p><h2 id="硬件环境">硬件环境</h2><p>华为擎云 L420 工程机，型号是 KLVV W5821。</p><ul><li>BIOS Revision: 0.9</li><li>Firmware Revision: 0.8</li><li>hisi Version: 1.0.0.3</li></ul><p>某鱼上捡的，外观惨不忍睹，而且就一个主机，配件全无。</p><p>到手时，是残缺状态的 UOS 20 1022，基本不能用，只能开机看个寂寞。也是，要不然也不可能 2000 块以内买到……</p><h2 id="体验-UOS-20-1041">体验 UOS 20 1041</h2><p>加了统信两个企业微信群，好不容易要到了一个 iso，然而根本不能启动。稣激动地插入 U 盘，结果它直接黑屏死掉！</p><p>机智如稣，立刻想到原来的系统可以启动，把旧系统的内核拿来用不就行了？em，这么干确实成功启动。</p><p>之前的系统缺失应用商店等系统组件，装完系统后，总算是一个完整的 UOS 了。然而内核还是旧的，所以……八哥如下：</p><ol><li><p>内建显示器无法调节亮度，只有关闭和中等亮度两个状态。【稣含着泪，倔强地说道：稣就当服务器用，要什么内建显示器？】</p></li><li><p>外接显示器没反应。【稣含着泪，倔强地说道：稣就当服务器用，要什么外接显示器？】</p></li><li><p>偶尔开机后没声音。不过注销一下，再登录就能恢复。【稣含着泪，倔强地说道：稣就当服务器用，要什么扬声器？】</p></li><li><p>从待机状态恢复后，有小概率内建键盘失灵或内建触摸板控制不了光标。但外接键鼠没问题。【稣含着泪，倔强地说道：稣就当服务器用，要什么键鼠？】</p></li><li><p>拔下充电器后，任务栏的电池图标依然一直显示正在充电。</p></li></ol><p>好吧，以上问题都是因为固件的版本太低，只能用充满八哥的低版本内核。只要升级固件，再升级相应的内核就可以解决。但是升级固件这个事太难了……这可是一个奇怪的工程机啊！正规手段都是各种失败，即使是解开固件 deb 包，手动运行 BIOSEC，让它分离出 Firmware.bin 和 Update.txt，也失败！把 Firmware.bin 拿去 BIOS 界面升级固件，依然失败！</p><p>BIOS 是百敖 0.09，果然难搞！好吧，没刷成砖头就好。咱们来日方长……【稣含着泪，倔强地说道：学习是终生的，而问题都是一时的！】</p><p>接下来说说系统本身的问题：其实 UOS 本身没问题，稣很满意，还是个适配的问题。</p><p>L420 的显示服务器是 xwayland，因为其使用的 mali GPU 的用户态驱动是闭源的，只支持 wayland，不支持 x11。这导致部分稣常用的软件无法正常工作，比如远程桌面客户端，em……目前还没发现能用的。【稣含着泪，倔强地说道：稣就当服务器用，要什么客户端？】</p><h2 id="体验银河麒麟桌面操作系统-V10">体验银河麒麟桌面操作系统 V10</h2><p>听说银河麒麟更爱国，稣从它的壁纸就可以看出来，这绝对是真的！</p><p><img src="/images/20220521-desktop.jpg" alt="银河麒麟桌面"></p><p>还是熟悉的味道，原版 iso 无法启动，换内核，启动正常，安装也正常。</p><p>银河麒麟不愧是上个世纪就诞生的国产操作系统，十分满意，默认设置，只有一个地方稣无法忍受——居然不是默认开启「自然滚动」！而且，图形界面下居然没地方设置？不知道和没激活有没有关系？</p><p><img src="/images/20220521-touchpad.png" alt="银河麒麟-设置-设备-触摸板"></p><p>但是这对使用 Debian 4 年以上经验的稣来说，简直易如反掌，命令行搞定，注销重新登录生效：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gsettings <span class="built_in">set</span> org.ukui.peripherals-touchpad natural-scroll <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>在另一台机器（非 L420）安装银河麒麟后，又发现一个问题比较难以接受：外接显示器的放大比例无法独立设置！</p><p><img src="/images/20220521-display.png" alt="银河麒麟-设置-系统-显示器"></p><p>任务栏这个风格也不太方便，还是合并到一起好。</p><p><img src="/images/20220521-taskbar.png" alt="银河麒麟-任务栏"></p><p>另外有一个惊喜，文件管理器借鉴了 macOS 的做法，有个颜色分类功能，很不错！（访达少数满意的地方）</p><p><img src="/images/20220521-finder.png" alt="银河麒麟-文件管理器"></p>]]></content>
     
     
       
