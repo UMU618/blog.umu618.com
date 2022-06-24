@@ -329,6 +329,16 @@
 <p><img src="/images/20220521-taskbar.png" alt="银河麒麟-任务栏"></p>
 <p>另外有一个惊喜，文件管理器借鉴了 macOS 的做法，有个颜色分类功能，很不错！（访达少数满意的地方）</p>
 <p><img src="/images/20220521-finder.png" alt="银河麒麟-文件管理器"></p>
+<h2 id="其他机友关于-BIOS-版本的经验">其他机友关于 BIOS 版本的经验</h2>
+<p>以下非本人经验，仅供参考，不保证正确性，也不提供相关资助：</p>
+<ul>
+<li>
+<p>BIOS 0.11：目前也是升级无望，有机友已经找过华为工程师，结果都搞不定。</p>
+</li>
+<li>
+<p>BIOS 0.18：根据不止一人反馈，是可以升级到 1.x 的。</p>
+</li>
+</ul>
 
       
     </div>
@@ -899,7 +909,7 @@
 <p>登陆系统，编辑 <code>/etc/apt/sources.list</code>，加 non-free 和配置 debian-security：</p>
 </li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free</span><br><span class="line">#deb-src http://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main</span><br><span class="line">#deb-src https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free</span><br><span class="line">#deb-src http://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free</span><br><span class="line">#deb-src http://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib non-free</span><br><span class="line">#deb-src https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free</span><br><span class="line">#deb-src http://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free</span><br></pre></td></tr></table></figure>
 <p>这步很重要，如果不改 debian-security，那么接下来在国内网络环境下，可能会很慢……</p>
 <ol start="7">
 <li>安装 non-free 驱动，主要是无线网卡和声卡：</li>
