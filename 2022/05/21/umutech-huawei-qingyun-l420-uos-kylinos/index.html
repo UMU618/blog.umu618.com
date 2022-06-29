@@ -19,7 +19,7 @@
 <meta property="og:image" content="//blog.umu618.com/images/20220521-taskbar.png">
 <meta property="og:image" content="//blog.umu618.com/images/20220521-finder.png">
 <meta property="article:published_time" content="2022-05-21T04:45:55.000Z">
-<meta property="article:modified_time" content="2022-06-24T05:22:06.792Z">
+<meta property="article:modified_time" content="2022-06-29T06:33:59.935Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="linux">
@@ -153,6 +153,9 @@
 </li>
 <li>
 <p>拔下充电器后，任务栏的电池图标依然一直显示正在充电。</p>
+</li>
+<li>
+<p>最可怕的是：开机久了，比如两三周，就有可能无法关机。前兆是同时键盘失灵，这时候关机，并不会真的断电，卡死在一个硬件奇异点，长按开关机键也无用，只能拆后盖断电池排线才能解决。据机友反馈，BIOS 0.11 也有这个问题。</p>
 </li>
 </ol>
 <p>好吧，以上问题都是因为固件的版本太低，只能用充满八哥的低版本内核。只要升级固件，再升级相应的内核就可以解决。但是升级固件这个事太难了……这可是一个奇怪的工程机啊！正规手段都是各种失败，即使是解开固件 deb 包，手动运行 BIOSEC，让它分离出 Firmware.bin 和 Update.txt，也失败！把 Firmware.bin 拿去 BIOS 界面升级固件，依然失败！</p>
