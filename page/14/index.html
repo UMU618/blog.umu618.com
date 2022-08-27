@@ -35,7 +35,7 @@
     s.parentNode.insertBefore(hm, s);
   })();
   </script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <body>
 <div id="container">
   <div id="wrap">
@@ -85,6 +85,65 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-reconstructionism-poet-buy-a-house" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/02/reconstructionism-poet-buy-a-house/" class="article-date">
+  <time datetime="2019-08-02T05:38:00.000Z" itemprop="datePublished">2019-08-02 13:38:00</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/02/reconstructionism-poet-buy-a-house/">诗盗·今年七夕不送礼送礼只送学区房吓醒</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>《#诗盗#·今年七夕不送礼送礼只送学区房吓醒》：一年三度情人谋，先虐情侣后虐狗。今日没钱空回首，粗茶淡饭再买楼。</p>
+<h2>注解</h2>
+<p>商家为了赚钱，一年催大家过三次情人节，堪比谋杀……先虐情侣的钱包，再通过情侣秀恩爱虐单身狗。
+今天想日却发现没钱，只能回首空悲切，过几年艰苦的日子后再考虑买学区房吧。</p>
+<p>改编自唐代诗人罗隐的《绵谷回寄蔡氏昆仲》：</p>
+<blockquote>
+<p><strong>一年两度锦城游，前值东风后值秋。</strong>
+芳草有情皆碍马，好云无处不遮楼。
+山将别恨和心断，水带离声入梦流。
+<strong>今日因君试回首，淡烟乔木隔绵州。</strong></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="//blog.umu618.com/2019/08/02/reconstructionism-poet-buy-a-house/" data-id="ckdw5bc48015s1sij21hi4v67" class="article-share-link" data-share="baidu" data-title="诗盗·今年七夕不送礼送礼只送学区房吓醒">分享到</a>
+      
+
+      
+        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/08/02/reconstructionism-poet-buy-a-house/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-umutech-optimization-thinking-4-bash-for-loop" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/30/umutech-optimization-thinking-4-bash-for-loop/" class="article-date">
@@ -111,20 +170,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="常规教材">常规教材</h2>
+        <h2>常规教材</h2>
 <p>Bash 循环有三种写法。</p>
-<h3 id="1-类-C-语言语法">1. 类 C 语言语法</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">for ((i = 1; i &lt;= 10000000; ++i))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="2-for-in-语法">2. for in 语法</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10000000&#125;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="3-使用外部命令-seq">3. 使用外部命令 seq</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in `seq 1 10000000`</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h2 id="分析">分析</h2>
+<h3>1. 类 C 语言语法</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">for ((i &#x3D; 1; i &lt;&#x3D; 10000000; ++i))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h3>2. for in 语法</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10000000&#125;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h3>3. 使用外部命令 seq</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#96;seq 1 10000000&#96;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h2>分析</h2>
 <p>这三种方法中，性能最好的是第一种，最差的是第三种。</p>
 <p>方法 1 是语言层面的循环语法，循环会<strong>立刻</strong>开始，而后两种，作为对比，并不会<strong>立刻</strong>开始！</p>
-<p>方法 2 中的 <code>&#123;1..10000000&#125;</code> 会产生一个 1 到 10000000 的序列，然后再开始循环。</p>
+<p>方法 2 中的 <code>{1..10000000}</code> 会产生一个 1 到 10000000 的序列，然后再开始循环。</p>
 <p>方法 3 中的 <code>seq 1 10000000</code> 是调用 <code>seq</code> 产生一个 1 到 10000000 的序列，然后再开始循环。涉及到外部进程调用和管道传递，所以比方法 2 更慢。</p>
-<h3 id="总结">总结</h3>
+<h3>总结</h3>
 <ul>
 <li>
 <p>方法 1 写起来最麻烦，性能却是最好的。<strong>“做一件事，有很多种方式”，有时候不是好事，有对比，就有伤害……优化往往是和人性作对！</strong></p>
@@ -133,14 +192,14 @@
 <p>语言原生的方法一般比调用外部命令好。</p>
 </li>
 </ul>
-<h2 id="同类经验">同类经验</h2>
+<h2>同类经验</h2>
 <p>Java 的 for 和 while 本质上一样（其实 while 可以去掉），而同是 JVM 语言的 Scala 的 for 却不同于 while。Scala 的 <code>for &lt;-</code> 也会先产生序列，再循环，所以超大规模循环时，for 性能不如 while。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/30/umutech-optimization-thinking-4-bash-for-loop/" data-id="cl35envyq01dl5g6yfd6aeelg" class="article-share-link" data-share="baidu" data-title="优化思维【4】Bash for 循环">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/30/umutech-optimization-thinking-4-bash-for-loop/" data-id="ckdw5bc42015c1sijgjqobvjz" class="article-share-link" data-share="baidu" data-title="优化思维【4】Bash for 循环">分享到</a>
       
 
       
@@ -193,7 +252,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/25/executioner/" data-id="cl35envyp01di5g6ya7qf2a6h" class="article-share-link" data-share="baidu" data-title="刽子手">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/25/executioner/" data-id="ckdw5bc43015f1sij6lnd9h8y" class="article-share-link" data-share="baidu" data-title="刽子手">分享到</a>
       
 
       
@@ -237,13 +296,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·九九六》：笑叙狐朋猪友，傲砍尸老霉幽。此计未卜证太周，虎去猴留，空画春秋，休休，占得几朝风流？九九六。</p>
-<h2 id="注解">注解</h2>
-<p>笑谈一些两面三刀的人和猪队友，傲慢导致招了很多八哥，最后尸变发霉，要砍掉才能净化。<br>
+<h2>注解</h2>
+<p>笑谈一些两面三刀的人和猪队友，傲慢导致招了很多八哥，最后尸变发霉，要砍掉才能净化。
 两年前预料到的事情，已然成真，好像验证了我能未卜先知。</p>
 <p>改编自霹雳角色“占云巾”出场诗：</p>
 <blockquote>
-<p>笑许云朋霞友，傲看石老梅幽。<br>
-此生未卜学太周，龙去虎留，明日墟丘。<br>
+<p>笑许云朋霞友，傲看石老梅幽。
+此生未卜学太周，龙去虎留，明日墟丘。
 休休，占得几家风流？算春秋。</p>
 </blockquote>
 
@@ -251,7 +310,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/20/reconstructionism-poet-996/" data-id="cl35envyp01df5g6y1qt5d87q" class="article-share-link" data-share="baidu" data-title="诗盗·九九六">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/20/reconstructionism-poet-996/" data-id="ckdw5bc4101591sij8j3ae9zk" class="article-share-link" data-share="baidu" data-title="诗盗·九九六">分享到</a>
       
 
       
@@ -295,18 +354,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·影帝》：信佛信道信耶稣，拜天拜神拜父母。腹中 U 墨黑灰白，哭遍影帝不归路。</p>
-<h2 id="注解">注解</h2>
-<p>曾经不信任何东西，包括自己在天地之间的状态，也不真心膜拜任何东西，人生过去一半后，都信了。<br>
-特别的人在人间探索，要学习别人对事情的反应，就可能被认为是同类，但其实不是，陷入叠加态。<br>
-曾经质疑神看不懂稣，会判断稣是邪恶的，所以自称量子邪稣。后来明白，神的观测无所不能，牠能看透任何面具。<br>
-明白神并不反对人处于亦正亦邪的状态，于是我不再像《追日者》眼里只有黑和白，灰色的人格才是世人常态。<br>
+<h2>注解</h2>
+<p>曾经不信任何东西，包括自己在天地之间的状态，也不真心膜拜任何东西，人生过去一半后，都信了。
+特别的人在人间探索，要学习别人对事情的反应，就可能被认为是同类，但其实不是，陷入叠加态。
+曾经质疑神看不懂稣，会判断稣是邪恶的，所以自称量子邪稣。后来明白，神的观测无所不能，牠能看透任何面具。
+明白神并不反对人处于亦正亦邪的状态，于是我不再像《追日者》眼里只有黑和白，灰色的人格才是世人常态。
 那些令我羡慕的影帝，很多并不是天生的，他们也是付出很多泪水和汗水才练成的。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/19/reconstructionism-poet-winner/" data-id="cl35envyr01dv5g6y5ab447sg" class="article-share-link" data-share="baidu" data-title="诗盗·影帝">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/19/reconstructionism-poet-winner/" data-id="ckdw5bc3z01561sijg1945zxy" class="article-share-link" data-share="baidu" data-title="诗盗·影帝">分享到</a>
       
 
       
@@ -350,7 +409,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="/images/20190207-luyu.jpg" alt="听说鲁豫要来采访稣"></p>
-<h2 id="1-听说稣特别能装逼是这样吗？能不能传授一下给大家？">1. 听说稣特别能装逼是这样吗？能不能传授一下给大家？</h2>
+<h2>1. 听说稣特别能装逼是这样吗？能不能传授一下给大家？</h2>
 <p>这就得分析一下装逼的本质，一般人会觉得装逼就是吹牛，其实是一大误解，装逼的奥义在于——说实话！</p>
 <p>举两个例子：</p>
 <ul>
@@ -361,7 +420,7 @@
 <p>稣不喝酒，不喝茶，有人来做客就拿出绮怡招待，500ml 一瓶 35 元，结果被说太装逼。其实这水健康，换成酒岂止要 35 元，还致癌！您说到底谁装逼呢？</p>
 </li>
 </ul>
-<h2 id="2-好像很有道理，您赢了！我们还是回到剧情。您不是说过自己是无神论，为什么剧中还出现神？">2. 好像很有道理，您赢了！我们还是回到剧情。您不是说过自己是无神论，为什么剧中还出现神？</h2>
+<h2>2. 好像很有道理，您赢了！我们还是回到剧情。您不是说过自己是无神论，为什么剧中还出现神？</h2>
 <p>简单地说，本剧出现的神指的是每个人的心头之师，可以认为它是每个人内心的原始愿力，它也受各种规则制约，和神话故事里那些有超能力的神完全不是一回事。</p>
 <ul>
 <li>
@@ -371,29 +430,29 @@
 <p>本剧的“命运无神论”完全没有神祗的意志成分，也无前生所造之业的因果成分，而是自然而然，谁都不可能预测或改变。简单地说，头发掉了就掉了呗。</p>
 </li>
 </ul>
-<h2 id="3-那您相信有那种有超能力的神吗？">3. 那您相信有那种有超能力的神吗？</h2>
+<h2>3. 那您相信有那种有超能力的神吗？</h2>
 <p>我相信有超能力的神在天道前一样是卑微。</p>
-<h2 id="4-稣为什么从神变成人？">4. 稣为什么从神变成人？</h2>
+<h2>4. 稣为什么从神变成人？</h2>
 <p>这是一个循环，不是单向变化，也有从人变成神的。</p>
 <p>时机一到，神自然就变成人。如果有神主动变成人，那可能是因为做神太快乐，以致于满足贫穷，本来就穷，还因为太快乐被人嫉妒，这不科学。做凡人呢，虽然没有做神开心，但有动力去赚钱呀。</p>
 <p>世界上有很多更重要的东西，但前提是有钱。举个例子，小学就学过一寸光阴一寸金，但长大后发现，上班族不就是出售自己的时间换钱？有钱时，时间才宝贵；有钱时，感情才珍贵。</p>
-<h2 id="5-是不是因为作者不想写了，强行把稣写死？">5. 是不是因为作者不想写了，强行把稣写死？</h2>
+<h2>5. 是不是因为作者不想写了，强行把稣写死？</h2>
 <p>当然不是！中国人的平均寿命是 76 岁，稣曾经在佛塔前立誓折寿守护亲人长寿，一命赔多命，消耗掉 10 年寿命，死于 66 岁，完全科学合理。</p>
 <p>梦见的就是这样死的，我有什么办法？咳！</p>
-<h2 id="6-稣的身体不是新的吗？">6. 稣的身体不是新的吗？</h2>
+<h2>6. 稣的身体不是新的吗？</h2>
 <p>身体是新的，但记忆是旧的，而且处于慢慢恢复的过程，恢复到一定程度后，稣领悟到转世的意义，自主选择转世。这事情已经发生过无数遍，不用在意死不死。</p>
-<h2 id="7-《八哥九九八十一难》后来去哪里了？">7. 《八哥九九八十一难》后来去哪里了？</h2>
+<h2>7. 《八哥九九八十一难》后来去哪里了？</h2>
 <p>这本书是高中时，妈妈为了让稣不因为早恋耽误学习、正确理解异性心理而传授的。但他的作者是未来的稣……时空悖论。</p>
 <p>里面的科研成果是花了巨大心力得来的，但失忆的稣看它其实是不太相信的，所以离婚时期稣去实践了几个，付出一些代价后相信。</p>
 <p>和大部分时空悖论的处理方式一样，和秦阳结婚后，稣亲自把它烧毁。</p>
-<h2 id="8-30-集中有一段写稣对陈博士的质疑，所以她到底是不是稣的前妻？">8. 30 集中有一段写稣对陈博士的质疑，所以她到底是不是稣的前妻？</h2>
+<h2>8. 30 集中有一段写稣对陈博士的质疑，所以她到底是不是稣的前妻？</h2>
 <p>不知道……真的！虽然我是作者，但这些故事是梦见的，所以也说不清楚！第 27 集里，稣在和陈立姻讲和秦阳的故事，那些记忆都是从识界复制而来的，识界里稣的前妻叫陈提姻，而不是陈立姻。至于 AVILab 的那个陈立姻，到底是谁，作者至今没搞懂！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/17/god-of-debug-side-story-6/" data-id="cl35envyq01dp5g6y1a0jcga5" class="article-share-link" data-share="baidu" data-title="八哥之神【番外篇6】">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/17/god-of-debug-side-story-6/" data-id="ckdw5bc3x014z1sij8y1nc57s" class="article-share-link" data-share="baidu" data-title="八哥之神【番外篇6】">分享到</a>
       
 
       
@@ -437,12 +496,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>《#诗盗#·买币送禅》：天花娉婷坠如雨，帆冻阴飙吹不举。苦却乐，乐却苦，数字黄金忽如土。</p>
-<h2 id="注解">注解</h2>
+<h2>注解</h2>
 <p>改编自唐朝贯休的《送颢雅禅师》：</p>
 <blockquote>
-<p>霜锋擗石鸟雀聚，帆冻阴飙吹不举。芬陀利香释驎虎，<br>
-幡幢冒雪争迎取。春光主，芙蓉堂窄堆花乳，<br>
-手提金桴打金鼓。天花娉婷下如雨，狻猊座上师子语。<br>
+<p>霜锋擗石鸟雀聚，帆冻阴飙吹不举。芬陀利香释驎虎，
+幡幢冒雪争迎取。春光主，芙蓉堂窄堆花乳，
+手提金桴打金鼓。天花娉婷下如雨，狻猊座上师子语。
 苦却乐，乐却苦，卢至黄金忽如土。</p>
 </blockquote>
 <p>空仓观测，甚至还有心情写诗。</p>
@@ -451,7 +510,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/17/reconstructionism-poet-meditate-on-btc/" data-id="cl35envyp01dc5g6y0xdrfp2r" class="article-share-link" data-share="baidu" data-title="诗盗·买币送禅">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/17/reconstructionism-poet-meditate-on-btc/" data-id="ckdw5bc3y01531sijgdhf5gy1" class="article-share-link" data-share="baidu" data-title="诗盗·买币送禅">分享到</a>
       
 
       
@@ -494,9 +553,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="故事">故事</h2>
-<p>四月底给 <a target="_blank" rel="noopener" href="https://github.com/EOSIO">EOSIO</a> / <a target="_blank" rel="noopener" href="https://github.com/EOSIO/eos">eos</a> 提了一个<a target="_blank" rel="noopener" href="https://github.com/EOSIO/eos/pull/7207">优化 MongoDB 插件性能的 PR</a>，被连续感谢好几个 <a target="_blank" rel="noopener" href="https://github.com/EOSIO/eos/releases/tag/v1.8.0">Release</a>。</p>
-<h2 id="分析">分析</h2>
+        <h2>故事</h2>
+<p>四月底给 <a href="https://github.com/EOSIO" target="_blank" rel="noopener">EOSIO</a> / <a href="https://github.com/EOSIO/eos" target="_blank" rel="noopener">eos</a> 提了一个<a href="https://github.com/EOSIO/eos/pull/7207" target="_blank" rel="noopener">优化 MongoDB 插件性能的 PR</a>，被连续感谢好几个 <a href="https://github.com/EOSIO/eos/releases/tag/v1.8.0" target="_blank" rel="noopener">Release</a>。</p>
+<h2>分析</h2>
 <p>原先的流程：fc::variant -&gt; JSON string -&gt; BSON，实现起来很简单，因为 JSON 是很常见的，fc::variant 和 BSON 都有到 JSON 的转化，所以实现代码很简单，一行两个函数。</p>
 <p>但数据大时，性能问题就暴露了，这个过程先把 fc::variant 对象序列化为 JSON 字符串，然后反序列化到 BSON 对象。两步都是 CPU 密集型操作，由于 nodeos 及其插件暂时对多核支持不好，导致单核跑爆。</p>
 <p>两个过程都要用递归实现，调用栈可能很深。调用函数可能有入栈出栈的消耗，有一种优化思路正是<strong>用 inline 减少函数的频繁调用</strong>。</p>
@@ -506,7 +565,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/16/umutech-optimization-thinking-3-remove-unnecessary-steps/" data-id="cl35envyn01d05g6yb2ia9xa8" class="article-share-link" data-share="baidu" data-title="优化思维【3】消除没必要步骤">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/16/umutech-optimization-thinking-3-remove-unnecessary-steps/" data-id="ckdw5bc3u014t1sij1lamd603" class="article-share-link" data-share="baidu" data-title="优化思维【3】消除没必要步骤">分享到</a>
       
 
       
@@ -549,27 +608,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="选型">选型</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/mapbox">mapbox</a> / <a target="_blank" rel="noopener" href="https://github.com/mapbox/node-sqlite3">sqlite3</a>: Asynchronous, non-blocking SQLite3 bindings for Node.js</p>
+        <h2>选型</h2>
+<p><a href="https://github.com/mapbox" target="_blank" rel="noopener">mapbox</a> / <a href="https://github.com/mapbox/node-sqlite3" target="_blank" rel="noopener">sqlite3</a>: Asynchronous, non-blocking SQLite3 bindings for Node.js</p>
 <p>安装：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add sqlite3</span><br></pre></td></tr></table></figure>
-<h2 id="常见操作">常见操作</h2>
-<h3 id="1-创建数据库">1. 创建数据库</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> sqlite = <span class="built_in">require</span>(<span class="string">&#x27;sqlite3&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dbPath = path.join(__dirname, <span class="string">&#x27;test.db&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> sqlite.Database(dbPath)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sqls = [<span class="string">`CREATE TABLE test(</span></span><br><span class="line"><span class="string">  id CHAR(64) NOT NULL PRIMARY KEY CHECK(LENGTH(id) == 64),</span></span><br><span class="line"><span class="string">  timeStamp INTEGER NOT NULL,</span></span><br><span class="line"><span class="string">  state INTEGER NOT NULL DEFAULT 0)`</span></span><br><span class="line">  , <span class="string">&#x27;CREATE INDEX index_id ON txs(id)&#x27;</span></span><br><span class="line">  , <span class="string">&#x27;CREATE INDEX index_timeStamp ON txs(timeStamp)&#x27;</span></span><br><span class="line">  , <span class="string">&#x27;CREATE INDEX index_state ON txs(state)&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">db.serialize(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> sql <span class="keyword">of</span> sqls) &#123;</span><br><span class="line">    db.run(sql, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;SQL executed.&#x27;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
-<h3 id="2-插入数据">2. 插入数据</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> items = [</span><br><span class="line">  &#123; <span class="attr">hash</span>: <span class="string">&#x27;D141925E39814FB5256615A1A94EC82B7043D983F68423D8C149A2AE360B623C&#x27;</span></span><br><span class="line">    , <span class="attr">ts</span>: <span class="number">1563273661316</span>, <span class="attr">state</span>: <span class="number">0</span> &#125;</span><br><span class="line">  , &#123; <span class="attr">hash</span>: <span class="string">&#x27;2E9F26F5D0A73AE5DAFC8A1C22264725972AA997A22522A906D8CD7E225096ED&#x27;</span></span><br><span class="line">    , <span class="attr">ts</span>: <span class="number">1563273661317</span>, <span class="attr">state</span>: <span class="number">1</span> &#125;</span><br><span class="line">  , &#123; <span class="attr">hash</span>: <span class="string">&#x27;0FF5F5F5E96664939D07D94975342D71F824747EFECE1D24FDDBB3B29DD91DCB&#x27;</span></span><br><span class="line">    , <span class="attr">ts</span>: <span class="number">1563273661318</span>, <span class="attr">state</span>: <span class="number">0</span> &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">db.serialize(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> stmt = db.prepare(<span class="string">&quot;INSERT INTO test VALUES (?, ?, ?)&quot;</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> items) &#123;</span><br><span class="line">    stmt.run(item.hash, item.ts, item.state, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="built_in">console</span>.error(err)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;INSERT&#x27;</span>, item.hash)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  stmt.finalize()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="3-查询">3. 查询</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.serialize(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  db.each(<span class="string">&quot;SELECT * FROM test WHERE state=0&quot;</span>, <span class="function">(<span class="params">err, row</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">&#x27;SELECT state=0 error:&#x27;</span>, err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// do something here</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="function">(<span class="params">err, count</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// do something here</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="4-更新">4. 更新</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.run(<span class="string">&quot;UPDATE test SET state=1 WHERE state=0&quot;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">&#x27;UPDATE txs error:&#x27;</span>, err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;UPDATE state to 1&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="参考">参考</h2>
-<p><a target="_blank" rel="noopener" href="http://www.sqlitetutorial.net/sqlite-nodejs/">http://www.sqlitetutorial.net/sqlite-nodejs/</a></p>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add sqlite3</span><br></pre></td></tr></table></figure></p>
+<h2>常见操作</h2>
+<h3>1. 创建数据库</h3>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> sqlite = <span class="built_in">require</span>(<span class="string">'sqlite3'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dbPath = path.join(__dirname, <span class="string">'test.db'</span>)</span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> sqlite.Database(dbPath)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sqls = [<span class="string">`CREATE TABLE test(</span></span><br><span class="line"><span class="string">  id CHAR(64) NOT NULL PRIMARY KEY CHECK(LENGTH(id) == 64),</span></span><br><span class="line"><span class="string">  timeStamp INTEGER NOT NULL,</span></span><br><span class="line"><span class="string">  state INTEGER NOT NULL DEFAULT 0)`</span></span><br><span class="line">  , <span class="string">'CREATE INDEX index_id ON txs(id)'</span></span><br><span class="line">  , <span class="string">'CREATE INDEX index_timeStamp ON txs(timeStamp)'</span></span><br><span class="line">  , <span class="string">'CREATE INDEX index_state ON txs(state)'</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">db.serialize(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> sql <span class="keyword">of</span> sqls) &#123;</span><br><span class="line">    db.run(sql, (err) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'SQL executed.'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure></p>
+<h3>2. 插入数据</h3>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> items = [</span><br><span class="line">  &#123; <span class="attr">hash</span>: <span class="string">'D141925E39814FB5256615A1A94EC82B7043D983F68423D8C149A2AE360B623C'</span></span><br><span class="line">    , <span class="attr">ts</span>: <span class="number">1563273661316</span>, <span class="attr">state</span>: <span class="number">0</span> &#125;</span><br><span class="line">  , &#123; <span class="attr">hash</span>: <span class="string">'2E9F26F5D0A73AE5DAFC8A1C22264725972AA997A22522A906D8CD7E225096ED'</span></span><br><span class="line">    , <span class="attr">ts</span>: <span class="number">1563273661317</span>, <span class="attr">state</span>: <span class="number">1</span> &#125;</span><br><span class="line">  , &#123; <span class="attr">hash</span>: <span class="string">'0FF5F5F5E96664939D07D94975342D71F824747EFECE1D24FDDBB3B29DD91DCB'</span></span><br><span class="line">    , <span class="attr">ts</span>: <span class="number">1563273661318</span>, <span class="attr">state</span>: <span class="number">0</span> &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">db.serialize(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> stmt = db.prepare(<span class="string">"INSERT INTO test VALUES (?, ?, ?)"</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> items) &#123;</span><br><span class="line">    stmt.run(item.hash, item.ts, item.state, (err) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="built_in">console</span>.error(err)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'INSERT'</span>, item.hash)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  stmt.finalize()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3>3. 查询</h3>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.serialize(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  db.each(<span class="string">"SELECT * FROM test WHERE state=0"</span>, (err, row) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">'SELECT state=0 error:'</span>, err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// do something here</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, (err, count) =&gt; &#123;</span><br><span class="line">    <span class="comment">// do something here</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3>4. 更新</h3>
+<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.run(<span class="string">"UPDATE test SET state=1 WHERE state=0"</span>, (err) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">'UPDATE txs error:'</span>, err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'UPDATE state to 1'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></p>
+<h2>参考</h2>
+<p><a href="http://www.sqlitetutorial.net/sqlite-nodejs/" target="_blank" rel="noopener">http://www.sqlitetutorial.net/sqlite-nodejs/</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/16/umutech-sqlite-nodejs/" data-id="cl35envyo01d95g6y1t3t0mxo" class="article-share-link" data-share="baidu" data-title="SQLite Node.js">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/16/umutech-sqlite-nodejs/" data-id="ckdw5bc3t014p1sij4uas7aua" class="article-share-link" data-share="baidu" data-title="SQLite Node.js">分享到</a>
       
 
       
@@ -612,31 +671,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安装">安装</h2>
-<p>比较多的文章推荐用 npm 安装，但 <a target="_blank" rel="noopener" href="https://blog.umu618.com/">UMU</a> 更推荐 yarn。</p>
-<p><strong>理由</strong>：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a> 脑残粉跟随 <a target="_blank" rel="noopener" href="https://github.com/Microsoft">Microsoft</a>/<a target="_blank" rel="noopener" href="https://github.com/Microsoft/vscode">vscode</a> 使用 yarn。</p>
-<p>参考 <a target="_blank" rel="noopener" href="https://yarnpkg.com/en/docs/install#debian-stable">yarn 安装</a>，其中 Ubuntu 下命令为：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | sudo tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line"></span><br><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install --no-install-recommends yarn</span><br></pre></td></tr></table></figure>
+        <h2>安装</h2>
+<p>比较多的文章推荐用 npm 安装，但 <a href="https://blog.umu618.com/" target="_blank" rel="noopener">UMU</a> 更推荐 yarn。</p>
+<p><strong>理由</strong>：<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a> 脑残粉跟随 <a href="https://github.com/Microsoft" target="_blank" rel="noopener">Microsoft</a>/<a href="https://github.com/Microsoft/vscode" target="_blank" rel="noopener">vscode</a> 使用 yarn。</p>
+<p>参考 <a href="https://yarnpkg.com/en/docs/install#debian-stable" target="_blank" rel="noopener">yarn 安装</a>，其中 Ubuntu 下命令为：</p>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb https://dl.yarnpkg.com/debian/ stable main"</span> | sudo tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line"></span><br><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install --no-install-recommends yarn</span><br></pre></td></tr></table></figure></p>
 <p>使用 yarn 安装 pm2：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add pm2</span><br></pre></td></tr></table></figure>
-<h2 id="运行">运行</h2>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add pm2</span><br></pre></td></tr></table></figure></p>
+<h2>运行</h2>
 <p>不熟悉 yarn 的话，装完一头雾水，装到哪了？用以下命令显示：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global bin</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global bin</span><br></pre></td></tr></table></figure></p>
 <p>结果参考：</p>
 <ul>
 <li>macOS：<code>/usr/local/bin</code></li>
 <li>Ubuntu：<code>/home/ubuntu/.yarn/bin</code></li>
 </ul>
 <p>启动脚本的命令为：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`yarn global bin`/pm2 start my-program.js</span><br></pre></td></tr></table></figure>
-<h2 id="安全建议">安全建议</h2>
+<p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`yarn global bin`/pm2 start my-program.js</span><br></pre></td></tr></table></figure></p>
+<h2>安全建议</h2>
 <p><strong>root 身份能不用则不用。</strong></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="//blog.umu618.com/2019/07/16/umutech-pm2-ops/" data-id="cl35envyn01d35g6y073nchf6" class="article-share-link" data-share="baidu" data-title="pm2 运维经验">分享到</a>
+        <a data-url="//blog.umu618.com/2019/07/16/umutech-pm2-ops/" data-id="ckdw5bc3s014m1sij5szyhrw2" class="article-share-link" data-share="baidu" data-title="pm2 运维经验">分享到</a>
       
 
       
@@ -645,127 +704,6 @@
 
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ops/" rel="tag">ops</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-subhuti" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/08/subhuti/" class="article-date">
-  <time datetime="2019-07-08T10:50:16.000Z" itemprop="datePublished">2019-07-08 18:50:16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/">宇督观</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/08/subhuti/">菩提祖稣</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="低调的菩提祖师">低调的菩提祖师</h2>
-<p>题目，是“菩提祖师是稣的偶像”的缩写。</p>
-<p>菩提祖师应该是西游记里最低调的人。</p>
-<ul>
-<li>
-<p>精通三教，牛逼轰轰，却只在深山隐匿授徒。稣想起“道隐”这个称号……“惯看满城烟雨，回首不入烽云”</p>
-</li>
-<li>
-<p>警告孙悟空出师门后不能提起他，否则就让孙悟空万劫不复。</p>
-</li>
-</ul>
-<blockquote>
-<p>你这去，定生不良。凭你怎么惹祸行凶，却不许说是我的徒弟。你说出半个字来，我就知之，把你这猢狲剥皮锉骨，将神魂贬在九幽之处，教你万劫不得翻身！</p>
-</blockquote>
-<ul>
-<li>行事作风很低调。</li>
-</ul>
-<blockquote>
-<p>这个工夫，可好在人前卖弄？假如你见别人有，不要求他？别人见你有，必然求你。你若畏祸却要传他，若不传他，必然加害，你之性命又不可保。</p>
-</blockquote>
-<ul>
-<li>自从孙悟空走出斜月三星洞，再没有出现过。</li>
-</ul>
-<h2 id="低调做人，高调做事">低调做人，高调做事</h2>
-<p>曾经的理解：很矛盾，做事也是做人的一部分，怎么能又低调又高调？难道又是量子邪说的叠加态？</p>
-<p>经历过一些事后，稣发现一个关键词：嫉妒。</p>
-<ul>
-<li>
-<p>做事高调，就是把事情做好，做出成绩，让大家认同，甚至可能引起崇拜。</p>
-</li>
-<li>
-<p>做人低调说的是——不要引起嫉妒！</p>
-</li>
-</ul>
-<p>虽然还是挺难的，但分得清，就有可能做到，其中最容易学的一种方式就是：学菩提祖师那样降低自己的存在感。</p>
-<h2 id="曾经的误解，如今的教训">曾经的误解，如今的教训</h2>
-<h3 id="1-有才华本身就可能招嫉妒">1. 有才华本身就可能招嫉妒</h3>
-<p>稣很喜欢会吹牛逼的有才人，比如听当兵的讲自己当年各种传奇故事，这类事可以重复听三遍以上。</p>
-<p>有次和一群朋友认识一名新朋友，聊完，稣觉得此人有才华又有意思，值得交往，但其他人全部反对……理由是：讲话太高调。Hmm……</p>
-<p>结论：有才还得有相应的低调隐藏，不然会有一大部分人不兼容。</p>
-<h3 id="2-生活不讲推理，有时候甚至不讲理">2. 生活不讲推理，有时候甚至不讲理</h3>
-<p>举个例子：稣买个东西，有钱人一看就知道是便宜货，所以稣很自觉地说这是炫穷，但偏偏有人以为稣在炫富……</p>
-<p>其实推理一下就明白，稣确实是个穷人，一年买买买的次数少之又少，偶尔买点东西，也确实是些普通的小东西。然而稣又错了，喜欢推理属于少数人的爱好，对一件事的评价，大部分人都是靠感性对待，能稍微推理一下都是很难得的。</p>
-<p>结论：更有钱可以提高认知水平，从而认识到自己曾经的错误。</p>
-<h3 id="3-众口铄金">3. 众口铄金</h3>
-<p>这可能是小学学的最酷的一个成语！不举例了……</p>
-<p>结论1：众口铄金的一个条件就是认知水平低的人占大部分，他们喜欢按照自己的认知描画事件。</p>
-<p>结论2：认知水平高的人可能愿意和低的人交往，但认知水平低的普遍不愿意和高的交往，甚至自发诋毁认知水平高的人。</p>
-<h3 id="4-道德攻击">4. 道德攻击</h3>
-<p>占据道德制高点，可能是很爽的事情吧，远比真相令人着迷。</p>
-<p>大部分热点事件，一定有人占据道德高点写文章批评其它观点，举世皆昏我独醒。</p>
-<p>很多事即使是侦探、警察都无法还原事实的全部，但侦探不能错过任何一种可能性，将各种可能列出来，然后分析其可能性多少。要能依循蛛丝马迹分析可能性，但不要轻易得出任何无根据的结论。</p>
-<p>结论：人民群众有无耻的权力，但要偷偷地。Hmm……好像不对劲。这么说吧——尿急，实在找不到厕所，找个隐蔽的地方，肯定比在大马路边随地撒尿好！</p>
-<h2 id="交友观">交友观</h2>
-<p>利益共同体的关系远比交情靠谱。交情是一种感情，是感情就可能受到嫉妒的影响，光看这点，朋友最好的人选有两类：</p>
-<ul>
-<li>
-<p>不容易嫉妒的人；</p>
-</li>
-<li>
-<p>可能小嫉妒，但不会因为嫉妒而害人的人。</p>
-</li>
-</ul>
-<p>能力问题，认知水平差太多的人是不太可能聊到一起的，甚至容易在关键时刻掉链子。举个例子：卧底在执行任务，跟一群人混，突然冒出一个大伯认识卧底，大伯认为卧底在当坏人，于是苦口婆心劝他从善，然后卧底被打死。</p>
-<ul>
-<li>
-<p>认知水平差不多；</p>
-</li>
-<li>
-<p>成长速度也差不多。</p>
-</li>
-</ul>
-<p>有些人在一起很久也无法互相理解，有些人一见面就相见恨晚。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="//blog.umu618.com/2019/07/08/subhuti/" data-id="cl35envyo01d65g6ydsac1mck" class="article-share-link" data-share="baidu" data-title="菩提祖稣">分享到</a>
-      
-
-      
-        <a target="_blank" rel="noopener" href="//blog.umu618.com/2019/07/08/subhuti/#SOHUCS" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" rel="tag">心理邪稣</a></li></ul>
 
     </footer>
   </div>
@@ -787,7 +725,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/UMUTech/">UMUTech</a><span class="category-list-count">147</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/U%E5%A2%A8/">U墨</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%93%E9%86%92/">吓醒</a><span class="category-list-count">77</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/">宇督观</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a><span class="category-list-count">319</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/UMUTech/">UMUTech</a><span class="category-list-count">147</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/U%E5%A2%A8/">U墨</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%93%E9%86%92/">吓醒</a><span class="category-list-count">77</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/">宇督观</a><span class="category-list-count">47</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a><span class="category-list-count">320</span></li></ul>
     </div>
   </div>
 
@@ -796,7 +734,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atl/" rel="tag">atl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/" rel="tag">boost</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ceph/" rel="tag">ceph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpp/" rel="tag">cpp</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dev/" rel="tag">dev</a><span class="tag-list-count">57</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dotnet/" rel="tag">dotnet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/embedded/" rel="tag">embedded</a><span class="tag-list-count">41</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lib/" rel="tag">lib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/" rel="tag">macos</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openwrt/" rel="tag">openwrt</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ops/" rel="tag">ops</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/" rel="tag">optimization</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspbian/" rel="tag">raspbian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming-media/" rel="tag">streaming-media</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a><span class="tag-list-count">161</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E9%B9%B0%E5%9C%A3/" rel="tag">七鹰圣</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%94%E8%A8%80/" rel="tag">五言</a><span class="tag-list-count">80</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%9C%E5%93%81/" rel="tag">作品</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%9A%E9%A2%98/" rel="tag">做题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%96%B7/" rel="tag">喷</a><span class="tag-list-count">128</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%A3%E5%B0%8F%E5%BC%80/" rel="tag">圣小开</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%93%E8%A8%80/" rel="tag">寓言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E8%81%94/" rel="tag">对联</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" rel="tag">心理邪稣</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%AA%E6%82%9F/" rel="tag">怪悟</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%93%E5%98%B4%E7%82%AE/" rel="tag">打嘴炮</a><span class="tag-list-count">47</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%A8%E8%B8%A2/" rel="tag">挨踢</a><span class="tag-list-count">108</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E8%B5%B0/" rel="tag">暴走</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%8C%E8%AF%84/" rel="tag">歌评</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%BB%E7%A5%9E/" rel="tag">死神</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A5%E5%B7%B4%E5%A8%83/" rel="tag">泥巴娃</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%97%E8%84%91/" rel="tag">洗脑</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%80%B6%E4%B9%8E%E7%9F%A5%E7%A8%A3/" rel="tag">耶乎知稣</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%80%BC/" rel="tag">装逼</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%8D/" rel="tag">词</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E7%A0%94/" rel="tag">调研</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8F%E5%AD%90%E9%82%AA%E7%A8%A3/" rel="tag">量子邪稣</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%BD%E5%8D%97%E8%AF%AD/" rel="tag">闽南语</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9C%B9%E9%9B%B3/" rel="tag">霹雳</a><span class="tag-list-count">60</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%93%BE/" rel="tag">鲸神链</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" rel="tag">鲸神魂裂</a><span class="tag-list-count">46</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atl/" rel="tag">atl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/" rel="tag">boost</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ceph/" rel="tag">ceph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpp/" rel="tag">cpp</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dev/" rel="tag">dev</a><span class="tag-list-count">57</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dotnet/" rel="tag">dotnet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/embedded/" rel="tag">embedded</a><span class="tag-list-count">41</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lib/" rel="tag">lib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macOS/" rel="tag">macOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/" rel="tag">macos</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openwrt/" rel="tag">openwrt</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ops/" rel="tag">ops</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/" rel="tag">optimization</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspbian/" rel="tag">raspbian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming-media/" rel="tag">streaming-media</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a><span class="tag-list-count">162</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E9%B9%B0%E5%9C%A3/" rel="tag">七鹰圣</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%94%E8%A8%80/" rel="tag">五言</a><span class="tag-list-count">80</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%9C%E5%93%81/" rel="tag">作品</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%9A%E9%A2%98/" rel="tag">做题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%96%B7/" rel="tag">喷</a><span class="tag-list-count">128</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%A3%E5%B0%8F%E5%BC%80/" rel="tag">圣小开</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%93%E8%A8%80/" rel="tag">寓言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E8%81%94/" rel="tag">对联</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" rel="tag">心理邪稣</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%AA%E6%82%9F/" rel="tag">怪悟</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%93%E5%98%B4%E7%82%AE/" rel="tag">打嘴炮</a><span class="tag-list-count">47</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%A8%E8%B8%A2/" rel="tag">挨踢</a><span class="tag-list-count">109</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E8%B5%B0/" rel="tag">暴走</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%8C%E8%AF%84/" rel="tag">歌评</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%BB%E7%A5%9E/" rel="tag">死神</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A5%E5%B7%B4%E5%A8%83/" rel="tag">泥巴娃</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%97%E8%84%91/" rel="tag">洗脑</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%80%B6%E4%B9%8E%E7%9F%A5%E7%A8%A3/" rel="tag">耶乎知稣</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A3%85%E9%80%BC/" rel="tag">装逼</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%8D/" rel="tag">词</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E7%A0%94/" rel="tag">调研</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8F%E5%AD%90%E9%82%AA%E7%A8%A3/" rel="tag">量子邪稣</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%BD%E5%8D%97%E8%AF%AD/" rel="tag">闽南语</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9C%B9%E9%9B%B3/" rel="tag">霹雳</a><span class="tag-list-count">60</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%93%BE/" rel="tag">鲸神链</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" rel="tag">鲸神魂裂</a><span class="tag-list-count">46</span></li></ul>
     </div>
   </div>
 
@@ -814,7 +752,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">十月 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">九月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">八月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">四月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">三月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">二月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">十二月 2012</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">五月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">四月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/02/">二月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/08/">八月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">六月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/03/">三月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">十月 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">九月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">八月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">四月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">三月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">二月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">十二月 2012</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">五月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">四月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/02/">二月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/08/">八月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">六月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/03/">三月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -824,6 +762,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/08/27/reconstructionism-poet-from-easy-to-difficult/">诗盗·闲卷齐吓传</a>
+          </li>
         
           <li>
             <a href="/2022/07/23/reconstructionism-poet-retail-investor/">诗盗·散居</a>
@@ -839,10 +781,6 @@
         
           <li>
             <a href="/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/">用华为擎云 L420 体验国产操作系统（UOS 和银河麒麟）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/15/umutech-smart-clock/">智能时钟</a>
           </li>
         
       </ul>
