@@ -8712,6 +8712,66 @@ AI 做，效率堪可。
   </entry>
   
   <entry>
+    <title>AAC 编码之 ADTS 头相关分析</title>
+    <link href="//blog.umu618.com/2017/08/21/umutech-aac-adts/"/>
+    <id>//blog.umu618.com/2017/08/21/umutech-aac-adts/</id>
+    <published>2017-08-21T07:15:00.000Z</published>
+    <updated>2022-09-26T14:57:14.966Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前在《<a href="/2017/07/01/umutech-opus-debugging/">Opus 编解码遇到的怪事</a>》说过一个因为编码器不同而导致的怪事的解决过程，最近又出现一例类似情况了。</p><p>UMU 的任务是把从麦克风采集到的音频数据，直接编码成 AAC，然后用 live555 流化为 RTSP 协议，做服务端。其中涉及到一个 ADTS 头部的问题，理论上有没有 ADTS 都是可以的，各有可行的解决方案。但在阅读其他同事代码的时候，惊讶地发现，他特地把 ADTS 头给去掉了。而 UMU 调试时，发现 AVPacket 的数据里根本没有 ADTS 头，何来去掉之说？</p><p>有了上次的经验，UMU 很快推测，我们俩用的编码器可能不同。后来验证，确实如此：ffmpeg 3.1 有两个 AAC 编码器，一个内置的，名字是 aac，另一个第三方的 libfdk_aac，商业使用 non-free。（以前还有其它两个第三方的，因为质量不行，已经被移除，ffmpeg 官网上有说明）默认的编译方式只有前者，后者需要使用 non-free 参数编译，基于后期的版权问题考虑，UMU 使用的是内置的 aac。但为了调查这个问题，UMU 特地编译并使用了 libfdk_aac，发现确实有不同。</p><ol><li><p>aac 编码出来的 AVPacket 是没有 ADTS 头的； libfdk_aac 则有。</p></li><li><p>aac 不需要设置 profile，因为它默认使用 LC，而 libfdk_aac 支持很多中 profile，所以需要设置一个合适的。</p></li><li><p>libfdk_aac 设置合适的 profile 字段，编码出来的 AVPacket 有 ADTS 头，VLC 可以播放，特地去掉 ADTS 头，VLC 也可以播放。</p></li><li><p>如果不设置 profile，默认是 FF_PROFILE_UNKNOWN，这时有 ADTS 头，但由于这个 ADTS 头里的 adts_buffer_fullness 不对，所以 VLC 无法播放，去掉反而可以。</p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;之前在《&lt;a href=&quot;/2017/07/01/umutech-opus-debugging/&quot;&gt;Opus 编解码遇到的怪事&lt;/a&gt;》说过一个因为编码器不同而导致的怪事的解决过程，最近又出现一例类似情况了。&lt;/p&gt;
+&lt;p&gt;UMU 的任务是把从麦克风采集到的音频数据，直接编</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="debug" scheme="//blog.umu618.com/tags/debug/"/>
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="streaming-media" scheme="//blog.umu618.com/tags/streaming-media/"/>
+    
+    <category term="ffmpeg" scheme="//blog.umu618.com/tags/ffmpeg/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决 ffmpeg 与 live555 宏定义冲突</title>
+    <link href="//blog.umu618.com/2017/08/18/umutech-resolve-macro-definition-conflicts-between-ffmpeg-and-live555/"/>
+    <id>//blog.umu618.com/2017/08/18/umutech-resolve-macro-definition-conflicts-between-ffmpeg-and-live555/</id>
+    <published>2017-08-18T03:03:06.000Z</published>
+    <updated>2022-09-26T15:09:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个工程同时使用了 ffmpeg 和 live555，结果一不注意就混乱了……原因如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ffmpeg 的 error.h 里 include 了 errno.h，有以下定义：</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EAGAIN          11</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 而 live555 的 NetCommon.h 里有以下定义：</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> EAGAIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> EAGAIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// WSAEWOULDBLOCK == 10035</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EAGAIN WSAEWOULDBLOCK</span></span><br></pre></td></tr></table></figure><p>很明显，live555 这么做，违背了面向对象的基本特征——封装，这种平台相关的抽象应该封装在源文件里面，而不是放在头文件。挪个位置即可。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;一个工程同时使用了 ffmpeg 和 live555，结果一不注意就混乱了……原因如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/s</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="streaming-media" scheme="//blog.umu618.com/tags/streaming-media/"/>
+    
+    <category term="ffmpeg" scheme="//blog.umu618.com/tags/ffmpeg/"/>
+    
+  </entry>
+  
+  <entry>
     <title>跟 UMU 一起玩 OpenWRT（入门篇14）：PPTP 穿透</title>
     <link href="//blog.umu618.com/2017/08/15/umutech-openwrt-primer-14-pptp-passthrough/"/>
     <id>//blog.umu618.com/2017/08/15/umutech-openwrt-primer-14-pptp-passthrough/</id>
