@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-10-30T17:36:21.371Z</updated>
+  <updated>2022-12-04T10:16:16.479Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>__BASE_FILE__ 和 __STEM__</title>
+    <link href="//blog.umu618.com/2022/12/04/umutech-stem/"/>
+    <id>//blog.umu618.com/2022/12/04/umutech-stem/</id>
+    <published>2022-12-04T09:38:05.000Z</published>
+    <updated>2022-12-04T10:16:16.479Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>为了更好追踪产品 bug，程序员很可能在日志里打印代码文件名和行号。例如：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">clog</span> &lt;&lt; <span class="string">&quot;(&quot;</span> __FILE__ <span class="string">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="string">&quot;): Failed to initialize!\n&quot;</span>;</span><br></pre></td></tr></table></figure><p>以上代码有两个问题：</p><ol><li><p>打印出代码文件的全路径，可能太长影响阅读，而且也没有必要。</p></li><li><p>代码文件的全路径暴露在二进制文件（可执行程序）里，有一定安全风险，也更容易被逆向。</p></li></ol><h2 id="分析">分析</h2><p>第一个问题很容易，打印文件 base name 即可。代码可能如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">consteval</span> <span class="built_in">std</span>::string_view <span class="title">GetFileBaseName</span><span class="params">(<span class="built_in">std</span>::string_view path)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.substr(path.rfind(<span class="string">&#x27;\\&#x27;</span>) + <span class="number">1</span>); <span class="comment">// for Windows path only</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(&#123;__FILE__, <span class="keyword">sizeof</span>(__FILE__) - <span class="number">1</span>&#125;) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(__FILE__) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure><p>但是，第二个问题并没有解决，<code>__FILE__</code> 依然存在于二进制文件里，用任意十六进制编辑器都能很轻易地找到“代码文件的全路径”。</p><h2 id="解决">解决</h2><p>改用 <code>__BASE_FILE__</code> 吧！新问题是：msvc 不支持。那就自己定义一个：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/D__BASE_FILE__=<span class="string">&quot;\&quot;%(Filename)%(Extension)\&quot;&quot;</span></span><br></pre></td></tr></table></figure><p>接着又想：后缀名有必要吗？如果保持优良习惯，从不在头文件里打日志，那确实没必要。于是再定义一个“文件主干名”：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/D__STEM__=<span class="string">&quot;\&quot;%(Filename)\&quot;&quot;</span></span><br></pre></td></tr></table></figure><h2 id="更多">更多</h2><p><code>std::source_location</code> 依赖 <code>__FILE__</code> 或 <code>__builtin_FILE()</code>，所以有一样的安全问题。</p>]]></content>
+    
+    
+    <summary type="html">防逆向</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="cpp" scheme="//blog.umu618.com/tags/cpp/"/>
+    
+    <category term="optimization" scheme="//blog.umu618.com/tags/optimization/"/>
+    
+    <category term="security" scheme="//blog.umu618.com/tags/security/"/>
+    
+  </entry>
   
   <entry>
     <title>八哥之神后传【6】</title>
