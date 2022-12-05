@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-12-04T10:16:16.479Z</updated>
+  <updated>2022-12-05T14:36:07.402Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -17,13 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CppWinRT 经验【1】链接 winmm.dll 而不是 api-ms-win-mm-time-l1-1-0.dll</title>
+    <link href="//blog.umu618.com/2022/12/05/cppwinrt-1-link-to-winmm-instead-of-api-ms-win-mm-time-l1-1-0/"/>
+    <id>//blog.umu618.com/2022/12/05/cppwinrt-1-link-to-winmm-instead-of-api-ms-win-mm-time-l1-1-0/</id>
+    <published>2022-12-05T13:52:25.000Z</published>
+    <updated>2022-12-05T14:36:07.402Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前提">前提</h2><p>稣使用 ATL/WTL 开发 Windows 程序多年，慢慢地，它们就不太时髦，尤其是命名风格和 STL 不同，显得十分不现代。比如 <a href="/2020/05/31/umutech-ccomptr-and-ccomqiptr/">ATL::CComPtr</a>，和 <code>std::unique_ptr</code> 确实风格迥异。</p><p>微软还搞了一套 WRL，例如：<code>Microsoft::WRL::ComPtr</code>，去掉了一个 C 是比 ATL 风格略好一点，但依然是不现代的（不像 STL 的）。</p><p>微软说：CppWinRT 才是王道，已经搞成现代 C++ 风格，例如：<code>winrt::com_ptr</code>。你们呀，用就行了。</p><p>好的！稣试试。不管用不用，先把它弄进来。这时候 <code>packages.config</code> 长得像下面：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">id</span>=<span class="string">&quot;Microsoft.Windows.CppWinRT&quot;</span> <span class="attr">version</span>=<span class="string">&quot;2.0.221121.5&quot;</span> <span class="attr">targetFramework</span>=<span class="string">&quot;native&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">packages</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="问题">问题</h2><p>原本设计支持 Windows 7 的程序突然无法在 Windows 7 正常运行了！提示找不到 <code>api-ms-win-mm-time-l1-1-0.dll</code>。</p><h2 id="分析">分析</h2><p>找出原本可以在 Windows 7 正常运行的旧版本程序，发现其导入表里链接的是 <code>winmm.dll</code>，而不能正常运行的新版本则是链接并不存在的 <code>api-ms-win-mm-time-l1-1-0.dll</code>。</p><p>在 Windows 10 上，<code>api-ms-win-mm-time-l1-1-0.dll</code> 会被映射到 <code>kernel32.dll</code>，但 Windows 7 没有这个映射，所以报错。</p><p>那么只有让程序链接 <code>winmm.lib</code> 就行了……可是，一直就是链接它的呀！</p><p>尝试把 <code>#pragma comment(lib, &quot;winmm.lib&quot;)</code> 去掉，居然不报错！</p><p>稣开始回忆最开始调用 time API 时，不加 <code>winmm.lib</code> 是链接不过的。很明显加了 CppWinRT 后，它的 lib 重载了 time API 的链接。</p><h2 id="解决">解决</h2><p>CppWinRT 很好！稣用 <a href="https://github.com/microsoft/wil">WIL</a>……例如：<code>wil::com_ptr</code>。</p><p>割爱吧！稣在 <code>Manage NuGet Packages...</code> 里卸载了 CppWinRT。</p>]]></content>
+    
+    
+    <summary type="html">CppWinRT 排坑记【1】</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="windows" scheme="//blog.umu618.com/tags/windows/"/>
+    
+    <category term="cpp" scheme="//blog.umu618.com/tags/cpp/"/>
+    
+    <category term="cppwinrt" scheme="//blog.umu618.com/tags/cppwinrt/"/>
+    
+  </entry>
+  
+  <entry>
     <title>__BASE_FILE__ 和 __STEM__</title>
     <link href="//blog.umu618.com/2022/12/04/umutech-stem/"/>
     <id>//blog.umu618.com/2022/12/04/umutech-stem/</id>
     <published>2022-12-04T09:38:05.000Z</published>
-    <updated>2022-12-04T10:16:16.479Z</updated>
+    <updated>2022-12-05T13:51:54.089Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>为了更好追踪产品 bug，程序员很可能在日志里打印代码文件名和行号。例如：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">clog</span> &lt;&lt; <span class="string">&quot;(&quot;</span> __FILE__ <span class="string">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="string">&quot;): Failed to initialize!\n&quot;</span>;</span><br></pre></td></tr></table></figure><p>以上代码有两个问题：</p><ol><li><p>打印出代码文件的全路径，可能太长影响阅读，而且也没有必要。</p></li><li><p>代码文件的全路径暴露在二进制文件（可执行程序）里，有一定安全风险，也更容易被逆向。</p></li></ol><h2 id="分析">分析</h2><p>第一个问题很容易，打印文件 base name 即可。代码可能如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">consteval</span> <span class="built_in">std</span>::string_view <span class="title">GetFileBaseName</span><span class="params">(<span class="built_in">std</span>::string_view path)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.substr(path.rfind(<span class="string">&#x27;\\&#x27;</span>) + <span class="number">1</span>); <span class="comment">// for Windows path only</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(&#123;__FILE__, <span class="keyword">sizeof</span>(__FILE__) - <span class="number">1</span>&#125;) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(__FILE__) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure><p>但是，第二个问题并没有解决，<code>__FILE__</code> 依然存在于二进制文件里，用任意十六进制编辑器都能很轻易地找到“代码文件的全路径”。</p><h2 id="解决">解决</h2><p>改用 <code>__BASE_FILE__</code> 吧！新问题是：msvc 不支持。那就自己定义一个：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/D__BASE_FILE__=<span class="string">&quot;\&quot;%(Filename)%(Extension)\&quot;&quot;</span></span><br></pre></td></tr></table></figure><p>接着又想：后缀名有必要吗？如果保持优良习惯，从不在头文件里打日志，那确实没必要。于是再定义一个“文件主干名”：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/D__STEM__=<span class="string">&quot;\&quot;%(Filename)\&quot;&quot;</span></span><br></pre></td></tr></table></figure><h2 id="更多">更多</h2><p><code>std::source_location</code> 依赖 <code>__FILE__</code> 或 <code>__builtin_FILE()</code>，所以有一样的安全问题。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>为了更好追踪产品 bug，程序员很可能在日志里打印代码文件名和行号。例如：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">clog</span> &lt;&lt; <span class="string">&quot;(&quot;</span> __FILE__ <span class="string">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="string">&quot;): Failed to initialize!\n&quot;</span>;</span><br></pre></td></tr></table></figure><p>以上代码有两个问题：</p><ol><li><p>打印出代码文件的全路径，可能太长影响阅读，而且也没有必要。</p></li><li><p>代码文件的全路径暴露在二进制文件（可执行程序）里，有一定安全风险，也更容易被逆向。</p></li></ol><h2 id="分析">分析</h2><p>第一个问题很容易，打印文件 base name 即可。代码可能如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">consteval</span> <span class="built_in">std</span>::string_view <span class="title">GetFileBaseName</span><span class="params">(<span class="built_in">std</span>::string_view path)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.substr(path.rfind(<span class="string">&#x27;\\&#x27;</span>) + <span class="number">1</span>); <span class="comment">// for Windows path only</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(&#123;__FILE__, <span class="keyword">sizeof</span>(__FILE__) - <span class="number">1</span>&#125;) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(__FILE__) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure><p>但是，第二个问题并没有解决，<code>__FILE__</code> 依然存在于二进制文件里，用任意十六进制编辑器都能很轻易地找到“代码文件的全路径”。</p><h2 id="解决">解决</h2><p>方法一：去掉 <code>Use Full Paths (/FC)</code> 即可把 <code>__FILE__</code> 设置为只有文件名，没有全路径。</p><p><img src="/images/20221205-fc.png" alt="Use Full Paths"></p><p>方法二：改用 <code>__BASE_FILE__</code> 吧！新问题是：msvc 不支持。那就自己定义一个：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/D__BASE_FILE__=<span class="string">&quot;\&quot;%(Filename)%(Extension)\&quot;&quot;</span></span><br></pre></td></tr></table></figure><p>接着又想：后缀名有必要吗？如果保持优良习惯，从不在头文件里打日志，那确实没必要。于是再定义一个“文件主干名”：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/D__STEM__=<span class="string">&quot;\&quot;%(Filename)\&quot;&quot;</span></span><br></pre></td></tr></table></figure><h2 id="更多">更多</h2><p><code>std::source_location</code> 依赖 <code>__FILE__</code> 或 <code>__builtin_FILE()</code>，所以如果开了 <code>/FC</code>，会有一样的安全问题。</p>]]></content>
     
     
     <summary type="html">防逆向</summary>
@@ -34,6 +61,8 @@
     
     
     <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="windows" scheme="//blog.umu618.com/tags/windows/"/>
     
     <category term="cpp" scheme="//blog.umu618.com/tags/cpp/"/>
     
@@ -8250,6 +8279,41 @@ AI 做，效率堪可。
   </entry>
   
   <entry>
+    <title>学习 go 语言【8】strings.Builder vs bytes.Buffer</title>
+    <link href="//blog.umu618.com/2018/04/02/umutech-learn-go-8-strings-builder-vs-bytes-buffer/"/>
+    <id>//blog.umu618.com/2018/04/02/umutech-learn-go-8-strings-builder-vs-bytes-buffer/</id>
+    <published>2018-04-02T10:47:56.000Z</published>
+    <updated>2022-12-05T15:05:09.423Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="结论">结论</h2><ul><li>strings.Builder：省内存</li><li>bytes.Buffer：快</li></ul><h2 id="代码">代码</h2><p>性能测试程序如下：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> benchmark_test</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">&quot;bytes&quot;</span></span><br><span class="line"><span class="string">&quot;strings&quot;</span></span><br><span class="line"><span class="string">&quot;testing&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">ss = <span class="string">&quot;1234567890abcdefghijklmnopqrstuvwxyz&quot;</span></span><br><span class="line">bs = []<span class="keyword">byte</span>(ss)</span><br><span class="line">rn = <span class="string">&#x27;a&#x27;</span></span><br><span class="line">bt = <span class="keyword">byte</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBuilderWrite</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> builder strings.Builder</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">builder.Write(bs)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBuiderWriteByte</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> builder strings.Builder</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">builder.WriteByte(bt)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBuilderWriteRune</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> builder strings.Builder</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">builder.WriteRune(rn)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBuilderWriteString</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> builder strings.Builder</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">builder.WriteString(ss)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBufferWrite</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> buffer bytes.Buffer</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">buffer.Write(bs)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBufferWriteByte</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> buffer bytes.Buffer</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">buffer.WriteByte(bt)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBufferWriteRune</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> buffer bytes.Buffer</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">buffer.WriteRune(rn)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkBufferWriteString</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> buffer bytes.Buffer</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">buffer.WriteString(ss)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;结论&quot;&gt;结论&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;strings.Builder：省内存&lt;/li&gt;
+&lt;li&gt;bytes.Buffer：快&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;代码&quot;&gt;代码&lt;/h2&gt;
+&lt;p&gt;性能测试程序如下：&lt;/p&gt;
+&lt;figure class=&quot;high</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="optimization" scheme="//blog.umu618.com/tags/optimization/"/>
+    
+    <category term="go" scheme="//blog.umu618.com/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
     <title>诗盗·白云凰</title>
     <link href="//blog.umu618.com/2018/04/02/reconstructionism-poet-the-ghost-wife/"/>
     <id>//blog.umu618.com/2018/04/02/reconstructionism-poet-the-ghost-wife/</id>
@@ -8312,6 +8376,35 @@ AI 做，效率堪可。
   </entry>
   
   <entry>
+    <title>学习 go 语言【7】设置进程退出码</title>
+    <link href="//blog.umu618.com/2018/03/31/umutech-learn-go-7-set-exit-code-of-process/"/>
+    <id>//blog.umu618.com/2018/03/31/umutech-learn-go-7-set-exit-code-of-process/</id>
+    <published>2018-03-31T12:45:49.000Z</published>
+    <updated>2022-12-05T14:59:14.238Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="常规方案">常规方案</h2><p>直接用 os.Exit (exit_code)，但这个太暴力了，我们需要高雅一点的，于是找到了这个：<a href="https://stackoverflow.com/questions/24601516/correct-way-to-set-exit-code-of-process">https://stackoverflow.com/questions/24601516/correct-way-to-set-exit-code-of-process</a></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    code := <span class="number">0</span></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        os.Exit(code)</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;Another deferred func&quot;</span>)</span><br><span class="line">    &#125;()</span><br><span class="line">    fmt.Println(<span class="string">&quot;Hello, 世界&quot;</span>)</span><br><span class="line">    code = <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="问题">问题</h2><p>调用 panic 的时候就知道以上的方法存在不足！panic 之后会导致 main 退出，本来紧接着应该打印 Trace Log，然而 main 退出时调用了 os.Exit ()，然后没有然后了……</p><p>本来 panic 时，退出码应该是 2 的，结果由于以上装 X 代码的作用，退出码变成了 0！如果 panic 是自己主动调用的，那还可以改改，使用别的方式；如果是其它库函数的就难办了……</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;常规方案&quot;&gt;常规方案&lt;/h2&gt;
+&lt;p&gt;直接用 os.Exit (exit_code)，但这个太暴力了，我们需要高雅一点的，于是找到了这个：&lt;a href=&quot;https://stackoverflow.com/questions/24601516/correct-w</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="debug" scheme="//blog.umu618.com/tags/debug/"/>
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="go" scheme="//blog.umu618.com/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
     <title>求模版函数地址</title>
     <link href="//blog.umu618.com/2018/03/21/umutech-take-address-of-template-function/"/>
     <id>//blog.umu618.com/2018/03/21/umutech-take-address-of-template-function/</id>
@@ -8338,6 +8431,35 @@ AI 做，效率堪可。
     <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
     
     <category term="cpp" scheme="//blog.umu618.com/tags/cpp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习 go 语言【6】从 stdin 读取一行汉字</title>
+    <link href="//blog.umu618.com/2018/03/14/umutech-learn-go-6-read-line-from-stdin/"/>
+    <id>//blog.umu618.com/2018/03/14/umutech-learn-go-6-read-line-from-stdin/</id>
+    <published>2018-03-14T15:39:35.000Z</published>
+    <updated>2022-12-05T14:50:06.967Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>需要从 stdin 读取一行汉字！搜了几篇出来，居然都不支持输入中文……</p><h2 id="代码">代码</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ScanLine</span><span class="params">()</span> <span class="params">(line <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> buffer []<span class="keyword">rune</span></span><br><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line"><span class="keyword">var</span> c <span class="keyword">rune</span></span><br><span class="line">n, err := fmt.Scanf(<span class="string">&quot;%c&quot;</span>, &amp;c)</span><br><span class="line"><span class="keyword">if</span> <span class="literal">nil</span> != err || <span class="number">1</span> != n || <span class="string">&#x27;\r&#x27;</span> == c || <span class="string">&#x27;\n&#x27;</span> == c &#123;</span><br><span class="line"><span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line">buffer = <span class="built_in">append</span>(buffer, c)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">string</span>(buffer)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;需求&quot;&gt;需求&lt;/h2&gt;
+&lt;p&gt;需要从 stdin 读取一行汉字！搜了几篇出来，居然都不支持输入中文……&lt;/p&gt;
+&lt;h2 id=&quot;代码&quot;&gt;代码&lt;/h2&gt;
+&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutte</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="go" scheme="//blog.umu618.com/tags/go/"/>
     
   </entry>
   
@@ -10800,6 +10922,34 @@ friend with benefit&lt;/p&gt;
     <category term="七律" scheme="//blog.umu618.com/tags/%E4%B8%83%E5%BE%8B/"/>
     
     <category term="装逼" scheme="//blog.umu618.com/tags/%E8%A3%85%E9%80%BC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习 go 语言【5】HTTP Echo Server</title>
+    <link href="//blog.umu618.com/2015/10/16/umutech-learn-go-5-http-echo-server/"/>
+    <id>//blog.umu618.com/2015/10/16/umutech-learn-go-5-http-echo-server/</id>
+    <published>2015-10-16T07:19:11.000Z</published>
+    <updated>2022-12-05T14:48:00.243Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>做加速时经常需要用到 HTTP Echo Server 来测试加速有没有成功，如果成功了，是显示请求来自加速代理服务器。原来用 node.js 写了一个，代码如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var http &#x3D; require(&#39;http&#39;);</span><br><span class="line">http.createServer(</span><br><span class="line">    function (req, res) &#123;</span><br><span class="line">        res.writeHead(200, &#123;&#39;Content-Type&#39;: &#39;text&#x2F;plain&#39;&#125;);</span><br><span class="line">        var ip &#x3D; req.headers[&#39;x-forwarded-for&#39;] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;</span><br><span class="line">        var ua &#x3D; req.headers[&#39;user-agent&#39;];</span><br><span class="line">        res.end(ip + &#39;\n&#39; + ua);</span><br><span class="line">    &#125;</span><br><span class="line">).listen(80);</span><br><span class="line">console.log(&#39;Server is running...&#39;);</span><br></pre></td></tr></table></figure><p>既然在学 Go 语言，就用它写个新的吧！功能要更强一些。</p><h2 id="代码">代码</h2><p>稍微改进一下：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="string">&quot;net/http&quot;</span></span><br><span class="line"><span class="string">&quot;os&quot;</span></span><br><span class="line"><span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> addr <span class="keyword">string</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(os.Args) &gt; <span class="number">1</span> &#123;</span><br><span class="line">addr = <span class="string">&quot;:&quot;</span> + os.Args[<span class="number">1</span>]</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">addr = <span class="string">&quot;:80&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">server := http.Server&#123;</span><br><span class="line">Addr:        addr,</span><br><span class="line">Handler:     &amp;MyHandler&#123;&#125;,</span><br><span class="line">ReadTimeout: <span class="number">5</span> * time.Second,</span><br><span class="line">&#125;</span><br><span class="line">err := server.ListenAndServe()</span><br><span class="line">fmt.Println(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyHandler <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(*MyHandler)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">info := r.RemoteAddr + <span class="string">&quot; @ &quot;</span> + time.Now().String() + <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">r.Method + <span class="string">&quot; &quot;</span> + r.RequestURI + <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line"><span class="string">&quot;Host: &quot;</span> + r.Host + <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line"><span class="string">&quot;UserAgent: &quot;</span> + r.UserAgent() + <span class="string">&quot;\r\n&quot;</span></span><br><span class="line">w.Write([]<span class="keyword">byte</span>(info))</span><br><span class="line">fmt.Println(info)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;需求&quot;&gt;需求&lt;/h2&gt;
+&lt;p&gt;做加速时经常需要用到 HTTP Echo Server 来测试加速有没有成功，如果成功了，是显示请求来自加速代理服务器。原来用 node.js 写了一个，代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="//blog.umu618.com/tags/dev/"/>
+    
+    <category term="go" scheme="//blog.umu618.com/tags/go/"/>
     
   </entry>
   
