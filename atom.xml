@@ -6,7 +6,7 @@
   <link href="//blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="//blog.umu618.com/"/>
-  <updated>2022-12-05T14:36:07.402Z</updated>
+  <updated>2023-01-07T09:34:46.596Z</updated>
   <id>//blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>缅怀黄文择</title>
+    <link href="//blog.umu618.com/2023/01/07/cherish-the-memory-of-ng-bun-tek/"/>
+    <id>//blog.umu618.com/2023/01/07/cherish-the-memory-of-ng-bun-tek/</id>
+    <published>2023-01-07T08:59:18.000Z</published>
+    <updated>2023-01-07T09:34:46.596Z</updated>
+    
+    <content type="html"><![CDATA[<p>黄文择（n̂g-bûn-tèk）于 2022-06-12 离世。之前其实已经换了配音，当时只觉得这是自然的事情，没想到接着便是死讯。新的配音应该不止一人，但显然还不如黄文择一人，尤其是逼格大降。稣慢慢对霹雳不那么热情。只是偶尔看到剧末，预告完来一句“欢迎继续收看黄文择布袋戏”，突然内牛满面……</p><p>所有的影视明星里，稣最爱的就是黄文择，从初中就一直听他的声音。黄家驹的歌，是在他已经逝世后才发现的。听到挂的，还有 Michael Jackson。不过只有黄大讲的是稣的家乡话，从情感上说，是完全不同的级别的亲切。</p><p>黄大也是稣心目中的大侠。在自己的事业上恪尽职守，发挥特长把布袋戏艺术传承下去。</p><p>很多时光、很多东西，人类喜欢它们，都是因为背后关联的一些人。如果那些人不在了，对物的乐趣也将消失。</p><p>这很霹雳，但这样就很不霹雳了。​</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;黄文择（n̂g-bûn-tèk）于 2022-06-12 离世。之前其实已经换了配音，当时只觉得这是自然的事情，没想到接着便是死讯。新的配音应该不止一人，但显然还不如黄文择一人，尤其是逼格大降。稣慢慢对霹雳不那么热情。只是偶尔看到剧末，预告完来一句“欢迎继续收看黄文择布袋戏</summary>
+      
+    
+    
+    
+    <category term="宇督观" scheme="//blog.umu618.com/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/"/>
+    
+    
+    <category term="霹雳" scheme="//blog.umu618.com/tags/%E9%9C%B9%E9%9B%B3/"/>
+    
+    <category term="死神" scheme="//blog.umu618.com/tags/%E6%AD%BB%E7%A5%9E/"/>
+    
+  </entry>
   
   <entry>
     <title>CppWinRT 经验【1】链接 winmm.dll 而不是 api-ms-win-mm-time-l1-1-0.dll</title>
@@ -13006,6 +13032,35 @@ friend with benefit&lt;/p&gt;
     <category term="embedded" scheme="//blog.umu618.com/tags/embedded/"/>
     
     <category term="security" scheme="//blog.umu618.com/tags/security/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微软面试题：为什么 Shell 脚本自动把字符串 10001 当成二进制，输出 17？</title>
+    <link href="//blog.umu618.com/2014/06/04/umutech-interview-question-why-does-shell-treat-string-10001-as%20binary-and-print-17/"/>
+    <id>//blog.umu618.com/2014/06/04/umutech-interview-question-why-does-shell-treat-string-10001-as%20binary-and-print-17/</id>
+    <published>2014-06-04T03:05:00.000Z</published>
+    <updated>2023-01-07T09:59:27.132Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="注解">注解</h2><p>这并非是“微软公司”的面试题，而是稣想出来“让人微软”的题。</p><h2 id="题目">题目</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="function"><span class="title">test</span></span>() &#123;</span><br><span class="line"> v=<span class="string">&#x27;10001&#x27;</span>;</span><br><span class="line"> <span class="built_in">return</span> <span class="variable">$v</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>;</span><br><span class="line"><span class="built_in">echo</span> $?</span><br></pre></td></tr></table></figure><p>运行后输出 17（二进制 10001 的十进制 17），解释一下？</p><h2 id="解答（2023-01-17-新增）">解答（2023-01-17 新增）</h2><p>返回值是个 Byte 呀！10001 是 0x2711，所以被截断为 0x11，那就是 17。即：</p><p><code>10001 mod 256 = 17</code></p><p>本题设置的陷阱正是“二进制 10001 的十进制等于 17”，误导人真有一套。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;注解&quot;&gt;注解&lt;/h2&gt;
+&lt;p&gt;这并非是“微软公司”的面试题，而是稣想出来“让人微软”的题。&lt;/p&gt;
+&lt;h2 id=&quot;题目&quot;&gt;题目&lt;/h2&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="//blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="debug" scheme="//blog.umu618.com/tags/debug/"/>
+    
+    <category term="做题" scheme="//blog.umu618.com/tags/%E5%81%9A%E9%A2%98/"/>
     
   </entry>
   
