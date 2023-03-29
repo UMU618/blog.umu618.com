@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-03-19T12:56:01.126Z</updated>
+  <updated>2023-03-29T15:31:16.031Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>诗盗·哥如生人</title>
+    <link href="https://blog.umu618.com/2023/03/29/reconstructionism-poet-buggy-life/"/>
+    <id>https://blog.umu618.com/2023/03/29/reconstructionism-poet-buggy-life/</id>
+    <published>2023-03-29T15:20:14.000Z</published>
+    <updated>2023-03-29T15:31:16.031Z</updated>
+    
+    <content type="html"><![CDATA[<p>《诗盗•哥如生人》：坑出八哥九丈深，人间细事缈如尘。穷稣偶见不平处，付之一句莫当真。</p><h2 id="注解">注解</h2><p>改自唐代刘叉的《偶书》：</p><blockquote><p>日出扶桑一丈高，<br>人间万事细如毛。<br>野夫怒见不平处，<br>磨损胸中万古刀。</p></blockquote>]]></content>
+    
+    
+    <summary type="html">稣在教 ChatGPT 写诗</summary>
+    
+    
+    
+    <category term="诗盗" scheme="https://blog.umu618.com/categories/%E8%AF%97%E7%9B%97/"/>
+    
+    
+    <category term="七律" scheme="https://blog.umu618.com/tags/%E4%B8%83%E5%BE%8B/"/>
+    
+    <category term="心理邪稣" scheme="https://blog.umu618.com/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>Boost【7】async_pipe</title>
