@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-03-29T15:31:16.031Z</updated>
+  <updated>2023-04-22T15:43:54.994Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【GSL 系列 3】为什么需要 gsl::owner？</title>
+    <link href="https://blog.umu618.com/2023/04/22/umutech-gsl-3-why-owner/"/>
+    <id>https://blog.umu618.com/2023/04/22/umutech-gsl-3-why-owner/</id>
+    <published>2023-04-22T14:54:53.000Z</published>
+    <updated>2023-04-22T15:43:54.994Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><ul><li>为啥要用 gsl::owner？什么时候用？</li></ul><h2 id="分析">分析</h2><p>当我们需要指针时，对于新写的代码，更应该使用智能指针（Smart Pointers）。但由于历史原因，一些旧代码里的裸指针（Raw Pointers）难以短时间重构为智能指针。而很多时候，裸指针的所有权难以一眼看出。良心代码可能通过注释指明，屎山代码就只能通过阅读大片相关语句块或函数来判断。</p><p>如果能用一个比较标准或通用的方式来指明，即可提高代码可读性，程序员能够更好滴理解代码，也就相应地能够提高健壮性。没错，这就是 gsl::owner 的应用场景。它就是<strong>提高【含有大量裸指针的】旧代码的可读性和健壮性的简单方法！</strong></p><p>举个最简单的场景：一个类里有一个成员变量叫 A* ptr，那么当这个类析构时，需要 delete ptr 吗？</p><ul><li><p>如果类对 ptr 有所有权，而析构时，没 delete ptr，则资源泄漏，危害整个程序。</p></li><li><p>如果类对 ptr 无所有权，而析构时，delete ptr，则造成悬空指针（Dangling Pointer），危害其它类。</p></li></ul><p>这个类的作者当然知道需不需要了，但即使他知道，也可能忘记写，或可能因为套用现有代码（Copy &amp; Paste）而多写了 delete！其他接盘侠（代码阅读者）想弄清楚这个问题，就更难了，一般需要认真阅读并调试。</p><p>但如果一开始，作者就用 gsl::owner&lt;A*&gt; ptr 来指明所有权，那么很自然地，大家都很容易知道：类析构时，需要 delete ptr。</p><p>当代码应用 gsl::owner 时，也能得使一些静态代码分析工具（static code analysis tools）更容易找出资源泄露问题。</p>]]></content>
+    
+    
+    <summary type="html">UMU 叫 ChatGPT 教您 C++</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+    <category term="optimization" scheme="https://blog.umu618.com/tags/optimization/"/>
+    
+    <category term="gsl" scheme="https://blog.umu618.com/tags/gsl/"/>
+    
+  </entry>
   
   <entry>
     <title>诗盗·哥如生人</title>
@@ -5213,11 +5240,11 @@ AI 做，效率堪可。&lt;br&gt;
   </entry>
   
   <entry>
-    <title>诗盗·Bugg 吓醒</title>
+    <title>诗盗·Buggy 吓醒</title>
     <link href="https://blog.umu618.com/2019/05/30/reconstructionism-poet-buggy-dream/"/>
     <id>https://blog.umu618.com/2019/05/30/reconstructionism-poet-buggy-dream/</id>
     <published>2019-05-30T15:48:36.000Z</published>
-    <updated>2023-03-06T16:41:31.608Z</updated>
+    <updated>2023-03-29T16:39:09.511Z</updated>
     
     <content type="html"><![CDATA[<p>《#诗盗#•Buggy 吓醒》</p><p>春去花还在，<br>情来处处开。<br>几集一剪梅，<br>精神九恋败。</p><h2 id="注解">注解</h2><p>有些花春天并不开，夏天花期到了才到处盛开。比喻部分 70、80、90 后由于受到错误教育压抑，无法正常地在花季谈恋爱，等到七老八十才慌了。</p><p>在五缘湾看了几集《一剪梅》，短短时间里，诗人已经在精神世界里和三个老婆八个女朋友模拟多次恋爱，但总是出八哥，吓醒而败。</p><p>九：多的意思，不是真的 9 次，实际有 11 次。</p><p>此处应有费玉清的歌：</p><blockquote><p>真情 像草原广阔<br>层层 风雨不能阻隔<br>总有 云开 日出 时候<br>万丈阳光 照耀你我<br>真情 像梅花开过<br>冷冷 冰雪不能掩没<br>就在 最冷 枝头 绽放<br>看见春天 走向你我<br>雪花飘飘 北风萧萧<br>天地 一片苍茫<br>一剪寒梅 傲立雪中<br>只为 伊人飘香<br>爱我所爱 无怨无悔<br>此情（此情）长留（长留）心间<br>雪花飘飘 北风萧萧<br>天地 一片苍茫<br>一剪寒梅 傲立雪中<br>只为 伊人飘香<br>爱我所爱 无怨无悔<br>此情（此情）长留（长留）心间</p></blockquote><p>还应该有李清照的诗：</p><blockquote><p>红藕香残玉簟秋，轻解罗裳，独上兰舟。<br>云中谁寄锦书来？雁字回时，月满西楼。<br>花自飘零水自流，一种相思，两处闲愁。<br>此情无计可消除，才下眉头，却上心头。</p></blockquote>]]></content>
     
@@ -7880,7 +7907,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2018/08/18/reconstructionism-poet-junior-tour/"/>
     <id>https://blog.umu618.com/2018/08/18/reconstructionism-poet-junior-tour/</id>
     <published>2018-08-18T03:40:53.000Z</published>
-    <updated>2023-03-06T16:41:31.601Z</updated>
+    <updated>2023-03-29T16:44:33.925Z</updated>
     
     <content type="html"><![CDATA[<p>《#诗盗#·骚年游》：<br>算来好景只如斯，惟许有钱支。寻常装逼，等闲递笑，诚意吉祥意。<br>十年情了音尘断，往事不胜思。一狗惨叫，半脸肥鸡，总是咬人屎。<br>仕途茫然财路断，全家不够吃。一心补脑，半脸肥猪，总吃卵磷脂。</p><h2 id="注解">注解</h2><p>作者：那男性CEO开</p>]]></content>
     
@@ -7902,6 +7929,8 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="词" scheme="https://blog.umu618.com/tags/%E8%AF%8D/"/>
     
     <category term="喷" scheme="https://blog.umu618.com/tags/%E5%96%B7/"/>
+    
+    <category term="闽南语" scheme="https://blog.umu618.com/tags/%E9%97%BD%E5%8D%97%E8%AF%AD/"/>
     
   </entry>
   
