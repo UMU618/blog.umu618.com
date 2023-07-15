@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-06-18T13:38:42.494Z</updated>
+  <updated>2023-07-15T08:51:36.211Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>诗盗·五亿稣隐</title>
+    <link href="https://blog.umu618.com/2023/07/08/reconstructionism-poet-make-500-million-and-retire/"/>
+    <id>https://blog.umu618.com/2023/07/08/reconstructionism-poet-make-500-million-and-retire/</id>
+    <published>2023-07-07T16:00:01.000Z</published>
+    <updated>2023-07-15T08:51:36.211Z</updated>
+    
+    <content type="html"><![CDATA[<p>《诗盗·五亿稣隐》：键盘十年忘写字，如今画符狗不识。若知挨踢毁前程，无如村官小职时。</p><h2 id="注解">注解</h2><p>改自霹雳角色无衣师尹的诗号：</p><blockquote><p>著书三年倦写字，<br>如今翻书不识志，<br>若知倦书悔前程，<br>无如渔樵未识时。</p></blockquote>]]></content>
+    
+    
+    <summary type="html">稣在教 ChatGPT 写诗</summary>
+    
+    
+    
+    <category term="诗盗" scheme="https://blog.umu618.com/categories/%E8%AF%97%E7%9B%97/"/>
+    
+    
+    <category term="七律" scheme="https://blog.umu618.com/tags/%E4%B8%83%E5%BE%8B/"/>
+    
+    <category term="霹雳" scheme="https://blog.umu618.com/tags/%E9%9C%B9%E9%9B%B3/"/>
+    
+    <category term="挨踢" scheme="https://blog.umu618.com/tags/%E6%8C%A8%E8%B8%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>导出标记为不可导出的证书</title>
