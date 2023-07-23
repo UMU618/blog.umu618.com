@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-07-15T08:51:36.211Z</updated>
+  <updated>2023-07-23T14:20:08.432Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用 TraceView 取代 DbgView</title>
+    <link href="https://blog.umu618.com/2023/07/23/replace-dbgview-with-traceview/"/>
+    <id>https://blog.umu618.com/2023/07/23/replace-dbgview-with-traceview/</id>
+    <published>2023-07-23T12:05:23.000Z</published>
+    <updated>2023-07-23T14:20:08.432Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-故事">1. 故事</h2><ul><li><p>开发虚拟显示器驱动时，打太多日志到 DbgView，结果导致驱动被底层主动杀死。</p></li><li><p>有一天，Linux 和 Windows 驱动都精通的钧叔，突然和稣吐槽，WPP 太擸𢶍。</p></li></ul><h2 id="2-问题">2. 问题</h2><ul><li><p>OutputDebugStringA 太慢了！</p></li><li><p>WPP 太乱了！</p></li></ul><h2 id="3-相关知识">3. 相关知识</h2><ul><li><p>ETW（Event Tracing for Windows）是 Windows 操作系统中的一种事件跟踪技术，可以用于记录系统和应用程序生成的事件。ETW 的优点就是性能好，并且同时具备内核态和用户态 API。</p></li><li><p>WPP（Windows Software Trace Preprocessor）是一种用于 Windows 软件跟踪的预处理器，可以帮助开发人员在代码中插入跟踪语句，并生成可用于 ETW 的跟踪消息。即，WPP 基于 ETW，只是做了层封装。</p></li><li><p><a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/traceview">TraceView</a> is a trace controller and a trace consumer. 类似于用 DbgView 看 OutputDebugStringA 产生的消息。ETW 产生的消息用 <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/traceview">TraceView</a> 来看。</p></li></ul><h2 id="4-解决">4. 解决</h2><p>慢的，不用就行。乱的，换个用法。</p><p>既然已经有 <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/traceview">TraceView</a>，那么我们只需要把 OutputDebugStringA 替换为 ETW 的 API 不就完事了吗？说干就干，先写个简单的 <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/trace-provider">Trace Provider</a> 代码：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;evntprov.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string_view&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">EtwLog</span> &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">EtwLog</span>() = <span class="keyword">default</span>;</span><br><span class="line">  ~<span class="built_in">EtwLog</span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> != event_handle_) &#123;</span><br><span class="line">      <span class="built_in">EventUnregister</span>(event_handle_);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">ULONG <span class="title">Initialize</span><span class="params">(<span class="type">const</span> GUID&amp; guid)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">    ULONG ec = <span class="built_in">EventRegister</span>(&amp;guid, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>, &amp;event_handle_);</span><br><span class="line">    <span class="built_in">assert</span>(ERROR_SUCCESS == ec);</span><br><span class="line">    <span class="keyword">return</span> ec;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">ULONG <span class="title">Log</span><span class="params">(std::wstring_view message,</span></span></span><br><span class="line"><span class="params"><span class="function">            std::<span class="type">uint8_t</span> level = <span class="number">1</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">            std::<span class="type">uint64_t</span> keyword = <span class="number">1</span>)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">    <span class="built_in">assert</span>(<span class="number">0</span> != event_handle_);</span><br><span class="line">    EVENT_DESCRIPTOR event_descriptor;</span><br><span class="line">    EVENT_DATA_DESCRIPTOR data_descriptor;</span><br><span class="line">    <span class="built_in">EventDescCreate</span>(&amp;event_descriptor, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, level, <span class="number">0</span>, <span class="number">0</span>, keyword);</span><br><span class="line">    <span class="built_in">EventDataDescCreate</span>(</span><br><span class="line">        &amp;data_descriptor, message.<span class="built_in">data</span>(),</span><br><span class="line">        <span class="built_in">static_cast</span>&lt;ULONG&gt;((message.<span class="built_in">size</span>() + <span class="number">1</span>) *</span><br><span class="line">                           <span class="built_in">sizeof</span>(std::wstring_view::value_type)));</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">EventWrite</span>(event_handle_, &amp;event_descriptor, <span class="number">1</span>, &amp;data_descriptor);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  REGHANDLE event_handle_&#123;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Hello ETW!\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">  EtwLog etw;</span><br><span class="line">  <span class="comment">// &#123;aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa&#125;</span></span><br><span class="line">  <span class="type">static</span> <span class="type">const</span> GUID guid = &#123;<span class="number">0xaaaaaaaa</span>,</span><br><span class="line">                            <span class="number">0xaaaa</span>,</span><br><span class="line">                            <span class="number">0xaaaa</span>,</span><br><span class="line">                            &#123;<span class="number">0xaa</span>, <span class="number">0xaa</span>, <span class="number">0xaa</span>, <span class="number">0xaa</span>, <span class="number">0xaa</span>, <span class="number">0xaa</span>, <span class="number">0xaa</span>, <span class="number">0xaa</span>&#125;&#125;;</span><br><span class="line">  ULONG ec = etw.<span class="built_in">Initialize</span>(guid);</span><br><span class="line">  <span class="keyword">if</span> (ERROR_SUCCESS != ec) &#123;</span><br><span class="line">    std::cerr &lt;&lt; <span class="string">&quot;Failed to Initialize ETW!\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> ec;</span><br><span class="line">  &#125;</span><br><span class="line">  etw.<span class="built_in">Log</span>(<span class="string">L&quot;Hello ETW!&quot;</span>);   <span class="comment">// View via TraceView</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>打开 <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/traceview">TraceView</a>，做好基本配置：</p><p><img src="/images/20230723-traceview-guid.png" alt="采用 GUID 方式"></p><p><img src="/images/20230723-traceview-tmf.png" alt="没有 TMF，先 Auto，等八哥"></p><p>然后，运行以上 C++ 代码，回到 <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/traceview">TraceView</a> 界面，能看到捕获到信息，但并没有“Hello ETW!”，而是写着“解码错误 1168”。</p><p><img src="/images/20230723-traceview-1168.png" alt="解码错误"></p><p>到此，恍然大悟，原来 ETW 太底层，所以才有 WPP 定义一系列规范来使用 ETW，只不过 WPP 太老，不好用了。有没有一种不需要 pdb/man/tmf 的使用 ETW 的方式？</p><p>有的。它就是 Windows 10 新增的 <a href="https://learn.microsoft.com/en-us/windows/win32/tracelogging/trace-logging-portal">TraceLogging</a>。</p><blockquote><p>Windows 10 introduces TraceLogging which builds on ETW and provides a simplified way to instrument code for native, .NET and WinRT developers.</p></blockquote><blockquote><p>TraceLogging is a system for logging events that can be decoded without a manifest. On Windows, TraceLogging is used in user-mode and kernel-mode to generate Event Tracing for Windows (ETW) events. TraceLogging builds on Event Tracing for Windows (ETW) and provides a simplified way to instrument code.</p></blockquote><p>参考微软给的例子就很容易理解并上手：<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/tracelogging-examples">C/C++ TraceLogging Examples</a></p>]]></content>
+    
+    
+    <summary type="html">稣在教 ChatGPT 写代码</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="debug" scheme="https://blog.umu618.com/tags/debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>诗盗·如梦令·挨踢垂暮</title>
+    <link href="https://blog.umu618.com/2023/07/21/reconstructionism-poet-rumengling-doom-of-it/"/>
+    <id>https://blog.umu618.com/2023/07/21/reconstructionism-poet-rumengling-doom-of-it/</id>
+    <published>2023-07-21T05:26:14.000Z</published>
+    <updated>2023-07-23T12:52:52.603Z</updated>
+    
+    <content type="html"><![CDATA[<p>《诗盗·如梦令·挨踢垂暮》</p><p>常记挨踢垂暮，沉重不知归路。</p><p>知识宛成咒，误入内卷深处。</p><p>要猝，要猝，惊起一滩社畜。</p><h2 id="注解">注解</h2><p>改自宋代李清照的《如梦令·常记溪亭日暮》：</p><blockquote><p>常记溪亭日暮，沉醉不知归路。<br>兴尽晚回舟，误入藕花深处。<br>争渡，争渡，惊起一滩鸥鹭。</p></blockquote>]]></content>
+    
+    
+    <summary type="html">稣在教 ChatGPT 写诗</summary>
+    
+    
+    
+    <category term="诗盗" scheme="https://blog.umu618.com/categories/%E8%AF%97%E7%9B%97/"/>
+    
+    
+    <category term="词" scheme="https://blog.umu618.com/tags/%E8%AF%8D/"/>
+    
+    <category term="挨踢" scheme="https://blog.umu618.com/tags/%E6%8C%A8%E8%B8%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>诗盗·五亿稣隐</title>
