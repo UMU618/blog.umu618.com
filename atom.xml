@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-08-13T16:17:57.819Z</updated>
+  <updated>2023-09-09T18:37:14.947Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Boost【8】shared_library</title>
+    <link href="https://blog.umu618.com/2023/09/10/umutech-boost-8-shared-library/"/>
+    <id>https://blog.umu618.com/2023/09/10/umutech-boost-8-shared-library/</id>
+    <published>2023-09-09T18:19:38.000Z</published>
+    <updated>2023-09-09T18:37:14.947Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-故事">1. 故事</h2><p>听说 Boost 有一个跨平台的 shared_library 可以管理动态链接库，试试？</p><h2 id="2-尝试">2. 尝试</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;boost/dll/shared_library.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  boost::dll::fs::error_code ec;</span><br><span class="line">  boost::<span class="function">dll::shared_library <span class="title">ntdll</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">      <span class="string">L&quot;ntdll.dll&quot;</span>, boost::dll::load_mode::search_system_folders, ec)</span></span>;</span><br><span class="line">  <span class="keyword">if</span> (ec) &#123;</span><br><span class="line">    std::cerr &lt;&lt; ec.<span class="built_in">message</span>();</span><br><span class="line">    <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; std::format(<span class="string">&quot;ntdll: &#123;&#125;\n&quot;</span>, ntdll.<span class="built_in">location</span>(ec).<span class="built_in">string</span>());</span><br><span class="line">  <span class="type">bool</span> has = ntdll.<span class="built_in">has</span>(<span class="string">&quot;RtlGetNtSystemRoot&quot;</span>);</span><br><span class="line">  std::cout &lt;&lt; std::format(<span class="string">&quot;has RtlGetNtSystemRoot: &#123;&#125;\n&quot;</span>, has);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (has) &#123;</span><br><span class="line">    std::wcout &lt;&lt; std::format(<span class="string">L&quot;RtlGetNtSystemRoot: &#123;&#125;\n&quot;</span>,</span><br><span class="line">                              ntdll.<span class="built_in">get</span>&lt;<span class="type">wchar_t</span>*()&gt;(<span class="string">&quot;RtlGetNtSystemRoot&quot;</span>)());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">auto</span> RtlGetNtSystemRoot = ntdll.<span class="built_in">get</span>&lt;<span class="type">wchar_t</span>*()&gt;(<span class="string">&quot;RtlGetNtSystemRoot&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">nullptr</span> != RtlGetNtSystemRoot) &#123;</span><br><span class="line">      std::wcout &lt;&lt; std::format(<span class="string">L&quot;RtlGetNtSystemRoot: &#123;&#125;\n&quot;</span>,</span><br><span class="line">                                <span class="built_in">RtlGetNtSystemRoot</span>());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="built_in">catch</span> (<span class="type">const</span> boost::system::system_error&amp; e) &#123;</span><br><span class="line">    std::cerr &lt;&lt; e.<span class="built_in">what</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="3-思考">3. 思考</h2><p>上面的例子显然不合格，因为它并不跨平台！动态加载 Windows 特有的 ntdll.dll 应该用 <a href="https://github.com/microsoft/wil">Windows Implementation Library</a>。</p><p>但作为范例，或者项目已经引入 Boost，却没有引入 wil，也是可以用用，只是它并不极致。比如说，ntdll.dll 其实并不需要 load，它必然被加载，只需要 GetModuleHandle 即可。</p><p>所以它其实还不如这个好用：<a href="https://github.com/UMU618/umu/blob/main/include/umu/module.hpp">https://github.com/UMU618/umu/blob/main/include/umu/module.hpp</a></p>]]></content>
+    
+    
+    <summary type="html">稣教 ChatGPT 用 Boost！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+    <category term="boost" scheme="https://blog.umu618.com/tags/boost/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“天道酬勤”的最初含义</title>
+    <link href="https://blog.umu618.com/2023/09/08/heaven-rewards-us-frequently/"/>
+    <id>https://blog.umu618.com/2023/09/08/heaven-rewards-us-frequently/</id>
+    <published>2023-09-07T16:14:11.000Z</published>
+    <updated>2023-09-09T18:09:10.999Z</updated>
+    
+    <content type="html"><![CDATA[<p>转自：<a href="https://epaper.gmw.cn/wzb/html/2016-04/16/nw.D110000wzb_20160416_5-02.htm">https://epaper.gmw.cn/wzb/html/2016-04/16/nw.D110000wzb_20160416_5-02.htm</a></p><p>“天道酬勤”大约是中国人最喜欢说的四个字，也是书法爱好者最爱写的词汇，经常用来励志。</p><p>事实上，从它的本义论起，现今我们对于它的理解是大错特错。它既非励志之言，更非一般百姓能用，若非君临天下，您断不可用此四字。</p><p>“天道酬勤”并非成语，由《尚书·大诰》：“天閟毖我成功，天亦惟用勤毖我民”之句引申而来。唐人孔颖达疏：“天慎劳民使成功，亦当勤劳民使安宁。”意思是：“上天啊，您咋这么好呢！您如此谨慎地护佑我的事业，确保其成功！您又是如此频繁地关照我的百姓……”这句话原是周天子向上天说的，用来感谢上天对国民无微不至的关怀。</p><p>到了近代，人们将其转引为更通俗的“天道酬勤”。字面虽是直白了，但歧义亦由此产生，变成了今天人们所理解的——同志们，要加倍努力啊，到时上天会犒赏大家的（最好发个大红包）。</p><p>“天道酬勤”之“勤”非“勤奋”之意，它只是表示次数多，即频繁。“酬勤”二字是倒装句，“勤”是状语，连起来意为“频繁地赏赐”。如此理解，便与我们平时的理解大有不同了。</p><p>“天道酬勤”与故宫太和殿上方的“建极绥猷”匾额传达的是一个意思，就是皇帝们要顺应天命，建立人间法则，安抚四方。所以，“天道酬勤”四字，本是君主们才能说的话。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;转自：&lt;a href=&quot;https://epaper.gmw.cn/wzb/html/2016-04/16/nw.D110000wzb_20160416_5-02.htm&quot;&gt;https://epaper.gmw.cn/wzb/html/2016-04/16/nw.D1100</summary>
+      
+    
+    
+    
+    <category term="宇督观" scheme="https://blog.umu618.com/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/"/>
+    
+    
+    <category term="洗脑" scheme="https://blog.umu618.com/tags/%E6%B4%97%E8%84%91/"/>
+    
+  </entry>
   
   <entry>
     <title>八哥系列：Debian 12 的 xrdp 突然连不上！</title>
