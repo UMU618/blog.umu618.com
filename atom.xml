@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-09-09T18:37:14.947Z</updated>
+  <updated>2023-09-13T15:44:02.305Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GetEnvironmentStrings 函数的八哥史</title>
+    <link href="https://blog.umu618.com/2023/09/13/umutech-a-brief-history-of-the-getenvironmentstrings-function/"/>
+    <id>https://blog.umu618.com/2023/09/13/umutech-a-brief-history-of-the-getenvironmentstrings-function/</id>
+    <published>2023-09-13T15:18:42.000Z</published>
+    <updated>2023-09-13T15:44:02.305Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="故事">故事</h2><p>故事总由八哥开始！今天稣看到一个 buggy 的 API 声明：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> UNICODE</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GetEnvironmentStrings  GetEnvironmentStringsW</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GetEnvironmentStringsA  GetEnvironmentStrings</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !UNICODE</span></span></span><br></pre></td></tr></table></figure><p><img src="/images/20230913-get-environment-strings.jpg" alt="GetEnvironmentStrings"></p><p>但是经历过 OutputDebugString 逆向的稣十分淡定地推测，这一定是故意的！微软为了兼容性，啥都干得出来。</p><blockquote><p>稣的逆向经验：一般 API 都是 A 的版本调用 W，而 OutputDebugString 是例外，OutputDebugStringW 调用 OutputDebugStringA。</p></blockquote><h2 id="搜索知识">搜索知识</h2><p>找到 Raymond Chen 写的《<a href="https://devblogs.microsoft.com/oldnewthing/20130117-00/?p=5533">A brief history of the GetEnvironmentStrings functions</a>》。原来，这个 API 早在 Windows NT 3.1 时就烙下八哥！</p><blockquote><p>The Get­Environment­Strings function has a long and troubled history.</p><p>The first bit of confusion is that the day it was introduced in Windows NT 3.1, it was exported funny. The UNICODE version was exported under the name Get­Environment­StringsW, but the ANSI version was exported under the name Get­Environment­Strings without the usual A suffix.</p><p>A mistake we have been living with for over two decades.</p></blockquote><p>虽然后来可以解决这个例外，但微软选择保留此例外。不过大家可以不必担心相关的可能问题，因为现代的 Windows 会同时导出 GetEnvironmentStrings 和 GetEnvironmentStringsA。</p><p><img src="/images/20230913-get-environment-strings-functions.jpg" alt="GetEnvironmentStrings functions"></p>]]></content>
+    
+    
+    <summary type="html">稣教 ChatGPT 用 API</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="debug" scheme="https://blog.umu618.com/tags/debug/"/>
+    
+  </entry>
   
   <entry>
     <title>Boost【8】shared_library</title>
