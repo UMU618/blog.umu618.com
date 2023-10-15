@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-09-16T11:28:11.799Z</updated>
+  <updated>2023-10-15T12:08:27.924Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为什么应该使用 C++ 20？</title>
+    <link href="https://blog.umu618.com/2023/10/15/umutech-why-cpp20/"/>
+    <id>https://blog.umu618.com/2023/10/15/umutech-why-cpp20/</id>
+    <published>2023-10-15T11:23:01.000Z</published>
+    <updated>2023-10-15T12:08:27.924Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="实战项目">实战项目</h2><ol><li><p><a href="https://github.com/ksyun-kenc/liuguang">鎏光云游戏引擎</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/562199099">金山云 LiveNet</a></p></li><li><p><a href="https://gitee.com/ksyun-kenc/ClipboardSync">ClipboardSync</a></p></li><li><p><a href="https://github.com/UMU618/PowerEconomizer">PowerEconomizer</a></p></li></ol><p>其中，鎏光一开始是用 C++ 17 的，在 MSVC 的 std::format 可用时，第一时间切换到 C++ 20。而 LiveNet 主要运行于 Linux，开发时 gcc 还不支持 std::format，使用 fmt::format 代替，但一直用 cxxstd=20 编译。</p><p>ClipboardSync 和 PowerEconomizer 使用了 C++ 20 modules。</p><p>现在还在开发的云桌面产品也是使用 C++ 20，但没有用 modules。</p><h2 id="理由">理由</h2><p>根据 <a href="https://www.jetbrains.com/lp/devecosystem-2022/cpp/">jetbrains</a> 的统计，2022 年时，C++ 20 的使用率是 23%，已经超过经典 C++ 的 8%。在游戏开发领域，C++ 20 的使用率为 25%，甚至已经超过 C++ 14 的 24%。</p><p>以下列举能够很容易想到的一些好处：</p><ol><li><p>好用、安全的新类：std::format、std::span、std::jthread、原子(Atomic)智能指针</p></li><li><p>designated-initializers 安全初始化，防止因为调整结构体而顺序不对</p></li><li><p>modules 加速编译</p></li><li><p>更多标签 [[likely]], [[unlikely]], [[nodiscard(reason)]]</p></li><li><p>可以 using enum</p></li><li><p>对模板形式的 Lambda 有更好支持</p></li><li><p>范围 for 循环支持初始化</p></li><li><p>三路比较运算符 &lt;=&gt;</p></li><li><p>Boost 的 awaitables 协程（BOOST_ASIO_HAS_CO_AWAIT）需要 C++ 20</p></li><li><p>ranges 库</p></li></ol><h2 id="阵痛">阵痛</h2><ol><li><p>曾经遇到 clang-format 对 modules 支持不好的问题，后来升级 clang-format 解决。但目前还不建议在大型项目里使用 modules。</p></li><li><p>有些隐式转换无法编译，尤其在编译驱动代码时，容易遇到连 WDK 里的头文件都无法编译。这是因为 C++ 20 比 C++ 17 都严格。建议内核态驱动使用 C++ 17；用户态驱动可以 C++ 20。</p></li></ol>]]></content>
+    
+    
+    <summary type="html">因为 Rust 太难了！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+  </entry>
   
   <entry>
     <title>无银第八哥【2】修改 API 返回结果</title>
