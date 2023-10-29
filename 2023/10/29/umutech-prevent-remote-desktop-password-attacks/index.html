@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20231029-winevent-xml.png">
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20231029-firewall.png">
 <meta property="article:published_time" content="2023-10-28T18:16:00.000Z">
-<meta property="article:modified_time" content="2023-10-29T13:14:05.037Z">
+<meta property="article:modified_time" content="2023-10-29T13:44:16.147Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="windows">
 <meta property="article:tag" content="ops">
@@ -122,7 +122,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="问题">问题</h2>
-<p>面向公网开了个远程桌面端口，无法用多少号端口，都会被爆破！</p>
+<p>面向公网开了个远程桌面端口，无论用多少号端口，都会被爆破！</p>
+<blockquote>
+<p>虽然稣的密码很安全，几乎爆破不了，但会在系统日志里留下大量记录，实在很不雅观！</p>
+</blockquote>
 <h2 id="分析">分析</h2>
 <p>改端口是没用的，因为只有 65535 个，只要机器 IP 被发现，扫描端口很快就能完成。</p>
 <p>封 IP 是有用的，虽然爆破者（攻击者）有很多 IP，但一定是有限的，有多少封多少！</p>
