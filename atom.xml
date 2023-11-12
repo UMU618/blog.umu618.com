@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-11-02T15:09:13.678Z</updated>
+  <updated>2023-11-12T16:39:54.463Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Boost【9】Boost.Beast</title>
+    <link href="https://blog.umu618.com/2023/11/12/umutech-boost-9-beast/"/>
+    <id>https://blog.umu618.com/2023/11/12/umutech-boost-9-beast/</id>
+    <published>2023-11-12T15:51:31.000Z</published>
+    <updated>2023-11-12T16:39:54.463Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="介绍">介绍</h2><p>Boost.Beast 是一个 HTTP/WebSocket 库。本文只讨论 WebSocket。</p><h2 id="相关经验">相关经验</h2><p>UMU 先是用过 WebSocket++（websocketpp），又用过 libwebsockets，再用的 Boost.Beast，之后就一直使用 Boost.Beast。</p><ul><li><p>2018 年，参与 EOS 开发时，它是用 WebSocket++ 的，跟着学习了一阵子。</p></li><li><p>2020 年，在金山云时，内部版云游戏用 libwebsockets，跟着学习了一阵子。</p></li><li><p>做开源版云游戏——<a href="https://github.com/ksyun-kenc/liuguang">鎏光云游戏引擎</a>时，特地学习并使用 Boost.Beast。因为公司其实是要求和内部版有一些差异的，正好之前一直用 Boost.Asio，对它的熟悉可以快速套用在 Boost.Beast，于是果断切到 Boost.Beast。</p></li></ul><h2 id="什么场景应该使用-WebSocket？">什么场景应该使用 WebSocket？</h2><p>如果您原本使用裸 TCP，您应该知道 TCP 的流式传输，导致您需要自己分包，即界定一个“消息”的边界。鎏光本来设计为同时支持裸 TCP 和 WebSocket 的，所以还保留着处理分包的代码：</p><p><a href="https://github.com/UMU618/liuguang/blob/97f558275571b9be14893e4b55703b4b65cdbda5/src/cge/cge/game_session.cpp#L232">https://github.com/UMU618/liuguang/blob/97f558275571b9be14893e4b55703b4b65cdbda5/src/cge/cge/game_session.cpp#L232</a></p><p>这对 WebSocket 其实并不需要，它的发送和接受已经是都是“消息”，带着长度的。所以如果您原来用 Asio 写 C/S 程序，把它们改为 Beast，是很容易的，而且代码量会缩减不少。</p><p>对于工具性的 C/S 程序，建议下次直接用 Beast 写更省事。</p><p>另一种适用场景是需要支持浏览器，即同时支持 C/S 和 B/S 模型。</p><h2 id="Boost-Beast-经验">Boost.Beast 经验</h2><ol><li><p>text 和 binary 模式需要区分清楚，如果用于发送音视频，显然应该使用 binary 模式。</p></li><li><p>stream 的默认接收长度是 16MiB，如果不够可以改长点，0 表示最大的 std::uint64_t。</p></li></ol><p>参考：boost/beast/websocket/stream.hpp</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Set the maximum incoming message size option.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Sets the largest permissible incoming message size. Message</span></span><br><span class="line"><span class="comment">    frame fields indicating a size that would bring the total</span></span><br><span class="line"><span class="comment">    message size over this limit will cause a protocol failure.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    The default setting is 16 megabytes. A value of zero indicates</span></span><br><span class="line"><span class="comment">    a limit of the maximum value of a `std::uint64_t`.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    @par Example</span></span><br><span class="line"><span class="comment">    Setting the maximum read message size.</span></span><br><span class="line"><span class="comment">    @code</span></span><br><span class="line"><span class="comment">        ws.read_message_max(65536);</span></span><br><span class="line"><span class="comment">    @endcode</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    @param amount The limit on the size of incoming messages.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">void</span></span></span><br><span class="line"><span class="function"><span class="title">read_message_max</span><span class="params">(std::<span class="type">size_t</span> amount)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Returns the maximum incoming message size setting.</span></span><br><span class="line"><span class="function">std::<span class="type">size_t</span></span></span><br><span class="line"><span class="function"><span class="title">read_message_max</span><span class="params">()</span> <span class="type">const</span></span>;</span><br></pre></td></tr></table></figure><ol start="3"><li>默认开了 deflate 压缩。UMU 在开发 <a href="https://github.com/UMU618/ClipboardSync">ClipboardSync</a> 时，曾经考虑给剪切板数据压缩，对比了 lz4 和 zstd，很是犹豫，后来发现 Beast 默认开了 deflate 压缩，于是放弃自己用 lz4 或 zstd 压缩。</li></ol>]]></content>
+    
+    
+    <summary type="html">稣教 ChatGPT 用 Boost！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+    <category term="boost" scheme="https://blog.umu618.com/tags/boost/"/>
+    
+  </entry>
   
   <entry>
     <title>自动添加 IP 黑名单到防火墙</title>
