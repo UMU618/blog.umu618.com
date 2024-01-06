@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2023-12-23T16:39:11.673Z</updated>
+  <updated>2024-01-06T08:04:47.061Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>指针判空</title>
+    <link href="https://blog.umu618.com/2024/01/06/umutech-if-a-pointer-is-null/"/>
+    <id>https://blog.umu618.com/2024/01/06/umutech-if-a-pointer-is-null/</id>
+    <published>2024-01-06T06:48:08.000Z</published>
+    <updated>2024-01-06T08:04:47.061Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="引子">引子</h2><p>C 和 C++ 都有一些很基本的语句出现不同派系的写法，比如 * 靠左还是靠右，抑或居中？这种还是排版问题，并不影响有效字符数，但下面这个就直接影响有效字符数了！</p><p>《对于选择恐惧症患者来说，指针判空究竟要怎么写才不纠结？》</p><h2 id="问题">问题</h2><p>指针判空有两大类写法：</p><ul><li><p>if (p) {}</p></li><li><p>if (nullptr != p) {}</p></li></ul><p>后者被挺多人推荐的，比如林锐的《<a href="https://vrlab.org.cn/~zhuq/download/%E9%AB%98%E8%B4%A8%E9%87%8F%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97.pdf">高质量C++/C编程指南</a>》。</p><p><img src="/images/2024/20240106-linrui.png" alt="高质量C++/C编程指南"></p><p>搜一下，能发现不少网友都挺纠结。<s>这么基础的问题，如果不交代清楚，就是给 C++ 黑很好的攻击理由。</s></p><h2 id="故事">故事</h2><p>稣刚大学毕业时，是使用 C，并不屑 C++ 的，当时看了不少代码，就是直接 <code>if (p)</code> 和 <code>if (!p)</code>，所以也坚持这种写法，并认为这样写比较短，对手指好，比较养生。</p><p>后来 C++17 出现，稣就坚定地改用 C++，于是也更多遵守 C++ 类型安全的原则，开始认为 <code>if (p)</code> 和 <code>if (!p)</code> 这种写法隐含类型转换，不太好。记得 2017 年以前，其实就看过 <a href="https://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a>，里面也曾经建议写成 <code>if (nullptr != p)</code> 和 <code>if (nullptr == p)</code>。</p><p>现在，再去看 <a href="https://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a>，已经没有这样的建议。</p><h2 id="解决">解决</h2><p><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c-core-guidelines">C++ Core Guidelines</a> 中有一条：<a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-if">ES.87: Don’t add redundant == or != to conditions</a>，它的理由是：</p><blockquote><p><strong>Reason</strong> Doing so avoids verbosity and eliminates some opportunities for mistakes. Helps make style consistent and conventional.</p></blockquote><p>if、while、for 的条件语句本身就是在选择 true 或 false，对于指针来说，会自动与 nullptr 比较。通常来说，<code>if (p)</code> 可以读作 “if p is valid”。</p><p>接着，还有一个例子：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">auto</span> pc = <span class="built_in">dynamic_cast</span>&lt;Circle&gt;(ps)) &#123; ... &#125; <span class="comment">// execute if ps points to a kind of Circle, good</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">auto</span> pc = <span class="built_in">dynamic_cast</span>&lt;Circle&gt;(ps); pc != <span class="literal">nullptr</span>) &#123; ... &#125; <span class="comment">// not recommended</span></span><br></pre></td></tr></table></figure><p>同样是推荐更简短的写法。但这个例子却有人提出疑问：推荐的写法不会被怀疑是 == 少写了一个 = 吗？</p><p>还真不会！这个语句其实不是经典 C++ 的语法，而是 C++17 的 init-statement 语法，这里的 auto 是类型，说明 = 不可能是 == 错误地少写成 =。</p><p>对于部分 C 程序员和“经典 C++”程序员会把赋值语句写在 if 条件里的做法，建议是改为分开写。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// p is defined before</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (p = <span class="built_in">func</span>()) &#123; ... &#125; <span class="comment">// bad</span></span><br><span class="line"></span><br><span class="line">p = <span class="built_in">func</span>();</span><br><span class="line"><span class="keyword">if</span> (p) &#123; ... &#125; <span class="comment">// good</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// p is used after</span></span><br></pre></td></tr></table></figure><p>稣会在新工程里坚持使用 <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c-core-guidelines">C++ Core Guidelines</a> 的建议，但也不反对另一种写法，只要不混合使用。<s>允许有不同派系，但最好别精神分裂。</s></p>]]></content>
+    
+    
+    <summary type="html">ChatGPT 也认为少敲几个键比较养生！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+    <category term="coding-style" scheme="https://blog.umu618.com/tags/coding-style/"/>
+    
+  </entry>
   
   <entry>
     <title>BoringSSL? LibreSSL? OpenSSL!</title>
