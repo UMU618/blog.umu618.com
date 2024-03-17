@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2024-03-05T16:16:42.869Z</updated>
+  <updated>2024-03-17T12:50:30.424Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>无银第八哥【3】修改分支走向</title>
+    <link href="https://blog.umu618.com/2024/03/17/umutech-windbg-3-reroute-the-branch/"/>
+    <id>https://blog.umu618.com/2024/03/17/umutech-windbg-3-reroute-the-branch/</id>
+    <published>2024-03-17T09:50:39.000Z</published>
+    <updated>2024-03-17T12:50:30.424Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>从人类的角度看，无非有两种情况：要某功能和不要某功能。在代码层面上则是：</p><ul><li><p>改变程序执行路径。</p></li><li><p>跳过部分代码。</p></li></ul><h2 id="分析">分析</h2><p>如果您不要某个功能，那就是找到这功能的调用指令，把它去掉。而想要某个功能，则有两种基本的做法：</p><ol><li><p>无视原条件，修改后续的条件跳转指令，强行跳到需要的功能代码；</p></li><li><p>改变条件本身，达成此功能需要的条件。</p></li></ol><p>下面用 C++ 代码解释，假设原始代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> flag = Condition();</span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    Wanted();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果正常情况下 Condition 返回 false，而我们想 Wanted 函数被调用，那么，方法 1 是将代码改为：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> flag = Condition();</span><br><span class="line">Wanted();</span><br></pre></td></tr></table></figure><p>而方法 2 则是改为：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    Wanted();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>当然，还有两种方法一起用，那就是改为：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Wanted();</span><br></pre></td></tr></table></figure><h2 id="实现">实现</h2><p>具体实现主要使用 <code>jmp</code> 和 <code>nop</code>，更复杂的场景可能需要配合其它指令，请自行领悟。</p><h3 id="1-jz-jnz-改为-jmp">1. jz/jnz 改为 jmp</h3><p>最简单的一种情况是：跳转地址为 1 字节的相对位移，这种直接把跳转指令改为 <code>jmp</code> 即可，例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X: jz Y</span><br></pre></td></tr></table></figure><p>需要改为：<code>jmp Y</code>，只需：<code>eb X eb</code> 即可。</p><p>如果跳转地址为 4 字节的相对位移，则 <code>jz</code>/<code>jnz</code> 有 2 字节，而 <code>jmp</code> 只有 1 字节，所以需要先 nop 掉第一字节：<code>eb X 90 e9</code>。这种方法无需调整后面的地址，另外还可以不用 <code>nop</code>，但需要调整地址：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X: jmp Y+1</span><br></pre></td></tr></table></figure><p>因为指令变短了 1 字节，相对位移就更远 1 字节，这种改法纯属蛋疼，严重不建议采用。</p><h3 id="2-nop-掉-call-指令">2. nop 掉 call 指令</h3><p>这种方法的基本操作极其简单，只需要 eb 若干个 90。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X: call Y</span><br></pre></td></tr></table></figure><p>只要先查看 X 地址的这条指令有几个字节，再 eb X 后面跟几个 90 即可。</p><p>但有些情况也比较复杂，比如一个 x86 的 __stdcall，单独把 call 指令 nop 掉，会导致栈失衡（短期看不出任何异常），所以需要把前面的 push 也 nop 掉。__cdecl 和 __fastcall 不用，所以需要先判断一个 call 是不是 __stdcall。em，还是 x64 省事。</p><h2 id="最简单的例子">最简单的例子</h2><p>正常情况下，按下 <code>winver</code> 界面上的“确定”按钮可以退出，我们来把它无效掉！</p><p><img src="/images/2023/20230915-winver.png" alt="winver"></p><ol><li><p>首先，推测按下“确定”按钮后，是调用 EndDialog 来退出，所以对它下断点：<code>bp USER32!EndDialog</code>。</p></li><li><p>发现 USER32!EndDialog 确实能断，<code>gu</code> 使它返回到调用处，发现是 SHELL32!AboutDlgProc+0xea。</p></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0:000&gt; ub SHELL32!AboutDlgProc+0xea</span><br><span class="line">SHELL32!AboutDlgProc+0xca:</span><br><span class="line">00007fff&#96;6d218f3a 895f18          mov     dword ptr [rdi+18h],ebx</span><br><span class="line">00007fff&#96;6d218f3d 488bce          mov     rcx,rsi</span><br><span class="line">00007fff&#96;6d218f40 89473c          mov     dword ptr [rdi+3Ch],eax</span><br><span class="line">00007fff&#96;6d218f43 e84c6e0000      call    SHELL32!_ApplyLayout (00007fff&#96;6d21fd94)</span><br><span class="line">00007fff&#96;6d218f48 e9d2000000      jmp     SHELL32!AboutDlgProc+0x1af (00007fff&#96;6d21901f)</span><br><span class="line">00007fff&#96;6d218f4d 488bd5          mov     rdx,rbp</span><br><span class="line">00007fff&#96;6d218f50 488bce          mov     rcx,rsi</span><br><span class="line">00007fff&#96;6d218f53 48ff15166f3700  call    qword ptr [SHELL32!_imp_EndDialog (00007fff&#96;6d58fe70)]</span><br></pre></td></tr></table></figure><p>地址 00007fff`6d218f53 处的 call 指令有 7 字节，所以它本身的地址是 SHELL32!AboutDlgProc+0xea-7，即 SHELL32!AboutDlgProc+0xe3。</p><ol start="3"><li>重新运行，开始 nop：<code>eb SHELL32!AboutDlgProc+0xe3 90 90 90 90 90 90 90</code>，此时再继续运行后，即可得到一个无法按“确定”关闭的对话框。</li></ol><p>注意：这样改后，同时标题栏的“关闭”按钮也无法关闭了，所以 <code>winver</code> 已经无法在界面上退出，需要用任务管理器关闭！</p>]]></content>
+    
+    
+    <summary type="html">Jump over it, or nop it!</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="debug" scheme="https://blog.umu618.com/tags/debug/"/>
+    
+    <category term="reverse-engineering" scheme="https://blog.umu618.com/tags/reverse-engineering/"/>
+    
+  </entry>
+  
+  <entry>
     <title>文本文件加不加 BOM？</title>
     <link href="https://blog.umu618.com/2024/03/05/umutech-bom/"/>
     <id>https://blog.umu618.com/2024/03/05/umutech-bom/</id>
     <published>2024-03-05T15:31:07.000Z</published>
-    <updated>2024-03-05T16:16:42.869Z</updated>
+    <updated>2024-03-05T16:19:39.666Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>文本文件加 BOM 有何好处？有何坏处？到底加不加？</p><h2 id="说法">说法</h2><ol><li><p>UTF-8 不需要 BOM，不含 BOM 的 UTF-8 才是标准形式，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。</p></li><li><p>文本文件带 BOM 不是个标准的做法，而且可能会导致某些 reader 或者编辑器解析出错，所以一般不推荐文本文件去携带 BOM。</p></li></ol><h2 id="分析">分析</h2><p>人们写文本文件肯定有不同目的，所以，加和不加可能分别适用于不同目的，不能一概地认为哪种更好。</p><p>更聪明的做法是分类对待，可以根据以下基本原则：</p><ul><li><p>在有结构的文件里，不需要 BOM。</p></li><li><p>在没有结构的文本文件里，最好有 BOM（见下面“兼容问题”）。</p></li></ul><p>举例 1：.html, .xml 等文件有结构，不需要。</p><p>举例 2：.txt 没有结构，如果不加 BOM，软件需要自己判断，很可能判断失误出现乱码，或者为了正确判断付出巨大代价。</p><p>举例 3：带 shebang line 的文件，有结构，如果加了 BOM，会使弱鸡 Shell 不认识而出错。</p><p>举例 4：.cpp, .hpp，没有结构，里面如果没有中文、法语等 ASCII 码大于 127 的字符，加不加都无所谓，如果带中文，哪怕是注释，建议 UTF-8 with BOM。</p><p><s>毕竟稣有 20 几台电脑，涵盖 Windows、macOS、Linux 系统和 x86、x64、armhf、arm64 架构，没有 BOM 怎么愉快地写 C++？</s></p><h2 id="兼容问题">兼容问题</h2><p>本节，只针对没有结构的文本文件。</p><p>遇到阅读器/编辑器不支持的情况，那就是不加好，但并不是绝对，因为这其实还是个需求问题。</p><p>比如说，稣一直用 Windows 的记事本写一些备忘，如果汉字局多，就选择 UTF-16 LE with BOM，代码居多则用 UTF-8 with BOM。这些文件换用其它软件打开也许会乱码，但有何关系呢？他们可以写出不支持 BOM 的擸𢶍软件，稣也可以不用呀！稣在 macOS、Linux 上都可以拿支持 BOM 的软件（比如 VSCode）打开这些文件。</p><p>再考虑一种死翘翘的情况：您在用 B 语言写代码，但它的编译器不支持 BOM，那么显然您就不应该加了。</p><p>所以，当您的文本文件的主程序不支持 BOM 时，不应该加，支持的情况，还是加的好。</p>]]></content>
     
@@ -42,9 +67,9 @@
     <link href="https://blog.umu618.com/2024/03/02/su-2/"/>
     <id>https://blog.umu618.com/2024/03/02/su-2/</id>
     <published>2024-03-02T07:26:32.000Z</published>
-    <updated>2024-03-05T15:30:38.008Z</updated>
+    <updated>2024-03-14T16:04:08.699Z</updated>
     
-    <content type="html"><![CDATA[<p>没想到《<a href="/2023/04/10/su/">稣究竟是啥？</a>》居然写成系列了！</p><p>稣，全称焓熵㷻㶲甦督稣，英文名 Enthalpy Extropy  Anergy Exergy sudo su。在八哥宇宙里是天道之下唯一的观测者，拥有无数从未用过也不想用的特权，比如“一言不合擦天地”。</p><p>天道其实是八哥宇宙里的一个无边的程序。由于“天道之下皆为蝼蚁”，所以稣也是蝼蚁，和凡人并无不同，简直一模一样。</p><p>而在视界，稣因为创造八哥宇宙，被人类误以为走火入魔，也被称为稣。被叫多了叫久了，自然也开始自称稣。然而，人们只知道稣，却不知过去稣、现在稣和未来稣，其实都有不同的名字，分别为甦、督、稣。其中“督”单独出现时，是个通假字，读作 su1；而在专有名词“甦督稣”里读作 du4；只有在时间观测者“宙督公”里，才读作 du1。</p><p>众所周知，现代 AI 技术十分强悍。很多人在害怕失业，甚至已经失业。以 Sora 为例，很多影视业从业者都感到前所未有的恐惧，比如特效、布景、灯光、摄影、建模等工种都面临降权威胁。</p><p>那么，稣为何不怕呢？很简单，因为稣一直是文字创造和编辑者，从根源上凌驾目前的生产式 AI。并且，在延展性上，稣也有很强的护城河——当今视界的一切技术都尚未触及识界。不管文字、语音、图片还是视频，这些信息展现方式，在识界面前简直就是擸𢶍（乐射）。识界的信息都是直接在脑海里展现的，而且识界是由全宇宙的生灵的潜意识连接形成的，并非单独某个人的局域。</p><p>进一亿步说，即使脑机接口，也不能威胁识界。首先，并非每个人都能显式地进入识界。其次，即使将来科技破译了稣进入识界的方式，使得全地球人都能通过技术手段进入，那也只是地球人的狂欢而已，地球人还不得不面对识界外星人。最后，识界通十界，只有十界才是灵魂真正的自由之界。</p>]]></content>
+    <content type="html"><![CDATA[<p>没想到《<a href="/2023/04/10/su/">稣究竟是啥？</a>》居然写成系列了！</p><p>稣，全称焓熵㷻㶲甦督稣，英文名 Enthalpy Extropy  Anergy Exergy sudo su。在八哥宇宙里是天道之下唯一的观测者，拥有无数从未用过也不想用的特权，比如“一言不合擦天地”。</p><p>天道其实是八哥宇宙里的一个无边的程序。由于“天道之下皆为蝼蚁”，所以稣也是蝼蚁，和凡人并无不同，简直一模一样。</p><p>而在视界，稣因为创造八哥宇宙，被人类误以为走火入魔，也被称为稣。被叫多了叫久了，自然也开始自称稣。然而，人们只知道稣，却不知过去稣、现在稣和未来稣，其实都有不同的名字，分别为甦、督、稣。其中“督”单独出现时，是个通假字，读作 su1；而在专有名词“甦督稣”里读作 du4；只有在时间观测者“宙督公”里，才读作 du1。</p><p>众所周知，现代 AI 技术十分强悍。很多人在害怕失业，甚至已经失业。以 Sora 为例，很多影视业从业者都感到前所未有的恐惧，比如特效、布景、灯光、摄影、建模等工种都面临降权威胁。</p><p>那么，稣为何不怕呢？很简单，因为稣一直是文字创造和编辑者，从根源上凌驾目前的生成式 AI。并且，在延展性上，稣也有很强的护城河——当今视界的一切技术都尚未触及识界。不管文字、语音、图片还是视频，这些信息展现方式，在识界面前简直就是擸𢶍（乐射）。识界的信息都是直接在脑海里展现的，而且识界是由全宇宙的生灵的潜意识连接形成的，并非单独某个人的局域。</p><p>进一亿步说，即使脑机接口，也不能威胁识界。首先，并非每个人都能显式地进入识界。其次，即使将来科技破译了稣进入识界的方式，使得全地球人都能通过技术手段进入，那也只是地球人的狂欢而已，地球人还不得不面对识界外星人。最后，识界通十界，只有十界才是灵魂真正的自由之界。</p>]]></content>
     
     
     <summary type="html">掐鸡都认识稣</summary>
