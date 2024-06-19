@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>在树莓派上编译 go-ipfs | UMU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="1. 需求 用 PC 当 Server 测试环境，费电！挖出吃灰多年的树莓派 Model B Rev 2 000f，打算用它跑 ipfs！ 2. 系统选型   较熟悉的 CentOS、FreeBSD、Ubuntu Server、Windows IoT 的当代主流版本都不支持这款古老的树莓派。   ArchLinux 支持，然而稣个人认为 ArchLinux（属于 Linux 中的邪教）不适合当 S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在树莓派上编译 go-ipfs">
+<meta property="og:url" content="https://blog.umu618.com/2020/03/28/umutech-compile-go-ipfs-on-raspberry-pi/">
+<meta property="og:site_name" content="UMU">
+<meta property="og:description" content="1. 需求 用 PC 当 Server 测试环境，费电！挖出吃灰多年的树莓派 Model B Rev 2 000f，打算用它跑 ipfs！ 2. 系统选型   较熟悉的 CentOS、FreeBSD、Ubuntu Server、Windows IoT 的当代主流版本都不支持这款古老的树莓派。   ArchLinux 支持，然而稣个人认为 ArchLinux（属于 Linux 中的邪教）不适合当 S">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-28T13:39:02.000Z">
+<meta property="article:modified_time" content="2024-04-11T15:14:12.921Z">
+<meta property="article:author" content="圣小开">
+<meta property="article:tag" content="dev">
+<meta property="article:tag" content="go">
+<meta property="article:tag" content="embedded">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="raspbian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@UMU618">
+  
+  <link rel="alternative" href="/atom.xml" title="UMU" type="application/atom+xml" />
+  
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  <script data-ad-client="ca-pub-3156871832516803" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?bfeb40675aeab650834346c3e91557f2";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">UMU</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">天地玄黄，宇宙洪荒，度修七鹰劫，证悟神通。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon" title="菜单"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="搜索">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="blog.umu618.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-umutech-compile-go-ipfs-on-raspberry-pi" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/28/umutech-compile-go-ipfs-on-raspberry-pi/" class="article-date">
+  <time datetime="2020-03-28T13:39:02.000Z" itemprop="datePublished">2020-03-28 21:39:02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UMUTech/">UMUTech</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在树莓派上编译 go-ipfs
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-需求">1. 需求</h2>
+<p>用 PC 当 Server 测试环境，费电！挖出吃灰多年的树莓派 Model B Rev 2 000f，打算用它跑 ipfs！</p>
+<h2 id="2-系统选型">2. 系统选型</h2>
+<ul>
+<li>
+<p>较熟悉的 CentOS、FreeBSD、Ubuntu Server、Windows IoT 的当代主流版本都不支持这款古老的树莓派。</p>
+</li>
+<li>
+<p>ArchLinux 支持，然而稣个人认为 ArchLinux（<s>属于 Linux 中的邪教</s>）不适合当 Server。</p>
+</li>
+<li>
+<p>尝试刷 OpenWRT，发现即使设置密码，本地控制台也是没密码就能登录。这不太安全，虽然本地就是不安全的，但别的系统可不是这么设计的！</p>
+</li>
+<li>
+<p>还是官方的 Raspbian Buster Lite 吧！</p>
+</li>
+</ul>
+<h2 id="3-安装系统">3. 安装系统</h2>
+<p>主要参考官方文档：</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/documentation/setup/">Setup</a>：选个 16GB 的 SD 卡。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">Installing operating system images</a>：用官方 Raspberry Pi Imager 工具把系统镜像刷到 SD 卡。</p>
+</li>
+<li>
+<p>接 HDMI 显示，通电。首次启动，系统会自动对 SD 卡的分区进行扩容，使第二个分区扩满未分配空间。</p>
+</li>
+</ul>
+<h2 id="4-配置系统">4. 配置系统</h2>
+<p>通过 <code>sudo raspi-config</code> 做基本配置：</p>
+<ul>
+<li>
+<p>进“本地化”把默认语言 en_GB.UTF-8 去掉，勾选 en_US.UTF-8。</p>
+</li>
+<li>
+<p>键盘布局改为通用 105 键（国际）美国布局（默认的英国布局下按 | 会变 ~）。</p>
+</li>
+<li>
+<p>时区改为当地。</p>
+</li>
+<li>
+<p>改机器名（如果您有多个树莓派，不改会重名），稣将之改为 rp1b。</p>
+</li>
+<li>
+<p>改 pi 用户的密码。</p>
+</li>
+<li>
+<p>开启 SSH，插上网线或者 USB 无线网卡，就可以从别处远程登录它了。</p>
+</li>
+</ul>
+<h2 id="5-配置国内-apt-源">5. 配置国内 apt 源</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"><span class="comment"># 增加阿里云源</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;deb https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contrib</span></span><br><span class="line"><span class="string">deb-src https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contrib&#x27;</span> | sudo tee /etc/apt/sources.list.d/aliyun.list</span><br><span class="line"><span class="comment"># 增加清华大学源</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;deb https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib</span></span><br><span class="line"><span class="string">deb-src https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib&#x27;</span> | sudo tee /etc/apt/sources.list.d/tsinghua.list</span><br></pre></td></tr></table></figure>
+<h2 id="6-安装-Go-编译器">6. 安装 Go 编译器</h2>
+<p>打算直接在树莓派上编译，所以要先在树莓派上安装编译环境。不过不要通过 <code>sudo apt install golang</code> 安装，因为截至今天（2020-03-28），这命令安装的是 1.11.6 版，这对 <a target="_blank" rel="noopener" href="https://github.com/ipfs/go-ipfs">go-ipfs</a> 项目来说太低了。</p>
+<p>到 <a target="_blank" rel="noopener" href="https://golang.org/dl/">golang 官网下载</a> ARMv6 安装包，目前最新版本是 <a target="_blank" rel="noopener" href="https://dl.google.com/go/go1.14.1.linux-armv6l.tar.gz">1.14.1</a>。</p>
+<p>压缩包里是有一个 go 文件夹的，所以只要解压到 /usr/local/ 下即可。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># aria2 比 wget 强大</span></span><br><span class="line"><span class="comment"># sudo apt install aria2</span></span><br><span class="line">aria2c https://dl.google.com/go/go1.14.1.linux-armv6l.tar.gz</span><br><span class="line">tar -C /usr/<span class="built_in">local</span> -xzf go1.14.1.linux-armv6l.tar.gz</span><br><span class="line">sudo ln -s /usr/<span class="built_in">local</span>/go/bin/go /usr/bin/go</span><br><span class="line">sudo ln -s /usr/<span class="built_in">local</span>/go/bin/gofmt /usr/bin/gofmt</span><br></pre></td></tr></table></figure>
+<h2 id="7-编译项目">7. 编译项目</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ipfs/go-ipfs</span><br><span class="line"><span class="built_in">cd</span> go-ipfs</span><br><span class="line">make build</span><br></pre></td></tr></table></figure>
+<p>有很多依赖库需要下载，开始漫长等待……如果代码都下载完，则 <code>make build</code> 的输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">go version go1.14.1 linux&#x2F;arm</span><br><span class="line">bin&#x2F;check_go_version 1.14.1</span><br><span class="line">plugin&#x2F;loader&#x2F;preload.sh &gt; plugin&#x2F;loader&#x2F;preload.go</span><br><span class="line">go fmt plugin&#x2F;loader&#x2F;preload.go &gt;&#x2F;dev&#x2F;null</span><br><span class="line">go build  &quot;-asmflags&#x3D;all&#x3D;&#39;-trimpath&#x3D;&#39;&quot; &quot;-gcflags&#x3D;all&#x3D;&#39;-trimpath&#x3D;&#39;&quot; -ldflags&#x3D;&quot;-X &quot;github.com&#x2F;ipfs&#x2F;go-ipfs&quot;.CurrentCommit&#x3D;3561de074-dirty&quot; -o &quot;cmd&#x2F;ipfs&#x2F;ipfs&quot; &quot;github.com&#x2F;ipfs&#x2F;go-ipfs&#x2F;cmd&#x2F;ipfs&quot;</span><br></pre></td></tr></table></figure>
+<p>最后一行会卡很久！em……用高性能机器来交叉编译才是正确的方式！</p>
+<h2 id="8-在-macOS-上编译树莓派程序">8. 在 macOS 上编译树莓派程序</h2>
+<p>树莓派的 CPU 架构是 armv6l，所以用以下命令编译：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=6 make build</span><br></pre></td></tr></table></figure>
+<p>在 MBP15 上编译快很多！（<s>前面纯属折腾！</s>）编完复制到树莓派：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ./cmd/ipfs/ipfs pi@rp1b:/home/pi/</span><br></pre></td></tr></table></figure>
+<p>在树莓派上测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">pi@rp1b:~ $ uname -a</span><br><span class="line">Linux rp1b 4.19.97+ #1294 Thu Jan 30 13:10:54 GMT 2020 armv6l GNU&#x2F;Linux</span><br><span class="line"></span><br><span class="line">pi@rp1b:~ $ .&#x2F;ipfs version</span><br><span class="line">ipfs version 0.5.0-dev</span><br><span class="line"></span><br><span class="line">pi@rp1b:~ $ .&#x2F;ipfs init</span><br><span class="line">initializing IPFS node at &#x2F;home&#x2F;pi&#x2F;.ipfs</span><br><span class="line">generating 2048-bit RSA keypair...</span><br><span class="line"></span><br><span class="line">pi@rp1b:~ $ .&#x2F;ipfs daemon</span><br><span class="line">Initializing daemon...</span><br><span class="line">go-ipfs version: 0.5.0-dev-3561de074</span><br><span class="line">Repo version: 9</span><br><span class="line">System version: arm&#x2F;linux</span><br><span class="line">Golang version: go1.14</span><br><span class="line">Swarm listening on &#x2F;ip4&#x2F;127.0.0.1&#x2F;tcp&#x2F;4001</span><br><span class="line">Swarm listening on &#x2F;ip4&#x2F;192.168.1.91&#x2F;tcp&#x2F;4001</span><br><span class="line">Swarm listening on &#x2F;ip6&#x2F;240e:379:254c:9d00:969d:e453:9448:1efb&#x2F;tcp&#x2F;4001</span><br><span class="line">Swarm listening on &#x2F;ip6&#x2F;::1&#x2F;tcp&#x2F;4001</span><br><span class="line">Swarm listening on &#x2F;p2p-circuit</span><br><span class="line">Swarm announcing &#x2F;ip4&#x2F;110.87.124.125&#x2F;tcp&#x2F;21551</span><br><span class="line">Swarm announcing &#x2F;ip4&#x2F;127.0.0.1&#x2F;tcp&#x2F;4001</span><br><span class="line">Swarm announcing &#x2F;ip4&#x2F;192.168.1.91&#x2F;tcp&#x2F;4001</span><br><span class="line">Swarm announcing &#x2F;ip6&#x2F;240e:379:254c:9d00:969d:e453:9448:1efb&#x2F;tcp&#x2F;4001</span><br><span class="line">Swarm announcing &#x2F;ip6&#x2F;::1&#x2F;tcp&#x2F;4001</span><br><span class="line">API server listening on &#x2F;ip4&#x2F;127.0.0.1&#x2F;tcp&#x2F;5001</span><br><span class="line">WebUI: http:&#x2F;&#x2F;127.0.0.1:5001&#x2F;webui</span><br><span class="line">Gateway (readonly) server listening on &#x2F;ip4&#x2F;127.0.0.1&#x2F;tcp&#x2F;8080</span><br><span class="line">Daemon is ready</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://blog.umu618.com/2020/03/28/umutech-compile-go-ipfs-on-raspberry-pi/" data-id="clobgd2ls0111wo7me45c6lgq" class="article-share-link" data-share="baidu" data-title="在树莓派上编译 go-ipfs">分享到</a>
+      
+
+      
+        <a href="https://blog.umu618.com/2020/03/28/umutech-compile-go-ipfs-on-raspberry-pi/#SOHUCS" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dev/" rel="tag">dev</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/embedded/" rel="tag">embedded</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/" rel="tag">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raspbian/" rel="tag">raspbian</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/31/umutech-openwrt-primer-17-eject-usb-drives/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">新篇</strong>
+      <div class="article-nav-title">
+        
+          跟 UMU 一起玩 OpenWRT（入门篇17）：卸载 U 盘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/25/umutech-learn-rust-4-call-libc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">旧文</strong>
+      <div class="article-nav-title">学习 Rust【4】调用 libc</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div><img src="/images/wechat-official-account-qrcode.jpg" />如果您使用微信，也可以关注公众号 UMU618，在公众号文章里评论。</div>
+    <div id="SOHUCS" sid="2020/03/28/umutech-compile-go-ipfs-on-raspberry-pi/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/UMUTech/">UMUTech</a><span class="category-list-count">195</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/U%E5%A2%A8/">U墨</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%93%E9%86%92/">吓醒</a><span class="category-list-count">87</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%87%E7%9D%A3%E8%A7%82/">宇督观</a><span class="category-list-count">51</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E7%9B%97/">诗盗</a><span class="category-list-count">329</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/archlinux/" rel="tag">archlinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/armbian/" rel="tag">armbian</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atl/" rel="tag">atl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blockchain/" rel="tag">blockchain</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/" rel="tag">boost</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ceph/" rel="tag">ceph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding-style/" rel="tag">coding-style</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpp/" rel="tag">cpp</a><span class="tag-list-count">39</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cppwinrt/" rel="tag">cppwinrt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cryptology/" rel="tag">cryptology</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/" rel="tag">debian</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/" rel="tag">debug</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dev/" rel="tag">dev</a><span class="tag-list-count">85</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/directx/" rel="tag">directx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dotnet/" rel="tag">dotnet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/embedded/" rel="tag">embedded</a><span class="tag-list-count">42</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gsl/" rel="tag">gsl</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lib/" rel="tag">lib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">57</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/" rel="tag">macos</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">mongodb</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openwrt/" rel="tag">openwrt</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ops/" rel="tag">ops</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/optimization/" rel="tag">optimization</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/powershell/" rel="tag">powershell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspbian/" rel="tag">raspbian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/" rel="tag">router</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/" rel="tag">rust</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming-media/" rel="tag">streaming-media</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a><span class="tag-list-count">46</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E5%BE%8B/" rel="tag">七律</a><span class="tag-list-count">168</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%83%E9%B9%B0%E5%9C%A3/" rel="tag">七鹰圣</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%94%E8%A8%80/" rel="tag">五言</a><span class="tag-list-count">80</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%9C%E5%93%81/" rel="tag">作品</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%9A%E9%A2%98/" rel="tag">做题</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%96%B7/" rel="tag">喷</a><span class="tag-list-count">131</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%A3%E5%B0%8F%E5%BC%80/" rel="tag">圣小开</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%93%E8%A8%80/" rel="tag">寓言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%B9%E8%81%94/" rel="tag">对联</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" rel="tag">心理邪稣</a><span class="tag-list-count">45</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%AA%E6%82%9F/" rel="tag">怪悟</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%93%E5%98%B4%E7%82%AE/" rel="tag">打嘴炮</a><span class="tag-list-count">47</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%A8%E8%B8%A2/" rel="tag">挨踢</a><span class="tag-list-count">116</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E8%B5%B0/" rel="tag">暴走</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%8C%E8%AF%84/" rel="tag">歌评</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%BB%E7%A5%9E/" rel="tag">死神</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A5%E5%B7%B4%E5%A8%83/" rel="tag">泥巴娃</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%97%E8%84%91/" rel="tag">洗脑</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%80%B6%E4%B9%8E%E7%9F%A5%E7%A8%A3/" rel="tag">耶乎知稣</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%8D/" rel="tag">词</a><span class="tag-list-count">81</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E7%A0%94/" rel="tag">调研</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8F%E5%AD%90%E9%82%AA%E7%A8%A3/" rel="tag">量子邪稣</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%91%E8%9E%8D/" rel="tag">金融</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%BD%E5%8D%97%E8%AF%AD/" rel="tag">闽南语</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9C%B9%E9%9B%B3/" rel="tag">霹雳</a><span class="tag-list-count">65</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%93%BE/" rel="tag">鲸神链</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" rel="tag">鲸神魂裂</a><span class="tag-list-count">48</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%B9%8F%E9%A3%8E/" rel="tag">鹏风</a><span class="tag-list-count">27</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/archlinux/" style="font-size: 10px;">archlinux</a> <a href="/tags/armbian/" style="font-size: 10.81px;">armbian</a> <a href="/tags/atl/" style="font-size: 10px;">atl</a> <a href="/tags/blockchain/" style="font-size: 14.32px;">blockchain</a> <a href="/tags/boost/" style="font-size: 12.7px;">boost</a> <a href="/tags/c/" style="font-size: 10.54px;">c</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/coding-style/" style="font-size: 10.81px;">coding-style</a> <a href="/tags/cpp/" style="font-size: 15.95px;">cpp</a> <a href="/tags/cppwinrt/" style="font-size: 10px;">cppwinrt</a> <a href="/tags/cryptology/" style="font-size: 11.35px;">cryptology</a> <a href="/tags/debian/" style="font-size: 12.7px;">debian</a> <a href="/tags/debug/" style="font-size: 17.84px;">debug</a> <a href="/tags/dev/" style="font-size: 19.19px;">dev</a> <a href="/tags/directx/" style="font-size: 10px;">directx</a> <a href="/tags/dotnet/" style="font-size: 10.27px;">dotnet</a> <a href="/tags/embedded/" style="font-size: 16.22px;">embedded</a> <a href="/tags/ffmpeg/" style="font-size: 11.89px;">ffmpeg</a> <a href="/tags/go/" style="font-size: 12.16px;">go</a> <a href="/tags/gsl/" style="font-size: 10.81px;">gsl</a> <a href="/tags/lib/" style="font-size: 10px;">lib</a> <a href="/tags/linux/" style="font-size: 18.11px;">linux</a> <a href="/tags/machine-learning/" style="font-size: 10.54px;">machine-learning</a> <a href="/tags/macos/" style="font-size: 12.43px;">macos</a> <a href="/tags/mongodb/" style="font-size: 12.16px;">mongodb</a> <a href="/tags/nodejs/" style="font-size: 11.89px;">nodejs</a> <a href="/tags/openwrt/" style="font-size: 15.41px;">openwrt</a> <a href="/tags/ops/" style="font-size: 15.68px;">ops</a> <a href="/tags/optimization/" style="font-size: 14.32px;">optimization</a> <a href="/tags/powershell/" style="font-size: 10.27px;">powershell</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/raspbian/" style="font-size: 10px;">raspbian</a> <a href="/tags/reverse-engineering/" style="font-size: 10.54px;">reverse-engineering</a> <a href="/tags/router/" style="font-size: 11.62px;">router</a> <a href="/tags/rust/" style="font-size: 10.81px;">rust</a> <a href="/tags/security/" style="font-size: 12.43px;">security</a> <a href="/tags/streaming-media/" style="font-size: 12.43px;">streaming-media</a> <a href="/tags/windows/" style="font-size: 17.03px;">windows</a> <a href="/tags/%E4%B8%83%E5%BE%8B/" style="font-size: 20px;">七律</a> <a href="/tags/%E4%B8%83%E9%B9%B0%E5%9C%A3/" style="font-size: 11.89px;">七鹰圣</a> <a href="/tags/%E4%BA%94%E8%A8%80/" style="font-size: 18.65px;">五言</a> <a href="/tags/%E4%BD%9C%E5%93%81/" style="font-size: 11.89px;">作品</a> <a href="/tags/%E5%81%9A%E9%A2%98/" style="font-size: 10.54px;">做题</a> <a href="/tags/%E5%96%B7/" style="font-size: 19.73px;">喷</a> <a href="/tags/%E5%9C%A3%E5%B0%8F%E5%BC%80/" style="font-size: 12.43px;">圣小开</a> <a href="/tags/%E5%AF%93%E8%A8%80/" style="font-size: 10px;">寓言</a> <a href="/tags/%E5%AF%B9%E8%81%94/" style="font-size: 11.08px;">对联</a> <a href="/tags/%E5%BD%B1%E8%AF%84/" style="font-size: 10.27px;">影评</a> <a href="/tags/%E5%BF%83%E7%90%86%E9%82%AA%E7%A8%A3/" style="font-size: 16.76px;">心理邪稣</a> <a href="/tags/%E6%80%AA%E6%82%9F/" style="font-size: 14.86px;">怪悟</a> <a href="/tags/%E6%89%93%E5%98%B4%E7%82%AE/" style="font-size: 17.3px;">打嘴炮</a> <a href="/tags/%E6%8C%A8%E8%B8%A2/" style="font-size: 19.46px;">挨踢</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10.81px;">数学</a> <a href="/tags/%E6%9A%B4%E8%B5%B0/" style="font-size: 11.89px;">暴走</a> <a href="/tags/%E6%AD%8C%E8%AF%84/" style="font-size: 10px;">歌评</a> <a href="/tags/%E6%AD%BB%E7%A5%9E/" style="font-size: 12.97px;">死神</a> <a href="/tags/%E6%B3%A5%E5%B7%B4%E5%A8%83/" style="font-size: 13.78px;">泥巴娃</a> <a href="/tags/%E6%B4%97%E8%84%91/" style="font-size: 13.51px;">洗脑</a> <a href="/tags/%E8%80%B6%E4%B9%8E%E7%9F%A5%E7%A8%A3/" style="font-size: 13.78px;">耶乎知稣</a> <a href="/tags/%E8%AF%8D/" style="font-size: 18.92px;">词</a> <a href="/tags/%E8%B0%83%E7%A0%94/" style="font-size: 14.59px;">调研</a> <a href="/tags/%E9%87%8F%E5%AD%90%E9%82%AA%E7%A8%A3/" style="font-size: 13.24px;">量子邪稣</a> <a href="/tags/%E9%87%91%E8%9E%8D/" style="font-size: 15.41px;">金融</a> <a href="/tags/%E9%97%BD%E5%8D%97%E8%AF%AD/" style="font-size: 14.05px;">闽南语</a> <a href="/tags/%E9%9C%B9%E9%9B%B3/" style="font-size: 18.38px;">霹雳</a> <a href="/tags/%E9%B2%B8%E7%A5%9E%E9%93%BE/" style="font-size: 16.49px;">鲸神链</a> <a href="/tags/%E9%B2%B8%E7%A5%9E%E9%AD%82%E8%A3%82/" style="font-size: 17.57px;">鲸神魂裂</a> <a href="/tags/%E9%B9%8F%E9%A3%8E/" style="font-size: 15.14px;">鹏风</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">十月 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">九月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">八月 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">六月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">四月 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">三月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">二月 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/01/">一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/12/">十二月 2012</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/08/">八月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/05/">五月 2012</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/04/">四月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/02/">二月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">一月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/10/">十月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/09/">九月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/08/">八月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/06/">六月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/04/">四月 2009</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/03/">三月 2009</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/02/">二月 2009</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/01/">一月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/12/">十二月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/08/">八月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/06/">六月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/05/">五月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/04/">四月 2008</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/06/09/umutech-install-both-arch-linux-and-debian-on-the-same-partition/">安装 Arch Linux 和 Debian 双系统至同一分区</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/09/caution-inferior-hdr-is-ruining-programmers-careers/">警惕！劣质的 HDR 正在摧毁程序员的职业生涯</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/08/umutech-partuuid/">PARTUUID</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/19/umutech-install-debian-quickly/">快速安装 Debian</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/12/umutech-installing-the-secure-version-of-thunder-on-windows/">Windows 平台安装安全版掩耳（Thunder）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://my.oschina.net/umu618" target="_blank">UMUTech</a>
+          </li>
+        
+          <li>
+            <a href="http://blog.vichamp.com/" target="_blank">叹为观止</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+	  <a href="https://beian.miit.gov.cn/" target="_blank">闽ICP备14015033号-1</a>
+	  &copy; 2008-2024 圣小开<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<script type="text/javascript"> 
+  (function(){ 
+  var appid = 'cytnUIVvU'; 
+  var conf = 'prod_ec4a41b6dd2a5922bc15dea6d7b0cab4'; 
+  var width = window.innerWidth || document.documentElement.clientWidth; 
+  if (width < 960) {
+  var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.charset = 'utf-8';
+  script.id = 'changyan_mobile_js';
+  script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+  head.appendChild(script);
+  } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
