@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2024-06-29T15:45:20.218Z</updated>
+  <updated>2024-07-06T09:47:45.533Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>修复因防火墙故障导致的 winget 无法使用</title>
+    <link href="https://blog.umu618.com/2024/07/06/umutech-fix-winget/"/>
+    <id>https://blog.umu618.com/2024/07/06/umutech-fix-winget/</id>
+    <published>2024-07-06T09:13:15.000Z</published>
+    <updated>2024-07-06T09:47:45.533Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>首次使用 winget，报无法注册 windows.firewall 扩展，防火墙无法启动。</p><h2 id="相关问题">相关问题</h2><ol><li><p><a href="https://github.com/microsoft/winget-cli/issues/4305">https://github.com/microsoft/winget-cli/issues/4305</a></p></li><li><p><a href="https://answers.microsoft.com/zh-hans/windows/forum/all/%E5%AE%89%E8%A3%85microsoft/d5635414-7302-4fc5-bbdc-f2f52bf9f3d7">安装Microsoft Store应用时，系统无法注册 windows.firewall 扩展</a></p></li></ol><h2 id="分析">分析</h2><p>不仅是 winget 会因为防火墙故障而无法启动，其它 Microsoft Store 应用也可能遇到，说明这问题出在防火墙，而不是 winget。</p><p>经过排查发现根源是 Base Filtering Engine 服务无法启动导致。用 sc 命令可以发现，Windows Defender Firewall (mpssvc) 依赖 Base Filtering Engine (bfe)，故 BFE 无法启动必然导致防火墙无法启动。</p><figure class="highlight pwsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> <span class="built_in">sc</span> qc mpssvc</span><br><span class="line">[<span class="type">SC</span>] QueryServiceConfig 成功</span><br><span class="line"></span><br><span class="line">SERVICE_NAME: mpssvc</span><br><span class="line">        <span class="built_in">TYPE</span>               : <span class="number">20</span>  WIN32_SHARE_PROCESS</span><br><span class="line">        START_TYPE         : <span class="number">2</span>   AUTO_START</span><br><span class="line">        ERROR_CONTROL      : <span class="number">1</span>   NORMAL</span><br><span class="line">        BINARY_PATH_NAME   : C:\Windows\system32\svchost.exe <span class="literal">-k</span> LocalServiceNoNetworkFirewall <span class="literal">-p</span></span><br><span class="line">        LOAD_ORDER_GROUP   : NetworkProvider</span><br><span class="line">        TAG                : <span class="number">0</span></span><br><span class="line">        DISPLAY_NAME       : Windows Defender Firewall</span><br><span class="line">        DEPENDENCIES       : mpsdrv</span><br><span class="line">                           : bfe</span><br><span class="line">                           : nsi</span><br><span class="line">        SERVICE_START_NAME : NT Authority\LocalService</span><br></pre></td></tr></table></figure><h2 id="尝试">尝试</h2><ol><li><p>使用 sfc 修复几次，bfe 还是无法启动！</p></li><li><p>从另一台机器导出一份干净的 BFE 服务注册信息，导入故障机，依然无法启动。</p></li><li><p>后来想到：导入时使用的是当前用户身份，可能权限不太一样，于是检查 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BFE 下每个键的权限，发现确实是不一样的。</p></li><li><p>给 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BFE\Parameters 设置权限，添加用户 <code>NT Service\BFE</code> 即可。</p></li></ol><h2 id="参考">参考</h2><p><a href="https://blog.csdn.net/anhui1983/article/details/102443054">Base Filtering Engine （BFE）服务无法启动-CSDN博客</a></p>]]></content>
+    
+    
+    <summary type="html">掐鸡学会修复 BFE</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+  </entry>
   
   <entry>
     <title>双拼输入法</title>
