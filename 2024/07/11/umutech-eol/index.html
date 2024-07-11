@@ -6,15 +6,15 @@
   
   <title>行结束符 | UMU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="掐鸡说为微软已经出手统一了！">
+  <meta name="description" content="掐鸡说微软已经出手统一了！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="行结束符">
 <meta property="og:url" content="https://blog.umu618.com/2024/07/11/umutech-eol/">
 <meta property="og:site_name" content="UMU">
-<meta property="og:description" content="掐鸡说为微软已经出手统一了！">
+<meta property="og:description" content="掐鸡说微软已经出手统一了！">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-11T15:25:50.000Z">
-<meta property="article:modified_time" content="2024-07-11T16:31:40.301Z">
+<meta property="article:modified_time" content="2024-07-11T16:50:45.326Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="optimization">
 <meta name="twitter:card" content="summary">
@@ -124,15 +124,15 @@
 </li>
 </ul>
 <h2 id="2-分析">2. 分析</h2>
-<p>行结束符（end-of-line, EOF）是文本文件中用来表示新行（new line）的间隔，也称作断行符（link break）。</p>
-<p>历史上 EOL 有三种：CR、LF 和 CRLF。其中：</p>
+<p>行结束符（end-of-line, EOF）是文本文件中用来表示新行（new line）的间隔，也称作断行符（line break）。</p>
+<p>历史上，有三种 EOL：CR、LF 和 CRLF。其中：</p>
 <ul>
 <li>CR (Carriage Return)，即回车；</li>
 <li>LF (Line Feed)，即换行。</li>
 </ul>
 <p>古典的 macOS 使用 CR 做 EOF，现在已经改为 LF，所以主流只有 LF 和 CRLF。</p>
 <h3 id="哪个更好呢？">哪个更好呢？</h3>
-<p>从技术的发展史来看，CRLF 更直观。在机械打字机时代，CR 和 LF 分别具有不同的作用：LF 将打印纸张上移一行位置，但是保持当前打字的水平位置不变；CR 则将“Carriage”（打字机上的滚动托架）滚回到打印纸张的最左侧，但是保持当前打字的垂直位置不变，即还是在同一行。 当 CR 和 LF 组合使用时，就是将打印纸张上移一行，且下一个打字位置将回到该行的最左侧。Windows 采用 CRLF，说明微软的人是很技术思维的，就是耿直地认为：行结束就应该先 CR，再 LF。</p>
+<p>从技术的发展史来看，CRLF 更直观。在机械打字机时代，CR 和 LF 分别具有不同的作用：LF 将打印纸张上移一行位置，但是保持当前打字的水平位置不变；CR 则将“Carriage”（打字机上的滚动托架）滚回到打印纸张的最左侧，但是保持当前打字的垂直位置不变，即还是在同一行。 当 CR 和 LF 组合使用时，就是将打印纸张上移一行，且下一个打字位置将回到该行的最左侧。Windows 采用 CRLF，说明微软的人是很技术思维的，就是耿直地认为：行结束就应该像打字机那样先 CR，再 LF。</p>
 <p>但从存储和解析的成本来看，LF 更好。所以现在微软在 Windows 11 里也倾向于同时支持两者，目前就连记事本也能识别 LF 格式的 EOF 了。</p>
 <h3 id="只使用-LF-可行吗？">只使用 LF 可行吗？</h3>
 <p>能统一肯定是好事！在写代码这件事上，只使用 LF，没啥坑。VS2022、VSCode 都能同时支持 CRLF 和 LF。</p>
