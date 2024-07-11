@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2024-07-06T09:47:45.533Z</updated>
+  <updated>2024-07-11T16:31:40.301Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>行结束符</title>
+    <link href="https://blog.umu618.com/2024/07/11/umutech-eol/"/>
+    <id>https://blog.umu618.com/2024/07/11/umutech-eol/</id>
+    <published>2024-07-11T15:25:50.000Z</published>
+    <updated>2024-07-11T16:31:40.301Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-问题">1. 问题</h2><ul><li><p>为何各平台行结束符不同？</p></li><li><p>跨平台开发应该使用哪种行结束符？</p></li></ul><h2 id="2-分析">2. 分析</h2><p>行结束符（end-of-line, EOF）是文本文件中用来表示新行（new line）的间隔，也称作断行符（link break）。</p><p>历史上 EOL 有三种：CR、LF 和 CRLF。其中：</p><ul><li>CR (Carriage Return)，即回车；</li><li>LF (Line Feed)，即换行。</li></ul><p>古典的 macOS 使用 CR 做 EOF，现在已经改为 LF，所以主流只有 LF 和 CRLF。</p><h3 id="哪个更好呢？">哪个更好呢？</h3><p>从技术的发展史来看，CRLF 更直观。在机械打字机时代，CR 和 LF 分别具有不同的作用：LF 将打印纸张上移一行位置，但是保持当前打字的水平位置不变；CR 则将“Carriage”（打字机上的滚动托架）滚回到打印纸张的最左侧，但是保持当前打字的垂直位置不变，即还是在同一行。 当 CR 和 LF 组合使用时，就是将打印纸张上移一行，且下一个打字位置将回到该行的最左侧。Windows 采用 CRLF，说明微软的人是很技术思维的，就是耿直地认为：行结束就应该先 CR，再 LF。</p><p>但从存储和解析的成本来看，LF 更好。所以现在微软在 Windows 11 里也倾向于同时支持两者，目前就连记事本也能识别 LF 格式的 EOF 了。</p><h3 id="只使用-LF-可行吗？">只使用 LF 可行吗？</h3><p>能统一肯定是好事！在写代码这件事上，只使用 LF，没啥坑。VS2022、VSCode 都能同时支持 CRLF 和 LF。</p><h2 id="3-实践">3. 实践</h2><ol><li>git 设置</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf input</span><br><span class="line">git config --global core.safecrlf <span class="literal">true</span></span><br></pre></td></tr></table></figure><ol start="2"><li>工程 <code>.gitattributes</code> 模板</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*                   text=auto eol=lf</span><br><span class="line">*.sln               text eol=crlf</span><br><span class="line">*.vcxproj           text eol=crlf</span><br><span class="line">*.vcxproj.filters   text eol=crlf</span><br></pre></td></tr></table></figure><p>有其它 Windows 特有，并且一保存就自动格式化为 CRLF 的文件，都设成 <code>text eol=crlf</code>。</p><ol start="3"><li>工程 <code>.editconfig</code> 模板</li></ol><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Visual Studio generated .editorconfig file with C++ settings.</span></span><br><span class="line"><span class="attr">root</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="section">[*.&#123;c++,cc,cpp,cxx,h,h++,hh,hpp,hxx,inl,ipp,tlh,tli&#125;]</span></span><br><span class="line"><span class="attr">charset</span> = utf-<span class="number">8</span>-bom</span><br><span class="line"><span class="attr">end_of_line</span> = lf</span><br><span class="line"><span class="attr">insert_final_newline</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">trim_trailing_whitespace</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">掐鸡说为微软已经出手统一了！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="optimization" scheme="https://blog.umu618.com/tags/optimization/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>华为擎云 W515 安装 Debian 12</title>
+    <link href="https://blog.umu618.com/2024/07/07/umutech-install-debian-12-on-w515/"/>
+    <id>https://blog.umu618.com/2024/07/07/umutech-install-debian-12-on-w515/</id>
+    <published>2024-07-07T08:30:55.000Z</published>
+    <updated>2024-07-11T15:40:46.275Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-需求">1. 需求</h2><p>GitHub 太慢，Gitee 老是被封，发邮件反馈好多次，至今给稣打上奇怪的标签。</p><p><a href="https://gitee.com/umu618">https://gitee.com/umu618</a></p><p>于是直接使用 gitlab-ce 打造自己的 git 服务，实现真正的 Private 仓库。</p><h2 id="2-硬件选型">2. 硬件选型</h2><p>首先，上擸𢶍，一台 J4125，6GB 内存的机器。实测 6GB 内存不太够，淘汰。</p><p>看来需要 8~12GB 内存比较靠谱，手里还有 3 台 N100，内存分别为：LPDDR5 4800MHz 8GB、DDR4 3200MHz 32GB、DDR5 4800MHz 32GB，问题是 N100 这么高贵的核显不是浪费了？果断都淘汰。</p><p>后来，把 DDR4 3200MHz 32GB 的 N100 机器出给道友，并收了他的华为擎云 W515，硬件选型迎来完美结束——省电的 arm64 CPU（整机并不省电）；8GB 内存；带不动 4K 的擸𢶍核显，一点都不浪费。</p><h2 id="3-OS-选型">3. OS 选型</h2><p>UOS 和 KylinOS 都玩了好几遍，它们都是桌面系统，有许多限制，不适合做 Server。</p><p>考虑上 Debian，但正常安装 Debian 11 和 12 都会遇到各种黑屏、无法启动。推测新内核无法启动 W515，是因为国产生态的开发比较保守，主要使用 4 和 5 这两个大版本，没给 6 的大版本适配。</p><p>最开始的解决方式是把 Debian 的内核换成 UOS 或 KylinOS 的，虽然启动报错导致启动慢，但又不是不能用。截图是 KylinOS 内核：</p><p><img src="/images/2024/20240331-w515-info.png" alt="W515 信息"></p><p>EFI 程序也是使用 Kylin 的：</p><p><img src="/images/2024/20240331-w515-info.png" alt="W515 EFI"></p><p>至此已经能够使用最新 Debian 发行版，并安装 gitlab-ce。</p><h2 id="4-后记">4. 后记</h2><p>以上折腾完都快一年了，最近发现原来 Debian 10 (Buster) 的内核就是 4.19 系列，所以它的 arm64 版可以直接使用……</p>]]></content>
+    
+    
+    <summary type="html">掐鸡说装 Debian 10 很快</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="linux" scheme="https://blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+    <category term="debian" scheme="https://blog.umu618.com/tags/debian/"/>
+    
+  </entry>
   
   <entry>
     <title>修复因防火墙故障导致的 winget 无法使用</title>
