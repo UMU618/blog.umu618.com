@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2024-07-13T08:47:19.164Z</updated>
+  <updated>2024-08-04T10:00:31.787Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>该不该用 std::string_view 替代 const std::string&amp;？</title>
+    <link href="https://blog.umu618.com/2024/08/04/umutech-should-i-use-std-string-view-instead-of-passing-std-string-by-const-reference/"/>
+    <id>https://blog.umu618.com/2024/08/04/umutech-should-i-use-std-string-view-instead-of-passing-std-string-by-const-reference/</id>
+    <published>2024-08-04T08:38:44.000Z</published>
+    <updated>2024-08-04T10:00:31.787Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><ul><li><p>有的大佬建议使用 <code>std::string_view</code> 替代 <code>const std::string&amp;</code>，也有的大佬表示反对，到底该不该呢？</p></li><li><p>以下代码运行后显示什么？</p></li></ul><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string_view&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std::string_view_literals;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">auto</span> s = <span class="string">&quot;Hello C++ 20!&quot;</span>sv.<span class="built_in">substr</span>(<span class="number">0</span>, <span class="number">5</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%.*s\n&quot;</span>, <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(s.<span class="built_in">size</span>()), s.<span class="built_in">data</span>());</span><br><span class="line">  std::cout &lt;&lt; s &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, s.<span class="built_in">data</span>()); <span class="comment">// buggy</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="分析">分析</h2><p>反对者可能是 C 语言的受害者！（这里没说反对得不对哦！）</p><p>先看看 <a href="https://github.com/isocpp/CppCoreGuidelines">CppCoreGuidelines</a> 的说法：</p><blockquote><p>In C++17, we might use string_view as the argument, rather than const string&amp; to allow more flexibility to callers</p></blockquote><p>这里说的是使用 <code>std::string_view</code> 作为参数，能够适配更多的调用者。不管传入 <code>const char*</code> 类型，还是 <code>std::string</code> 类型的变量，都能编译。</p><p>反之，如果参数是 <code>const std::string&amp;</code> 类型，则有以下缺点：</p><ul><li><p>传入 <code>std::string_view</code> 类型无法编译。</p></li><li><p>传入 <code>const char*</code> 类型，会多构造一个 <code>std::string</code> 类型的临时变量。</p></li></ul><p>但是 <a href="https://github.com/isocpp/CppCoreGuidelines">CppCoreGuidelines</a> 并没有建议把 <code>const std::string&amp;</code> 参数都替换成 <code>std::string_view</code>，而是说字符串是一个大话题，需要分很多种情况讨论。具体可见 <code>SL.str: String</code> 节，下面列出大概意思：</p><blockquote><p>Text manipulation is a huge topic.<br><code>std::string</code> doesn’t cover all of it.<br>This section primarily tries to clarify <code>std::string</code>’s relation to <code>char*</code>, <code>zstring</code>, <code>string_view</code>, and <code>gsl::span&lt;char&gt;</code>.<br>The important issue of non-ASCII character sets and encodings (e.g., <code>wchar_t</code>, Unicode, and UTF-8) will be covered elsewhere.</p><ul><li>SL.str.1: Use <code>std::string</code> to own character sequences</li><li>SL.str.2: Use <code>std::string_view</code> or <code>gsl::span&lt;char&gt;</code> to refer to character sequences</li><li>SL.str.3: Use <code>zstring</code> or <code>czstring</code> to refer to a C-style, zero-terminated, sequence of characters</li><li>SL.str.4: Use <code>char*</code> to refer to a single character</li><li>SL.str.5: Use <code>std::byte</code> to refer to byte values that do not necessarily represent characters</li><li>SL.str.10: Use <code>std::string</code> when you need to perform locale-sensitive string operations</li><li>SL.str.11: Use <code>gsl::span&lt;char&gt;</code> rather than <code>std::string_view</code> when you need to mutate a string</li><li>SL.str.12: Use the <code>s</code> suffix for string literals meant to be standard-library <code>string</code>s</li></ul></blockquote><p>那么，究竟啥场景能用 <code>std::string_view</code> 类型参数？</p><p>F.25: Use a <code>zstring</code> or a <code>not_null&lt;zstring&gt;</code> to designate a C-style string 节有一句话：</p><blockquote><p>If you don’t need null termination, use <code>string_view</code>.</p></blockquote><p>这句是重点！因为 <code>std::string_view</code> 并不保证 Null-terminated，如果函数使用 <code>std::string_view</code> 参数，却做了 Null-terminated 的假定，那么，在把参数传给其它 C-Style API 时，就可能导致 bug，甚至崩溃。</p><p>例如，这位大佬的文章说的情况：</p><ul><li><a href="https://giodicanio.com/2023/05/09/string_view-bug-the-case-of-string_view-and-the-magic-string/">The Case of string_view and the Magic String</a></li><li><a href="https://giodicanio.com/2024/05/14/why-dont-you-use-string-views-like-std-wstring_view-instead-of-passing-std-wstring-by-const-reference/">Why Don’t You Use String Views (as std::wstring_view) Instead of Passing std::wstring by const&amp;?</a></li></ul><p>简单地说，<code>std::string</code> 是保证 Null-terminated 的，而 <code>std::string_view</code> 不保证，当 <code>const std::string&amp;</code> 参数被替换为 <code>std::string_view</code> 时，对于部分没有 Null-terminated 的字符序列，C-Style API 可能读入超过范围的字符，而导致逻辑上的错误，还可能因为读到无权限的地址而崩溃。</p><h2 id="总结">总结</h2><p>简单地说，看情况而定。总之，为了写高质量的 C++ 代码，必须细分这么多的情况。</p><p>但您如果熟悉 C 语言，可能会提出疑问：大部分 CRT 函数或 C-Style API 不都做了字符串是 Null-terminated 的假定？确实如此！如果人人写好注释，人人遵守规则，那确实能把代码简化。问题是：异常和意外，哪个先来？</p>]]></content>
+    
+    
+    <summary type="html">掐鸡也表示很无奈！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+    <category term="coding-style" scheme="https://blog.umu618.com/tags/coding-style/"/>
+    
+  </entry>
   
   <entry>
     <title>在容器的遍历中使用迭代器删除元素</title>
