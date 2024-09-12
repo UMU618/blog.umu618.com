@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tools</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="UMU's Tools">
+    <meta name="keywords" content="Tools">
+    <style>
+        body {
+            color: black;
+            background: #c7edcc;
+            margin: 0px auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 816px;
+            margin: 0px auto;
+        }
+
+        td {
+            width: 50px;
+            height: 40px;
+            border: 1px solid;
+        }
+    </style>
+
+    <script>
+        function base64Encode() {
+            let str = document.getElementById("textInput").value;
+            document.getElementById("base64Input").value = btoa(str);
+        }
+        function base64Decode() {
+            let base64Str = document.getElementById("base64Input").value;
+            document.getElementById("textInput").value = atob(base64Str);
+        }
+
+        function toHex(binaryStr) {
+            let hexStr = '';
+            for (let i = 0; i < binaryStr.length; ++i) {
+                let hex = binaryStr.charCodeAt(i).toString(16);
+                hexStr += ('00' + hex).slice(-2);
+            }
+            return hexStr;
+        }
+        function fromHex(hexStr) {
+            let bytes = new Uint8Array(hexStr.length / 2);
+            for (let i = 0; i < bytes.length; ++i) {
+                bytes[i] = parseInt(hexStr.substr(i * 2, 2), 16);
+            }
+            return String.fromCharCode.apply(null, bytes);
+        }
+        function hexEncode() {
+            let str = document.getElementById("textInput").value;
+            document.getElementById("hexInput").value = toHex(str);
+        }
+        function hexDecode() {
+            let base64Str = document.getElementById("hexInput").value;
+            document.getElementById("textInput").value = fromHex(base64Str);
+        }
+
+        function convertBase64ToHex() {
+            let base64Str = document.getElementById("base64Input").value;
+            let binaryStr = atob(base64Str);
+            document.getElementById("hexInput").value = toHex(binaryStr);
+        }
+
+        function convertHexToBase64() {
+            let hexStr = document.getElementById("hexInput").value;
+            let binaryStr = fromHex(hexStr)
+            let base64Str = btoa(binaryStr);
+            document.getElementById("base64Input").value = base64Str;
+        }
+
+        function validateBase64Input(event) {
+            const currentValue = event.target.value;
+            if (currentValue.length > 0) {
+                const base64Chars = /^[A-Za-z0-9+/=]+$/;
+                if (!base64Chars.test(currentValue)) {
+                    event.target.value = currentValue.replace(/[^A-Za-z0-9+\/=]/g, '');
+                }
+            }
+        }
+
+        function allowHexInputOnly(event) {
+            const key = event.key;
+            const isValidHex = /[0-9a-fA-F]/.test(key);
+            const isControlKey = event.key === 'Backspace' || event.key === 'Delete' || 
+                                  event.key === 'ArrowLeft' || event.key === 'ArrowRight' ||
+                                  event.key === 'Tab';
+            if (!isValidHex && !isControlKey) {
+                event.preventDefault();
+            }
+        }
+
+        function formatHexInput(event) {
+            const textarea = event.target;
+            textarea.value = textarea.value.replace(/[^0-9A-Fa-f]/g, '');
+            let button = document.getElementById("hexToBase64");
+            if (textarea.value.length % 2 === 0) {
+                button.disabled = false;
+            } else {
+                button.disabled = true;
+            }
+        }
+
+        function insertChar(text, s) {
+            let result = "";
+            for (let i = 0; i < text.length; i += 2) {
+                result += text.slice(i, i + 2);
+                if (i < text.length - 2) {
+                    result += s;
+                }
+            }
+            return result;
+        }
+        function insertSpaces(s) {
+            let hexStr = document.getElementById("hexInput").value;
+            document.getElementById("hexResult").value = insertChar(hexStr, " ");
+        }
+        function insertColons(s) {
+            let hexStr = document.getElementById("hexInput").value;
+            document.getElementById("hexResult").value = insertChar(hexStr, ":");
+        }
+    </script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="UMU" type="application/atom+xml">
+</head>
+
+<body width="100%" height="100%">
+    <h2>Offline Base64-Hex Converter</h2>
+    <div>Text:</div>
+    <textarea id="textInput" rows="4" cols="120" placeholder="Enter string"></textarea>
+    <div>
+        <button onclick="base64Encode()">⬇️Base64Encode</button>
+        <button onclick="base64Decode()">⬆️Base64Decode</button>
+        <button onclick="hexEncode()">⬇️⬇️HexEncode</button>
+        <button onclick="hexDecode()">⬆️⬆️HexDecode</button>
+    </div>
+    <div>Base64:</div>
+    <textarea id="base64Input" rows="4" cols="120" oninput="validateBase64Input(event)" placeholder="Enter Base64 string"></textarea>
+    <div>
+        <button onclick="convertBase64ToHex()">⬇️Base64Decode then HexEncode</button>
+        <button id="hexToBase64" onclick="convertHexToBase64()">⬆️HexDecode then Base64Encode</button>
+    </div>
+    <div>Hex:</div>
+    <textarea id="hexInput" rows="4" cols="120" onkeypress="allowHexInputOnly(event)" oninput="formatHexInput(event)" placeholder="Enter Hex string"></textarea>
+    <div>
+        <button onclick="insertSpaces()">⬇️Insert spaces to hex</button>
+        <button onclick="insertColons()">⬇️Insert colons to hex</button>
+    </div>
+    <textarea id="hexResult" rows="4" cols="120" readonly></textarea>
+</body>
+
+</html>
+
