@@ -30,16 +30,34 @@
     </style>
 
     <script>
+        function toBase64(str) {
+            const encoder = new TextEncoder();
+            const view = encoder.encode(str);
+            let binaryStr = String.fromCharCode(...view);
+            return btoa(binaryStr);
+        }
+        function fromBase64(base64) {
+            let str = atob(base64);
+            let bytes = new Uint8Array(str.length);
+            for (let i = 0; i < str.length; i++) {
+                bytes[i] = str.charCodeAt(i);
+            }
+            const decoder = new TextDecoder('utf-8');
+            return decoder.decode(bytes);
+        }
         function base64Encode() {
-            let str = document.getElementById("textInput").value;
-            document.getElementById("base64Input").value = btoa(str);
+            let str = document.getElementById('textInput').value;
+            document.getElementById('base64Input').value = toBase64(str);
         }
         function base64Decode() {
-            let base64Str = document.getElementById("base64Input").value;
-            document.getElementById("textInput").value = atob(base64Str);
+            let base64Str = document.getElementById('base64Input').value;
+            document.getElementById('textInput').value = fromBase64(base64Str);
         }
 
-        function toHex(binaryStr) {
+        function toHex(str) {
+            const encoder = new TextEncoder();
+            const view = encoder.encode(str);
+            let binaryStr = String.fromCharCode(...view);
             let hexStr = '';
             for (let i = 0; i < binaryStr.length; ++i) {
                 let hex = binaryStr.charCodeAt(i).toString(16);
@@ -52,28 +70,29 @@
             for (let i = 0; i < bytes.length; ++i) {
                 bytes[i] = parseInt(hexStr.substr(i * 2, 2), 16);
             }
-            return String.fromCharCode.apply(null, bytes);
+            const decoder = new TextDecoder('utf-8');
+            return decoder.decode(bytes);
         }
         function hexEncode() {
-            let str = document.getElementById("textInput").value;
-            document.getElementById("hexInput").value = toHex(str);
+            let str = document.getElementById('textInput').value;
+            document.getElementById('hexInput').value = toHex(str);
         }
         function hexDecode() {
-            let base64Str = document.getElementById("hexInput").value;
-            document.getElementById("textInput").value = fromHex(base64Str);
+            let base64Str = document.getElementById('hexInput').value;
+            document.getElementById('textInput').value = fromHex(base64Str);
         }
 
         function convertBase64ToHex() {
-            let base64Str = document.getElementById("base64Input").value;
-            let binaryStr = atob(base64Str);
-            document.getElementById("hexInput").value = toHex(binaryStr);
+            let base64Str = document.getElementById('base64Input').value;
+            let binaryStr = fromBase64(base64Str);
+            document.getElementById('hexInput').value = toHex(binaryStr);
         }
 
         function convertHexToBase64() {
-            let hexStr = document.getElementById("hexInput").value;
+            let hexStr = document.getElementById('hexInput').value;
             let binaryStr = fromHex(hexStr)
-            let base64Str = btoa(binaryStr);
-            document.getElementById("base64Input").value = base64Str;
+            let base64Str = toBase64(binaryStr);
+            document.getElementById('base64Input').value = base64Str;
         }
 
         function validateBase64Input(event) {
@@ -100,7 +119,7 @@
         function formatHexInput(event) {
             const textarea = event.target;
             textarea.value = textarea.value.replace(/[^0-9A-Fa-f]/g, '');
-            let button = document.getElementById("hexToBase64");
+            let button = document.getElementById('hexToBase64');
             if (textarea.value.length % 2 === 0) {
                 button.disabled = false;
             } else {
@@ -109,7 +128,7 @@
         }
 
         function insertChar(text, s) {
-            let result = "";
+            let result = '';
             for (let i = 0; i < text.length; i += 2) {
                 result += text.slice(i, i + 2);
                 if (i < text.length - 2) {
@@ -119,12 +138,12 @@
             return result;
         }
         function insertSpaces(s) {
-            let hexStr = document.getElementById("hexInput").value;
-            document.getElementById("hexResult").value = insertChar(hexStr, " ");
+            let hexStr = document.getElementById('hexInput').value;
+            document.getElementById('hexResult').value = insertChar(hexStr, ' ');
         }
         function insertColons(s) {
-            let hexStr = document.getElementById("hexInput").value;
-            document.getElementById("hexResult").value = insertChar(hexStr, ":");
+            let hexStr = document.getElementById('hexInput').value;
+            document.getElementById('hexResult').value = insertChar(hexStr, ':');
         }
     </script>
 <meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="UMU" type="application/atom+xml">
