@@ -120,7 +120,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/16/reconstructionism-poet-tunnel/" data-id="cly09uhsx01kqsw7vdvqt771l" class="article-share-link" data-share="baidu" data-title="诗盗·翔胺睡道">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/16/reconstructionism-poet-tunnel/" data-id="cm3zebrgt01iffk7meijof3xg" class="article-share-link" data-share="baidu" data-title="诗盗·翔胺睡道">分享到</a>
       
 
       
@@ -177,10 +177,10 @@
 <h2 id="转换过程">转换过程</h2>
 <h3 id="1-解码私钥">1. 解码私钥</h3>
 <p>假设私钥为：<code>5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3</code>，这是 base58 编码，用 bs58 库解码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bs = <span class="built_in">require</span>(<span class="string">&#x27;bs58&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bs.<span class="title function_">decode</span>(<span class="string">&#x27;5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bs = <span class="built_in">require</span>(<span class="string">&#x27;bs58&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bs.decode(<span class="string">&#x27;5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>得到 <code>&lt;Buffer 80 d2 65 3f f7 cb b2 d8 ff 12 9a c2 7e f5 78 1c e6 8b 25 58 c4 1a 74 af 1f 2d dc a6 35 cb ee f0 7d aa 08 64 4a&gt;</code>，其中第 1 个字节 <code>0x80</code> 是类型，末尾的 4 字节是校验码。</p>
 <p>这里我们不关心校验码，也可以直接用 <code>bs58check</code> 解码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bsc = <span class="built_in">require</span>(<span class="string">&#x27;bs58check&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bsc.<span class="title function_">decode</span>(<span class="string">&#x27;5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bsc = <span class="built_in">require</span>(<span class="string">&#x27;bs58check&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bsc.decode(<span class="string">&#x27;5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>得到 <code>&lt;Buffer 80 d2 65 3f f7 cb b2 d8 ff 12 9a c2 7e f5 78 1c e6 8b 25 58 c4 1a 74 af 1f 2d dc a6 35 cb ee f0 7d&gt;</code>，去掉首字节后为：</p>
 <p><code>d2 65 3f f7 cb b2 d8 ff 12 9a c2 7e f5 78 1c e6 8b 25 58 c4 1a 74 af 1f 2d dc a6 35 cb ee f0 7d</code></p>
 <p>这是 256bit 整数的 Big endian 字节流表示，转为 16 进制整形为 <code>0xd2653ff7cbb2d8ff129ac27ef5781ce68b2558c41a74af1f2ddca635cbeef07d</code>，记为 <code>pk</code>。</p>
@@ -197,17 +197,17 @@
 <p><strong>注：若 y 为奇数，则前缀为 3。</strong></p>
 <p><strong>注：为什么这么规定？只用 x 值和 y 值的奇偶性表示一个点，这叫公钥的压缩格式。因为只要有 x，就可以通过 k1 的椭圆曲线方程式 $y^2 = x^3 + 7 \mod p$ 求出 y，但此时 y 会有两个解，又由于 p 是一个大质数，必定为奇数，故两个 y 解的和 mod p 一定等于 0，即一奇一偶，所以用 x 和 y 的奇偶性标志即可代表这个点。</strong></p>
 <p>接着求校验码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ripemd160 = <span class="built_in">require</span>(<span class="string">&#x27;ripemd160&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title function_">ripemd160</span>().<span class="title function_">update</span>(<span class="title class_">Buffer</span>.<span class="title function_">from</span>([<span class="number">2</span>, <span class="number">0xc0</span>, <span class="number">0xde</span>, <span class="number">0xd2</span>, <span class="number">0xbc</span>, <span class="number">0x1f</span>, <span class="number">0x13</span>, <span class="number">0x05</span>, <span class="number">0xfb</span>, <span class="number">0x0f</span>, <span class="number">0xaa</span>, <span class="number">0xc5</span>, <span class="number">0xe6</span>, <span class="number">0xc0</span>, <span class="number">0x3e</span>, <span class="number">0xe3</span>, <span class="number">0xa1</span>, <span class="number">0x92</span>, <span class="number">0x42</span>, <span class="number">0x34</span>, <span class="number">0x98</span>, <span class="number">0x54</span>, <span class="number">0x27</span>, <span class="number">0xb6</span>, <span class="number">0x16</span>, <span class="number">0x7c</span>, <span class="number">0xa5</span>, <span class="number">0x69</span>, <span class="number">0xd1</span>, <span class="number">0x3d</span>, <span class="number">0xf4</span>, <span class="number">0x35</span>, <span class="number">0xcf</span>])).<span class="title function_">digest</span>()</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ripemd160 = <span class="built_in">require</span>(<span class="string">&#x27;ripemd160&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> ripemd160().update(Buffer.from([<span class="number">2</span>, <span class="number">0xc0</span>, <span class="number">0xde</span>, <span class="number">0xd2</span>, <span class="number">0xbc</span>, <span class="number">0x1f</span>, <span class="number">0x13</span>, <span class="number">0x05</span>, <span class="number">0xfb</span>, <span class="number">0x0f</span>, <span class="number">0xaa</span>, <span class="number">0xc5</span>, <span class="number">0xe6</span>, <span class="number">0xc0</span>, <span class="number">0x3e</span>, <span class="number">0xe3</span>, <span class="number">0xa1</span>, <span class="number">0x92</span>, <span class="number">0x42</span>, <span class="number">0x34</span>, <span class="number">0x98</span>, <span class="number">0x54</span>, <span class="number">0x27</span>, <span class="number">0xb6</span>, <span class="number">0x16</span>, <span class="number">0x7c</span>, <span class="number">0xa5</span>, <span class="number">0x69</span>, <span class="number">0xd1</span>, <span class="number">0x3d</span>, <span class="number">0xf4</span>, <span class="number">0x35</span>, <span class="number">0xcf</span>])).digest()</span><br></pre></td></tr></table></figure>
 <p>得到：<code>&lt;Buffer eb 05 f9 d2 c6 dd 62 f7 f2 a0 f7 61 ea 1d 8c 0b 84 4a 3b 52&gt;</code>，取前 4 字节，添加到末尾，得到：<code>[2, 0xc0, 0xde, 0xd2, 0xbc, 0x1f, 0x13, 0x05, 0xfb, 0x0f, 0xaa, 0xc5, 0xe6, 0xc0, 0x3e, 0xe3, 0xa1, 0x92, 0x42, 0x34, 0x98, 0x54, 0x27, 0xb6, 0x16, 0x7c, 0xa5, 0x69, 0xd1, 0x3d, 0xf4, 0x35, 0xcf, 0xeb, 0x05, 0xf9, 0xd2]</code></p>
 <p>然后，base58 编码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bs = <span class="built_in">require</span>(<span class="string">&#x27;bs58&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bs.<span class="title function_">encode</span>(<span class="title class_">Buffer</span>.<span class="title function_">from</span>([<span class="number">2</span>, <span class="number">0xc0</span>, <span class="number">0xde</span>, <span class="number">0xd2</span>, <span class="number">0xbc</span>, <span class="number">0x1f</span>, <span class="number">0x13</span>, <span class="number">0x05</span>, <span class="number">0xfb</span>, <span class="number">0x0f</span>, <span class="number">0xaa</span>, <span class="number">0xc5</span>, <span class="number">0xe6</span>, <span class="number">0xc0</span>, <span class="number">0x3e</span>, <span class="number">0xe3</span>, <span class="number">0xa1</span>, <span class="number">0x92</span>, <span class="number">0x42</span>, <span class="number">0x34</span>, <span class="number">0x98</span>, <span class="number">0x54</span>, <span class="number">0x27</span>, <span class="number">0xb6</span>, <span class="number">0x16</span>, <span class="number">0x7c</span>, <span class="number">0xa5</span>, <span class="number">0x69</span>, <span class="number">0xd1</span>, <span class="number">0x3d</span>, <span class="number">0xf4</span>, <span class="number">0x35</span>, <span class="number">0xcf</span>, <span class="number">0xeb</span>, <span class="number">0x05</span>, <span class="number">0xf9</span>, <span class="number">0xd2</span>]))</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bs = <span class="built_in">require</span>(<span class="string">&#x27;bs58&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bs.encode(Buffer.from([<span class="number">2</span>, <span class="number">0xc0</span>, <span class="number">0xde</span>, <span class="number">0xd2</span>, <span class="number">0xbc</span>, <span class="number">0x1f</span>, <span class="number">0x13</span>, <span class="number">0x05</span>, <span class="number">0xfb</span>, <span class="number">0x0f</span>, <span class="number">0xaa</span>, <span class="number">0xc5</span>, <span class="number">0xe6</span>, <span class="number">0xc0</span>, <span class="number">0x3e</span>, <span class="number">0xe3</span>, <span class="number">0xa1</span>, <span class="number">0x92</span>, <span class="number">0x42</span>, <span class="number">0x34</span>, <span class="number">0x98</span>, <span class="number">0x54</span>, <span class="number">0x27</span>, <span class="number">0xb6</span>, <span class="number">0x16</span>, <span class="number">0x7c</span>, <span class="number">0xa5</span>, <span class="number">0x69</span>, <span class="number">0xd1</span>, <span class="number">0x3d</span>, <span class="number">0xf4</span>, <span class="number">0x35</span>, <span class="number">0xcf</span>, <span class="number">0xeb</span>, <span class="number">0x05</span>, <span class="number">0xf9</span>, <span class="number">0xd2</span>]))</span><br></pre></td></tr></table></figure>
 <p>得到：<code>6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV</code>，加上前缀 <code>EOS</code>，即为公钥。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/15/umutech-eosio-private-key-to-public-key/" data-id="cly09uhsx01knsw7vbbnf67y6" class="article-share-link" data-share="baidu" data-title="基于 ECC 的私钥转为公钥的过程">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/15/umutech-eosio-private-key-to-public-key/" data-id="cm3zebrgt01iifk7mgzqj7858" class="article-share-link" data-share="baidu" data-title="基于 ECC 的私钥转为公钥的过程">分享到</a>
       
 
       
@@ -259,7 +259,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/14/reconstructionism-poet-lose-weight-by-eating-chocolates/" data-id="cly09uhsw01khsw7vcwzi2n5l" class="article-share-link" data-share="baidu" data-title="诗盗·吃巧克力减肥">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/14/reconstructionism-poet-lose-weight-by-eating-chocolates/" data-id="cm3zebrgs01icfk7memaw0c51" class="article-share-link" data-share="baidu" data-title="诗盗·吃巧克力减肥">分享到</a>
       
 
       
@@ -317,7 +317,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/09/reconstructionism-poet-dreaming-of-god/" data-id="cly09uhsw01kksw7v2t28hnvp" class="article-share-link" data-share="baidu" data-title="诗盗·梦神">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/09/reconstructionism-poet-dreaming-of-god/" data-id="cm3zebrgr01i6fk7mhe6lfkxw" class="article-share-link" data-share="baidu" data-title="诗盗·梦神">分享到</a>
       
 
       
@@ -377,7 +377,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/09/reconstructionism-poet-firm-without-desire/" data-id="cly09uhsu01kbsw7veout6lid" class="article-share-link" data-share="baidu" data-title="诗盗·无欲则刚">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/09/reconstructionism-poet-firm-without-desire/" data-id="cm3zebrgr01i9fk7mcrec5bs5" class="article-share-link" data-share="baidu" data-title="诗盗·无欲则刚">分享到</a>
       
 
       
@@ -516,7 +516,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/05/god-of-debug-prequel-1/" data-id="cly09uhsr01k4sw7vgik41572" class="article-share-link" data-share="baidu" data-title="八哥之神前传【1】">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/05/god-of-debug-prequel-1/" data-id="cm3zebrgq01i0fk7mgr5b5fec" class="article-share-link" data-share="baidu" data-title="八哥之神前传【1】">分享到</a>
       
 
       
@@ -566,7 +566,7 @@
 <h3 id="2-合约调用-accept-charges">2. 合约调用 accept_charges</h3>
 <p><a target="_blank" rel="noopener" href="https://github.com/EOSIO/spec-repo/blob/master/esr_contract_pays.md">Contracts Paying Transaction Costs</a> 提出一种无需联合签名的方法（注意：目前还只是提案，尚未实现）。</p>
 <p>关键函数如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bool accept_charges(</span><br><span class="line">    uint32_t max_net_usage_words,   // Maximum NET usage to charge</span><br><span class="line">    uint32_t max_cpu_usage_ms       // Maximum CPU usage to charge</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">void get_accept_charges(</span><br><span class="line">    name*     contract,</span><br><span class="line">    uint32_t* max_net_usage_words,</span><br><span class="line">    uint32_t* max_cpu_usage_ms,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">void get_num_actions(</span><br><span class="line">    uint32_t* num_actions,</span><br><span class="line">    uint32_t* num_context_free_actions,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bool accept_charges(</span><br><span class="line">    uint32_t max_net_usage_words,   &#x2F;&#x2F; Maximum NET usage to charge</span><br><span class="line">    uint32_t max_cpu_usage_ms       &#x2F;&#x2F; Maximum CPU usage to charge</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">void get_accept_charges(</span><br><span class="line">    name*     contract,</span><br><span class="line">    uint32_t* max_net_usage_words,</span><br><span class="line">    uint32_t* max_cpu_usage_ms,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">void get_num_actions(</span><br><span class="line">    uint32_t* num_actions,</span><br><span class="line">    uint32_t* num_context_free_actions,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>简单地说，在合约调用 <code>accept_charges</code> 函数，如返回 <code>true</code>，则事务的开销将会由合约账户承担。</p>
 <p>具体规则如下：</p>
 <ul>
@@ -583,7 +583,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/03/umutech-eosio-contract-pays/" data-id="cly09uhsr01k8sw7v1k3c6zfw" class="article-share-link" data-share="baidu" data-title="智能合约替用户承担事务的开销">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/03/umutech-eosio-contract-pays/" data-id="cm3zebrgp01hxfk7mbw063j6t" class="article-share-link" data-share="baidu" data-title="智能合约替用户承担事务的开销">分享到</a>
       
 
       
@@ -640,7 +640,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/08/02/reconstructionism-poet-buy-a-house/" data-id="cly09uhsv01kesw7vgqlh2lwx" class="article-share-link" data-share="baidu" data-title="诗盗·今年七夕不送礼送礼只送学区房吓醒">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/08/02/reconstructionism-poet-buy-a-house/" data-id="cm3zebrgq01i3fk7mf1qyeyuj" class="article-share-link" data-share="baidu" data-title="诗盗·今年七夕不送礼送礼只送学区房吓醒">分享到</a>
       
 
       
@@ -686,11 +686,11 @@
         <h2 id="常规教材">常规教材</h2>
 <p>Bash 循环有三种写法。</p>
 <h3 id="1-类-C-语言语法">1. 类 C 语言语法</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">for ((i = 1; i &lt;= 10000000; ++i))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">for ((i &#x3D; 1; i &lt;&#x3D; 10000000; ++i))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <h3 id="2-for-in-语法">2. for in 语法</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10000000&#125;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10000000&#125;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <h3 id="3-使用外部命令-seq">3. 使用外部命令 seq</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in `seq 1 10000000`</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in &#96;seq 1 10000000&#96;</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <h2 id="分析">分析</h2>
 <p>这三种方法中，性能最好的是第一种，最差的是第三种。</p>
 <p>方法 1 是语言层面的循环语法，循环会<strong>立刻</strong>开始，而后两种，作为对比，并不会<strong>立刻</strong>开始！</p>
@@ -712,7 +712,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/07/30/umutech-optimization-thinking-4-bash-for-loop/" data-id="cly09uhsq01jysw7vgahx3gwj" class="article-share-link" data-share="baidu" data-title="优化思维【4】Bash for 循环">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/07/30/umutech-optimization-thinking-4-bash-for-loop/" data-id="cm3zebrgo01htfk7m6qew86yp" class="article-share-link" data-share="baidu" data-title="优化思维【4】Bash for 循环">分享到</a>
       
 
       
@@ -765,7 +765,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/07/25/executioner/" data-id="cly09uhsq01k1sw7v058ea211" class="article-share-link" data-share="baidu" data-title="刽子手">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/07/25/executioner/" data-id="cm3zebrgo01hqfk7m70ijc4bo" class="article-share-link" data-share="baidu" data-title="刽子手">分享到</a>
       
 
       

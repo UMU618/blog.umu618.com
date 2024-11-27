@@ -6,15 +6,15 @@
   
   <title>鸡兔同笼问题的程序解法 | UMU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="定义 “鸡兔同笼问题”是我国古算书《孙子算经》中著名的数学问题，其内容是：  今有雉（鸡）兔同笼，上有三十五头，下有九十四足。问雉兔各几何。  数学描述 设鸡有 x 只，兔有 y 只，则： 12x + y &#x3D; 352x + 4y &#x3D; 94 解这个方程组得 x &#x3D; 23, y &#x3D; 12。 用矩阵表示： 12[1, 1]  *  [x]  &#x3D;  [35][2, 4]     [y]     [94]">
+  <meta name="description" content="定义 “鸡兔同笼问题”是我国古算书《孙子算经》中著名的数学问题，其内容是：  今有雉（鸡）兔同笼，上有三十五头，下有九十四足。问雉兔各几何。  数学描述 设鸡有 x 只，兔有 y 只，则： 12x + y &#x3D; 352x + 4y &#x3D; 94 解这个方程组得 x &#x3D; 23, y &#x3D; 12。 用矩阵表示： 12[1, 1]  *  [x]  &#x3D;  [35][2, 4]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="鸡兔同笼问题的程序解法">
 <meta property="og:url" content="https://blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/">
 <meta property="og:site_name" content="UMU">
-<meta property="og:description" content="定义 “鸡兔同笼问题”是我国古算书《孙子算经》中著名的数学问题，其内容是：  今有雉（鸡）兔同笼，上有三十五头，下有九十四足。问雉兔各几何。  数学描述 设鸡有 x 只，兔有 y 只，则： 12x + y &#x3D; 352x + 4y &#x3D; 94 解这个方程组得 x &#x3D; 23, y &#x3D; 12。 用矩阵表示： 12[1, 1]  *  [x]  &#x3D;  [35][2, 4]     [y]     [94]">
+<meta property="og:description" content="定义 “鸡兔同笼问题”是我国古算书《孙子算经》中著名的数学问题，其内容是：  今有雉（鸡）兔同笼，上有三十五头，下有九十四足。问雉兔各几何。  数学描述 设鸡有 x 只，兔有 y 只，则： 12x + y &#x3D; 352x + 4y &#x3D; 94 解这个方程组得 x &#x3D; 23, y &#x3D; 12。 用矩阵表示： 12[1, 1]  *  [x]  &#x3D;  [35][2, 4]">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-05-23T14:29:08.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.988Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="做题">
 <meta property="article:tag" content="数学">
@@ -122,10 +122,10 @@
 </blockquote>
 <h2 id="数学描述">数学描述</h2>
 <p>设鸡有 x 只，兔有 y 只，则：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x + y = 35</span><br><span class="line">2x + 4y = 94</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x + y &#x3D; 35</span><br><span class="line">2x + 4y &#x3D; 94</span><br></pre></td></tr></table></figure>
 <p>解这个方程组得 <code>x = 23, y = 12</code>。</p>
 <p>用矩阵表示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 1]  *  [x]  =  [35]</span><br><span class="line">[2, 4]     [y]     [94]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 1]  *  [x]  &#x3D;  [35]</span><br><span class="line">[2, 4]     [y]     [94]</span><br></pre></td></tr></table></figure>
 <h2 id="Python-代码">Python 代码</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.mat([[<span class="number">1</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">4</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.mat([[<span class="number">35</span>], [<span class="number">94</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.I * b</span><br><span class="line">matrix([[<span class="number">23.</span>],</span><br><span class="line">        [<span class="number">12.</span>]])</span><br></pre></td></tr></table></figure>
 <p>再来一题三元版本：</p>
@@ -133,7 +133,7 @@
 <p>有蜘蛛，蜻蜓，蝉三种动物共 18 只，共有腿 118 条，翅膀 20 对，三种动物各几只？</p>
 </blockquote>
 <p>蜘蛛 8 条腿；蜻蜓 6 条腿， 2 对翅膀；蝉 6 条腿，1 对翅膀。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 1, 1]     [x]     [18]</span><br><span class="line">[8, 6, 6]  *  [y]  =  [118]</span><br><span class="line">[0, 2, 1]     [z]     [20]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 1, 1]     [x]     [18]</span><br><span class="line">[8, 6, 6]  *  [y]  &#x3D;  [118]</span><br><span class="line">[0, 2, 1]     [z]     [20]</span><br></pre></td></tr></table></figure>
 <p>代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.mat([[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">8</span>, <span class="number">6</span>, <span class="number">6</span>], [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.mat([[<span class="number">18</span>], [<span class="number">118</span>], [<span class="number">20</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.I * b</span><br><span class="line">matrix([[<span class="number">5.</span>],</span><br><span class="line">        [<span class="number">7.</span>],</span><br><span class="line">        [<span class="number">6.</span>]])</span><br></pre></td></tr></table></figure>
 
@@ -141,7 +141,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/" data-id="cly09uhsd01hysw7v3u6fh9oc" class="article-share-link" data-share="baidu" data-title="鸡兔同笼问题的程序解法">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/" data-id="cm3zebrg801ftfk7m7iiigxqw" class="article-share-link" data-share="baidu" data-title="鸡兔同笼问题的程序解法">分享到</a>
       
 
       

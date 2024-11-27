@@ -14,7 +14,7 @@
 <meta property="og:description" content="标题是个坑 不要在 Ubuntu 上运行这条命令！都说 CentOS 比 Ubuntu 稳定，总算见识到具体案例！ 没有对比就没有伤害 CentOS 123456$ cat &#x2F;etc&#x2F;centos-releaseCentOS Linux release 7.7.1908 (Core)$ chsh -s zshChanging shell for root.chsh: shell must be a">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-23T07:53:16.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2024-04-11T15:14:12.921Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ops">
@@ -119,10 +119,10 @@
 <p>不要在 Ubuntu 上运行这条命令！都说 CentOS 比 Ubuntu 稳定，总算见识到具体案例！</p>
 <h2 id="没有对比就没有伤害">没有对比就没有伤害</h2>
 <h3 id="CentOS">CentOS</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> /etc/centos-release</span><br><span class="line">CentOS Linux release 7.7.1908 (Core)</span><br><span class="line"></span><br><span class="line">$ chsh -s zsh</span><br><span class="line">Changing shell <span class="keyword">for</span> root.</span><br><span class="line">chsh: shell must be a full path name</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/centos-release</span><br><span class="line">CentOS Linux release 7.7.1908 (Core)</span><br><span class="line"></span><br><span class="line">$ chsh -s zsh</span><br><span class="line">Changing shell <span class="keyword">for</span> root.</span><br><span class="line">chsh: shell must be a full path name</span><br></pre></td></tr></table></figure>
 <p>可见，机智的 CentOS，早就料到这个运维事故！</p>
 <h3 id="Ubuntu">Ubuntu</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> /etc/lsb-release</span><br><span class="line">DISTRIB_ID=Ubuntu</span><br><span class="line">DISTRIB_RELEASE=18.04</span><br><span class="line">DISTRIB_CODENAME=bionic</span><br><span class="line">DISTRIB_DESCRIPTION=<span class="string">&quot;Ubuntu 18.04.4 LTS&quot;</span></span><br><span class="line"></span><br><span class="line">$ chsh -s zsh</span><br><span class="line">chsh: Warning: zsh does not exist</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cat</span> /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:zsh</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/lsb-release</span><br><span class="line">DISTRIB_ID=Ubuntu</span><br><span class="line">DISTRIB_RELEASE=18.04</span><br><span class="line">DISTRIB_CODENAME=bionic</span><br><span class="line">DISTRIB_DESCRIPTION=<span class="string">&quot;Ubuntu 18.04.4 LTS&quot;</span></span><br><span class="line"></span><br><span class="line">$ chsh -s zsh</span><br><span class="line">chsh: Warning: zsh does not exist</span><br><span class="line"></span><br><span class="line">$ cat /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:zsh</span><br></pre></td></tr></table></figure>
 <p>SSH 到 Ubuntu Server 上，运行 <code>chsh -s zsh</code>，<code>exit</code> 后就再也无法登录……</p>
 <p>如果您要远程做这个试验，记得 <code>exit</code> 前 <code>chsh -s /bin/zsh</code>，或者 <code>vi</code> 手动纠正 /etc/passwd。</p>
 
@@ -130,7 +130,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/03/23/umutech-chsh/" data-id="cly09uhq7015msw7vb3rp6w9c" class="article-share-link" data-share="baidu" data-title="chsh -s zsh">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/03/23/umutech-chsh/" data-id="cm3zebrdv013vfk7m3gqr9ngl" class="article-share-link" data-share="baidu" data-title="chsh -s zsh">分享到</a>
       
 
       

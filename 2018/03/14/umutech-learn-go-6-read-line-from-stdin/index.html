@@ -14,7 +14,7 @@
 <meta property="og:description" content="需求 需要从 stdin 读取一行汉字！搜了几篇出来，居然都不支持输入中文…… 代码 123456789101112func ScanLine() (line string) &amp;#123;	var buffer []rune	for &amp;#123;		var c rune		n, err :&#x3D; fmt.Scanf(&quot;%c&quot;, &amp;c)		if nil !&#x3D; err || 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-03-14T15:39:35.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.948Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="go">
@@ -118,13 +118,13 @@
         <h2 id="需求">需求</h2>
 <p>需要从 stdin 读取一行汉字！搜了几篇出来，居然都不支持输入中文……</p>
 <h2 id="代码">代码</h2>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ScanLine</span><span class="params">()</span></span> (line <span class="type">string</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> buffer []<span class="type">rune</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> c <span class="type">rune</span></span><br><span class="line">		n, err := fmt.Scanf(<span class="string">&quot;%c&quot;</span>, &amp;c)</span><br><span class="line">		<span class="keyword">if</span> <span class="literal">nil</span> != err || <span class="number">1</span> != n || <span class="string">&#x27;\r&#x27;</span> == c || <span class="string">&#x27;\n&#x27;</span> == c &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		buffer = <span class="built_in">append</span>(buffer, c)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">string</span>(buffer)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ScanLine</span><span class="params">()</span> <span class="params">(line <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> buffer []<span class="keyword">rune</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> c <span class="keyword">rune</span></span><br><span class="line">		n, err := fmt.Scanf(<span class="string">&quot;%c&quot;</span>, &amp;c)</span><br><span class="line">		<span class="keyword">if</span> <span class="literal">nil</span> != err || <span class="number">1</span> != n || <span class="string">&#x27;\r&#x27;</span> == c || <span class="string">&#x27;\n&#x27;</span> == c &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		buffer = <span class="built_in">append</span>(buffer, c)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(buffer)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/03/14/umutech-learn-go-6-read-line-from-stdin/" data-id="cly09uhof00v8sw7vfljsffdc" class="article-share-link" data-share="baidu" data-title="学习 go 语言【6】从 stdin 读取一行汉字">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/03/14/umutech-learn-go-6-read-line-from-stdin/" data-id="cm3zebrcv00y0fk7mhvi08td9" class="article-share-link" data-share="baidu" data-title="学习 go 语言【6】从 stdin 读取一行汉字">分享到</a>
       
 
       

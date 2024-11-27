@@ -14,7 +14,7 @@
 <meta property="og:description" content="掐鸡教的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-20T12:57:10.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.791Z">
+<meta property="article:modified_time" content="2024-04-20T13:43:46.968Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="linux">
@@ -126,18 +126,18 @@
 <p>所以，可以拿它来运行别的 ELF 程序？</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /lib64/ld-linux-x86-64.so.2 $(<span class="built_in">which</span> <span class="built_in">pwd</span>)</span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
 <p>哦吼！还真可以……看看它到底是啥：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ file /lib64/ld-linux-x86-64.so.2</span><br><span class="line">/lib64/ld-linux-x86-64.so.2: symbolic <span class="built_in">link</span> to /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">$ file /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2: ELF 64-bit LSB shared object, x86-64, version 1 (GNU/Linux), dynamically linked, BuildID[sha1]=38e7d4a67acf053c794b3b8094e6900b5163f37d, stripped</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ file /lib64/ld-linux-x86-64.so.2</span><br><span class="line">/lib64/ld-linux-x86-64.so.2: symbolic link to /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">$ file /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2: ELF 64-bit LSB shared object, x86-64, version 1 (GNU/Linux), dynamically linked, BuildID[sha1]=38e7d4a67acf053c794b3b8094e6900b5163f37d, stripped</span><br></pre></td></tr></table></figure>
 <p>所以，在 x64 的 Linux，ELF 的解释器其实是 <code>/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</code>。</p>
 <h2 id="结论">结论</h2>
 <p>最快杀死 Linux 的方法是：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">chmod</span> -x /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; chmod -x /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br></pre></td></tr></table></figure>
 <p>请勿轻易尝试。如果您真的很好奇，记得先备份这个程序，在一定时间内还能救回来。可以这么思考：这个解释器又是谁加载的？您不会已经关闭 shell 了吧？</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/04/20/umutech-kill-linux-quickly/" data-id="cly09uhtf01nbsw7vbb2qff5k" class="article-share-link" data-share="baidu" data-title="快速杀死 Linux">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/04/20/umutech-kill-linux-quickly/" data-id="cm3zebrev018tfk7mgnfxd1dg" class="article-share-link" data-share="baidu" data-title="快速杀死 Linux">分享到</a>
       
 
       

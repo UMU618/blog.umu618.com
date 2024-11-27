@@ -14,7 +14,7 @@
 <meta property="og:description" content="起源 今天看到有网文《iptables+tproxy实现ss-redir的UDP转发的方法》说：“OpenWrt 做 UDP 转发需要的依赖是：iptables-mod-tproxy, kmod-ipt-tproxy 和 ip-full”。使用 opkg install ip 安装的默认是 ip-tiny，一般情况下都是够用的，不禁想弄明白两者有何区别。 探索 拿 ip 命令对比测试：  ip-t">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-09-28T13:56:16.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.998Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="embedded">
 <meta property="article:tag" content="linux">
@@ -123,11 +123,11 @@
 <ul>
 <li>ip-tiny</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OBJECT := &#123; link | address | route | rule | neigh | tunnel | maddress |</span><br><span class="line">            mroute | mrule | monitor | netns | macsec | token | ila |</span><br><span class="line">            vrf | sr &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OBJECT :&#x3D; &#123; link | address | route | rule | neigh | tunnel | maddress |</span><br><span class="line">            mroute | mrule | monitor | netns | macsec | token | ila |</span><br><span class="line">            vrf | sr &#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>ip-full</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OBJECT := &#123; link | address | addrlabel | route | rule | neigh | ntable |</span><br><span class="line">            tunnel | tuntap | maddress | mroute | mrule | monitor | xfrm |</span><br><span class="line">            netns | l2tp | fou | macsec | tcp_metrics | token | netconf | ila |</span><br><span class="line">            vrf | sr &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OBJECT :&#x3D; &#123; link | address | addrlabel | route | rule | neigh | ntable |</span><br><span class="line">            tunnel | tuntap | maddress | mroute | mrule | monitor | xfrm |</span><br><span class="line">            netns | l2tp | fou | macsec | tcp_metrics | token | netconf | ila |</span><br><span class="line">            vrf | sr &#125;</span><br></pre></td></tr></table></figure>
 <p>即 ip-full 多了这些对象： <code>addrlabel | ntable | tuntap | xfrm | l2tp | fou | tcp_metrics | netconf</code>。举个例子，只安装 ip-tiny 时，运行 <code>ip xfrm</code> 报错如下：</p>
 <blockquote>
 <p>Object “xfrm” is unknown, try “ip help”.</p>
@@ -148,7 +148,7 @@ Protocol and features of Mobile IPv6.</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/09/28/umutech-openwrt-primer-15-ip-tiny-or-ip-full/" data-id="cly09uht101lbsw7vgz53dtto" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇15）：ip-tiny 和 ip-full 的区别">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/09/28/umutech-openwrt-primer-15-ip-tiny-or-ip-full/" data-id="cm3zebrgy01j3fk7m2otge5pm" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇15）：ip-tiny 和 ip-full 的区别">分享到</a>
       
 
       

@@ -15,10 +15,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.umu618.com/images/2022/20221205-fc.png">
 <meta property="article:published_time" content="2022-12-04T09:38:05.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.786Z">
+<meta property="article:modified_time" content="2023-10-29T12:24:56.928Z">
 <meta property="article:author" content="圣小开">
-<meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
+<meta property="article:tag" content="dev">
 <meta property="article:tag" content="cpp">
 <meta property="article:tag" content="optimization">
 <meta property="article:tag" content="security">
@@ -122,7 +122,7 @@
       
         <h2 id="问题">问题</h2>
 <p>为了更好追踪产品 bug，程序员很可能在日志里打印代码文件名和行号。例如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::clog &lt;&lt; <span class="string">&quot;(&quot;</span> __FILE__ <span class="string">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="string">&quot;): Failed to initialize!\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">clog</span> &lt;&lt; <span class="string">&quot;(&quot;</span> __FILE__ <span class="string">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="string">&quot;): Failed to initialize!\n&quot;</span>;</span><br></pre></td></tr></table></figure>
 <p>以上代码有两个问题：</p>
 <ol>
 <li>
@@ -134,7 +134,7 @@
 </ol>
 <h2 id="分析">分析</h2>
 <p>第一个问题很容易，打印文件 base name 即可。代码可能如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">consteval</span> std::string_view <span class="title">GetFileBaseName</span><span class="params">(std::string_view path)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.<span class="built_in">substr</span>(path.<span class="built_in">rfind</span>(<span class="string">&#x27;\\&#x27;</span>) + <span class="number">1</span>); <span class="comment">// for Windows path only</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line">std::cout &lt;&lt; <span class="built_in">GetFileBaseName</span>(&#123;__FILE__, <span class="built_in">sizeof</span>(__FILE__) - <span class="number">1</span>&#125;) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="built_in">GetFileBaseName</span>(__FILE__) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">consteval</span> <span class="built_in">std</span>::string_view <span class="title">GetFileBaseName</span><span class="params">(<span class="built_in">std</span>::string_view path)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.substr(path.rfind(<span class="string">&#x27;\\&#x27;</span>) + <span class="number">1</span>); <span class="comment">// for Windows path only</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(&#123;__FILE__, <span class="keyword">sizeof</span>(__FILE__) - <span class="number">1</span>&#125;) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(__FILE__) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>但是，第二个问题并没有解决，<code>__FILE__</code> 依然存在于二进制文件里，用任意十六进制编辑器都能很轻易地找到“代码文件的全路径”。</p>
 <h2 id="解决">解决</h2>
 <p>方法一：去掉 <code>Use Full Paths (/FC)</code> 即可把 <code>__FILE__</code> 设置为只有文件名，没有全路径。</p>
@@ -150,7 +150,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/12/04/umutech-stem/" data-id="cly09uhpk011osw7v7p5o061z" class="article-share-link" data-share="baidu" data-title="__BASE_FILE__ 和 __STEM__">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/12/04/umutech-stem/" data-id="cm3zebrco00x7fk7m10ea2hzc" class="article-share-link" data-share="baidu" data-title="__BASE_FILE__ 和 __STEM__">分享到</a>
       
 
       

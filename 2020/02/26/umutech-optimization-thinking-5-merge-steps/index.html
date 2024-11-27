@@ -14,7 +14,7 @@
 <meta property="og:description" content="前情 在《优化思维【3】消除没必要步骤》提到一个对象转化的例子：A 对象要转为 B 对象，实现时先把 A 对象转为中间对象 T，再将 T 转为 B 对象，由于两步都很容易实现，一个现有函数即可，所以很多人可能会采用这个思路。 下面要介绍的“合并步骤”，类似于优等生解应用题时“跳步”（一行合并多个步骤），可以作为前文的补充。 例子 1. 合并 cat 和 grep 以下命令 UMU 经常看到，其实它">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-26T15:38:07.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.008Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="optimization">
@@ -121,7 +121,7 @@
 <h2 id="例子">例子</h2>
 <h3 id="1-合并-cat-和-grep">1. 合并 cat 和 grep</h3>
 <p>以下命令 UMU 经常看到，其实它可以用 <code>grep UMU test</code> 来优化，减少一次管道交互。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> <span class="built_in">test</span> | grep UMU</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="built_in">test</span> | grep UMU</span><br></pre></td></tr></table></figure>
 <h3 id="2-合并多个-sed">2. 合并多个 sed</h3>
 <p>再看下面例子是从一个命令行里移除 A 和 C 两个选项：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd=<span class="string">&quot;EXE A=1 B=2 C=3 D=4&quot;</span></span><br><span class="line">removed=$(<span class="built_in">echo</span> <span class="variable">$cmd</span> | sed -e <span class="string">&#x27;s/ A=[^ ]*//&#x27;</span> | sed -e <span class="string">&#x27;s/ C=[^ ]*//&#x27;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$removed</span></span><br></pre></td></tr></table></figure>
@@ -158,7 +158,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/02/26/umutech-optimization-thinking-5-merge-steps/" data-id="cly09uhq40155sw7v160080dh" class="article-share-link" data-share="baidu" data-title="优化思维【5】合并步骤">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/02/26/umutech-optimization-thinking-5-merge-steps/" data-id="cm3zebrdp012yfk7m2nyl0p0s" class="article-share-link" data-share="baidu" data-title="优化思维【5】合并步骤">分享到</a>
       
 
       

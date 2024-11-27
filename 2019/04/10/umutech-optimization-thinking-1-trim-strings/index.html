@@ -14,7 +14,7 @@
 <meta property="og:description" content="In place 版本 传入的字符串将被改变。 为方便复用，一般会实现 ltrim 和 rtrim 两个函数，然后 trim 函数调用这两者实现。   ltrim：从 str 头部开始找到非空格字符，偏移量记为 offset，将 str 左移（move）offset 个字符。   rtrim：从 str 尾部向头部找到非空格字符，偏移量记为 offset，将 str 截断为 offset。   一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-04-10T15:15:22.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.978Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="optimization">
@@ -127,18 +127,18 @@
 </li>
 </ul>
 <p>一个想当然的实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(str) &#123;</span><br><span class="line">    ltrim(str)</span><br><span class="line">    rtrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(str) &#123;</span><br><span class="line">    ltrim(str)</span><br><span class="line">    rtrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>假设 str 是 x 个空格 + y 个非空格 + z 个空格，则以上代码需要把 y + z 个字符向左移动 x 个位置。</p>
 <p>更好的实现是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(string&amp; str) &#123;</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(string&amp; str) &#123;</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于先截断，剩 x + y，再去左移，只需要把 y 个字符左移 x 个位置。</p>
 <p><strong>优化思路：尽量减少复制，调整顺序也是优化手段。</strong></p>
 <h2 id="Copy-版本">Copy 版本</h2>
 <p>传入的字符串不会被改变，返回一个新的字符串。</p>
 <p>一个复用前面代码的实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(string str) &#123;</span><br><span class="line">    // str is a copy</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">    return str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(string str) &#123;</span><br><span class="line">    &#x2F;&#x2F; str is a copy</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">    return str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个版本需要复制 x + y + z 个字符，ltrim 和 rtrim 里面都有找偏移量的代码可以复用，直接找到 y 个非空格字符是起点和终点，复制这 y 个字符就好了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(const string&amp; str) &#123;</span><br><span class="line">    // str is a copy</span><br><span class="line">    l = lfind(str)</span><br><span class="line">    r = rfind(str)</span><br><span class="line">    return str[l, r]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(const string&amp; str) &#123;</span><br><span class="line">    &#x2F;&#x2F; str is a copy</span><br><span class="line">    l &#x3D; lfind(str)</span><br><span class="line">    r &#x3D; rfind(str)</span><br><span class="line">    return str[l, r]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>优化思路：尽量减少复制。</strong></p>
 <h2 id="move">move</h2>
 <p>strlen、strcpy、memmove 这类函数，都有一个优化思路：机器字长对齐，一次处理一个机器字。对于长字符串，效果显著。</p>
@@ -148,7 +148,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/04/10/umutech-optimization-thinking-1-trim-strings/" data-id="cly09uhs401gjsw7v9g7eb06w" class="article-share-link" data-share="baidu" data-title="优化思维【1】字符串去空格">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/04/10/umutech-optimization-thinking-1-trim-strings/" data-id="cm3zebrfx01ebfk7m0oy9b2fu" class="article-share-link" data-share="baidu" data-title="优化思维【1】字符串去空格">分享到</a>
       
 
       

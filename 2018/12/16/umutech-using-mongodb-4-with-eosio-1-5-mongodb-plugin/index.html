@@ -14,7 +14,7 @@
 <meta property="og:description" content="问题描述 在前文《为 EOSIO MongoDB 插件搭建高可用集群》中，我们使用了 MongoDB 4.0.4，如果直接配套 EOSIO 1.5 版本，MongoDB 插件用的 MongoDB C Driver 与 MongoDB 4.0.4 是不完全兼容的。   EOSIO 1.5 指定的 MongoDB 版本是 3.6.3；   MongoDB 4.0 的客户端需要 MongoDB C Dr">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-12-16T15:04:42.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.968Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="linux">
@@ -143,7 +143,7 @@
 <p>Ubuntu 操作参考：</p>
 </li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/releases\/v3.3/releases\/stable/;s/1\.10\.2/1\.13\.0/g&#x27;</span> scripts/eosio_build_ubuntu.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译前</span></span><br><span class="line">grep <span class="string">&quot;Version:&quot;</span> /usr/local/lib/pkgconfig/libmongocxx-static.pc</span><br><span class="line">Version: 3.3.2-pre</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">./eosio_build.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译后</span></span><br><span class="line">grep <span class="string">&quot;Version:&quot;</span> /usr/local/lib/pkgconfig/libmongocxx-static.pc</span><br><span class="line">Version: 3.4.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/releases\/v3.3/releases\/stable/;s/1\.10\.2/1\.13\.0/g&#x27;</span> scripts/eosio_build_ubuntu.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译前</span></span><br><span class="line">grep <span class="string">&quot;Version:&quot;</span> /usr/<span class="built_in">local</span>/lib/pkgconfig/libmongocxx-static.pc</span><br><span class="line">Version: 3.3.2-pre</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">./eosio_build.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译后</span></span><br><span class="line">grep <span class="string">&quot;Version:&quot;</span> /usr/<span class="built_in">local</span>/lib/pkgconfig/libmongocxx-static.pc</span><br><span class="line">Version: 3.4.0</span><br></pre></td></tr></table></figure>
 <p>然后编译、安装 eos。</p>
 <blockquote>
 <p>参考：</p>
@@ -158,7 +158,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/12/16/umutech-using-mongodb-4-with-eosio-1-5-mongodb-plugin/" data-id="cly09uhoz00yysw7vd5j3gx4y" class="article-share-link" data-share="baidu" data-title="EOSIO 1.5.0 MongoDB 插件搭配 MongoDB 4.0.4">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/12/16/umutech-using-mongodb-4-with-eosio-1-5-mongodb-plugin/" data-id="cm3zebrdi011tfk7mai3r021w" class="article-share-link" data-share="baidu" data-title="EOSIO 1.5.0 MongoDB 插件搭配 MongoDB 4.0.4">分享到</a>
       
 
       

@@ -16,11 +16,11 @@
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20230913-get-environment-strings.jpg">
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20230913-get-environment-strings-functions.jpg">
 <meta property="article:published_time" content="2023-09-13T15:18:42.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.786Z">
+<meta property="article:modified_time" content="2023-10-29T12:24:56.896Z">
 <meta property="article:author" content="圣小开">
-<meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
 <meta property="article:tag" content="debug">
+<meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.umu618.com/images/2023/20230913-get-environment-strings.jpg">
 <meta name="twitter:creator" content="@UMU618">
@@ -121,7 +121,7 @@
       
         <h2 id="故事">故事</h2>
 <p>故事总由八哥开始！今天稣看到一个 buggy 的 API 声明：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> UNICODE</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GetEnvironmentStrings  GetEnvironmentStringsW</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> GetEnvironmentStringsA  GetEnvironmentStrings</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !UNICODE</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> UNICODE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GetEnvironmentStrings  GetEnvironmentStringsW</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GetEnvironmentStringsA  GetEnvironmentStrings</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !UNICODE</span></span></span><br></pre></td></tr></table></figure>
 <p><img src="/images/2023/20230913-get-environment-strings.jpg" alt="GetEnvironmentStrings"></p>
 <p>但是经历过 OutputDebugString 逆向的稣十分淡定地推测，这一定是故意的！毕竟，微软为了兼容性，啥都干得出来。</p>
 <blockquote>
@@ -143,7 +143,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/09/13/umutech-a-brief-history-of-the-getenvironmentstrings-function/" data-id="cly09uhrc01busw7v1nrq6h3h" class="article-share-link" data-share="baidu" data-title="GetEnvironmentStrings 函数的八哥史">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/09/13/umutech-a-brief-history-of-the-getenvironmentstrings-function/" data-id="cm3zebri501odfk7m3b1571aa" class="article-share-link" data-share="baidu" data-title="GetEnvironmentStrings 函数的八哥史">分享到</a>
       
 
       

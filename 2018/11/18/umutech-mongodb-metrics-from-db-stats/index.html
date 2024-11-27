@@ -14,7 +14,7 @@
 <meta property="og:description" content="现象 db.stats() 的各种 Size 需要理理，先看例子： 1234567891011&gt; db.action_traces.dataSize()12489840963&gt; db.action_traces.totalSize()5391249408&gt; db.action_traces.storageSize()3684032512&gt; db.action_traces.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-11-18T11:16:25.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.958Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="ops">
 <meta property="article:tag" content="mongodb">
@@ -117,7 +117,7 @@
       
         <h2 id="现象">现象</h2>
 <p>db.stats() 的各种 Size 需要理理，先看例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.action_traces.dataSize()</span><br><span class="line">12489840963</span><br><span class="line"></span><br><span class="line">&gt; db.action_traces.totalSize()</span><br><span class="line">5391249408</span><br><span class="line"></span><br><span class="line">&gt; db.action_traces.storageSize()</span><br><span class="line">3684032512</span><br><span class="line"></span><br><span class="line">&gt; db.action_traces.totalIndexSize()</span><br><span class="line">1707216896</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.action_traces.dataSize()</span><br><span class="line">12489840963</span><br><span class="line"></span><br><span class="line">&gt; db.action_traces.totalSize()</span><br><span class="line">5391249408</span><br><span class="line"></span><br><span class="line">&gt; db.action_traces.storageSize()</span><br><span class="line">3684032512</span><br><span class="line"></span><br><span class="line">&gt; db.action_traces.totalIndexSize()</span><br><span class="line">1707216896</span><br></pre></td></tr></table></figure>
 <h2 id="概念解释">概念解释</h2>
 <p>db.action_traces.stats() 里的 size 就是 db.action_traces.dataSize()，也就是数据本身的逻辑大小。</p>
 <p>由于数据库引擎有压缩概念，所以存储到介质时，可能占用的空间并没有逻辑大小那么多，比如 WiredTiger Storage Engine 的压缩率就挺不错的，dataSize = 12,489,840,963 字节的数据，存到硬盘只有 storageSize = 5,391,249,408 字节。</p>
@@ -134,7 +134,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/11/18/umutech-mongodb-metrics-from-db-stats/" data-id="cly09uhow00ycsw7vbazp3az8" class="article-share-link" data-share="baidu" data-title="MongoDB db.stats() 的各种 Size">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/11/18/umutech-mongodb-metrics-from-db-stats/" data-id="cm3zebrdf0118fk7mbmsv6pxz" class="article-share-link" data-share="baidu" data-title="MongoDB db.stats() 的各种 Size">分享到</a>
       
 
       

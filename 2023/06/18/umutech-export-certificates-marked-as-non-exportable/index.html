@@ -21,11 +21,11 @@
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20230618-not-found.png">
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20230618-non-exportable.png">
 <meta property="article:published_time" content="2023-06-18T08:22:26.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.786Z">
+<meta property="article:modified_time" content="2023-10-29T12:24:56.928Z">
 <meta property="article:author" content="圣小开">
-<meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
 <meta property="article:tag" content="debug">
+<meta property="article:tag" content="dev">
 <meta property="article:tag" content="security">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.umu618.com/images/2023/20230618-private.png">
@@ -127,7 +127,7 @@
       
         <h2 id="故事">故事</h2>
 <p>稣于 2022-10-16 公布自己的<a href="/about/cert">签名证书</a>。当时是在自己的笔记本上用以下 PowerShell 命令生成的：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-SelfSignedCertificate</span> <span class="literal">-DnsName</span> <span class="string">&quot;umu618.com&quot;</span> <span class="literal">-CertStoreLocation</span> <span class="string">&quot;Cert:\CurrentUser\My&quot;</span> <span class="literal">-HashAlgorithm</span> sha512 <span class="literal">-KeyLength</span> <span class="number">4096</span> <span class="literal">-Type</span> CodeSigningCert <span class="literal">-FriendlyName</span> UMU618 <span class="literal">-NotAfter</span> <span class="number">2049</span><span class="literal">-11-10</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-SelfSignedCertificate</span> <span class="literal">-DnsName</span> <span class="string">&quot;umu618.com&quot;</span> <span class="literal">-CertStoreLocation</span> <span class="string">&quot;Cert:\CurrentUser\My&quot;</span> <span class="literal">-HashAlgorithm</span> sha512 <span class="literal">-KeyLength</span> <span class="number">4096</span> <span class="literal">-Type</span> CodeSigningCert <span class="literal">-FriendlyName</span> UMU618 <span class="literal">-NotAfter</span> <span class="number">2049</span><span class="literal">-11</span><span class="literal">-10</span></span><br></pre></td></tr></table></figure>
 <p>因为 <a target="_blank" rel="noopener" href="https://github.com/UMU618/PowerEconomizer">PowerEconomizer</a> 已经使用它签名，所以私钥的存储安全也就正规处理——导出到 pfx 文件加密并分布式保管。</p>
 <p>后来，因为很久没有再验证过私钥的密码，居然，忘记了……想从笔记本再次导出一份，却发现无法导出！（此处脑补：大概是自己导出后，就删除系统里的私钥，然后又导入一次，并设置为不可导出！）不愧是重视安全的稣，连自己都要防！回头又对备份的 pfx 尝试上百次密码，安全性依然牢不可摧，只能放弃！</p>
 <h2 id="破解思路">破解思路</h2>
@@ -148,7 +148,7 @@
 <h3 id="2-缝缝补补">2. 缝缝补补</h3>
 <p>开始对 mimikatz/modules/crypto/kuhl_m_crypto_patch.c 进行改进，关键点在于 CPExportKey_4000 和 CPExportKey_4001 的入口特征，需要逆向获得。于是用 IDA 简单看看 rsaenh.dll，顺利获得入口处的汇编指令，换上后依然失败。后来发现不换，其实也能找到入口，旧版本用更短的前缀一样可以找到。</p>
 <p>看来是后面的处理不对，跟踪到 kuhl_m_crypto_extractor_capi64 函数发现一个魔法数字 RSAENH_KEY_64 被使用了两次，感觉是突破口。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RSAENH_KEY_64	0xe35a172cd96214a0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RSAENH_KEY_64	0xe35a172cd96214a0</span></span><br></pre></td></tr></table></figure>
 <p>果断在 GitHub 上搜一下，结果找到另一个基于 <a target="_blank" rel="noopener" href="https://github.com/EasyHook/EasyHook">EasyHook</a> 的实现 <a target="_blank" rel="noopener" href="https://github.com/iSECPartners/jailbreak">jailbreak</a>，稣毕竟是 <a target="_blank" rel="noopener" href="https://github.com/EasyHook/EasyHook">EasyHook</a> 代码贡献者，当然是切换到 <a target="_blank" rel="noopener" href="https://github.com/iSECPartners/jailbreak">jailbreak</a> 尝试，结果令人愉悦！在虚拟机里实践成功。</p>
 <p><img src="/images/2023/20230618-ida-1.png" alt="IDA 1"><br>
 <img src="/images/2023/20230618-ida-2.png" alt="IDA 2"><br>
@@ -169,7 +169,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/06/18/umutech-export-certificates-marked-as-non-exportable/" data-id="cly09uhr701b5sw7vg5cqfbyp" class="article-share-link" data-share="baidu" data-title="导出标记为不可导出的证书">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/06/18/umutech-export-certificates-marked-as-non-exportable/" data-id="cm3zebrhy01nlfk7m499zdi1a" class="article-share-link" data-share="baidu" data-title="导出标记为不可导出的证书">分享到</a>
       
 
       

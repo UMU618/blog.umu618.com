@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.debian.org/Pics/debian-logo-1024x576.png">
 <meta property="article:published_time" content="2023-02-12T15:22:48.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.786Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.048Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="linux">
@@ -157,7 +157,7 @@
 <p>服务器软件的安装可以参考《<a href="/2022/05/15/umutech-smart-clock/">智能时钟</a>》。至于电视盒子嘛……其实它是一个浏览器：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install chromium</span><br></pre></td></tr></table></figure>
 <p>但是有个问题——用 HDMI 线连电视后，发现没有声音！</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install firmware-linux-nonfree firmware-iwlfifi firmware-sof-signed</span><br><span class="line">sudo apt install pulseaudio</span><br><span class="line"><span class="built_in">cat</span> /etc/modprobe.d/alsa.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo <span class="built_in">tee</span> /etc/modprobe.d/alsa.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install firmware-linux-nonfree firmware-iwlfifi firmware-sof-signed</span><br><span class="line">sudo apt install pulseaudio</span><br><span class="line">cat /etc/modprobe.d/alsa.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo tee /etc/modprobe.d/alsa.conf</span><br></pre></td></tr></table></figure>
 <h3 id="2-某-N5095A-迷你电脑">2. 某 N5095A 迷你电脑</h3>
 <p>用途：娱乐桌面</p>
 <p>这次选择 GNOME，依然是轻松搞定，但是有个问题——用 HDMI 线连电视后，发现没有声音！</p>
@@ -167,14 +167,14 @@
 <p>又但是，编译后也无法加载呀，它是个没签名的内核模块，稣又不想关闭 Secure Boot！只好装 MOK (Machine Owner Key) 搞定签名。</p>
 <p>转念一想，会不会 Testing 版本已经支持这款硬件了？果断切过去。</p>
 <p>目前 Testing 的 GNOME 已经使用 PipeWire 取代 PulseAudio，所以不能再安装 PulseAudio，因为这会卸载 GNOME！坑稣呢……只要加个声卡的调教参数，即可！</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo <span class="built_in">tee</span> -a /etc/modprobe.d/alsa-legacy.conf &gt; /dev/null</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo tee -a /etc/modprobe.d/alsa-legacy.conf &gt; /dev/null</span><br></pre></td></tr></table></figure>
 <p>6.X 的内核和 GNOME 桌面下，娱乐的那点事，一切完美。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/02/12/umutech-debian-testing/" data-id="cly09uhqy01a4sw7vd6922tvj" class="article-share-link" data-share="baidu" data-title="Debian Testing">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/02/12/umutech-debian-testing/" data-id="cm3zebrhp01mlfk7m5l710ji5" class="article-share-link" data-share="baidu" data-title="Debian Testing">分享到</a>
       
 
       

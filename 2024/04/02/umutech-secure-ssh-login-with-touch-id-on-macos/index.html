@@ -14,10 +14,10 @@
 <meta property="og:description" content="需求   使用文件存 SSH 私钥，其实安全性挺堪忧的：如果私钥没有密码，任何程序都可以直接读取，被流氓软件偷偷上传怎么办？为了安全，给私钥加密，这就要输入密码，麻烦。而且输入密码时，又可能被偷。   有没有一种木马专门针对 ssh-agent 呢？您把密钥的密码交给 ssh-agent​，真放心吗？   稣特地买了一台 MBA 13 M1 乞丐版装 Asahi Linux，结果触控板在 Linu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-02T13:33:16.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.791Z">
+<meta property="article:modified_time" content="2024-05-12T05:34:21.936Z">
 <meta property="article:author" content="圣小开">
-<meta property="article:tag" content="security">
 <meta property="article:tag" content="ops">
+<meta property="article:tag" content="security">
 <meta property="article:tag" content="macos">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@UMU618">
@@ -138,7 +138,7 @@
 <h3 id="1-安装-sekey">1. 安装 sekey</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install sekey</span><br></pre></td></tr></table></figure>
 <p>安装后，可用以下命令检查 sekey 是否在运行：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> ~/.sekey/ssh-agent.ssh</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls ~/.sekey/ssh-agent.ssh</span><br></pre></td></tr></table></figure>
 <h3 id="2-创建基于-Secure-Enclave-的密钥对">2. 创建基于 Secure Enclave 的密钥对</h3>
 <p>创建一个名为 SSH 的密钥对：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sekey -c SSH</span><br></pre></td></tr></table></figure>
@@ -146,7 +146,7 @@
 <h3 id="3-配置-ssh-使用-sekey">3. 配置 ssh 使用 sekey</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.ssh/config</span><br></pre></td></tr></table></figure>
 <p>添加以下一行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IdentityAgent ~/.sekey/ssh-agent.ssh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IdentityAgent ~&#x2F;.sekey&#x2F;ssh-agent.ssh</span><br></pre></td></tr></table></figure>
 <h2 id="疑难杂症">疑难杂症</h2>
 <p>当服务器为 OpenWRT 系统时，有可能无法正常工作。因为 OpenWRT 默认的 SSH 服务端是 dropbear，它不支持 ecdsa-sha2-nistp256。装个 OpenSSH 即可：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install openssh-server</span><br></pre></td></tr></table></figure>
@@ -156,7 +156,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/04/02/umutech-secure-ssh-login-with-touch-id-on-macos/" data-id="cly09uhtc01mwsw7vc9reayhl" class="article-share-link" data-share="baidu" data-title="macOS 上用触控 ID 安全登录 SSH">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/04/02/umutech-secure-ssh-login-with-touch-id-on-macos/" data-id="cm3zebres018efk7mfx492eej" class="article-share-link" data-share="baidu" data-title="macOS 上用触控 ID 安全登录 SSH">分享到</a>
       
 
       

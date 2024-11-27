@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.umu618.com/images/2024/20240106-linrui.png">
 <meta property="article:published_time" content="2024-01-06T06:48:08.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.786Z">
+<meta property="article:modified_time" content="2024-01-06T08:15:23.867Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="cpp">
@@ -145,18 +145,18 @@
 </blockquote>
 <p>if、while、for 的条件语句本身就是在选择 true 或 false，对于指针来说，会自动与 nullptr 比较。通常来说，<code>if (p)</code> 可以读作 “if p is valid”。</p>
 <p>接着，还有一个例子：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">auto</span> pc = <span class="built_in">dynamic_cast</span>&lt;Circle&gt;(ps)) &#123; ... &#125; <span class="comment">// execute if ps points to a kind of Circle, good</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">auto</span> pc = <span class="built_in">dynamic_cast</span>&lt;Circle&gt;(ps); pc != <span class="literal">nullptr</span>) &#123; ... &#125; <span class="comment">// not recommended</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">auto</span> pc = <span class="keyword">dynamic_cast</span>&lt;Circle&gt;(ps)) &#123; ... &#125; <span class="comment">// execute if ps points to a kind of Circle, good</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">auto</span> pc = <span class="keyword">dynamic_cast</span>&lt;Circle&gt;(ps); pc != <span class="literal">nullptr</span>) &#123; ... &#125; <span class="comment">// not recommended</span></span><br></pre></td></tr></table></figure>
 <p>同样是推荐更简短的写法。但这个例子却有人提出疑问：推荐的写法不会被怀疑是 == 少写了一个 = 吗？</p>
 <p>还真不会！这个语句其实不是经典 C++ 的语法，而是 C++17 的 init-statement 语法，这里的 auto 是类型，说明 = 不可能是 == 错误地少写成 =。</p>
 <p>对于部分 C 程序员和“经典 C++”程序员会把赋值语句写在 if 条件里的做法，建议是改为分开写。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// p is defined before</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (p = <span class="built_in">func</span>()) &#123; ... &#125; <span class="comment">// bad</span></span><br><span class="line"></span><br><span class="line">p = <span class="built_in">func</span>();</span><br><span class="line"><span class="keyword">if</span> (p) &#123; ... &#125; <span class="comment">// good</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// p is used after</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// p is defined before</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (p = func()) &#123; ... &#125; <span class="comment">// bad</span></span><br><span class="line"></span><br><span class="line">p = func();</span><br><span class="line"><span class="keyword">if</span> (p) &#123; ... &#125; <span class="comment">// good</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// p is used after</span></span><br></pre></td></tr></table></figure>
 <p>稣会在新工程里坚持使用 <a target="_blank" rel="noopener" href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c-core-guidelines">C++ Core Guidelines</a> 的建议，但也不反对另一种写法，只要不混合使用。<s>允许有不同派系，但最好别精神分裂。</s></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/01/06/umutech-if-a-pointer-is-null/" data-id="cly09uht801mbsw7vap1ue1z4" class="article-share-link" data-share="baidu" data-title="指针判空">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/01/06/umutech-if-a-pointer-is-null/" data-id="cm3zebreq0181fk7m3igvc9z4" class="article-share-link" data-share="baidu" data-title="指针判空">分享到</a>
       
 
       

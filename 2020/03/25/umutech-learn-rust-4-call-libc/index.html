@@ -14,7 +14,7 @@
 <meta property="og:description" content="问题 Rust中如何使用linux的原生api？ - 知乎 概述 很多语言调用 C 语言写的模块来弥补自己某些不足。Rust 当然也可以调用 C 语言开发的模块，不过这是不安全的。 代码  在 Cargo.toml 中加入依赖库：  12[dependencies]libc &#x3D; &quot;0.2.68&quot;  Rust 示例代码：  123456789101112use libc;fn m">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-25T05:04:28.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.008Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="linux">
@@ -128,7 +128,7 @@
 <ol start="2">
 <li>Rust 示例代码：</li>
 </ol>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> libc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">pid</span> = <span class="keyword">unsafe</span> &#123; libc::fork() &#125;;</span><br><span class="line">    <span class="keyword">if</span> pid &lt; <span class="number">0</span> &#123;</span><br><span class="line">        <span class="built_in">eprintln!</span>(<span class="string">&quot;错误！&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> pid == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;子进程空间&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;父进程空间, 子进程 pid 为 &#123;&#125;&quot;</span>, pid);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> libc;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> pid = <span class="keyword">unsafe</span> &#123; libc::fork() &#125;;</span><br><span class="line">    <span class="keyword">if</span> pid &lt; <span class="number">0</span> &#123;</span><br><span class="line">        eprintln!(<span class="string">&quot;错误！&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> pid == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;子进程空间&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;父进程空间, 子进程 pid 为 &#123;&#125;&quot;</span>, pid);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>macOS <strong>也</strong>测试通过。</li>
 </ol>
@@ -137,7 +137,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/03/25/umutech-learn-rust-4-call-libc/" data-id="cly09uhqa0165sw7v42dg8woa" class="article-share-link" data-share="baidu" data-title="学习 Rust【4】调用 libc">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/03/25/umutech-learn-rust-4-call-libc/" data-id="cm3zebrdu013pfk7m5fltf5t4" class="article-share-link" data-share="baidu" data-title="学习 Rust【4】调用 libc">分享到</a>
       
 
       

@@ -6,15 +6,15 @@
   
   <title>优化思维【2】有符号和无符号的本质区别 | UMU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="做题 以下代码打印什么？ 1234567auto count &#x3D; sizeof (int);if (count &gt; -1) &amp;#123;  std::cout &lt;&lt; &quot;&gt; -1&quot;;&amp;#125;else &amp;#123;  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;&amp;#125; 答案是：&lt;&#x3D; -1，因为 sizeof">
+  <meta name="description" content="做题 以下代码打印什么？ 1234567auto count &#x3D; sizeof (int);if (count &gt; -1) &amp;#123;  std::cout &lt;&lt; &quot;&gt; -1&quot;;&amp;#125;else &amp;#123;  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;&amp;#125; 答案是：&lt;&#x3D; -1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="优化思维【2】有符号和无符号的本质区别">
 <meta property="og:url" content="https://blog.umu618.com/2019/05/16/umutech-optimization-thinking-2-signed-and-unsigned/">
 <meta property="og:site_name" content="UMU">
-<meta property="og:description" content="做题 以下代码打印什么？ 1234567auto count &#x3D; sizeof (int);if (count &gt; -1) &amp;#123;  std::cout &lt;&lt; &quot;&gt; -1&quot;;&amp;#125;else &amp;#123;  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;&amp;#125; 答案是：&lt;&#x3D; -1，因为 sizeof">
+<meta property="og:description" content="做题 以下代码打印什么？ 1234567auto count &#x3D; sizeof (int);if (count &gt; -1) &amp;#123;  std::cout &lt;&lt; &quot;&gt; -1&quot;;&amp;#125;else &amp;#123;  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;&amp;#125; 答案是：&lt;&#x3D; -1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-05-16T15:07:02.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.988Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="cpp">
@@ -118,7 +118,7 @@
       
         <h2 id="做题">做题</h2>
 <p>以下代码打印什么？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto count = sizeof (int);</span><br><span class="line">if (count &gt; -1) &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&gt; -1&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&lt;= -1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto count &#x3D; sizeof (int);</span><br><span class="line">if (count &gt; -1) &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&gt; -1&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  std::cout &lt;&lt; &quot;&lt;&#x3D; -1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>答案是：<code>&lt;= -1</code>，因为 sizeof (int) 是无符号的，把 <code>auto</code> 改为 <code>int</code> 则结果是 <code>&gt; -1</code>。</p>
 <h2 id="本质论">本质论</h2>
 <p>当我们声明 <code>unsigned/signed int count</code> 时，<code>unsigned/signed</code> 是变量 <code>count</code> 的使用属性，<code>int</code> 是其容量属性。</p>
@@ -134,7 +134,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/05/16/umutech-optimization-thinking-2-signed-and-unsigned/" data-id="cly09uhsc01hssw7v5sosax9n" class="article-share-link" data-share="baidu" data-title="优化思维【2】有符号和无符号的本质区别">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/05/16/umutech-optimization-thinking-2-signed-and-unsigned/" data-id="cm3zebrg601fkfk7mdolw42tt" class="article-share-link" data-share="baidu" data-title="优化思维【2】有符号和无符号的本质区别">分享到</a>
       
 
       

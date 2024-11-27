@@ -14,7 +14,7 @@
 <meta property="og:description" content="一个工程同时使用了 ffmpeg 和 live555，结果一不注意就混乱了……原因如下： 1234567891011&#x2F;&#x2F; ffmpeg 的 error.h 里 include 了 errno.h，有以下定义：#define EAGAIN          11&#x2F;&#x2F; 而 live555 的 NetCommon.h 里有以下定义：#ifdef EAGAIN#undef EAGAIN#endif&#x2F;&#x2F; W">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-08-18T03:03:06.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.948Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="streaming-media">
@@ -117,14 +117,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>一个工程同时使用了 ffmpeg 和 live555，结果一不注意就混乱了……原因如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ffmpeg 的 error.h 里 include 了 errno.h，有以下定义：</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EAGAIN          11</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 而 live555 的 NetCommon.h 里有以下定义：</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> EAGAIN</span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> EAGAIN</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// WSAEWOULDBLOCK == 10035</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EAGAIN WSAEWOULDBLOCK</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ffmpeg 的 error.h 里 include 了 errno.h，有以下定义：</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EAGAIN          11</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 而 live555 的 NetCommon.h 里有以下定义：</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> EAGAIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span> EAGAIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// WSAEWOULDBLOCK == 10035</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EAGAIN WSAEWOULDBLOCK</span></span><br></pre></td></tr></table></figure>
 <p>很明显，live555 这么做，违背了面向对象的基本特征——封装，这种平台相关的抽象应该封装在源文件里面，而不是放在头文件。挪个位置即可。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2017/08/18/umutech-resolve-macro-definition-conflicts-between-ffmpeg-and-live555/" data-id="cly09uho700tisw7v5m3v6g5c" class="article-share-link" data-share="baidu" data-title="解决 ffmpeg 与 live555 宏定义冲突">分享到</a>
+        <a data-url="https://blog.umu618.com/2017/08/18/umutech-resolve-macro-definition-conflicts-between-ffmpeg-and-live555/" data-id="cm3zebra000fzfk7m8ij9fnvg" class="article-share-link" data-share="baidu" data-title="解决 ffmpeg 与 live555 宏定义冲突">分享到</a>
       
 
       

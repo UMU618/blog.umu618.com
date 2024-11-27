@@ -14,7 +14,7 @@
 <meta property="og:description" content="需求 前文《在 Armbian 安装 NFS 服务端》介绍 nfs-ganesha 的安装配置。经过几天使用，发现效果还可以，但一直都是在局域网内使用，突然有一天想在公司访问家里的 NFS 共享…… 问题 直接 mount 会一直卡着。 开放 111、2049 端口，再 mount，还是卡着。 通过反复重启 nfs-ganesha 并 netstat -nalp | grep ganesha.nf">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-16T14:15:55.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.018Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="embedded">
@@ -128,12 +128,12 @@
 <h2 id="解决">解决</h2>
 <h3 id="Armbian-配置">Armbian 配置</h3>
 <p>将 mountd 端口绑定，比如 2618，但配置的方法和常规 Debian 服务器的内核级 NFS Server 不同。修改 /etc/services 添加 mountd 绑定是无用的，应该编辑 /etc/ganesha/ganesha.conf，添加以下配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NFS_CORE_PARAM</span><br><span class="line">&#123;</span><br><span class="line">        MNT_Port = 2618;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NFS_CORE_PARAM</span><br><span class="line">&#123;</span><br><span class="line">        MNT_Port &#x3D; 2618;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>改完重启服务：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nfs-ganesha.service</span><br></pre></td></tr></table></figure>
 <h3 id="防护墙配置">防护墙配置</h3>
 <p>UMU 用的是 OpenWRT 路由器作为家庭网络出口，firewall 配置文件是 /etc/config/firewall，添加以下几行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">config rule</span><br><span class="line">        option src &#x27;wan&#x27;</span><br><span class="line">        option name &#x27;Allow-NFS&#x27;</span><br><span class="line">        option dest &#x27;*&#x27;</span><br><span class="line">        option target &#x27;ACCEPT&#x27;</span><br><span class="line">        option dest_port &#x27;111 2049 2618&#x27;</span><br><span class="line">        option family &#x27;ipv6&#x27;</span><br><span class="line">        option start_time &#x27;00:09:00&#x27;</span><br><span class="line">        option stop_time &#x27;00:21:00&#x27;</span><br><span class="line">        option enabled &#x27;0&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">config rule</span><br><span class="line">        option src &#39;wan&#39;</span><br><span class="line">        option name &#39;Allow-NFS&#39;</span><br><span class="line">        option dest &#39;*&#39;</span><br><span class="line">        option target &#39;ACCEPT&#39;</span><br><span class="line">        option dest_port &#39;111 2049 2618&#39;</span><br><span class="line">        option family &#39;ipv6&#39;</span><br><span class="line">        option start_time &#39;00:09:00&#39;</span><br><span class="line">        option stop_time &#39;00:21:00&#39;</span><br><span class="line">        option enabled &#39;0&#39;</span><br></pre></td></tr></table></figure>
 <p>以上配置开启了 111、2049、2618 三个端口的转发，其中 udp/tcp 111 是 portmap 端口，udp/tcp 2049 是 nfsd 端口，udp/tcp 2618 是上一步绑定的 mountd 端口。</p>
 <p><code>/etc/init.d/firewall restart</code> 重启后就可以在办公室通过 IPv6 访问家里的 NFS 共享了。</p>
 <h2 id="参考">参考</h2>
@@ -143,7 +143,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/16/umutech-nfs-ganesha-firewall-settings/" data-id="cly09uhqd016nsw7v3t5hgd5y" class="article-share-link" data-share="baidu" data-title="nfs-ganesha 端口绑定">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/16/umutech-nfs-ganesha-firewall-settings/" data-id="cm3zebre1014ofk7m2ds99nsy" class="article-share-link" data-share="baidu" data-title="nfs-ganesha 端口绑定">分享到</a>
       
 
       

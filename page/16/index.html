@@ -115,7 +115,7 @@
 <p>Android 电视盒刷 Armbian，分区时，EMMC 前面一部分没被利用，为什么？以及怎么办？</p>
 <h2 id="原因">原因</h2>
 <p>u-boot 是为 Android 设计的，分区是按照 Android 需求分的。比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Partition table get from SPL is :</span><br><span class="line">        name                        offset              size              flag</span><br><span class="line">===================================================================================</span><br><span class="line">   0: bootloader                         0            400000                  0</span><br><span class="line">   1: reserved                     2400000           4000000                  0</span><br><span class="line">   2: cache                        6c00000          20000000                  2</span><br><span class="line">   3: env                         27400000            800000                  0</span><br><span class="line">   4: logo                        28400000           2000000                  1</span><br><span class="line">   5: recovery                    2ac00000           2000000                  1</span><br><span class="line">   6: misc                        2d400000           2000000                  1</span><br><span class="line">   7: boot                        2fc00000           2000000                  1</span><br><span class="line">   8: system                      32400000          40000000                  1</span><br><span class="line">   9: data                        72c00000         15f400000                  4</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Partition table get from SPL is :</span><br><span class="line">        name                        offset              size              flag</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">   0: bootloader                         0            400000                  0</span><br><span class="line">   1: reserved                     2400000           4000000                  0</span><br><span class="line">   2: cache                        6c00000          20000000                  2</span><br><span class="line">   3: env                         27400000            800000                  0</span><br><span class="line">   4: logo                        28400000           2000000                  1</span><br><span class="line">   5: recovery                    2ac00000           2000000                  1</span><br><span class="line">   6: misc                        2d400000           2000000                  1</span><br><span class="line">   7: boot                        2fc00000           2000000                  1</span><br><span class="line">   8: system                      32400000          40000000                  1</span><br><span class="line">   9: data                        72c00000         15f400000                  4</span><br></pre></td></tr></table></figure>
 <p>其中 reserved 分区放着其它分区的名字、位移、大小等信息，如果被破坏 u-boot 将无法识别分区。</p>
 <p>env 分区保存启动脚本，如果被破坏，可能导致系统无法启动。</p>
 <h2 id="解决">解决</h2>
@@ -142,7 +142,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/05/02/umutech-armbian-partition-optimization/" data-id="cly09uhqg0174sw7vhidg4bnn" class="article-share-link" data-share="baidu" data-title="Armbian 分区优化">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/05/02/umutech-armbian-partition-optimization/" data-id="cm3zebre40155fk7mcgp8f18a" class="article-share-link" data-share="baidu" data-title="Armbian 分区优化">分享到</a>
       
 
       
@@ -242,7 +242,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/27/umutech-openwrt-primer-19-detect-wifi-hacking/" data-id="cly09uhqg0178sw7v1bny44si" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇19）：检测 WiFi 入侵">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/27/umutech-openwrt-primer-19-detect-wifi-hacking/" data-id="cm3zebre30151fk7m6zw6cozp" class="article-share-link" data-share="baidu" data-title="跟 UMU 一起玩 OpenWRT（入门篇19）：检测 WiFi 入侵">分享到</a>
       
 
       
@@ -300,7 +300,7 @@ baby123</p>
 <ol start="3">
 <li>推测 adduser 是脚本，内部调用 useradd。求证之！</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">head</span> -1 /usr/sbin/adduser</span><br><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br><span class="line"></span><br><span class="line">grep useradd /usr/sbin/adduser</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">&#x27;useradd&#x27;</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">&#x27;-d&#x27;</span>, <span class="variable">$home_dir</span>, <span class="string">&#x27;-g&#x27;</span>, <span class="variable">$ingroup_name</span>, <span class="string">&#x27;-s&#x27;</span>,</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">&#x27;useradd&#x27;</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">&#x27;-d&#x27;</span>, <span class="variable">$home_dir</span>, <span class="string">&#x27;-g&#x27;</span>, <span class="variable">$ingroup_name</span>, <span class="string">&#x27;-s&#x27;</span>,</span><br><span class="line">    <span class="comment"># useradd without -p has left the account disabled (password string is &#x27;!&#x27;)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">head -1 /usr/sbin/adduser</span><br><span class="line"><span class="meta">#!/usr/bin/perl</span></span><br><span class="line"></span><br><span class="line">grep useradd /usr/sbin/adduser</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">&#x27;useradd&#x27;</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">&#x27;-d&#x27;</span>, <span class="variable">$home_dir</span>, <span class="string">&#x27;-g&#x27;</span>, <span class="variable">$ingroup_name</span>, <span class="string">&#x27;-s&#x27;</span>,</span><br><span class="line">    my <span class="variable">$useradd</span> = &amp;<span class="built_in">which</span>(<span class="string">&#x27;useradd&#x27;</span>);</span><br><span class="line">    &amp;systemcall(<span class="variable">$useradd</span>, <span class="string">&#x27;-d&#x27;</span>, <span class="variable">$home_dir</span>, <span class="string">&#x27;-g&#x27;</span>, <span class="variable">$ingroup_name</span>, <span class="string">&#x27;-s&#x27;</span>,</span><br><span class="line">    <span class="comment"># useradd without -p has left the account disabled (password string is &#x27;!&#x27;)</span></span><br></pre></td></tr></table></figure>
 <p>这说明 adduser 是 perl 脚本，内部确实调用 useradd。</p>
 <ol start="4">
 <li>直觉告诉 UMU，应该用 adduser，如果 useradd 很好用，不会有 adduser 存在的必要。</li>
@@ -310,7 +310,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/26/umutech-the-difference-between-adduser-and-useradd/" data-id="cly09uhqf0171sw7v9re58coy" class="article-share-link" data-share="baidu" data-title="adduser 和 useradd 的区别">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/26/umutech-the-difference-between-adduser-and-useradd/" data-id="cm3zebre2014yfk7m7ci602rj" class="article-share-link" data-share="baidu" data-title="adduser 和 useradd 的区别">分享到</a>
       
 
       
@@ -409,7 +409,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/23/umutech-optimization-thinking-6-security/" data-id="cly09uhqe016xsw7v9rwabzv9" class="article-share-link" data-share="baidu" data-title="优化思维【6】安全性">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/23/umutech-optimization-thinking-6-security/" data-id="cm3zebre2014ufk7m223o7f0n" class="article-share-link" data-share="baidu" data-title="优化思维【6】安全性">分享到</a>
       
 
       
@@ -493,7 +493,7 @@ baby123</p>
 <p>可以清楚地看出前者短一个字符，数值也相应比较小。</p>
 <h3 id="2-BASE58-编码的原理">2. BASE58 编码的原理</h3>
 <p>BASE58 的字符集：<code>123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz</code>，其中 ‘1’ 代表 0，‘z’ 代表 57。把待编码的数字不断除以 58，并将余数用对应的字符表示。举个小点的数字做例子：618</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">618 / 58 = 10 .. 38 -&gt; f</span><br><span class="line"></span><br><span class="line">10 / 58  = 0  .. 10 -&gt; B</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">618 &#x2F; 58 &#x3D; 10 .. 38 -&gt; f</span><br><span class="line"></span><br><span class="line">10 &#x2F; 58  &#x3D; 0  .. 10 -&gt; B</span><br></pre></td></tr></table></figure>
 <p>拼接余数得 fB，再反转得 Bf。</p>
 <h3 id="3-BASE58-编码位数关系">3. BASE58 编码位数关系</h3>
 <p>一个数编码后，应该长于或等于比它小的数。我们可以通过简单的数学计算得出 45 个字符的 BASE58 编码可以表示的最大数：</p>
@@ -519,7 +519,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/22/umutech-why-eos-private-keys-have-variable-length/" data-id="cly09uhqe016usw7v4k7agiun" class="article-share-link" data-share="baidu" data-title="为什么 EOS 私钥有不同长度？">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/22/umutech-why-eos-private-keys-have-variable-length/" data-id="cm3zebre1014rfk7maz8h60k2" class="article-share-link" data-share="baidu" data-title="为什么 EOS 私钥有不同长度？">分享到</a>
       
 
       
@@ -571,12 +571,12 @@ baby123</p>
 <h2 id="解决">解决</h2>
 <h3 id="Armbian-配置">Armbian 配置</h3>
 <p>将 mountd 端口绑定，比如 2618，但配置的方法和常规 Debian 服务器的内核级 NFS Server 不同。修改 /etc/services 添加 mountd 绑定是无用的，应该编辑 /etc/ganesha/ganesha.conf，添加以下配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NFS_CORE_PARAM</span><br><span class="line">&#123;</span><br><span class="line">        MNT_Port = 2618;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NFS_CORE_PARAM</span><br><span class="line">&#123;</span><br><span class="line">        MNT_Port &#x3D; 2618;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>改完重启服务：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nfs-ganesha.service</span><br></pre></td></tr></table></figure>
 <h3 id="防护墙配置">防护墙配置</h3>
 <p>UMU 用的是 OpenWRT 路由器作为家庭网络出口，firewall 配置文件是 /etc/config/firewall，添加以下几行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">config rule</span><br><span class="line">        option src &#x27;wan&#x27;</span><br><span class="line">        option name &#x27;Allow-NFS&#x27;</span><br><span class="line">        option dest &#x27;*&#x27;</span><br><span class="line">        option target &#x27;ACCEPT&#x27;</span><br><span class="line">        option dest_port &#x27;111 2049 2618&#x27;</span><br><span class="line">        option family &#x27;ipv6&#x27;</span><br><span class="line">        option start_time &#x27;00:09:00&#x27;</span><br><span class="line">        option stop_time &#x27;00:21:00&#x27;</span><br><span class="line">        option enabled &#x27;0&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">config rule</span><br><span class="line">        option src &#39;wan&#39;</span><br><span class="line">        option name &#39;Allow-NFS&#39;</span><br><span class="line">        option dest &#39;*&#39;</span><br><span class="line">        option target &#39;ACCEPT&#39;</span><br><span class="line">        option dest_port &#39;111 2049 2618&#39;</span><br><span class="line">        option family &#39;ipv6&#39;</span><br><span class="line">        option start_time &#39;00:09:00&#39;</span><br><span class="line">        option stop_time &#39;00:21:00&#39;</span><br><span class="line">        option enabled &#39;0&#39;</span><br></pre></td></tr></table></figure>
 <p>以上配置开启了 111、2049、2618 三个端口的转发，其中 udp/tcp 111 是 portmap 端口，udp/tcp 2049 是 nfsd 端口，udp/tcp 2618 是上一步绑定的 mountd 端口。</p>
 <p><code>/etc/init.d/firewall restart</code> 重启后就可以在办公室通过 IPv6 访问家里的 NFS 共享了。</p>
 <h2 id="参考">参考</h2>
@@ -586,7 +586,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/16/umutech-nfs-ganesha-firewall-settings/" data-id="cly09uhqd016nsw7v3t5hgd5y" class="article-share-link" data-share="baidu" data-title="nfs-ganesha 端口绑定">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/16/umutech-nfs-ganesha-firewall-settings/" data-id="cm3zebre1014ofk7m2ds99nsy" class="article-share-link" data-share="baidu" data-title="nfs-ganesha 端口绑定">分享到</a>
       
 
       
@@ -635,20 +635,20 @@ baby123</p>
 <p>某些版本的 Armbian 内核不支持 nfsd，刚好稣就刷到！如果按照 debian 服务器玩法——安装 kernel 版服务端，是无法正常工作的：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nfs-common nfs-kernel-server</span><br></pre></td></tr></table></figure>
 <p>启动时会提示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount: /proc/fs/nfsd: unknown filesystem type &#x27;nfsd&#x27;.</span><br><span class="line">proc-fs-nfsd.mount: Mount process exited, code=exited, status=32/n/a</span><br><span class="line">proc-fs-nfsd.mount: Failed with result &#x27;exit-code&#x27;.</span><br><span class="line">nfs-mountd.service: Job nfs-mountd.service/start failed with result &#x27;dependency&#x27;.</span><br><span class="line">nfs-idmapd.service: Job nfs-idmapd.service/start failed with result &#x27;dependency&#x27;.</span><br><span class="line">nfs-server.service: Job nfs-server.service/start failed with result &#x27;dependency&#x27;.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount: &#x2F;proc&#x2F;fs&#x2F;nfsd: unknown filesystem type &#39;nfsd&#39;.</span><br><span class="line">proc-fs-nfsd.mount: Mount process exited, code&#x3D;exited, status&#x3D;32&#x2F;n&#x2F;a</span><br><span class="line">proc-fs-nfsd.mount: Failed with result &#39;exit-code&#39;.</span><br><span class="line">nfs-mountd.service: Job nfs-mountd.service&#x2F;start failed with result &#39;dependency&#39;.</span><br><span class="line">nfs-idmapd.service: Job nfs-idmapd.service&#x2F;start failed with result &#39;dependency&#39;.</span><br><span class="line">nfs-server.service: Job nfs-server.service&#x2F;start failed with result &#39;dependency&#39;.</span><br></pre></td></tr></table></figure>
 <h2 id="解决">解决</h2>
 <h3 id="服务端">服务端</h3>
 <p>使用用户态的 nfs-ganesha。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install nfs-ganesha nfs-ganesha-vfs</span><br></pre></td></tr></table></figure>
 <p>配置文件为 /etc/ganesh/ganesha.conf。nfs-ganesha-vfs 包另带一个 vfs.conf 参考模板。以下配置创建读写共享 /root/share 和只读共享 /opt：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">EXPORT_DEFAULTS</span><br><span class="line">&#123;</span><br><span class="line">        Protocols = 4;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">EXPORT</span><br><span class="line">&#123;</span><br><span class="line">        Export_Id = 77;</span><br><span class="line">        Protocols = 3, 4;</span><br><span class="line">        Path = /root/share;</span><br><span class="line">        Pseudo = /root/share;</span><br><span class="line">        Access_Type = RW;</span><br><span class="line">        FSAL &#123;</span><br><span class="line">                Name = VFS;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">EXPORT</span><br><span class="line">&#123;</span><br><span class="line">        Export_Id = 78;</span><br><span class="line">        Path = /opt;</span><br><span class="line">        Pseudo = /opt;</span><br><span class="line">        Access_Type = RO;</span><br><span class="line">        FSAL &#123;</span><br><span class="line">                Name = VFS;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">EXPORT_DEFAULTS</span><br><span class="line">&#123;</span><br><span class="line">        Protocols &#x3D; 4;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">EXPORT</span><br><span class="line">&#123;</span><br><span class="line">        Export_Id &#x3D; 77;</span><br><span class="line">        Protocols &#x3D; 3, 4;</span><br><span class="line">        Path &#x3D; &#x2F;root&#x2F;share;</span><br><span class="line">        Pseudo &#x3D; &#x2F;root&#x2F;share;</span><br><span class="line">        Access_Type &#x3D; RW;</span><br><span class="line">        FSAL &#123;</span><br><span class="line">                Name &#x3D; VFS;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">EXPORT</span><br><span class="line">&#123;</span><br><span class="line">        Export_Id &#x3D; 78;</span><br><span class="line">        Path &#x3D; &#x2F;opt;</span><br><span class="line">        Pseudo &#x3D; &#x2F;opt;</span><br><span class="line">        Access_Type &#x3D; RO;</span><br><span class="line">        FSAL &#123;</span><br><span class="line">                Name &#x3D; VFS;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>改完重启服务：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nfs-ganesha.service</span><br></pre></td></tr></table></figure>
 <h3 id="客户端">客户端</h3>
 <ul>
 <li>Debian</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nfs-common</span><br><span class="line"></span><br><span class="line">showmount -e u1</span><br><span class="line">Export list <span class="keyword">for</span> u1:</span><br><span class="line">/root/share (everyone)</span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">mkdir</span> /mnt/share</span><br><span class="line"><span class="comment"># sudo mount -t nfs u1:/root/share /mnt/share</span></span><br><span class="line">sudo mount.nfs u1:/root/share /mnt/share</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nfs-common</span><br><span class="line"></span><br><span class="line">showmount -e u1</span><br><span class="line">Export list <span class="keyword">for</span> u1:</span><br><span class="line">/root/share (everyone)</span><br><span class="line"></span><br><span class="line">sudo mkdir /mnt/share</span><br><span class="line"><span class="comment"># sudo mount -t nfs u1:/root/share /mnt/share</span></span><br><span class="line">sudo mount.nfs u1:/root/share /mnt/share</span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong>：如果提示 <code>mount.nfs: No such device</code>，说明内核没有 NFS 模块，<s>洗洗睡了</s>，换 Windows 10 吧！</p>
 <ul>
 <li>Windows 10</li>
@@ -665,7 +665,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/11/umutech-install-nfs-server-on-armbian/" data-id="cly09uhqd016rsw7v62f71ynl" class="article-share-link" data-share="baidu" data-title="在 Armbian 安装 NFS 服务端">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/11/umutech-install-nfs-server-on-armbian/" data-id="cm3zebre0014kfk7m3arh4tku" class="article-share-link" data-share="baidu" data-title="在 Armbian 安装 NFS 服务端">分享到</a>
       
 
       
@@ -725,7 +725,7 @@ baby123</p>
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/09/umutech-solve-armbian-login-incorrect-via-ttl/" data-id="cly09uhqc016ksw7v18lm6ax4" class="article-share-link" data-share="baidu" data-title="解决通过 TTL 登录 Armbian 时的 Login incorrect">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/09/umutech-solve-armbian-login-incorrect-via-ttl/" data-id="cm3zebrdz014hfk7mgld619c6" class="article-share-link" data-share="baidu" data-title="解决通过 TTL 登录 Armbian 时的 Login incorrect">分享到</a>
       
 
       
@@ -773,7 +773,7 @@ baby123</p>
 <h2 id="分析">分析</h2>
 <p>由于 Windows 10 的 sshd、ssh-agent 做成服务，比较容易管理，而且微软改造的版本会更注重安全，所以 UMU 决定舍弃 git 带的那套。</p>
 <h2 id="解决">解决</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.sshcommand &quot;C:/Windows/System32/OpenSSH/ssh.exe&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.sshcommand &quot;C:&#x2F;Windows&#x2F;System32&#x2F;OpenSSH&#x2F;ssh.exe&quot;</span><br></pre></td></tr></table></figure>
 <p>以上方法是自定义私钥路径时惯用的（加 -i 参数），但这里我们只改变 ssh 本身路径。参考文档：</p>
 <blockquote>
 <p><strong>core.sshCommand</strong><br>
@@ -788,7 +788,7 @@ If this variable is set, git fetch and git push will use the specified command i
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/07/umutech-get-git-to-use-windows-10-openssh/" data-id="cly09uhqb016esw7v1y13c3sx" class="article-share-link" data-share="baidu" data-title="让 git 使用 Windows 10 OpenSSH">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/07/umutech-get-git-to-use-windows-10-openssh/" data-id="cm3zebrdz014efk7mcmnl1n28" class="article-share-link" data-share="baidu" data-title="让 git 使用 Windows 10 OpenSSH">分享到</a>
       
 
       
@@ -910,7 +910,7 @@ If this variable is set, git fetch and git push will use the specified command i
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/05/umutech-ttl-to-raspberry-pi/" data-id="cly09uhqc016hsw7v3mzmeypv" class="article-share-link" data-share="baidu" data-title="TTL 线连接树莓派">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/05/umutech-ttl-to-raspberry-pi/" data-id="cm3zebrdy014bfk7mf3x8d6mh" class="article-share-link" data-share="baidu" data-title="TTL 线连接树莓派">分享到</a>
       
 
       

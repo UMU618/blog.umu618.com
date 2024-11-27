@@ -14,7 +14,7 @@
 <meta property="og:description" content="作者: UMU @ MEET.ONE 实验室  问题 很多 EOS 浏览器都只能显示别人给我抵押了多少 EOS，但不能看到是哪个账号帮我抵押的。 分析 1. 看抵押的实现代码 从 eosio.contracts&#x2F;eosio.system&#x2F;src&#x2F;delegate_bandwidth.cpp 的 delegatebw 函数开始分析。 它调用了 changebw，其中的查表操作是这样的： 12del">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-12-28T03:18:00.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.968Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="调研">
 <meta property="article:tag" content="blockchain">
@@ -124,20 +124,20 @@
 <h3 id="1-看抵押的实现代码">1. 看抵押的实现代码</h3>
 <p>从 <code>eosio.contracts/eosio.system/src/delegate_bandwidth.cpp</code> 的 <code>delegatebw</code> 函数开始分析。</p>
 <p>它调用了 <code>changebw</code>，其中的查表操作是这样的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">del_bandwidth_table     <span class="title">del_tbl</span><span class="params">( _self, from.value )</span></span>;</span><br><span class="line"><span class="keyword">auto</span> itr = del_tbl.<span class="built_in">find</span>( receiver.value );</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">del_bandwidth_table     <span class="title">del_tbl</span><span class="params">( _self, from.value )</span></span>;</span><br><span class="line"><span class="keyword">auto</span> itr = del_tbl.find( receiver.value );</span><br></pre></td></tr></table></figure>
 <p>scope 是 from，而 from 就是要求的未知项，直接粉碎我们用这路线继续求解的可能。</p>
 <h3 id="2-找交易记录">2. 找交易记录</h3>
 <p>MEET.ONE 之前发布过几篇关于 MongoDB 插件的文章，这些积累为我们继续求解提供了很大便利。</p>
 <p>直接在 <code>Mongo Shell</code> 里尝试：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use <span class="variable constant_">EOS</span></span><br><span class="line">db.<span class="property">transaction_traces</span>.<span class="title function_">findOne</span>(&#123;<span class="string">&quot;action_traces.act.account&quot;</span> : <span class="string">&quot;eosio&quot;</span>, <span class="string">&quot;action_traces.act.name&quot;</span> : <span class="string">&quot;delegatebw&quot;</span>, <span class="string">&quot;action_traces.act.data.receiver&quot;</span> : <span class="string">&quot;shengxiaokai&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use EOS</span><br><span class="line">db.transaction_traces.findOne(&#123;<span class="string">&quot;action_traces.act.account&quot;</span> : <span class="string">&quot;eosio&quot;</span>, <span class="string">&quot;action_traces.act.name&quot;</span> : <span class="string">&quot;delegatebw&quot;</span>, <span class="string">&quot;action_traces.act.data.receiver&quot;</span> : <span class="string">&quot;shengxiaokai&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
 <p>执行之后，找到一条 trx_id 为 <code>9bd50c0fd6f0e1d0ed4c6f5c6f873a33976955ff9dae2ac3eb16cb7e9a44d106</code> 的交易记录，显示 <code>1freeaccount</code> 为 <code>shengxiaokai</code> 抵押：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;from&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;1freeaccount&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;receiver&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;shengxiaokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;stake_net_quantity&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;0.0000 EOS&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;stake_cpu_quantity&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;0.5000 EOS&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;transfer&quot;</span> <span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;from&quot;</span> : <span class="string">&quot;1freeaccount&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;receiver&quot;</span> : <span class="string">&quot;shengxiaokai&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;stake_net_quantity&quot;</span> : <span class="string">&quot;0.0000 EOS&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;stake_cpu_quantity&quot;</span> : <span class="string">&quot;0.5000 EOS&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;transfer&quot;</span> : <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/12/28/umutech-eosio-find-out-who-stakes-for-me/" data-id="cly09uhp100zbsw7v9otlcja2" class="article-share-link" data-share="baidu" data-title="EOSIO 找出谁为我质押">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/12/28/umutech-eosio-find-out-who-stakes-for-me/" data-id="cm3zebrdk0125fk7m4q28781f" class="article-share-link" data-share="baidu" data-title="EOSIO 找出谁为我质押">分享到</a>
       
 
       

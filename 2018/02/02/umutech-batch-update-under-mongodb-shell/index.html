@@ -6,15 +6,15 @@
   
   <title>Mongo Shell 下批量更新集合 | UMU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="需求 延长 MongoDB 某集合里的“过期时间”字段。 风险分析 update 一下是很简单，主要怕在 Shell 下操作可能改变数字类型。 先做了实验，发现 3.2 的版本下，并没有这个问题，之前看书，说数字可能被改为双精度，看来是旧版本的不足。 1234db.UMU.find().forEach(function (doc) &amp;#123;    doc.expireDate &#x3D; Number">
+  <meta name="description" content="需求 延长 MongoDB 某集合里的“过期时间”字段。 风险分析 update 一下是很简单，主要怕在 Shell 下操作可能改变数字类型。 先做了实验，发现 3.2 的版本下，并没有这个问题，之前看书，说数字可能被改为双精度，看来是旧版本的不足。 1234db.UMU.find().forEach(function (doc) &amp;#123;    doc.expireDate &#x3D; N">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mongo Shell 下批量更新集合">
 <meta property="og:url" content="https://blog.umu618.com/2018/02/02/umutech-batch-update-under-mongodb-shell/">
 <meta property="og:site_name" content="UMU">
-<meta property="og:description" content="需求 延长 MongoDB 某集合里的“过期时间”字段。 风险分析 update 一下是很简单，主要怕在 Shell 下操作可能改变数字类型。 先做了实验，发现 3.2 的版本下，并没有这个问题，之前看书，说数字可能被改为双精度，看来是旧版本的不足。 1234db.UMU.find().forEach(function (doc) &amp;#123;    doc.expireDate &#x3D; Number">
+<meta property="og:description" content="需求 延长 MongoDB 某集合里的“过期时间”字段。 风险分析 update 一下是很简单，主要怕在 Shell 下操作可能改变数字类型。 先做了实验，发现 3.2 的版本下，并没有这个问题，之前看书，说数字可能被改为双精度，看来是旧版本的不足。 1234db.UMU.find().forEach(function (doc) &amp;#123;    doc.expireDate &#x3D; N">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-02-02T09:57:47.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.948Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="ops">
 <meta property="article:tag" content="mongodb">
@@ -120,14 +120,14 @@
 <h2 id="风险分析">风险分析</h2>
 <p>update 一下是很简单，主要怕在 Shell 下操作可能改变数字类型。<br>
 先做了实验，发现 3.2 的版本下，并没有这个问题，之前看书，说数字可能被改为双精度，看来是旧版本的不足。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.UMU.find().forEach(function (doc) &#123;</span><br><span class="line">    doc.expireDate = NumberLong(doc.updateTime + 180*24*60*60*1000);</span><br><span class="line">    db.UMU.save(doc);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.UMU.find().forEach(function (doc) &#123;</span><br><span class="line">    doc.expireDate &#x3D; NumberLong(doc.updateTime + 180*24*60*60*1000);</span><br><span class="line">    db.UMU.save(doc);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>其中 NumberLong 是必要的，不然更新后，expireDate 的类型并不是和 updateTime 一样的 NumberLong。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/02/02/umutech-batch-update-under-mongodb-shell/" data-id="cly09uhoe00v1sw7vbsmpd6uf" class="article-share-link" data-share="baidu" data-title="Mongo Shell 下批量更新集合">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/02/02/umutech-batch-update-under-mongodb-shell/" data-id="cm3zebrcu00xqfk7m6e5g9kki" class="article-share-link" data-share="baidu" data-title="Mongo Shell 下批量更新集合">分享到</a>
       
 
       

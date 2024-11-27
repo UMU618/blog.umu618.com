@@ -14,11 +14,11 @@
 <meta property="og:description" content="某游戏在 RemoteFX 远程桌面下无法正常运行。提示：  运行引擎需要DX11特征等级10.0  英文版提示：  DX11 feature level 10.0 is required to run the engine.  稣立刻调用 dxdiag 查看，结果 Feature Level 10.0 是支持的！ 然后决定自己写个 DX11 程序测试一下，于是找到这里例子：Tutorial 3:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-06-29T03:04:11.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.958Z">
 <meta property="article:author" content="圣小开">
-<meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
 <meta property="article:tag" content="debug">
+<meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@UMU618">
   
@@ -130,7 +130,7 @@
 <p>MessageBox(hwnd, L&quot;Could not initialize Direct3D.“, L&quot;Error”, MB_OK);</p>
 </blockquote>
 <p>接下来，仔细检查这个初始化过程，发现居然是因为 wcstombs_s 失败引起的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Convert the name of the video card to a character array and store it.</span><br><span class="line">error = wcstombs_s(&amp;stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Convert the name of the video card to a character array and store it.</span><br><span class="line">error &#x3D; wcstombs_s(&amp;stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);</span><br></pre></td></tr></table></figure>
 <p>原来是因为 RemoteFX 显卡的名字里有汉字……</p>
 <blockquote>
 <p>RemoteFX 3D 视频适配器</p>
@@ -145,7 +145,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/06/29/umutech-chinese-name-gpu/" data-id="cly09uhop00x4sw7vhcebekia" class="article-share-link" data-share="baidu" data-title="显卡名称包含汉字导致 DX11 程序无法正常工作">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/06/29/umutech-chinese-name-gpu/" data-id="cm3zebrd700zxfk7mh8mpel70" class="article-share-link" data-share="baidu" data-title="显卡名称包含汉字导致 DX11 程序无法正常工作">分享到</a>
       
 
       

@@ -14,13 +14,13 @@
 <meta property="og:description" content="稣在教 ChatGPT 用 Debian 12">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-13T08:54:01.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.786Z">
+<meta property="article:modified_time" content="2023-09-17T13:15:38.237Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ops">
-<meta property="article:tag" content="macos">
 <meta property="article:tag" content="debian">
+<meta property="article:tag" content="macos">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@UMU618">
   
@@ -127,8 +127,8 @@
 <h3 id="八哥一：为什么睡眠了？">八哥一：为什么睡眠了？</h3>
 <p>因为每次 RDP 进入 KDE 后，都弹出一个密码输入框，上面想着“挂起系统需要身份验证”，于是稣做了如下操作，把它去掉。</p>
 <p><code>sudo vim /etc/polkit-1/rules.d/85-suspend.rules</code>，输入：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">polkit.<span class="title function_">addRule</span>(<span class="keyword">function</span>(<span class="params">action, subject</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (action.<span class="property">id</span> == <span class="string">&quot;org.freedesktop.login1.suspend&quot;</span> &amp;&amp;</span><br><span class="line">        subject.<span class="title function_">isInGroup</span>(<span class="string">&quot;tsusers&quot;</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> polkit.<span class="property">Result</span>.<span class="property">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 755 /etc/polkit-1/rules.d</span><br><span class="line">sudo <span class="built_in">chmod</span> 644 /etc/polkit-1/rules.d/85-suspend.rules</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">polkit.addRule(<span class="function"><span class="keyword">function</span>(<span class="params">action, subject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (action.id == <span class="string">&quot;org.freedesktop.login1.suspend&quot;</span> &amp;&amp;</span><br><span class="line">        subject.isInGroup(<span class="string">&quot;tsusers&quot;</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> polkit.Result.YES;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 755 /etc/polkit-1/rules.d</span><br><span class="line">sudo chmod 644 /etc/polkit-1/rules.d/85-suspend.rules</span><br></pre></td></tr></table></figure>
 <p>结果——机器就能自动睡眠了。这是不符合预期的……</p>
 <h3 id="八哥二：SSH-好好的，唯独-XRDP-坏了？">八哥二：SSH 好好的，唯独 XRDP 坏了？</h3>
 <p>确实是稣的一大失算！因为期间在 Debian 本地使用了 wayland，而 xrdp 用的是 xorg，怀疑这可能把 xrdp 弄坏，就把目光都集中在 xrdp 上，各种修复，甚至重新安装、配置 xrdp，也无济于事。</p>
@@ -140,7 +140,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/08/13/umutech-bug-xrdp-was-broken/" data-id="cly09uhra01bhsw7v4ojlgjqp" class="article-share-link" data-share="baidu" data-title="八哥系列：Debian 12 的 xrdp 突然连不上！">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/08/13/umutech-bug-xrdp-was-broken/" data-id="cm3zebri401oafk7m5wj28xcu" class="article-share-link" data-share="baidu" data-title="八哥系列：Debian 12 的 xrdp 突然连不上！">分享到</a>
       
 
       

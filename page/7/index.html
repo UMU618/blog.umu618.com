@@ -153,7 +153,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/03/12/umutech-asahi-linux/" data-id="cly09uhqy01a1sw7vfxps9to1" class="article-share-link" data-share="baidu" data-title="在 MacBook Air M1 上体验 Asahi Linux">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/03/12/umutech-asahi-linux/" data-id="cm3zebrhr01mufk7ma9xl9p6s" class="article-share-link" data-share="baidu" data-title="在 MacBook Air M1 上体验 Asahi Linux">分享到</a>
       
 
       
@@ -234,7 +234,7 @@
 <p>服务器软件的安装可以参考《<a href="/2022/05/15/umutech-smart-clock/">智能时钟</a>》。至于电视盒子嘛……其实它是一个浏览器：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install chromium</span><br></pre></td></tr></table></figure>
 <p>但是有个问题——用 HDMI 线连电视后，发现没有声音！</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install firmware-linux-nonfree firmware-iwlfifi firmware-sof-signed</span><br><span class="line">sudo apt install pulseaudio</span><br><span class="line"><span class="built_in">cat</span> /etc/modprobe.d/alsa.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo <span class="built_in">tee</span> /etc/modprobe.d/alsa.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install firmware-linux-nonfree firmware-iwlfifi firmware-sof-signed</span><br><span class="line">sudo apt install pulseaudio</span><br><span class="line">cat /etc/modprobe.d/alsa.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo tee /etc/modprobe.d/alsa.conf</span><br></pre></td></tr></table></figure>
 <h3 id="2-某-N5095A-迷你电脑">2. 某 N5095A 迷你电脑</h3>
 <p>用途：娱乐桌面</p>
 <p>这次选择 GNOME，依然是轻松搞定，但是有个问题——用 HDMI 线连电视后，发现没有声音！</p>
@@ -244,14 +244,14 @@
 <p>又但是，编译后也无法加载呀，它是个没签名的内核模块，稣又不想关闭 Secure Boot！只好装 MOK (Machine Owner Key) 搞定签名。</p>
 <p>转念一想，会不会 Testing 版本已经支持这款硬件了？果断切过去。</p>
 <p>目前 Testing 的 GNOME 已经使用 PipeWire 取代 PulseAudio，所以不能再安装 PulseAudio，因为这会卸载 GNOME！坑稣呢……只要加个声卡的调教参数，即可！</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo <span class="built_in">tee</span> -a /etc/modprobe.d/alsa-legacy.conf &gt; /dev/null</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options snd-intel-dspcfg dsp_driver=1&#x27;</span> | sudo tee -a /etc/modprobe.d/alsa-legacy.conf &gt; /dev/null</span><br></pre></td></tr></table></figure>
 <p>6.X 的内核和 GNOME 桌面下，娱乐的那点事，一切完美。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/02/12/umutech-debian-testing/" data-id="cly09uhqy01a4sw7vd6922tvj" class="article-share-link" data-share="baidu" data-title="Debian Testing">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/02/12/umutech-debian-testing/" data-id="cm3zebrhp01mlfk7m5l710ji5" class="article-share-link" data-share="baidu" data-title="Debian Testing">分享到</a>
       
 
       
@@ -313,7 +313,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/01/26/story-of-anti-formaldehyde-2/" data-id="cly09uhqz01a7sw7v0b9w4552" class="article-share-link" data-share="baidu" data-title="稣终于还是战胜甲醛测试仪2">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/01/26/story-of-anti-formaldehyde-2/" data-id="cm3zebrhr01mrfk7m8a1ah5vf" class="article-share-link" data-share="baidu" data-title="稣终于还是战胜甲醛测试仪2">分享到</a>
       
 
       
@@ -386,7 +386,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/01/21/reconstructionism-poet-carry-on-with-it/" data-id="cly09uhqx019vsw7v09jf57lw" class="article-share-link" data-share="baidu" data-title="诗盗·再战挨踢境逆">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/01/21/reconstructionism-poet-carry-on-with-it/" data-id="cm3zebrho01mifk7m2xfs31ok" class="article-share-link" data-share="baidu" data-title="诗盗·再战挨踢境逆">分享到</a>
       
 
       
@@ -439,7 +439,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/01/07/cherish-the-memory-of-ng-bun-tek/" data-id="cly09uhqw019ssw7vbivlfqe0" class="article-share-link" data-share="baidu" data-title="缅怀黄文择">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/01/07/cherish-the-memory-of-ng-bun-tek/" data-id="cm3zebrho01mffk7m137cfe4a" class="article-share-link" data-share="baidu" data-title="缅怀黄文择">分享到</a>
       
 
       
@@ -496,7 +496,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/12/30/reconstructionism-poet-am-i-hungry/" data-id="cly09uhpk011usw7vf63gelrb" class="article-share-link" data-share="baidu" data-title="诗盗·薛定谔好饿">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/12/30/reconstructionism-poet-am-i-hungry/" data-id="cm3zebrcs00xdfk7me52t7b8m" class="article-share-link" data-share="baidu" data-title="诗盗·薛定谔好饿">分享到</a>
       
 
       
@@ -544,7 +544,7 @@
 <p>微软还搞了一套 WRL，例如：<code>Microsoft::WRL::ComPtr</code>，去掉了一个 C 是比 ATL 风格略好一点，但依然是不现代的（不像 STL 的）。</p>
 <p>微软说：CppWinRT 才是王道，已经搞成现代 C++ 风格，例如：<code>winrt::com_ptr</code>。你们呀，用就行了。</p>
 <p>好的！稣试试。不管用不用，先把它弄进来。这时候 <code>packages.config</code> 长得像下面：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">id</span>=<span class="string">&quot;Microsoft.Windows.CppWinRT&quot;</span> <span class="attr">version</span>=<span class="string">&quot;2.0.221121.5&quot;</span> <span class="attr">targetFramework</span>=<span class="string">&quot;native&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">packages</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">packages</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">id</span>=<span class="string">&quot;Microsoft.Windows.CppWinRT&quot;</span> <span class="attr">version</span>=<span class="string">&quot;2.0.221121.5&quot;</span> <span class="attr">targetFramework</span>=<span class="string">&quot;native&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">packages</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="问题">问题</h2>
 <p>原本设计支持 Windows 7 的程序突然无法在 Windows 7 正常运行了！提示找不到 <code>api-ms-win-mm-time-l1-1-0.dll</code>。</p>
 <h2 id="分析">分析</h2>
@@ -561,7 +561,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/12/05/cppwinrt-1-link-to-winmm-instead-of-api-ms-win-mm-time-l1-1-0/" data-id="cly09uhpl0120sw7vhzab0j4v" class="article-share-link" data-share="baidu" data-title="CppWinRT 经验【1】链接 winmm.dll 而不是 api-ms-win-mm-time-l1-1-0.dll">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/12/05/cppwinrt-1-link-to-winmm-instead-of-api-ms-win-mm-time-l1-1-0/" data-id="cm3zebrcr00xafk7m57fc4j2c" class="article-share-link" data-share="baidu" data-title="CppWinRT 经验【1】链接 winmm.dll 而不是 api-ms-win-mm-time-l1-1-0.dll">分享到</a>
       
 
       
@@ -606,7 +606,7 @@
       
         <h2 id="问题">问题</h2>
 <p>为了更好追踪产品 bug，程序员很可能在日志里打印代码文件名和行号。例如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::clog &lt;&lt; <span class="string">&quot;(&quot;</span> __FILE__ <span class="string">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="string">&quot;): Failed to initialize!\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">clog</span> &lt;&lt; <span class="string">&quot;(&quot;</span> __FILE__ <span class="string">&quot;:&quot;</span> &lt;&lt; __LINE__ &lt;&lt; <span class="string">&quot;): Failed to initialize!\n&quot;</span>;</span><br></pre></td></tr></table></figure>
 <p>以上代码有两个问题：</p>
 <ol>
 <li>
@@ -618,7 +618,7 @@
 </ol>
 <h2 id="分析">分析</h2>
 <p>第一个问题很容易，打印文件 base name 即可。代码可能如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">consteval</span> std::string_view <span class="title">GetFileBaseName</span><span class="params">(std::string_view path)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.<span class="built_in">substr</span>(path.<span class="built_in">rfind</span>(<span class="string">&#x27;\\&#x27;</span>) + <span class="number">1</span>); <span class="comment">// for Windows path only</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line">std::cout &lt;&lt; <span class="built_in">GetFileBaseName</span>(&#123;__FILE__, <span class="built_in">sizeof</span>(__FILE__) - <span class="number">1</span>&#125;) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">std::cout &lt;&lt; <span class="built_in">GetFileBaseName</span>(__FILE__) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">consteval</span> <span class="built_in">std</span>::string_view <span class="title">GetFileBaseName</span><span class="params">(<span class="built_in">std</span>::string_view path)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.substr(path.rfind(<span class="string">&#x27;\\&#x27;</span>) + <span class="number">1</span>); <span class="comment">// for Windows path only</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(&#123;__FILE__, <span class="keyword">sizeof</span>(__FILE__) - <span class="number">1</span>&#125;) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; GetFileBaseName(__FILE__) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>但是，第二个问题并没有解决，<code>__FILE__</code> 依然存在于二进制文件里，用任意十六进制编辑器都能很轻易地找到“代码文件的全路径”。</p>
 <h2 id="解决">解决</h2>
 <p>方法一：去掉 <code>Use Full Paths (/FC)</code> 即可把 <code>__FILE__</code> 设置为只有文件名，没有全路径。</p>
@@ -634,7 +634,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/12/04/umutech-stem/" data-id="cly09uhpk011osw7v7p5o061z" class="article-share-link" data-share="baidu" data-title="__BASE_FILE__ 和 __STEM__">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/12/04/umutech-stem/" data-id="cm3zebrco00x7fk7m10ea2hzc" class="article-share-link" data-share="baidu" data-title="__BASE_FILE__ 和 __STEM__">分享到</a>
       
 
       
@@ -686,7 +686,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/12/02/reconstructionism-poet-cease-to-live/" data-id="cly09uhpj011lsw7vc60h55td" class="article-share-link" data-share="baidu" data-title="诗盗·奋斗不息">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/12/02/reconstructionism-poet-cease-to-live/" data-id="cm3zebrcn00x4fk7mc9mx508f" class="article-share-link" data-share="baidu" data-title="诗盗·奋斗不息">分享到</a>
       
 
       
@@ -812,7 +812,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/10/30/god-of-debug-sequel-6/" data-id="cly09uhpk011rsw7vh1ey1nvu" class="article-share-link" data-share="baidu" data-title="八哥之神后传【6】">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/10/30/god-of-debug-sequel-6/" data-id="cm3zebrcn00x1fk7m0cog1mo9" class="article-share-link" data-share="baidu" data-title="八哥之神后传【6】">分享到</a>
       
 
       

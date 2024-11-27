@@ -14,10 +14,10 @@
 <meta property="og:description" content="问题 这里有两个 EOS 私钥，它们长度居然不一样？   PVT_K1_1EEr5aW5162skbocDSMDgoWn9jna6HPSr1TwEMR6PNXbPtRky   PVT_K1_2bfGi9rYsXQSXXTvJbDAPhHLQUojjaNLomdm3cEJ1XTzMqUt3V   为什么私钥有不同长度？而公钥就都是固定长度呢？ 知识点   私钥是一个大型随机数，而公钥则是私钥乘以椭圆">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-22T08:27:30.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.759Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.018Z">
 <meta property="article:author" content="圣小开">
-<meta property="article:tag" content="dev">
 <meta property="article:tag" content="debug">
+<meta property="article:tag" content="dev">
 <meta property="article:tag" content="blockchain">
 <meta property="article:tag" content="cryptology">
 <meta name="twitter:card" content="summary">
@@ -158,7 +158,7 @@
 <p>可以清楚地看出前者短一个字符，数值也相应比较小。</p>
 <h3 id="2-BASE58-编码的原理">2. BASE58 编码的原理</h3>
 <p>BASE58 的字符集：<code>123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz</code>，其中 ‘1’ 代表 0，‘z’ 代表 57。把待编码的数字不断除以 58，并将余数用对应的字符表示。举个小点的数字做例子：618</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">618 / 58 = 10 .. 38 -&gt; f</span><br><span class="line"></span><br><span class="line">10 / 58  = 0  .. 10 -&gt; B</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">618 &#x2F; 58 &#x3D; 10 .. 38 -&gt; f</span><br><span class="line"></span><br><span class="line">10 &#x2F; 58  &#x3D; 0  .. 10 -&gt; B</span><br></pre></td></tr></table></figure>
 <p>拼接余数得 fB，再反转得 Bf。</p>
 <h3 id="3-BASE58-编码位数关系">3. BASE58 编码位数关系</h3>
 <p>一个数编码后，应该长于或等于比它小的数。我们可以通过简单的数学计算得出 45 个字符的 BASE58 编码可以表示的最大数：</p>
@@ -184,7 +184,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/04/22/umutech-why-eos-private-keys-have-variable-length/" data-id="cly09uhqe016usw7v4k7agiun" class="article-share-link" data-share="baidu" data-title="为什么 EOS 私钥有不同长度？">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/04/22/umutech-why-eos-private-keys-have-variable-length/" data-id="cm3zebre1014rfk7maz8h60k2" class="article-share-link" data-share="baidu" data-title="为什么 EOS 私钥有不同长度？">分享到</a>
       
 
       

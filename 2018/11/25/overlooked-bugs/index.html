@@ -14,7 +14,7 @@
 <meta property="og:description" content="1. 主题曲《像屎》  实习生黑锅 是很遥远的事情 八哥算什么 早无人在意 前埔不夜城 处处烤鱼 酒杯中好一片男男风情 最肯忘却故人失 最不屑一顾是相思 养着老怕人笑 还怕人看轻 新又来看乱码呆 竟不见有心人去改 庸才占着茅坑前途不在  2. 百度分享不支持 HTTPS 百度分享不支持 HTTPS 的解决方案：https:&#x2F;&#x2F;github.com&#x2F;hrwhisper&#x2F;baiduShare，最早是">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-11-25T05:59:53.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.958Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
 <p><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/process/coding-style.html#allocating-memory">原文</a>是“The preferred form for allocating a zeroed array is the following:”，所以“零长”应该改为“填零”。</p>
 <p><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/htmldocs/kernel-api/API-kcalloc.html">kcalloc 的文档</a>也说：“kcalloc — allocate memory for an array. The memory is set to zero. ”</p>
 <p>kcalloc 的定义 <a target="_blank" rel="noopener" href="https://github.com/torvalds/linux/blob/v4.19/include/linux/slab.h">/include/linux/slab.h</a> 更能说明：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * kcalloc - allocate memory for an array. The memory is set to zero.</span><br><span class="line"> * @n: number of elements.</span><br><span class="line"> * @size: element size.</span><br><span class="line"> * @flags: the type of memory to allocate (see kmalloc).</span><br><span class="line"> */</span><br><span class="line">static inline void *kcalloc(size_t n, size_t size, gfp_t flags)</span><br><span class="line">&#123;</span><br><span class="line">	return kmalloc_array(n, size, flags | __GFP_ZERO);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * kcalloc - allocate memory for an array. The memory is set to zero.</span><br><span class="line"> * @n: number of elements.</span><br><span class="line"> * @size: element size.</span><br><span class="line"> * @flags: the type of memory to allocate (see kmalloc).</span><br><span class="line"> *&#x2F;</span><br><span class="line">static inline void *kcalloc(size_t n, size_t size, gfp_t flags)</span><br><span class="line">&#123;</span><br><span class="line">	return kmalloc_array(n, size, flags | __GFP_ZERO);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>“零长数组”应该是指：<code>char u[0];</code></p>
 <h3 id="结论-2">结论</h3>
 <p>疑智商太高，学习太快，中国的内核开发者都不屑看翻译的文档。</p>
@@ -153,7 +153,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/11/25/overlooked-bugs/" data-id="cly09uhoy00ymsw7vdk8pf98e" class="article-share-link" data-share="baidu" data-title="无人在意的八哥">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/11/25/overlooked-bugs/" data-id="cm3zebrdg011efk7mh3vbcbrp" class="article-share-link" data-share="baidu" data-title="无人在意的八哥">分享到</a>
       
 
       

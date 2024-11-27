@@ -14,7 +14,7 @@
 <meta property="og:description" content="问题  gsl::narrow_cast 不就是 static_cast 吗？为啥要用 gsl::narrow_cast？  分析 gsl::narrow_cast 的注释写着：  &#x2F;&#x2F; narrow_cast(): a searchable way to do narrowing casts of values  其实已经很直白。用它的好处就是——以后要搜索将更容易！那么问题转变为：为什么要搜索">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-18T07:07:30.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.775Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.038Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="cpp">
@@ -128,7 +128,7 @@
 </blockquote>
 <p>其实已经很直白。用它的好处就是——以后要搜索将更容易！那么问题转变为：为什么要搜索？当然是因为将数据变窄是可能有潜在问题的！</p>
 <p>下面的例子里，有 gsl::narrow_cast 把数据转窄，又有 static_cast 把数据转宽。如果只用 static_cast，那么在排查哪里把数据丢失时，需要将第二个无关的 static_cast 也查一遍，这就浪费时间了。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;gsl/gsl&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0xff</span>;</span><br><span class="line">	<span class="keyword">auto</span> b = gsl::<span class="built_in">narrow_cast</span>&lt;std::<span class="type">uint8_t</span>&gt;(i);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// std::cout &lt;&lt; b;</span></span><br><span class="line">	std::cout &lt;&lt; <span class="built_in">static_cast</span>&lt;<span class="type">int</span>&gt;(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gsl/gsl&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0xff</span>;</span><br><span class="line">	<span class="keyword">auto</span> b = gsl::narrow_cast&lt;<span class="built_in">std</span>::<span class="keyword">uint8_t</span>&gt;(i);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// std::cout &lt;&lt; b;</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>总之，<strong>使用 gsl::narrow_cast 是为了写出更健壮更好维护的代码。</strong></p>
 <h2 id="更多">更多</h2>
 <p>还有一个 gsl::narrow，会在转换丢失数据时抛出 gsl::narrowing_error 异常，适合在不允许数据丢失的场景使用。</p>
@@ -137,7 +137,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/09/18/umutech-gsl-2-why-narrow_cast/" data-id="cly09uhpf011csw7vc78ses67" class="article-share-link" data-share="baidu" data-title="【GSL 系列 2】为什么需要 gsl::narrow_cast？">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/09/18/umutech-gsl-2-why-narrow_cast/" data-id="cm3zebrcl00wrfk7mfphv6sjl" class="article-share-link" data-share="baidu" data-title="【GSL 系列 2】为什么需要 gsl::narrow_cast？">分享到</a>
       
 
       

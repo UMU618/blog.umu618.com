@@ -129,7 +129,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2017/02/09/reconstructionism-poet-superman/" data-id="cly09uho000s4sw7v2j7k0et6" class="article-share-link" data-share="baidu" data-title="诗盗·非正常人类">分享到</a>
+        <a data-url="https://blog.umu618.com/2017/02/09/reconstructionism-poet-superman/" data-id="cm3zebr9s00eefk7m3gbcf1ij" class="article-share-link" data-share="baidu" data-title="诗盗·非正常人类">分享到</a>
       
 
       
@@ -173,11 +173,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>UMU 认为有一个目的是：<strong>需求细分</strong>（另外还有优化的目的）。考虑以下代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Movable</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Movable</span>() : <span class="built_in">i</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">3</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; __FUNCTION__ &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Movable</span>(Movable&amp; m) : <span class="built_in">i</span>(m.i)</span><br><span class="line">	&#123;</span><br><span class="line">		m.i = <span class="literal">nullptr</span>; <span class="comment">// 这里改变值是可以的</span></span><br><span class="line">		std::cout &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span>* i;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Movable</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Movable() : i(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">3</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	Movable(Movable&amp; m) : i(m.i)</span><br><span class="line">	&#123;</span><br><span class="line">		m.i = <span class="literal">nullptr</span>; <span class="comment">// 这里改变值是可以的</span></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>* i;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>因为 Movable&amp; m 没有用 const 修饰，所以可以在内部改变 m 的状态。如果加上 const 则不行：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Movable</span>(<span class="type">const</span> Movable&amp; m) : <span class="built_in">i</span>(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//m.i = nullptr; // 不能改变 m</span></span><br><span class="line">	std::cout &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Movable(<span class="keyword">const</span> Movable&amp; m) : i(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//m.i = nullptr; // 不能改变 m</span></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么没加 const 的集合，减去有 const 的集合，等于什么？答案就是：移动构造函数</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Movable</span>(Movable&amp;&amp; m) : <span class="built_in">i</span>(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	m.i = <span class="literal">nullptr</span>;</span><br><span class="line">	std::cout &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&amp;&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Movable(Movable&amp;&amp; m) : i(m.i)</span><br><span class="line">&#123;</span><br><span class="line">	m.i = <span class="literal">nullptr</span>;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">&quot;&amp;&amp;&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>分成 const Movable&amp; 和 Movable&amp;&amp; 两个，更严格、更清晰，这是好事。而 std::move 做的事情是为了正确调用移动构造函数（Movable&amp;&amp;），而不是被隐式转为 const 而错误地调用了复制构造函数（const Movable&amp;），不要在意什么左值、右值的，太烧脑了……</p>
 <p>扩展阅读：《从4行代码看右值引用》，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qicosmos/p/4283455.html">https://www.cnblogs.com/qicosmos/p/4283455.html</a></p>
 
@@ -185,7 +185,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2017/01/05/umutech-cpp-learning-notes-2-move-constructor/" data-id="cly09uhnz00rysw7v3nshcqje" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 2] 为什么会有移动构造函数、std::move？">分享到</a>
+        <a data-url="https://blog.umu618.com/2017/01/05/umutech-cpp-learning-notes-2-move-constructor/" data-id="cm3zebr9t00ehfk7m5xgn4pdf" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 2] 为什么会有移动构造函数、std::move？">分享到</a>
       
 
       
@@ -237,17 +237,17 @@
 <h3 id="1-析构次数不同">1. 析构次数不同</h3>
 <p>当 ptr 指向的是基础类型数组时，在析构这一步时，<code>delete ptr</code> 和 <code>delete[] ptr</code> 等价。</p>
 <p>当 ptr 指向类对象数组时，两者的差别在于调用多少个析构函数，<code>delete</code> 只调用第一个元素的析构函数，<code>delete[]</code> 则调用所有元素的析构函数。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Foo</span>() &#123;</span><br><span class="line">    std::cout &lt;&lt; __func__ &lt;&lt; std::endl;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ~<span class="built_in">Foo</span>() &#123;</span><br><span class="line">    std::cout &lt;&lt; __func__ &lt;&lt; std::endl;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// bug: 只会析构一个元素</span></span><br><span class="line">  <span class="function">std::shared_ptr&lt;Foo&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> Foo[<span class="number">10</span>])</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  Foo() &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __func__ &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ~Foo() &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __func__ &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// bug: 只会析构一个元素</span></span><br><span class="line">  <span class="function"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Foo&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> Foo[<span class="number">10</span>])</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当数组只有 1 个元素时，实际上两者的析构次数也一样。那么，<code>delete[]</code> 怎么知道当初分配了多少个元素呢？下一节有答案。</p>
 <h3 id="2-实际释放的指针不同">2. 实际释放的指针不同</h3>
 <p>对于基础类型，多数编译器（验证过 MSVC、clang++）会把 <code>new[]</code> 实现为不加任何“头部”，因为基础类型不需要析构。</p>
 <p>对于类对象数组，<code>delete[] ptr</code> 会先对 ptr 做减法，因为实际上 <code>new[]</code> 分配的是一个结构体：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">NewData</span> &#123;</span><br><span class="line">    <span class="type">size_t</span> element_count;</span><br><span class="line">    <span class="comment">// 这里可能有其它字段</span></span><br><span class="line">    T data[<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NewData</span> &#123;</span></span><br><span class="line">    <span class="keyword">size_t</span> element_count;</span><br><span class="line">    <span class="comment">// 这里可能有其它字段</span></span><br><span class="line">    T data[<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>但返回值指向 data。data 之前的字段可以称之为“头部”，这部分内容的实现具有不确定性。大约可以用下列代码解释：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// new T[element_count];</span></span><br><span class="line"><span class="type">size_t</span> total_size = element_count * <span class="built_in">sizeof</span>(T) + <span class="built_in">sizeof</span>(<span class="type">size_t</span>);</span><br><span class="line"><span class="keyword">auto</span> p = <span class="built_in">static_cast</span>&lt;NewData*&gt;(<span class="keyword">operator</span> <span class="built_in">new</span>(total_size));</span><br><span class="line">p-&gt;element_count = element_count;</span><br><span class="line"><span class="comment">// 其它实现</span></span><br><span class="line"><span class="keyword">return</span> p-&gt;data;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// new T[element_count];</span></span><br><span class="line"><span class="keyword">size_t</span> total_size = element_count * <span class="keyword">sizeof</span>(T) + <span class="keyword">sizeof</span>(<span class="keyword">size_t</span>);</span><br><span class="line"><span class="keyword">auto</span> p = <span class="keyword">static_cast</span>&lt;NewData*&gt;(<span class="keyword">operator</span> <span class="keyword">new</span>(total_size));</span><br><span class="line">p-&gt;element_count = element_count;</span><br><span class="line"><span class="comment">// 其它实现</span></span><br><span class="line"><span class="keyword">return</span> p-&gt;data;</span><br></pre></td></tr></table></figure>
 <p>所以 <code>delete[] ptr</code> 需要先对 ptr 做个位移，才能得到当初由 <code>operator new</code> 分配的内存。</p>
 <p>举例：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">EmptyClass</span> &#123;</span><br><span class="line">  ~<span class="built_in">EmptyClass</span>() &#123;</span><br><span class="line">    std::cout &lt;&lt; __func__ &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EmptyClass</span> &#123;</span></span><br><span class="line">  ~EmptyClass() &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; __func__ &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>auto ptr = new EmptyClass[1]</code> 需要分配一个 size_t 和一个 EmptyClass，在 x64 下是 8+1 字节，但 ptr 指向的是这块内存的第 8 字节。</li>
 <li><code>delete[] ptr</code> 对 ptr 减掉 8 个字节得到 new 分配的一块 8+1 字节的内存的地址，对其进行释放。</li>
@@ -281,7 +281,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2017/01/04/umutech-cpp-learning-notes-1-delete/" data-id="cly09uhnz00rssw7v3vbld00q" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 1] delete 和 delete[] 的本质区别">分享到</a>
+        <a data-url="https://blog.umu618.com/2017/01/04/umutech-cpp-learning-notes-1-delete/" data-id="cm3zebr9s00ebfk7m8ys5eeum" class="article-share-link" data-share="baidu" data-title="[C++ 学习笔记 1] delete 和 delete[] 的本质区别">分享到</a>
       
 
       
@@ -336,7 +336,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2016/12/31/reconstructionism-poet-arya-avalokiteshvara/" data-id="cly09uhnz00rvsw7vai6ehwz8" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说之观世寂莲宇督工">分享到</a>
+        <a data-url="https://blog.umu618.com/2016/12/31/reconstructionism-poet-arya-avalokiteshvara/" data-id="cm3zebrbd00oufk7m457b3jnp" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说之观世寂莲宇督工">分享到</a>
       
 
       
@@ -390,7 +390,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2016/12/27/reconstructionism-poet-boss/" data-id="cly09uhny00rjsw7vg3n54qgu" class="article-share-link" data-share="baidu" data-title="诗盗·是个头">分享到</a>
+        <a data-url="https://blog.umu618.com/2016/12/27/reconstructionism-poet-boss/" data-id="cm3zebrbd00orfk7m4e8yd68m" class="article-share-link" data-share="baidu" data-title="诗盗·是个头">分享到</a>
       
 
       
@@ -441,7 +441,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2016/11/26/reconstructionism-poet-vicissitudes/" data-id="cly09uhny00rpsw7v6xub5l24" class="article-share-link" data-share="baidu" data-title="诗盗·诡龄长生莫沧桑">分享到</a>
+        <a data-url="https://blog.umu618.com/2016/11/26/reconstructionism-poet-vicissitudes/" data-id="cm3zebrbc00oofk7mgegb1nrt" class="article-share-link" data-share="baidu" data-title="诗盗·诡龄长生莫沧桑">分享到</a>
       
 
       
@@ -494,7 +494,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2016/11/06/reconstructionism-poet-couplets-life/" data-id="cly09uhny00rmsw7v6sllg05y" class="article-share-link" data-share="baidu" data-title="诗盗·对联·人生">分享到</a>
+        <a data-url="https://blog.umu618.com/2016/11/06/reconstructionism-poet-couplets-life/" data-id="cm3zebrbb00oifk7m6patafst" class="article-share-link" data-share="baidu" data-title="诗盗·对联·人生">分享到</a>
       
 
       
@@ -547,7 +547,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2016/10/31/reconstructionism-poet-shanpoyang-forget/" data-id="cly09uhnx00rasw7v9kcneegj" class="article-share-link" data-share="baidu" data-title="诗盗·山坡羊·忘">分享到</a>
+        <a data-url="https://blog.umu618.com/2016/10/31/reconstructionism-poet-shanpoyang-forget/" data-id="cm3zebrbc00olfk7mfkbf0u8k" class="article-share-link" data-share="baidu" data-title="诗盗·山坡羊·忘">分享到</a>
       
 
       
@@ -605,7 +605,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2016/10/21/primitive-power/" data-id="cly09uhnx00rgsw7v0u6jhix9" class="article-share-link" data-share="baidu" data-title="原始强力和成熟进程">分享到</a>
+        <a data-url="https://blog.umu618.com/2016/10/21/primitive-power/" data-id="cm3zebrbb00offk7m6n5x5b4w" class="article-share-link" data-share="baidu" data-title="原始强力和成熟进程">分享到</a>
       
 
       
@@ -656,7 +656,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2016/10/20/reconstructionism-poet-quantum-heresy/" data-id="cly09uhnx00rdsw7v4depdprb" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说">分享到</a>
+        <a data-url="https://blog.umu618.com/2016/10/20/reconstructionism-poet-quantum-heresy/" data-id="cm3zebrbb00ocfk7m0hep9k1s" class="article-share-link" data-share="baidu" data-title="诗盗·量子邪说">分享到</a>
       
 
       

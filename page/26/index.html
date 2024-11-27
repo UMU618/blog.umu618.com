@@ -123,18 +123,18 @@
 </li>
 </ul>
 <p>一个想当然的实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(str) &#123;</span><br><span class="line">    ltrim(str)</span><br><span class="line">    rtrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(str) &#123;</span><br><span class="line">    ltrim(str)</span><br><span class="line">    rtrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>假设 str 是 x 个空格 + y 个非空格 + z 个空格，则以上代码需要把 y + z 个字符向左移动 x 个位置。</p>
 <p>更好的实现是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(string&amp; str) &#123;</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">trim(string&amp; str) &#123;</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于先截断，剩 x + y，再去左移，只需要把 y 个字符左移 x 个位置。</p>
 <p><strong>优化思路：尽量减少复制，调整顺序也是优化手段。</strong></p>
 <h2 id="Copy-版本">Copy 版本</h2>
 <p>传入的字符串不会被改变，返回一个新的字符串。</p>
 <p>一个复用前面代码的实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(string str) &#123;</span><br><span class="line">    // str is a copy</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">    return str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(string str) &#123;</span><br><span class="line">    &#x2F;&#x2F; str is a copy</span><br><span class="line">    rtrim(str)</span><br><span class="line">    ltrim(str)</span><br><span class="line">    return str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个版本需要复制 x + y + z 个字符，ltrim 和 rtrim 里面都有找偏移量的代码可以复用，直接找到 y 个非空格字符是起点和终点，复制这 y 个字符就好了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(const string&amp; str) &#123;</span><br><span class="line">    // str is a copy</span><br><span class="line">    l = lfind(str)</span><br><span class="line">    r = rfind(str)</span><br><span class="line">    return str[l, r]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string trim_copy(const string&amp; str) &#123;</span><br><span class="line">    &#x2F;&#x2F; str is a copy</span><br><span class="line">    l &#x3D; lfind(str)</span><br><span class="line">    r &#x3D; rfind(str)</span><br><span class="line">    return str[l, r]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>优化思路：尽量减少复制。</strong></p>
 <h2 id="move">move</h2>
 <p>strlen、strcpy、memmove 这类函数，都有一个优化思路：机器字长对齐，一次处理一个机器字。对于长字符串，效果显著。</p>
@@ -144,7 +144,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/04/10/umutech-optimization-thinking-1-trim-strings/" data-id="cly09uhs401gjsw7v9g7eb06w" class="article-share-link" data-share="baidu" data-title="优化思维【1】字符串去空格">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/04/10/umutech-optimization-thinking-1-trim-strings/" data-id="cm3zebrfx01ebfk7m0oy9b2fu" class="article-share-link" data-share="baidu" data-title="优化思维【1】字符串去空格">分享到</a>
       
 
       
@@ -236,7 +236,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/04/05/company-is-not-a-family/" data-id="cly09uhs401ggsw7v4ntohqmn" class="article-share-link" data-share="baidu" data-title="公司不是家庭">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/04/05/company-is-not-a-family/" data-id="cm3zebrfx01e8fk7m4x81076e" class="article-share-link" data-share="baidu" data-title="公司不是家庭">分享到</a>
       
 
       
@@ -346,7 +346,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/31/god-of-debug-18/" data-id="cly09uhs301gdsw7v90qx11e4" class="article-share-link" data-share="baidu" data-title="八哥之神【18】">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/31/god-of-debug-18/" data-id="cm3zebrfw01e5fk7m1mik7cff" class="article-share-link" data-share="baidu" data-title="八哥之神【18】">分享到</a>
       
 
       
@@ -449,7 +449,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/28/god-of-debug-17/" data-id="cly09uhs301gasw7v1huyhe36" class="article-share-link" data-share="baidu" data-title="八哥之神【17】">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/28/god-of-debug-17/" data-id="cm3zebrfv01e2fk7m4iem5v4t" class="article-share-link" data-share="baidu" data-title="八哥之神【17】">分享到</a>
       
 
       
@@ -502,9 +502,9 @@
 <li>Boost：1.69.0（1.67.0 也有问题，干脆用这个版本）</li>
 </ul>
 <h2 id="验证问题">验证问题</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ::<span class="type">sigset_t</span> sigset;</span><br><span class="line"></span><br><span class="line">  ::<span class="built_in">sigemptyset</span>(&amp;sigset);</span><br><span class="line">  ::<span class="built_in">sigaddset</span>(&amp;sigset, SIGCHLD);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ::<span class="keyword">sigset_t</span> sigset;</span><br><span class="line"></span><br><span class="line">  ::sigemptyset(&amp;sigset);</span><br><span class="line">  ::sigaddset(&amp;sigset, SIGCHLD);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>编译输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Scanning dependencies of target signal</span><br><span class="line">[ 50%] Building CXX object CMakeFiles/signal.dir/signal.cpp.o</span><br><span class="line">/Users/umu/umutech/macos-cpp/source/study/posix/signal/signal.cpp:6:5: error: expected unqualified-id</span><br><span class="line">  ::sigemptyset(&amp;sigset);</span><br><span class="line">    ^</span><br><span class="line">/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include/signal.h:125:26: note: expanded from macro &#x27;sigemptyset&#x27;</span><br><span class="line">#define sigemptyset(set)        (*(set) = 0, 0)</span><br><span class="line">                                ^</span><br><span class="line">/Users/umu/umutech/macos-cpp/source/study/posix/signal/signal.cpp:7:5: error: expected unqualified-id</span><br><span class="line">  ::sigaddset(&amp;sigset, SIGCHLD);</span><br><span class="line">    ^</span><br><span class="line">/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include/signal.h:122:31: note: expanded from macro &#x27;sigaddset&#x27;</span><br><span class="line">#define sigaddset(set, signo)   (*(set) |= __sigbits(signo), 0)</span><br><span class="line">                                ^</span><br><span class="line">2 errors generated.</span><br><span class="line">make[2]: *** [CMakeFiles/signal.dir/signal.cpp.o] Error 1</span><br><span class="line">make[1]: *** [CMakeFiles/signal.dir/all] Error 2</span><br><span class="line">make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Scanning dependencies of target signal</span><br><span class="line">[ 50%] Building CXX object CMakeFiles&#x2F;signal.dir&#x2F;signal.cpp.o</span><br><span class="line">&#x2F;Users&#x2F;umu&#x2F;umutech&#x2F;macos-cpp&#x2F;source&#x2F;study&#x2F;posix&#x2F;signal&#x2F;signal.cpp:6:5: error: expected unqualified-id</span><br><span class="line">  ::sigemptyset(&amp;sigset);</span><br><span class="line">    ^</span><br><span class="line">&#x2F;Applications&#x2F;Xcode.app&#x2F;Contents&#x2F;Developer&#x2F;Platforms&#x2F;MacOSX.platform&#x2F;Developer&#x2F;SDKs&#x2F;MacOSX10.14.sdk&#x2F;usr&#x2F;include&#x2F;signal.h:125:26: note: expanded from macro &#39;sigemptyset&#39;</span><br><span class="line">#define sigemptyset(set)        (*(set) &#x3D; 0, 0)</span><br><span class="line">                                ^</span><br><span class="line">&#x2F;Users&#x2F;umu&#x2F;umutech&#x2F;macos-cpp&#x2F;source&#x2F;study&#x2F;posix&#x2F;signal&#x2F;signal.cpp:7:5: error: expected unqualified-id</span><br><span class="line">  ::sigaddset(&amp;sigset, SIGCHLD);</span><br><span class="line">    ^</span><br><span class="line">&#x2F;Applications&#x2F;Xcode.app&#x2F;Contents&#x2F;Developer&#x2F;Platforms&#x2F;MacOSX.platform&#x2F;Developer&#x2F;SDKs&#x2F;MacOSX10.14.sdk&#x2F;usr&#x2F;include&#x2F;signal.h:122:31: note: expanded from macro &#39;sigaddset&#39;</span><br><span class="line">#define sigaddset(set, signo)   (*(set) |&#x3D; __sigbits(signo), 0)</span><br><span class="line">                                ^</span><br><span class="line">2 errors generated.</span><br><span class="line">make[2]: *** [CMakeFiles&#x2F;signal.dir&#x2F;signal.cpp.o] Error 1</span><br><span class="line">make[1]: *** [CMakeFiles&#x2F;signal.dir&#x2F;all] Error 2</span><br><span class="line">make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
 <h2 id="解决">解决</h2>
 <p>去掉 <code>sigemptyset</code> 和 <code>sigaddset</code> 前面的 <code>::</code> 即可。因为他们是宏，宏都是全局的，用 <code>::</code> 修饰反而错了，严格！</p>
 <p>Boost 开发分支上已经修复：</p>
@@ -515,7 +515,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/26/umutech-fix-clang-error-expected-unqualified-id/" data-id="cly09uhs201g7sw7v8m9p97pc" class="article-share-link" data-share="baidu" data-title="修复 Clang 编译错误：error: expected unqualified-id">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/26/umutech-fix-clang-error-expected-unqualified-id/" data-id="cm3zebrfv01dzfk7m6iubb2q3" class="article-share-link" data-share="baidu" data-title="修复 Clang 编译错误：error: expected unqualified-id">分享到</a>
       
 
       
@@ -590,7 +590,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/24/god-of-debug-16/" data-id="cly09uhs201g4sw7v053b31xt" class="article-share-link" data-share="baidu" data-title="八哥之神【16】">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/24/god-of-debug-16/" data-id="cm3zebrfu01dwfk7mc9mj87ay" class="article-share-link" data-share="baidu" data-title="八哥之神【16】">分享到</a>
       
 
       
@@ -684,7 +684,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/24/god-of-debug-15/" data-id="cly09uhs101g1sw7v36hx1tra" class="article-share-link" data-share="baidu" data-title="八哥之神【15】">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/24/god-of-debug-15/" data-id="cm3zebrft01dtfk7m16tvezwy" class="article-share-link" data-share="baidu" data-title="八哥之神【15】">分享到</a>
       
 
       
@@ -781,7 +781,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/17/god-of-debug-14/" data-id="cly09uhs101fysw7v0vwp87td" class="article-share-link" data-share="baidu" data-title="八哥之神【14】">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/17/god-of-debug-14/" data-id="cm3zebrft01dqfk7mf90e89dx" class="article-share-link" data-share="baidu" data-title="八哥之神【14】">分享到</a>
       
 
       
@@ -924,7 +924,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/05/god-of-debug-13/" data-id="cly09uhrz01fpsw7v5np99b10" class="article-share-link" data-share="baidu" data-title="八哥之神【13】">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/05/god-of-debug-13/" data-id="cm3zebrfr01dkfk7m6x2bdnnz" class="article-share-link" data-share="baidu" data-title="八哥之神【13】">分享到</a>
       
 
       
@@ -1010,7 +1010,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/03/02/i-suggest-you-having-2-kids/" data-id="cly09uhs001fvsw7v9yqe5eoi" class="article-share-link" data-share="baidu" data-title="熊市，耶劝你生二胎">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/03/02/i-suggest-you-having-2-kids/" data-id="cm3zebrfs01dnfk7m5x3wefyb" class="article-share-link" data-share="baidu" data-title="熊市，耶劝你生二胎">分享到</a>
       
 
       

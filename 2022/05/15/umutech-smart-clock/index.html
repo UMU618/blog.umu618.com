@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.umu618.com/images/2022/20220515-clock.jpg">
 <meta property="article:published_time" content="2022-05-14T16:06:18.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.775Z">
+<meta property="article:modified_time" content="2023-10-29T12:24:56.928Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="linux">
@@ -203,7 +203,7 @@
 <p>iWork 8:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install firmware-realtek firmware-intel-sound</span><br></pre></td></tr></table></figure>
 <p>Dell Venue 8 Pro 稍微麻烦点：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt install firmware-atheros</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/UMU618/ath6kl-firmware</span><br><span class="line">sudo <span class="built_in">cp</span> -r ath6kl-firmware/ath6k/AR6004/hw3.0/ /lib/firmware/ath6k/AR6004/</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt install firmware-atheros</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/UMU618/ath6kl-firmware</span><br><span class="line">sudo cp -r ath6kl-firmware/ath6k/AR6004/hw3.0/ /lib/firmware/ath6k/AR6004/</span><br></pre></td></tr></table></figure>
 <h3 id="3-配置无线网络">3. 配置无线网络</h3>
 <p>建议采用 NetworkManager 的方式：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install network-manager</span><br></pre></td></tr></table></figure>
@@ -240,7 +240,7 @@
 <h3 id="8-安装做共享用的-Samba">8. 安装做共享用的 Samba</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install samba</span><br></pre></td></tr></table></figure>
 <p>来个配置例子：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat /etc/samba/smb.conf</span></span><br><span class="line">[movie]</span><br><span class="line">   comment = Movie</span><br><span class="line">   browseable = <span class="built_in">yes</span></span><br><span class="line">   path = /mnt/sd/movie</span><br><span class="line">   <span class="built_in">read</span> only = <span class="built_in">yes</span></span><br><span class="line">   guest ok = <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat /etc/samba/smb.conf</span></span><br><span class="line">[movie]</span><br><span class="line">   comment = Movie</span><br><span class="line">   browseable = yes</span><br><span class="line">   path = /mnt/sd/movie</span><br><span class="line">   <span class="built_in">read</span> only = yes</span><br><span class="line">   guest ok = yes</span><br></pre></td></tr></table></figure>
 <h3 id="9-全家出动录音做闹钟声">9. 全家出动录音做闹钟声</h3>
 <p>直接在平板电脑上用 <code>arecord</code> 录有点麻烦，建议在 PC 上录再用 <code>scp</code> 或 <code>rz</code> 上传，wav 格式的就行。</p>
 <p>调节音量可以用：</p>
@@ -277,7 +277,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/05/15/umutech-smart-clock/" data-id="cly09uhp9010gsw7vh447arql" class="article-share-link" data-share="baidu" data-title="智能时钟">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/05/15/umutech-smart-clock/" data-id="cm3zebrcf00vufk7mhk5hed3s" class="article-share-link" data-share="baidu" data-title="智能时钟">分享到</a>
       
 
       

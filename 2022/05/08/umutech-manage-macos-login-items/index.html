@@ -14,7 +14,7 @@
 <meta property="og:description" content="问题 稣在 macOS 上装了「Free Download Manager」，结果每次系统重启登录后它都会自启动，稣明明没让它这么做的！以下图形界面下的方法都试过，还是自启动！   在「Dock 栏」右击「Free Download Manager」的图标，选择「选项」，确认「登录时打开」没有打勾。   「系统偏好设置」-「用户与群组」-「登录项」里面也没有「Free Download Manag">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-08T08:22:29.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.775Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.038Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="debug">
 <meta property="article:tag" content="ops">
@@ -142,7 +142,7 @@
 <ol>
 <li>首先要得到「Free Download Manager」的程序 ID：</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> /Applications | grep <span class="string">&#x27;Free Download Manager&#x27;</span></span><br><span class="line">Free Download Manager.app</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">ls</span> /Applications/Free\ Download\ Manager.app/Contents</span><br><span class="line">Frameworks     Info.plist     MacOS          PkgInfo        PlugIns        Resources      _CodeSignature translations</span><br><span class="line"></span><br><span class="line">$ grep -A1 CFBundleIdentifier /Applications/Free\ Download\ Manager.app/Contents/Info.plist</span><br><span class="line">        &lt;key&gt;CFBundleIdentifier&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;org.freedownloadmanager.fdm6&lt;/string&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ls /Applications | grep <span class="string">&#x27;Free Download Manager&#x27;</span></span><br><span class="line">Free Download Manager.app</span><br><span class="line"></span><br><span class="line">$ ls /Applications/Free\ Download\ Manager.app/Contents</span><br><span class="line">Frameworks     Info.plist     MacOS          PkgInfo        PlugIns        Resources      _CodeSignature translations</span><br><span class="line"></span><br><span class="line">$ grep -A1 CFBundleIdentifier /Applications/Free\ Download\ Manager.app/Contents/Info.plist</span><br><span class="line">        &lt;key&gt;CFBundleIdentifier&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;org.freedownloadmanager.fdm6&lt;/string&gt;</span><br></pre></td></tr></table></figure>
 <p>以上，专业的一条命令为：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ defaults <span class="built_in">read</span> /Applications/Free\ Download\ Manager.app/Contents/Info.plist CFBundleIdentifier</span><br><span class="line">org.freedownloadmanager.fdm6</span><br></pre></td></tr></table></figure>
 <ol start="2">
@@ -159,7 +159,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/05/08/umutech-manage-macos-login-items/" data-id="cly09uhp9010dsw7vf0oo7d0l" class="article-share-link" data-share="baidu" data-title="管理 macOS 的登录项">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/05/08/umutech-manage-macos-login-items/" data-id="cm3zebrcf00vqfk7m3r4o8ofg" class="article-share-link" data-share="baidu" data-title="管理 macOS 的登录项">分享到</a>
       
 
       

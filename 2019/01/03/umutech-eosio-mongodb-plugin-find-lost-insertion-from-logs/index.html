@@ -14,7 +14,7 @@
 <meta property="og:description" content="作者: UMU @ MEET.ONE 实验室  问题 当 MongoDB 因不可抗力故障，nodeos 重启后会丢失上次故障时正在插入的记录。 解决 nodeos 会将插入语句连同错误原因等信息一起写入 log，这给了我们手动修复丢失的机会。下面以 transaction_traces 为例，介绍修复流程。 1. 找出所有失败记录 1grep &amp;#x27;mongo exception, tra">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-01-03T03:58:24.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.968Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="调研">
 <meta property="article:tag" content="blockchain">
@@ -125,15 +125,15 @@
 <h3 id="1-找出所有失败记录">1. 找出所有失败记录</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;mongo exception, trans_traces insert:&#x27;</span> *.<span class="built_in">log</span> &gt; lost.txt</span><br></pre></td></tr></table></figure>
 <h3 id="2-从-log-生成-mongo-script">2. 从 log 生成 mongo script</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;++++&quot;);</span></span><br><span class="line"><span class="string">var eos = db.getSiblingDB(&quot;EOS&quot;);&#x27;</span> &gt; lost.js</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> lost.txt | sed -n <span class="string">&#x27;s/.*, trans_traces insert: \(.*\), line 920, code.*/eos.transaction_traces.insert(\1)/p&#x27;</span> &gt;&gt; lost.js</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;----&quot;);&#x27;</span> &gt;&gt; lost.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;++++&quot;);</span></span><br><span class="line"><span class="string">var eos = db.getSiblingDB(&quot;EOS&quot;);&#x27;</span> &gt; lost.js</span><br><span class="line"></span><br><span class="line">cat lost.txt | sed -n <span class="string">&#x27;s/.*, trans_traces insert: \(.*\), line 920, code.*/eos.transaction_traces.insert(\1)/p&#x27;</span> &gt;&gt; lost.js</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;----&quot;);&#x27;</span> &gt;&gt; lost.js</span><br></pre></td></tr></table></figure>
 <h3 id="3-导入-MongoDB">3. 导入 MongoDB</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> mongo mongodb://<span class="variable">$user</span>:<span class="variable">$password</span>@127.0.0.1:<span class="variable">$port</span>/admin lost.js &gt; lost.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup mongo mongodb://<span class="variable">$user</span>:<span class="variable">$password</span>@127.0.0.1:<span class="variable">$port</span>/admin lost.js &gt; lost.log</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/" data-id="cly09uhrh01cnsw7vdf2m5gju" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：从 log 中找回丢失的插入记录">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/" data-id="cm3zebrf601affk7m1xnjazgc" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：从 log 中找回丢失的插入记录">分享到</a>
       
 
       

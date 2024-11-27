@@ -123,7 +123,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/06/25/reconstructionism-poet-will-fck-the-fool/" data-id="cm02h9jja00001s7vcvpggb4m" class="article-share-link" data-share="baidu" data-title="诗盗·将上愚者">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/06/25/reconstructionism-poet-will-fck-the-fool/" data-id="cm3zebrez019efk7meeft735r" class="article-share-link" data-share="baidu" data-title="诗盗·将上愚者">分享到</a>
       
 
       
@@ -209,10 +209,10 @@
 </li>
 </ul>
 <p>注意：安装 Debian 时已经分过区，到这步，只需要创建子卷：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">btrfs subvolume create /mnt/@<span class="built_in">arch</span></span><br><span class="line"><span class="comment"># 相应地，挂载 Arch 根目录所在子卷到 /mnt 那步改为</span></span><br><span class="line">mount -t btrfs -o subvol=/@<span class="built_in">arch</span>,compress=zstd /dev/nvme0n1p2 /mnt</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">btrfs subvolume create /mnt/@arch</span><br><span class="line"><span class="comment"># 相应地，挂载 Arch 根目录所在子卷到 /mnt 那步改为</span></span><br><span class="line">mount -t btrfs -o subvol=/@arch,compress=zstd /dev/nvme0n1p2 /mnt</span><br></pre></td></tr></table></figure>
 <p>然后，@home 子卷之前已经创建，直接挂载即可。</p>
 <p>最后，**不要安装引导程序！**重启去 Debian，手动加 Arch 的启动项。这步解释起来麻烦，直接发一下 Debian 的 <code>/boot/grub/grub.cfg</code> 里的片段：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">menuentry &#x27;Arch Linux&#x27; --class archlinux --class gnu-linux --class gnu --class os $menuentry_id_option &#x27;gnulinux-simple-9b30a786-55a7-4068-8886-226f147eef4d&#x27; &#123;</span><br><span class="line">        load_video</span><br><span class="line">        insmod gzio</span><br><span class="line">        if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">        insmod part_gpt</span><br><span class="line">        insmod btrfs</span><br><span class="line">        search --no-floppy --fs-uuid --set=root 9b30a786-55a7-4068-8886-226f147eef4d</span><br><span class="line">        echo    &#x27;Loading Arch Linux ...&#x27;</span><br><span class="line">        linux   /@/boot/vmlinuz-linux root=UUID=9b30a786-55a7-4068-8886-226f147eef4d ro rootflags=subvol=@arch,compress=zstd  nowatchdog</span><br><span class="line">        echo    &#x27;Loading initial ramdisk ...&#x27;</span><br><span class="line">        initrd  /@/boot/initramfs-linux.img</span><br><span class="line">&#125;</span><br><span class="line">menuentry &#x27;Arch Linux fallback&#x27; --class archlinux --class gnu-linux --class gnu --class os $menuentry_id_option &#x27;gnulinux-simple-9b30a786-55a7-4068-8886-226f147eef4d&#x27; &#123;</span><br><span class="line">        load_video</span><br><span class="line">        insmod gzio</span><br><span class="line">        if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">        insmod part_gpt</span><br><span class="line">        insmod btrfs</span><br><span class="line">        search --no-floppy --fs-uuid --set=root 9b30a786-55a7-4068-8886-226f147eef4d</span><br><span class="line">        echo    &#x27;Loading Arch Linux ...&#x27;</span><br><span class="line">        linux   /@/boot/vmlinuz-linux root=UUID=9b30a786-55a7-4068-8886-226f147eef4d ro rootflags=subvol=@arch  quiet</span><br><span class="line">        echo    &#x27;Loading initial ramdisk ...&#x27;</span><br><span class="line">        initrd  /@/boot/amd-ucode.img /@/boot/initramfs-linux-fallback.img</span><br><span class="line">&#125;</span><br><span class="line">menuentry &#x27;Debian GNU/Linux&#x27; --class debian --class gnu-linux --class gnu --class os $menuentry_id_option &#x27;gnulinux-simple-9b30a786-55a7-4068-8886-226f147eef4d&#x27; &#123;</span><br><span class="line">        load_video</span><br><span class="line">        insmod gzio</span><br><span class="line">        if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">        insmod part_gpt</span><br><span class="line">        insmod btrfs</span><br><span class="line">        search --no-floppy --fs-uuid --set=root 9b30a786-55a7-4068-8886-226f147eef4d</span><br><span class="line">        echo    &#x27;Loading Linux 6.1.0-21-amd64 ...&#x27;</span><br><span class="line">        linux   /@rootfs/boot/vmlinuz-6.1.0-21-amd64 root=UUID=9b30a786-55a7-4068-8886-226f147eef4d ro rootflags=subvol=@rootfs  quiet</span><br><span class="line">        echo    &#x27;Loading initial ramdisk ...&#x27;</span><br><span class="line">        initrd  /@rootfs/boot/initrd.img-6.1.0-21-amd64</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">menuentry &#39;Arch Linux&#39; --class archlinux --class gnu-linux --class gnu --class os $menuentry_id_option &#39;gnulinux-simple-9b30a786-55a7-4068-8886-226f147eef4d&#39; &#123;</span><br><span class="line">        load_video</span><br><span class="line">        insmod gzio</span><br><span class="line">        if [ x$grub_platform &#x3D; xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">        insmod part_gpt</span><br><span class="line">        insmod btrfs</span><br><span class="line">        search --no-floppy --fs-uuid --set&#x3D;root 9b30a786-55a7-4068-8886-226f147eef4d</span><br><span class="line">        echo    &#39;Loading Arch Linux ...&#39;</span><br><span class="line">        linux   &#x2F;@&#x2F;boot&#x2F;vmlinuz-linux root&#x3D;UUID&#x3D;9b30a786-55a7-4068-8886-226f147eef4d ro rootflags&#x3D;subvol&#x3D;@arch,compress&#x3D;zstd  nowatchdog</span><br><span class="line">        echo    &#39;Loading initial ramdisk ...&#39;</span><br><span class="line">        initrd  &#x2F;@&#x2F;boot&#x2F;initramfs-linux.img</span><br><span class="line">&#125;</span><br><span class="line">menuentry &#39;Arch Linux fallback&#39; --class archlinux --class gnu-linux --class gnu --class os $menuentry_id_option &#39;gnulinux-simple-9b30a786-55a7-4068-8886-226f147eef4d&#39; &#123;</span><br><span class="line">        load_video</span><br><span class="line">        insmod gzio</span><br><span class="line">        if [ x$grub_platform &#x3D; xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">        insmod part_gpt</span><br><span class="line">        insmod btrfs</span><br><span class="line">        search --no-floppy --fs-uuid --set&#x3D;root 9b30a786-55a7-4068-8886-226f147eef4d</span><br><span class="line">        echo    &#39;Loading Arch Linux ...&#39;</span><br><span class="line">        linux   &#x2F;@&#x2F;boot&#x2F;vmlinuz-linux root&#x3D;UUID&#x3D;9b30a786-55a7-4068-8886-226f147eef4d ro rootflags&#x3D;subvol&#x3D;@arch  quiet</span><br><span class="line">        echo    &#39;Loading initial ramdisk ...&#39;</span><br><span class="line">        initrd  &#x2F;@&#x2F;boot&#x2F;amd-ucode.img &#x2F;@&#x2F;boot&#x2F;initramfs-linux-fallback.img</span><br><span class="line">&#125;</span><br><span class="line">menuentry &#39;Debian GNU&#x2F;Linux&#39; --class debian --class gnu-linux --class gnu --class os $menuentry_id_option &#39;gnulinux-simple-9b30a786-55a7-4068-8886-226f147eef4d&#39; &#123;</span><br><span class="line">        load_video</span><br><span class="line">        insmod gzio</span><br><span class="line">        if [ x$grub_platform &#x3D; xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">        insmod part_gpt</span><br><span class="line">        insmod btrfs</span><br><span class="line">        search --no-floppy --fs-uuid --set&#x3D;root 9b30a786-55a7-4068-8886-226f147eef4d</span><br><span class="line">        echo    &#39;Loading Linux 6.1.0-21-amd64 ...&#39;</span><br><span class="line">        linux   &#x2F;@rootfs&#x2F;boot&#x2F;vmlinuz-6.1.0-21-amd64 root&#x3D;UUID&#x3D;9b30a786-55a7-4068-8886-226f147eef4d ro rootflags&#x3D;subvol&#x3D;@rootfs  quiet</span><br><span class="line">        echo    &#39;Loading initial ramdisk ...&#39;</span><br><span class="line">        initrd  &#x2F;@rootfs&#x2F;boot&#x2F;initrd.img-6.1.0-21-amd64</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong>：直接修改 <code>/boot/grub/grub.cfg</code> 通常被认为是不好的，但这里的 Arch 是个不支持 Secure Boot 的擸𢶍，不用太客气。</p>
 <h2 id="答疑">答疑</h2>
 <ol>
@@ -240,7 +240,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/06/09/umutech-install-both-arch-linux-and-debian-on-the-same-partition/" data-id="cly09uhtt02ebsw7v2rlv48td" class="article-share-link" data-share="baidu" data-title="安装 Arch Linux 和 Debian 双系统至同一分区">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/06/09/umutech-install-both-arch-linux-and-debian-on-the-same-partition/" data-id="cm3zebrf0019hfk7m0wza695s" class="article-share-link" data-share="baidu" data-title="安装 Arch Linux 和 Debian 双系统至同一分区">分享到</a>
       
 
       
@@ -299,7 +299,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/06/09/caution-inferior-hdr-is-ruining-programmers-careers/" data-id="cly09uhti01ntsw7vfnwl2di1" class="article-share-link" data-share="baidu" data-title="警惕！劣质的 HDR 正在摧毁程序员的职业生涯">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/06/09/caution-inferior-hdr-is-ruining-programmers-careers/" data-id="cm3zebrey019bfk7mckvy5ioq" class="article-share-link" data-share="baidu" data-title="警惕！劣质的 HDR 正在摧毁程序员的职业生涯">分享到</a>
       
 
       
@@ -380,7 +380,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/06/08/umutech-partuuid/" data-id="cly09uhtj01nwsw7v398wfarh" class="article-share-link" data-share="baidu" data-title="PARTUUID">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/06/08/umutech-partuuid/" data-id="cm3zebrey0198fk7m8dsk1i1z" class="article-share-link" data-share="baidu" data-title="PARTUUID">分享到</a>
       
 
       
@@ -471,7 +471,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/05/19/umutech-install-debian-quickly/" data-id="cly09uhti01nqsw7v3qs15bw4" class="article-share-link" data-share="baidu" data-title="快速安装 Debian">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/05/19/umutech-install-debian-quickly/" data-id="cm3zebrex0195fk7m4snc1ki1" class="article-share-link" data-share="baidu" data-title="快速安装 Debian">分享到</a>
       
 
       
@@ -526,7 +526,7 @@
 <h2 id="安装流程">安装流程</h2>
 <h3 id="1-安装-WSL-Debian">1. 安装 WSL Debian</h3>
 <p>在 Windows 上操作：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--install</span> <span class="literal">-d</span> Debian</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -<span class="literal">-install</span> <span class="literal">-d</span> Debian</span><br></pre></td></tr></table></figure>
 <h3 id="2-安装掩耳">2. 安装掩耳</h3>
 <p>这步在 Debian 上操作，由于稣的 Windows 是 ARM64 版本，所以以下安装的是 arm64 的掩耳：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://archive.kylinos.cn/kylin/partner/pool/com.xunlei.download_1.0.0.1_arm64.deb</span><br><span class="line">sudo dpkg -i com.xunlei.download_1.0.0.1_arm64.deb</span><br></pre></td></tr></table></figure>
@@ -544,7 +544,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/05/12/umutech-installing-the-secure-version-of-thunder-on-windows/" data-id="cly09uhth01nnsw7v7jk3bj5o" class="article-share-link" data-share="baidu" data-title="Windows 平台安装安全版掩耳（Thunder）">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/05/12/umutech-installing-the-secure-version-of-thunder-on-windows/" data-id="cm3zebrex0192fk7m8kz6cb7y" class="article-share-link" data-share="baidu" data-title="Windows 平台安装安全版掩耳（Thunder）">分享到</a>
       
 
       
@@ -602,9 +602,9 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dmesg | grep -i tpm</span><br></pre></td></tr></table></figure>
 <p>如果没有输出，那可能是内核不支持或者没有 TPM 芯片；但也可能只是内核比较老，没有输出而已，比如华为擎云 W515 就没有输出，但它能用。</p>
 <p>类似以下输出，是没有芯片：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[    0.800622] ima: No TPM chip found, activating TPM-bypass!</span><br><span class="line">[    2.030844] systemd[1]: systemd 252.22-1~deb12u1 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -BPF_FRAMEWORK -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[    0.800622] ima: No TPM chip found, activating TPM-bypass!</span><br><span class="line">[    2.030844] systemd[1]: systemd 252.22-1~deb12u1 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -BPF_FRAMEWORK -XKBCOMMON +UTMP +SYSVINIT default-hierarchy&#x3D;unified)</span><br></pre></td></tr></table></figure>
 <p>内核识别出 TPM 芯片的输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[    0.000000] efi: ACPI=0x75620000 ACPI 2.0=0x75620014 TPMFinalLog=0x755ef000 SMBIOS=0x75cac000 SMBIOS 3.0=0x75cab000 MEMATTR=0x6bf5d018 ESRT=0x6e822718 MOKvar=0x75ce8000</span><br><span class="line">[    0.014309] ACPI: TPM2 0x00000000754DF000 00004C (v04 ALASKA A M I    00000001 AMI  00000000)</span><br><span class="line">[    0.014336] ACPI: Reserving TPM2 table memory at [mem 0x754df000-0x754df04b]</span><br><span class="line">[   12.590389] systemd[1]: systemd 252.22-1~deb12u1 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT +QRENCODE +TP2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -BPF_FRAMEWORK -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[    0.000000] efi: ACPI&#x3D;0x75620000 ACPI 2.0&#x3D;0x75620014 TPMFinalLog&#x3D;0x755ef000 SMBIOS&#x3D;0x75cac000 SMBIOS 3.0&#x3D;0x75cab000 MEMATTR&#x3D;0x6bf5d018 ESRT&#x3D;0x6e822718 MOKvar&#x3D;0x75ce8000</span><br><span class="line">[    0.014309] ACPI: TPM2 0x00000000754DF000 00004C (v04 ALASKA A M I    00000001 AMI  00000000)</span><br><span class="line">[    0.014336] ACPI: Reserving TPM2 table memory at [mem 0x754df000-0x754df04b]</span><br><span class="line">[   12.590389] systemd[1]: systemd 252.22-1~deb12u1 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY +P11KIT +QRENCODE +TP2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -BPF_FRAMEWORK -XKBCOMMON +UTMP +SYSVINIT default-hierarchy&#x3D;unified)</span><br></pre></td></tr></table></figure>
 <h3 id="2-安装必要软件">2. 安装必要软件</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install tpm2-tools tpm2-abrmd libtpm2-pkcs11-tools libtpm2-pkcs11-1</span><br></pre></td></tr></table></figure>
 <p>其中：</p>
@@ -635,29 +635,29 @@
 <p>这第 6 步与第 5 步只需二选一。</p>
 <p>第 5 步中新建私钥是无法导出的，万一自己不小心删了，或者升级 BIOS，也可能无法解开，导致私钥丢失。所以，如果这私钥是不能丢的，那最好的方式是从离线保存的私钥文件里导入。</p>
 <p>这步可能有风险，因为需要把离线保存的私钥文件复制到目标机器，而且要将私钥的密码清零。为了提高安全性，建议离线操作，并尽可能快速完成全部流程。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在内存文件系统操作，防止私钥落盘</span></span><br><span class="line"><span class="built_in">umask</span> 077 &amp;&amp; <span class="built_in">mkdir</span> /tmp/crypto &amp;&amp; <span class="built_in">cd</span> /tmp/crypto</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里断网，再复制你的私钥到 /tmp/crypto/tpm_pri</span></span><br><span class="line"><span class="comment"># 假设是从 U 盘复制，那命令可能是：</span></span><br><span class="line">sudo mount -o ro /dev/sdb1 /mnt</span><br><span class="line"><span class="built_in">cp</span> /mnt/key.pem tpm_pri</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密私钥，即删除私钥的密码（这很危险！平时绝不能这样做！）</span></span><br><span class="line">ssh-keygen -f tpm_pri -mPEM -ep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入私钥</span></span><br><span class="line">tpm2_ptool import --label SSHToken --key-label TPM-SSH --userpin [USER-PIN] \</span><br><span class="line">    --privkey /tmp/crypto/tpm_pri --algorithm ecc384</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理机密数据</span></span><br><span class="line"><span class="built_in">shred</span> -zu tpm_pri</span><br><span class="line"><span class="built_in">rm</span> -rf /tmp/crypto</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在内存文件系统操作，防止私钥落盘</span></span><br><span class="line"><span class="built_in">umask</span> 077 &amp;&amp; mkdir /tmp/crypto &amp;&amp; <span class="built_in">cd</span> /tmp/crypto</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里断网，再复制你的私钥到 /tmp/crypto/tpm_pri</span></span><br><span class="line"><span class="comment"># 假设是从 U 盘复制，那命令可能是：</span></span><br><span class="line">sudo mount -o ro /dev/sdb1 /mnt</span><br><span class="line">cp /mnt/key.pem tpm_pri</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密私钥，即删除私钥的密码（这很危险！平时绝不能这样做！）</span></span><br><span class="line">ssh-keygen -f tpm_pri -mPEM -ep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入私钥</span></span><br><span class="line">tpm2_ptool import --label SSHToken --key-label TPM-SSH --userpin [USER-PIN] \</span><br><span class="line">    --privkey /tmp/crypto/tpm_pri --algorithm ecc384</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理机密数据</span></span><br><span class="line">shred -zu tpm_pri</span><br><span class="line">rm -rf /tmp/crypto</span><br></pre></td></tr></table></figure>
 <h3 id="7-查看公钥">7. 查看公钥</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TPM2_PKCS11_SO=/usr/lib/$(gcc -dumpmachine)/pkcs11/libtpm2_pkcs11.so</span><br><span class="line"></span><br><span class="line">ssh-keygen -D <span class="variable">$TPM2_PKCS11_SO</span></span><br></pre></td></tr></table></figure>
 <p>可以导到文件里：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -D <span class="variable">$TPM2_PKCS11_SO</span> &gt; ~/.ssh/tpm.pub</span><br></pre></td></tr></table></figure>
 <h3 id="8-设置-SSH-服务端">8. 设置 SSH 服务端</h3>
 <p>这里在本地测试：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.ssh/tpm.pub &gt;&gt; ~/.ssh/authorized_keys2</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/tpm.pub &gt;&gt; ~/.ssh/authorized_keys2</span><br></pre></td></tr></table></figure>
 <p>测试连接：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -I <span class="variable">$TPM2_PKCS11_SO</span> <span class="variable">$USER</span>@localhost</span><br></pre></td></tr></table></figure>
 <h3 id="9-【可选】使用-ssh-agent">9. 【可选】使用 ssh-agent</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pgrep -u <span class="variable">$UID</span> ssh-agent || <span class="built_in">eval</span> `ssh-agent`</span><br><span class="line">ssh-add -s <span class="variable">$TPM2_PKCS11_SO</span></span><br></pre></td></tr></table></figure>
 <h3 id="10-【可选】对指定主机自动使用-TPM-密钥">10. 【可选】对指定主机自动使用 TPM 密钥</h3>
 <p>添加以下文本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host umu618.com</span><br><span class="line">  PKCS11Provider /lib/x86_64-linux-gnu/pkcs11/libtpm2_pkcs11.so</span><br><span class="line">  IdentityAgent none</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host umu618.com</span><br><span class="line">  PKCS11Provider &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;pkcs11&#x2F;libtpm2_pkcs11.so</span><br><span class="line">  IdentityAgent none</span><br></pre></td></tr></table></figure>
 <p>或者对全部主机使用：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;(<span class="built_in">echo</span> <span class="string">&quot;PKCS11Provider <span class="variable">$TPM2_PKCS11_SO</span>&quot;</span>) ~/.ssh/config \</span><br><span class="line">    | <span class="built_in">tee</span> ~/.ssh/config</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;(<span class="built_in">echo</span> <span class="string">&quot;PKCS11Provider <span class="variable">$TPM2_PKCS11_SO</span>&quot;</span>) ~/.ssh/config \</span><br><span class="line">    | tee ~/.ssh/config</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/04/29/umutech-secure-ssh-login-with-tpm2-on-debian-12/" data-id="cly09uhtg01nksw7v1dmbdnhj" class="article-share-link" data-share="baidu" data-title="Debian 12 上用 TPM 2.0 安全登陆 SSH">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/04/29/umutech-secure-ssh-login-with-tpm2-on-debian-12/" data-id="cm3zebrev018wfk7m6b40gmrv" class="article-share-link" data-share="baidu" data-title="Debian 12 上用 TPM 2.0 安全登陆 SSH">分享到</a>
       
 
       
@@ -763,7 +763,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/04/22/umutech-home-wifi-solution-2-mesh/" data-id="cly09uhtg01nhsw7v5i5ndyk1" class="article-share-link" data-share="baidu" data-title="家用 WiFi 方案二【MESH 版】">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/04/22/umutech-home-wifi-solution-2-mesh/" data-id="cm3zebrew018zfk7md70v8qz8" class="article-share-link" data-share="baidu" data-title="家用 WiFi 方案二【MESH 版】">分享到</a>
       
 
       
@@ -817,18 +817,18 @@
 <p>所以，可以拿它来运行别的 ELF 程序？</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /lib64/ld-linux-x86-64.so.2 $(<span class="built_in">which</span> <span class="built_in">pwd</span>)</span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
 <p>哦吼！还真可以……看看它到底是啥：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ file /lib64/ld-linux-x86-64.so.2</span><br><span class="line">/lib64/ld-linux-x86-64.so.2: symbolic <span class="built_in">link</span> to /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">$ file /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2: ELF 64-bit LSB shared object, x86-64, version 1 (GNU/Linux), dynamically linked, BuildID[sha1]=38e7d4a67acf053c794b3b8094e6900b5163f37d, stripped</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ file /lib64/ld-linux-x86-64.so.2</span><br><span class="line">/lib64/ld-linux-x86-64.so.2: symbolic link to /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">$ file /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br><span class="line">/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2: ELF 64-bit LSB shared object, x86-64, version 1 (GNU/Linux), dynamically linked, BuildID[sha1]=38e7d4a67acf053c794b3b8094e6900b5163f37d, stripped</span><br></pre></td></tr></table></figure>
 <p>所以，在 x64 的 Linux，ELF 的解释器其实是 <code>/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</code>。</p>
 <h2 id="结论">结论</h2>
 <p>最快杀死 Linux 的方法是：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">chmod</span> -x /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; chmod -x /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2</span><br></pre></td></tr></table></figure>
 <p>请勿轻易尝试。如果您真的很好奇，记得先备份这个程序，在一定时间内还能救回来。可以这么思考：这个解释器又是谁加载的？您不会已经关闭 shell 了吧？</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/04/20/umutech-kill-linux-quickly/" data-id="cly09uhtf01nbsw7vbb2qff5k" class="article-share-link" data-share="baidu" data-title="快速杀死 Linux">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/04/20/umutech-kill-linux-quickly/" data-id="cm3zebrev018tfk7mgnfxd1dg" class="article-share-link" data-share="baidu" data-title="快速杀死 Linux">分享到</a>
       
 
       
@@ -888,7 +888,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2024/04/13/umutech-enable-sound-redirection-on-debian-12-with-xrdp/" data-id="cly09uhte01n8sw7vgclx7wey" class="article-share-link" data-share="baidu" data-title="Debian 12 的 xrdp 开启声音重定向">分享到</a>
+        <a data-url="https://blog.umu618.com/2024/04/13/umutech-enable-sound-redirection-on-debian-12-with-xrdp/" data-id="cm3zebreu018qfk7m8zp4dxms" class="article-share-link" data-share="baidu" data-title="Debian 12 的 xrdp 开启声音重定向">分享到</a>
       
 
       

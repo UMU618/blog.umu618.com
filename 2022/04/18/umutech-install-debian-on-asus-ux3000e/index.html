@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.umu618.com/images/2022/20220418-ux3000e.png">
 <meta property="article:published_time" content="2022-04-17T16:46:52.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.775Z">
+<meta property="article:modified_time" content="2024-04-11T15:14:12.921Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ops">
@@ -153,12 +153,12 @@
 <p>登录系统，编辑 <code>/etc/apt/sources.list</code>，加 non-free 和配置 debian-security：</p>
 </li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free</span><br><span class="line">#deb-src http://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib non-free</span><br><span class="line">#deb-src https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free</span><br><span class="line">#deb-src http://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;debian&#x2F; bullseye main contrib non-free</span><br><span class="line">#deb-src http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;debian&#x2F; bullseye main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;debian-security bullseye-security main contrib non-free</span><br><span class="line">#deb-src https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;debian-security bullseye-security main contrib non-free</span><br><span class="line"></span><br><span class="line">deb https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;debian&#x2F; bullseye-updates main contrib non-free</span><br><span class="line">#deb-src http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;debian&#x2F; bullseye-updates main contrib non-free</span><br></pre></td></tr></table></figure>
 <p>这步很重要，如果不改 debian-security，那么接下来在国内网络环境下，可能会很慢……</p>
 <ol start="7">
 <li>安装 non-free 驱动，主要是无线网卡和声卡：</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install firmware-iwlwifi firmware-sof-signed</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install firmware-iwlwifi firmware-sof-signed</span><br></pre></td></tr></table></figure>
 <p>装完无线网卡驱动后，网卡名字是 wlo1，配置见 <a target="_blank" rel="noopener" href="https://wiki.debian.org/WiFi/HowToUse">https://wiki.debian.org/WiFi/HowToUse</a>。</p>
 <ol start="8">
 <li>
@@ -168,14 +168,14 @@
 <p>【可选】开远程桌面：</p>
 </li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install xrdp</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install xrdp</span><br></pre></td></tr></table></figure>
 <p><img src="/images/2022/20220418-ux3000e.png" alt="Plasma UX3000E"></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2022/04/18/umutech-install-debian-on-asus-ux3000e/" data-id="cly09uhp70103sw7vhblfah0k" class="article-share-link" data-share="baidu" data-title="在华硕灵耀 X 纵横上装 Debian 桌面的经验">分享到</a>
+        <a data-url="https://blog.umu618.com/2022/04/18/umutech-install-debian-on-asus-ux3000e/" data-id="cm3zebrcd00vgfk7m00l7274g" class="article-share-link" data-share="baidu" data-title="在华硕灵耀 X 纵横上装 Debian 桌面的经验">分享到</a>
       
 
       

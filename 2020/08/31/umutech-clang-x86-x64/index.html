@@ -14,11 +14,11 @@
 <meta property="og:description" content="需求 VS2019 Makefile 型工程使用 Clang 编译，要同时支持 x86 和 x64 平台。 问题 找不到 Clang 参数可以指定目标平台，如果您知道请不吝赐教。（github 账号：UMU618） 解决 同时安装这两个平台的 Clang。x86 的由 VS2019 自带，在 VS 中被表示为 &quot;$(ClangAnalysisToolsPath)\clang.exe&amp;qu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-31T15:11:53.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.775Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:27.018Z">
 <meta property="article:author" content="圣小开">
-<meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
 <meta property="article:tag" content="debug">
+<meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@UMU618">
   
@@ -122,16 +122,16 @@
 <p>找不到 Clang 参数可以指定目标平台，如果您知道请不吝赐教。（github 账号：UMU618）</p>
 <h2 id="解决">解决</h2>
 <p>同时安装这两个平台的 Clang。x86 的由 VS2019 自带，在 VS 中被表示为 <code>&quot;$(ClangAnalysisToolsPath)\clang.exe&quot;</code>，宏展开后为：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> &amp;<span class="string">&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\bin\clang.exe&quot;</span> <span class="literal">-v</span></span><br><span class="line">clang version <span class="number">10.0</span>.<span class="number">0</span></span><br><span class="line">Target: i686<span class="literal">-pc-windows-msvc</span></span><br><span class="line">Thread model: posix</span><br><span class="line">InstalledDir: C:\Program Files (x86)\Microsoft Visual Studio\<span class="number">2019</span>\Community\VC\Tools\Llvm\bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> &amp;<span class="string">&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\bin\clang.exe&quot;</span> <span class="literal">-v</span></span><br><span class="line">clang version <span class="number">10.0</span>.<span class="number">0</span></span><br><span class="line">Target: i686<span class="literal">-pc</span><span class="literal">-windows</span><span class="literal">-msvc</span></span><br><span class="line">Thread model: posix</span><br><span class="line">InstalledDir: C:\Program Files (x86)\Microsoft Visual Studio\<span class="number">2019</span>\Community\VC\Tools\Llvm\bin</span><br></pre></td></tr></table></figure>
 <p>x64 是另外安装的，安装时选择把目录注册到 PATH：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> clang <span class="literal">-v</span></span><br><span class="line">clang version <span class="number">10.0</span>.<span class="number">0</span></span><br><span class="line">Target: x86_64<span class="literal">-pc-windows-msvc</span></span><br><span class="line">Thread model: posix</span><br><span class="line">InstalledDir: C:\Program Files\LLVM\bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> clang <span class="literal">-v</span></span><br><span class="line">clang version <span class="number">10.0</span>.<span class="number">0</span></span><br><span class="line">Target: x86_64<span class="literal">-pc</span><span class="literal">-windows</span><span class="literal">-msvc</span></span><br><span class="line">Thread model: posix</span><br><span class="line">InstalledDir: C:\Program Files\LLVM\bin</span><br></pre></td></tr></table></figure>
 <p>结论：只需在 Win32 的平台设置使用 <code>&quot;$(ClangAnalysisToolsPath)\clang.exe&quot;</code>，而 x64 则直接使用 <code>clang</code>（如果安装时忘记注册到 PATH，需要手动添加）。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2020/08/31/umutech-clang-x86-x64/" data-id="cly09uhqo018gsw7vakxxhiyi" class="article-share-link" data-share="baidu" data-title="VS2019 Makefile 型工程调用 Clang">分享到</a>
+        <a data-url="https://blog.umu618.com/2020/08/31/umutech-clang-x86-x64/" data-id="cm3zebred016gfk7m3np1ft1v" class="article-share-link" data-share="baidu" data-title="VS2019 Makefile 型工程调用 Clang">分享到</a>
       
 
       

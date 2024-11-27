@@ -17,11 +17,11 @@
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20231029-winevent-xml.png">
 <meta property="og:image" content="https://blog.umu618.com/images/2023/20231029-firewall.png">
 <meta property="article:published_time" content="2023-10-28T18:16:00.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.786Z">
+<meta property="article:modified_time" content="2024-05-25T06:42:53.015Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="windows">
-<meta property="article:tag" content="security">
 <meta property="article:tag" content="ops">
+<meta property="article:tag" content="security">
 <meta property="article:tag" content="powershell">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.umu618.com/images/2023/20231029-winevent-ui.png">
@@ -147,7 +147,7 @@
 <li>把爆破者 IP 加入防火墙，阻止它们</li>
 </ol>
 <p>目前收集到这些：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">112.184.96.197</span><br><span class="line">118.45.92.239</span><br><span class="line">122.38.193.166</span><br><span class="line">138.199.21.245</span><br><span class="line">14.116.196.99</span><br><span class="line">14.49.207.162</span><br><span class="line">141.98.11.119</span><br><span class="line">141.98.11.58</span><br><span class="line">147.78.47.57</span><br><span class="line">148.113.4.245</span><br><span class="line">176.111.174.173</span><br><span class="line">176.111.174.174</span><br><span class="line">179.60.147.13</span><br><span class="line">182.180.92.224</span><br><span class="line">185.161.248.145</span><br><span class="line">188.250.64.50</span><br><span class="line">222.191.242.228</span><br><span class="line">45.143.201.62</span><br><span class="line">58.221.4.54</span><br><span class="line">58.33.52.84</span><br><span class="line">62.122.184.88</span><br><span class="line">67.159.237.58</span><br><span class="line">77.90.185.132</span><br><span class="line">78.128.114.18</span><br><span class="line">89.248.163.94</span><br><span class="line">89.248.163.95</span><br><span class="line">91.191.209.202</span><br><span class="line">91.240.118.187</span><br><span class="line">91.240.118.29</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">112.184.96.197</span><br><span class="line">118.45.92.239</span><br><span class="line">122.38.193.166</span><br><span class="line">138.199.21.245</span><br><span class="line">14.116.196.99</span><br><span class="line">14.49.207.162</span><br><span class="line">141.98.11.119</span><br><span class="line">141.98.11.58</span><br><span class="line">147.78.47.57</span><br><span class="line">148.113.4.245</span><br><span class="line">176.111.174.173</span><br><span class="line">176.111.174.174</span><br><span class="line">179.60.147.13</span><br><span class="line">182.180.92.224</span><br><span class="line">185.161.248.145</span><br><span class="line">188.250.64.50</span><br><span class="line">222.191.242.228</span><br><span class="line">45.143.201.62</span><br><span class="line">58.221.4.54</span><br><span class="line">58.33.52.84</span><br><span class="line">62.122.184.88</span><br><span class="line">67.159.237.58</span><br><span class="line">77.90.185.132</span><br><span class="line">78.128.114.18</span><br><span class="line">89.248.163.94</span><br><span class="line">89.248.163.95</span><br><span class="line">91.191.209.202</span><br><span class="line">91.240.118.187</span><br><span class="line">91.240.118.29</span><br></pre></td></tr></table></figure>
 <p>打开 <code>wf.msc</code>，新建一个阻止型的防火墙策略，然后加入到“作用域”的“远程 IP 地址”里。</p>
 <p><img src="/images/2023/20231029-firewall.png" alt="Firewall"></p>
 <p>加防火墙也可以用 PowerShell 搞定，这次先偷个懒，下次再说吧！</p>
@@ -156,7 +156,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2023/10/29/umutech-prevent-remote-desktop-password-attacks/" data-id="cly09uhre01c6sw7v35iqdvt1" class="article-share-link" data-share="baidu" data-title="防爆破远程桌面密码">分享到</a>
+        <a data-url="https://blog.umu618.com/2023/10/29/umutech-prevent-remote-desktop-password-attacks/" data-id="cm3zebri801osfk7m64y85el2" class="article-share-link" data-share="baidu" data-title="防爆破远程桌面密码">分享到</a>
       
 
       

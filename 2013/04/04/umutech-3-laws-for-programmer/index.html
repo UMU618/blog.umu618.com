@@ -14,7 +14,7 @@
 <meta property="og:description" content="本文不是介绍奇技淫巧，甚至本质上并不是技术，而是态度，心法。 1.抓住问题的本质，在源头解决问题 简单地说，A 有八哥，B 依赖 A，所以导致依赖 B 的 C 出问题，您会通过修改 B 来解决问题吗？正常人都知道要先解决 A 的八哥，蛋似，稍微复杂、含蓄点的问题就有人迷糊了： 一个浮动小窗体，不希望在任务栏上出现标签。 UMU 见过有人使用了 ITaskbarList 对象的 DeleteTab">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2013-04-03T16:44:11.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.712Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.888Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="optimization">
 <meta name="twitter:card" content="summary">
@@ -130,9 +130,9 @@
 <p>遇到不合理的情况，UMU 认为应该给力地告诉该知道的人。比如，函数不希望入参是某指，可是调用者偏偏就输入了那个值，怎么办？打印调试信息？不够给力，容易被忽视，应该中断一下，告诉开发者。</p>
 <p>配置文件字段被改错，怎么办？如果这个文件是技术人员维护的，应该抛出异常，死给修改配置文件的人看；如果是一般的最终用户，那应该弹出界面，友好提示哪里、怎么错了。</p>
 <p>早期，很多程序员为了避免头文件被重复包含，就用了以下代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> XXX</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> XXX</span></span><br><span class="line"><span class="comment">// 各种语句</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> XXX</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> XXX</span></span><br><span class="line"><span class="comment">// 各种语句</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 <p>后来，大家喜欢用 #pragma once，省事，又不容易漏掉最后的 #endif。但是这样做之后会……姑息养奸！除非十分通用的工具类，对严谨的人来说，重复包含是不应该的！所以应该这样：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> XXX</span></span><br><span class="line"><span class="meta">#<span class="keyword">error</span> <span class="string">&quot;您不严谨了！&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> XXX</span></span><br><span class="line"><span class="comment">// 各种语句</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> XXX</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">error</span> <span class="meta-string">&quot;您不严谨了！&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> XXX</span></span><br><span class="line"><span class="comment">// 各种语句</span></span><br></pre></td></tr></table></figure>
 <p>有重复包含立刻告警，而且都是集中在开头，不存在漏掉 #endif 的问题。</p>
 <p>态度问题！这里只是举几个简单的例子~</p>
 
@@ -140,7 +140,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2013/04/04/umutech-3-laws-for-programmer/" data-id="cly09uhlo00bvsw7vbxrt0qg6" class="article-share-link" data-share="baidu" data-title="程序员心法三则">分享到</a>
+        <a data-url="https://blog.umu618.com/2013/04/04/umutech-3-laws-for-programmer/" data-id="cm3zebr9b00anfk7mfn2k74gl" class="article-share-link" data-share="baidu" data-title="程序员心法三则">分享到</a>
       
 
       

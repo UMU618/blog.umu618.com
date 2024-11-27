@@ -6,15 +6,15 @@
   
   <title>程序员鼓励师系列：EOSIO 智能合约开发从入门到入定 | UMU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="作者: UMU @ MEET.ONE 实验室  常规入门流程 经典三步：   了解区块链基本概念，了解 EOS 基本情况；   看官方开发者文档；   开始愉快地写代码。   但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了…… 这不是 C++，这不是 C++，这真是不是 C++ 不信？我们就来试一试： 123error: cannot use &amp;#x27;try&amp;#x27; w">
+  <meta name="description" content="作者: UMU @ MEET.ONE 实验室  常规入门流程 经典三步：   了解区块链基本概念，了解 EOS 基本情况；   看官方开发者文档；   开始愉快地写代码。   但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了…… 这不是 C++，这不是 C++，这真是不是 C++ 不信？我们就来试一试： 123error: cannot use &#39;try&#39; wit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">
 <meta property="og:url" content="https://blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/">
 <meta property="og:site_name" content="UMU">
-<meta property="og:description" content="作者: UMU @ MEET.ONE 实验室  常规入门流程 经典三步：   了解区块链基本概念，了解 EOS 基本情况；   看官方开发者文档；   开始愉快地写代码。   但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了…… 这不是 C++，这不是 C++，这真是不是 C++ 不信？我们就来试一试： 123error: cannot use &amp;#x27;try&amp;#x27; w">
+<meta property="og:description" content="作者: UMU @ MEET.ONE 实验室  常规入门流程 经典三步：   了解区块链基本概念，了解 EOS 基本情况；   看官方开发者文档；   开始愉快地写代码。   但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了…… 这不是 C++，这不是 C++，这真是不是 C++ 不信？我们就来试一试： 123error: cannot use &#39;try&#39; wit">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-01-04T14:25:47.000Z">
-<meta property="article:modified_time" content="2024-06-29T10:31:52.744Z">
+<meta property="article:modified_time" content="2023-08-05T13:01:26.971Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="调研">
 <meta property="article:tag" content="洗脑">
@@ -135,7 +135,7 @@
 <p>但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了……</p>
 <h2 id="这不是-C-，这不是-C-，这真是不是-C">这不是 C++，这不是 C++，这真是不是 C++</h2>
 <p>不信？我们就来试一试：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: cannot use &#x27;try&#x27; with exceptions disabled</span><br><span class="line">        try &#123;</span><br><span class="line">        ^</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: cannot use &#39;try&#39; with exceptions disabled</span><br><span class="line">        try &#123;</span><br><span class="line">        ^</span><br></pre></td></tr></table></figure>
 <p>智能合约的编译目标是 WASM 文件，最终要在 WASM 的 VM 里运行，比如 <a target="_blank" rel="noopener" href="https://github.com/WebAssembly/wabt">wabt</a>，这和常规情况下使用原生 C++ 开发可执行程序、静态库、动态库等，有很大不同。</p>
 <p>受限部分包括：</p>
 <ul>
@@ -169,17 +169,17 @@
 <p>虽然现状是 C++ 一枝独秀，但未来可能会有人开发专门的编译器支持 Golang、Rust 等语言开发 EOS 智能合约。</p>
 <h3 id="2-WASM-逆向">2. WASM 逆向</h3>
 <p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode</a> 安装插件后可以直接打开 WASM 文件，显示 WAST 代码，比如我们随便打开一个 hello.wasm，滚动到末尾，可能会看到以下两行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(data (i32.const 8192) &quot;read\00&quot;)</span><br><span class="line">(data (i32.const 8197) &quot;get\00malloc_from_freed was designed to only be called after _heap was completely allocated\00&quot;))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(data (i32.const 8192) &quot;read\00&quot;)</span><br><span class="line">(data (i32.const 8197) &quot;get\00malloc_from_freed was designed to only be called after _heap was completely allocated\00&quot;))</span><br></pre></td></tr></table></figure>
 <p>下面我们写个 C++ 代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* p = <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> <span class="type">char</span>*&gt;(<span class="number">8192</span>);</span><br><span class="line">eosio::<span class="built_in">print</span>(p);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">char</span>*&gt;(<span class="number">8192</span>);</span><br><span class="line">eosio::print(p);</span><br></pre></td></tr></table></figure>
 <p>以上代码，打印出 <code>read</code>。如果把 <code>8192</code> 改为 <code>8197</code>，则打印 <code>get</code>；改为 <code>8201</code>，打印 <code>malloc_from_freed was designed to only be called after _heap was completely allocated</code>。</p>
 <p>这个例子可能吓倒大家，特别交代下，一般开发中，较难遇到逆向……只是想说明 WASM 的内存管理和常规 C++ 开发的可执行程序是不同的，后者把指针指向 8192，是 Process Working Set 的地址，通常来说去读这么低的地址，后果极可能是读异常，挂掉。</p>
 <p><strong>划重点</strong>：虽然你用 C++ 写代码，但编译后是 WASM 二进制编码，运行时使用 VM，受控性很强，降低了开发难度，也杜绝很多安全问题。</p>
 <h3 id="3-性能问题">3. 性能问题</h3>
 <p>为了讨好 Python 程序员，下面用 Python 来写个开平方运算，有这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(math.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">print(math.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
 <p>也有这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(numpy.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">print(numpy.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
 <p>他们有个共同点——很快……相对 C++ 写的！！有点难以理解？</p>
 <p>Python 的 sqrt 函数，其实都是用 C 语言实现的，最终都是调用解释器里的本地代码，速度很快。</p>
 <p>原生 C++ 写的本地程序，几乎肯定是比 Python 快的，但我们前面说过：智能合约的 C++ 不是常规的 C++，当它被编译成 WASM 后，我们去看 WAST 代码，会发现 sqrt 的实现整个被塞进 WASM 里，它最终要用 VM 来执行，当然没有 Python 解释器快了！</p>
@@ -193,7 +193,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" data-id="cly09uhri01ctsw7v0hne62n8" class="article-share-link" data-share="baidu" data-title="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" data-id="cm3zebrf901axfk7m1e8f6kx3" class="article-share-link" data-share="baidu" data-title="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">分享到</a>
       
 
       

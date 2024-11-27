@@ -123,7 +123,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/15/reconstructionism-poet-grass/" data-id="cly09uhrk01d5sw7v6oggf2se" class="article-share-link" data-share="baidu" data-title="诗盗·草">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/15/reconstructionism-poet-grass/" data-id="cm3zebrf801aufk7mcw9z1o94" class="article-share-link" data-share="baidu" data-title="诗盗·草">分享到</a>
       
 
       
@@ -175,7 +175,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/13/reconstructionism-poet-two-ghosts/" data-id="cly09uhrk01d2sw7vf0e24ivb" class="article-share-link" data-share="baidu" data-title="诗盗·记一次见鬼吓醒">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/13/reconstructionism-poet-two-ghosts/" data-id="cm3zebrf601aifk7m3opi8pqq" class="article-share-link" data-share="baidu" data-title="诗盗·记一次见鬼吓醒">分享到</a>
       
 
       
@@ -229,7 +229,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/12/reconstructionism-poet-haze/" data-id="cly09uhrj01cwsw7v6c3g56o8" class="article-share-link" data-share="baidu" data-title="诗盗·大霾苍蝇">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/12/reconstructionism-poet-haze/" data-id="cm3zebrf801arfk7m014w3ics" class="article-share-link" data-share="baidu" data-title="诗盗·大霾苍蝇">分享到</a>
       
 
       
@@ -283,7 +283,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/05/reconstructionism-poet-ceh/" data-id="cly09uhrj01czsw7vbyj64c55" class="article-share-link" data-share="baidu" data-title="诗盗·黑客求道">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/05/reconstructionism-poet-ceh/" data-id="cm3zebrf701alfk7mg7hthbtq" class="article-share-link" data-share="baidu" data-title="诗盗·黑客求道">分享到</a>
       
 
       
@@ -345,7 +345,7 @@
 <p>但是，有个很大的问题：开发语言居然是 C++！所以，鼓励师出场了……</p>
 <h2 id="这不是-C-，这不是-C-，这真是不是-C">这不是 C++，这不是 C++，这真是不是 C++</h2>
 <p>不信？我们就来试一试：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: cannot use &#x27;try&#x27; with exceptions disabled</span><br><span class="line">        try &#123;</span><br><span class="line">        ^</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: cannot use &#39;try&#39; with exceptions disabled</span><br><span class="line">        try &#123;</span><br><span class="line">        ^</span><br></pre></td></tr></table></figure>
 <p>智能合约的编译目标是 WASM 文件，最终要在 WASM 的 VM 里运行，比如 <a target="_blank" rel="noopener" href="https://github.com/WebAssembly/wabt">wabt</a>，这和常规情况下使用原生 C++ 开发可执行程序、静态库、动态库等，有很大不同。</p>
 <p>受限部分包括：</p>
 <ul>
@@ -379,17 +379,17 @@
 <p>虽然现状是 C++ 一枝独秀，但未来可能会有人开发专门的编译器支持 Golang、Rust 等语言开发 EOS 智能合约。</p>
 <h3 id="2-WASM-逆向">2. WASM 逆向</h3>
 <p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode</a> 安装插件后可以直接打开 WASM 文件，显示 WAST 代码，比如我们随便打开一个 hello.wasm，滚动到末尾，可能会看到以下两行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(data (i32.const 8192) &quot;read\00&quot;)</span><br><span class="line">(data (i32.const 8197) &quot;get\00malloc_from_freed was designed to only be called after _heap was completely allocated\00&quot;))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(data (i32.const 8192) &quot;read\00&quot;)</span><br><span class="line">(data (i32.const 8197) &quot;get\00malloc_from_freed was designed to only be called after _heap was completely allocated\00&quot;))</span><br></pre></td></tr></table></figure>
 <p>下面我们写个 C++ 代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* p = <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> <span class="type">char</span>*&gt;(<span class="number">8192</span>);</span><br><span class="line">eosio::<span class="built_in">print</span>(p);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">char</span>*&gt;(<span class="number">8192</span>);</span><br><span class="line">eosio::print(p);</span><br></pre></td></tr></table></figure>
 <p>以上代码，打印出 <code>read</code>。如果把 <code>8192</code> 改为 <code>8197</code>，则打印 <code>get</code>；改为 <code>8201</code>，打印 <code>malloc_from_freed was designed to only be called after _heap was completely allocated</code>。</p>
 <p>这个例子可能吓倒大家，特别交代下，一般开发中，较难遇到逆向……只是想说明 WASM 的内存管理和常规 C++ 开发的可执行程序是不同的，后者把指针指向 8192，是 Process Working Set 的地址，通常来说去读这么低的地址，后果极可能是读异常，挂掉。</p>
 <p><strong>划重点</strong>：虽然你用 C++ 写代码，但编译后是 WASM 二进制编码，运行时使用 VM，受控性很强，降低了开发难度，也杜绝很多安全问题。</p>
 <h3 id="3-性能问题">3. 性能问题</h3>
 <p>为了讨好 Python 程序员，下面用 Python 来写个开平方运算，有这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(math.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">print(math.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
 <p>也有这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(numpy.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">print(numpy.sqrt(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
 <p>他们有个共同点——很快……相对 C++ 写的！！有点难以理解？</p>
 <p>Python 的 sqrt 函数，其实都是用 C 语言实现的，最终都是调用解释器里的本地代码，速度很快。</p>
 <p>原生 C++ 写的本地程序，几乎肯定是比 Python 快的，但我们前面说过：智能合约的 C++ 不是常规的 C++，当它被编译成 WASM 后，我们去看 WAST 代码，会发现 sqrt 的实现整个被塞进 WASM 里，它最终要用 VM 来执行，当然没有 Python 解释器快了！</p>
@@ -403,7 +403,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" data-id="cly09uhri01ctsw7v0hne62n8" class="article-share-link" data-share="baidu" data-title="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/04/umutech-eosio-smart-contracts-development-beginners-guide/" data-id="cm3zebrf901axfk7m1e8f6kx3" class="article-share-link" data-share="baidu" data-title="程序员鼓励师系列：EOSIO 智能合约开发从入门到入定">分享到</a>
       
 
       
@@ -458,16 +458,16 @@
 <h2 id="3-守护-nodeos-进程">3. 守护 nodeos 进程</h2>
 <p>目前 nodeos 1.5+ 版本如果优雅退出，下次启动可以无需痛苦的 replay 过程，所以可以监控 nodeos 进程，如果退出就调用。</p>
 <p>启动脚本 /home/ubuntu/shell/continue.sh：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> /usr/local/eosio/bin/nodeos --config-dir /home/ubuntu/nodeos/config-dir --data-dir /home/ubuntu/nodeos/data-dir &gt; /home/ubuntu/shell/`<span class="built_in">date</span> +%Y-%m-%d_%H-%M`.<span class="built_in">log</span> 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup /usr/<span class="built_in">local</span>/eosio/bin/nodeos --config-dir /home/ubuntu/nodeos/config-dir --data-dir /home/ubuntu/nodeos/data-dir &gt; /home/ubuntu/shell/`date +%Y-%m-%d_%H-%M`.<span class="built_in">log</span> 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 <p>守护脚本 /home/ubuntu/shell/autorun.sh：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -C nodeos || /home/ubuntu/shell/continue.sh</span><br></pre></td></tr></table></figure>
 <p>添加到计划任务，运行 <code>sudo crontab -e</code>，输入下行并保存、退出：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * /home/ubuntu/shell/autorun.sh</span><br></pre></td></tr></table></figure>
 <h2 id="4-读写用户分离">4. 读写用户分离</h2>
 <p>nodeos 需要写入，使用有写入权限的 EOS 用户，其余情况使用只读权限的 EOSReader 用户，数据库安装之后就尽量不使用管理员用户。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use <span class="variable constant_">EOS</span></span><br><span class="line">db.<span class="title function_">createUser</span>(&#123;<span class="string">&quot;user&quot;</span> : <span class="string">&quot;EOS&quot;</span>, <span class="string">&quot;pwd&quot;</span> : <span class="string">&quot;Password&quot;</span>, <span class="string">&quot;roles&quot;</span> : [&#123;role : <span class="string">&quot;readWrite&quot;</span>, <span class="string">&quot;db&quot;</span> : <span class="string">&quot;EOS&quot;</span>&#125;,<span class="string">&quot;dbOwner&quot;</span>]&#125;);</span><br><span class="line">db.<span class="title function_">createUser</span>(&#123;<span class="string">&quot;user&quot;</span> : <span class="string">&quot;EOSReader&quot;</span>, <span class="string">&quot;pwd&quot;</span> : <span class="string">&quot;password&quot;</span>, <span class="string">&quot;roles&quot;</span> : [&#123;role : <span class="string">&quot;read&quot;</span>, <span class="string">&quot;db&quot;</span> : <span class="string">&quot;EOS&quot;</span>&#125;]&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use EOS</span><br><span class="line">db.createUser(&#123;<span class="string">&quot;user&quot;</span> : <span class="string">&quot;EOS&quot;</span>, <span class="string">&quot;pwd&quot;</span> : <span class="string">&quot;Password&quot;</span>, <span class="string">&quot;roles&quot;</span> : [&#123;<span class="attr">role</span> : <span class="string">&quot;readWrite&quot;</span>, <span class="string">&quot;db&quot;</span> : <span class="string">&quot;EOS&quot;</span>&#125;,<span class="string">&quot;dbOwner&quot;</span>]&#125;);</span><br><span class="line">db.createUser(&#123;<span class="string">&quot;user&quot;</span> : <span class="string">&quot;EOSReader&quot;</span>, <span class="string">&quot;pwd&quot;</span> : <span class="string">&quot;password&quot;</span>, <span class="string">&quot;roles&quot;</span> : [&#123;<span class="attr">role</span> : <span class="string">&quot;read&quot;</span>, <span class="string">&quot;db&quot;</span> : <span class="string">&quot;EOS&quot;</span>&#125;]&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="5-查询同步进度">5. 查询同步进度</h2>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use <span class="variable constant_">EOS</span></span><br><span class="line">db.<span class="property">transaction_traces</span>.<span class="title function_">find</span>(&#123;&#125;, &#123;<span class="string">&quot;block_num&quot;</span> : <span class="number">1</span>, <span class="string">&quot;block_time&quot;</span> : <span class="number">1</span>&#125;, -<span class="number">1</span>).<span class="title function_">sort</span>(&#123;<span class="attr">$natural</span>:-<span class="number">1</span>&#125;).<span class="title function_">pretty</span>()</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use EOS</span><br><span class="line">db.transaction_traces.find(&#123;&#125;, &#123;<span class="string">&quot;block_num&quot;</span> : <span class="number">1</span>, <span class="string">&quot;block_time&quot;</span> : <span class="number">1</span>&#125;, -<span class="number">1</span>).sort(&#123;<span class="attr">$natural</span>:-<span class="number">1</span>&#125;).pretty()</span><br></pre></td></tr></table></figure>
 <h2 id="6-修复丢失数据">6. 修复丢失数据</h2>
 <p>参考《<a href="/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/">EOSIO MongoDB 插件系列：从 log 中找回丢</a>》</p>
 
@@ -475,7 +475,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-management-skills/" data-id="cly09uhri01cqsw7v2rlp9s1h" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：管理技巧">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-management-skills/" data-id="cm3zebrf701aofk7m8dsdbf7o" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：管理技巧">分享到</a>
       
 
       
@@ -528,15 +528,15 @@
 <h3 id="1-找出所有失败记录">1. 找出所有失败记录</h3>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;mongo exception, trans_traces insert:&#x27;</span> *.<span class="built_in">log</span> &gt; lost.txt</span><br></pre></td></tr></table></figure>
 <h3 id="2-从-log-生成-mongo-script">2. 从 log 生成 mongo script</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;++++&quot;);</span></span><br><span class="line"><span class="string">var eos = db.getSiblingDB(&quot;EOS&quot;);&#x27;</span> &gt; lost.js</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> lost.txt | sed -n <span class="string">&#x27;s/.*, trans_traces insert: \(.*\), line 920, code.*/eos.transaction_traces.insert(\1)/p&#x27;</span> &gt;&gt; lost.js</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;----&quot;);&#x27;</span> &gt;&gt; lost.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;++++&quot;);</span></span><br><span class="line"><span class="string">var eos = db.getSiblingDB(&quot;EOS&quot;);&#x27;</span> &gt; lost.js</span><br><span class="line"></span><br><span class="line">cat lost.txt | sed -n <span class="string">&#x27;s/.*, trans_traces insert: \(.*\), line 920, code.*/eos.transaction_traces.insert(\1)/p&#x27;</span> &gt;&gt; lost.js</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;print(&quot;----&quot;);&#x27;</span> &gt;&gt; lost.js</span><br></pre></td></tr></table></figure>
 <h3 id="3-导入-MongoDB">3. 导入 MongoDB</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> mongo mongodb://<span class="variable">$user</span>:<span class="variable">$password</span>@127.0.0.1:<span class="variable">$port</span>/admin lost.js &gt; lost.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup mongo mongodb://<span class="variable">$user</span>:<span class="variable">$password</span>@127.0.0.1:<span class="variable">$port</span>/admin lost.js &gt; lost.log</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/" data-id="cly09uhrh01cnsw7vdf2m5gju" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：从 log 中找回丢失的插入记录">分享到</a>
+        <a data-url="https://blog.umu618.com/2019/01/03/umutech-eosio-mongodb-plugin-find-lost-insertion-from-logs/" data-id="cm3zebrf601affk7m1xnjazgc" class="article-share-link" data-share="baidu" data-title="EOSIO MongoDB 插件系列：从 log 中找回丢失的插入记录">分享到</a>
       
 
       
@@ -607,7 +607,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/12/30/umutech-numeric-eosio-name/" data-id="cly09uhp200zesw7v578e2kky" class="article-share-link" data-share="baidu" data-title="纯数字 EOS 账号">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/12/30/umutech-numeric-eosio-name/" data-id="cm3zebrdl0128fk7maqf1b5wj" class="article-share-link" data-share="baidu" data-title="纯数字 EOS 账号">分享到</a>
       
 
       
@@ -659,20 +659,20 @@
 <h3 id="1-看抵押的实现代码">1. 看抵押的实现代码</h3>
 <p>从 <code>eosio.contracts/eosio.system/src/delegate_bandwidth.cpp</code> 的 <code>delegatebw</code> 函数开始分析。</p>
 <p>它调用了 <code>changebw</code>，其中的查表操作是这样的：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">del_bandwidth_table     <span class="title">del_tbl</span><span class="params">( _self, from.value )</span></span>;</span><br><span class="line"><span class="keyword">auto</span> itr = del_tbl.<span class="built_in">find</span>( receiver.value );</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">del_bandwidth_table     <span class="title">del_tbl</span><span class="params">( _self, from.value )</span></span>;</span><br><span class="line"><span class="keyword">auto</span> itr = del_tbl.find( receiver.value );</span><br></pre></td></tr></table></figure>
 <p>scope 是 from，而 from 就是要求的未知项，直接粉碎我们用这路线继续求解的可能。</p>
 <h3 id="2-找交易记录">2. 找交易记录</h3>
 <p>MEET.ONE 之前发布过几篇关于 MongoDB 插件的文章，这些积累为我们继续求解提供了很大便利。</p>
 <p>直接在 <code>Mongo Shell</code> 里尝试：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use <span class="variable constant_">EOS</span></span><br><span class="line">db.<span class="property">transaction_traces</span>.<span class="title function_">findOne</span>(&#123;<span class="string">&quot;action_traces.act.account&quot;</span> : <span class="string">&quot;eosio&quot;</span>, <span class="string">&quot;action_traces.act.name&quot;</span> : <span class="string">&quot;delegatebw&quot;</span>, <span class="string">&quot;action_traces.act.data.receiver&quot;</span> : <span class="string">&quot;shengxiaokai&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use EOS</span><br><span class="line">db.transaction_traces.findOne(&#123;<span class="string">&quot;action_traces.act.account&quot;</span> : <span class="string">&quot;eosio&quot;</span>, <span class="string">&quot;action_traces.act.name&quot;</span> : <span class="string">&quot;delegatebw&quot;</span>, <span class="string">&quot;action_traces.act.data.receiver&quot;</span> : <span class="string">&quot;shengxiaokai&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
 <p>执行之后，找到一条 trx_id 为 <code>9bd50c0fd6f0e1d0ed4c6f5c6f873a33976955ff9dae2ac3eb16cb7e9a44d106</code> 的交易记录，显示 <code>1freeaccount</code> 为 <code>shengxiaokai</code> 抵押：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;from&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;1freeaccount&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;receiver&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;shengxiaokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;stake_net_quantity&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;0.0000 EOS&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;stake_cpu_quantity&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;0.5000 EOS&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;transfer&quot;</span> <span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;from&quot;</span> : <span class="string">&quot;1freeaccount&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;receiver&quot;</span> : <span class="string">&quot;shengxiaokai&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;stake_net_quantity&quot;</span> : <span class="string">&quot;0.0000 EOS&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;stake_cpu_quantity&quot;</span> : <span class="string">&quot;0.5000 EOS&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;transfer&quot;</span> : <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/12/28/umutech-eosio-find-out-who-stakes-for-me/" data-id="cly09uhp100zbsw7v9otlcja2" class="article-share-link" data-share="baidu" data-title="EOSIO 找出谁为我质押">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/12/28/umutech-eosio-find-out-who-stakes-for-me/" data-id="cm3zebrdk0125fk7m4q28781f" class="article-share-link" data-share="baidu" data-title="EOSIO 找出谁为我质押">分享到</a>
       
 
       
@@ -724,7 +724,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://blog.umu618.com/2018/12/22/reconstructionism-poet-dangerous-social-activity/" data-id="cly09uhp300zhsw7v5m3h4bqv" class="article-share-link" data-share="baidu" data-title="诗盗·记一次危险性社交活动">分享到</a>
+        <a data-url="https://blog.umu618.com/2018/12/22/reconstructionism-poet-dangerous-social-activity/" data-id="cm3zebrdk0122fk7m3n1afguc" class="article-share-link" data-share="baidu" data-title="诗盗·记一次危险性社交活动">分享到</a>
       
 
       
