@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2024-10-22T03:25:24.089Z</updated>
+  <updated>2024-12-09T05:28:53.802Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>不建议使用 using namespace</title>
+    <link href="https://blog.umu618.com/2024/12/08/umutech-not-recommended-to-use-using-namespace/"/>
+    <id>https://blog.umu618.com/2024/12/08/umutech-not-recommended-to-use-using-namespace/</id>
+    <published>2024-12-07T16:00:49.000Z</published>
+    <updated>2024-12-09T05:28:53.802Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="故事">故事</h2><p>最近稣在梳理一份 <a href="https://google.github.io/styleguide/cppguide.html">Google C++ Coding Style</a> 的更严格版本，其中，有一条是“在大范围禁止使用 <code>using namespace</code>”，结果获得 100% 员工的支持。<s>员工人数：1！</s></p><h2 id="分析">分析</h2><p>具体来说，大范围指的是比函数更大的范围。通常的 Coding Style 可能会提到：禁止在头文件里使用 using namespace，而这里的禁止显然涉及的地方更多。禁用它的理由通常有以下这些：</p><ol><li><p>降低可维护性：using namespace 会降低代码的可读性，因为它隐藏了实体的来源，读者需要额外的工作来确定一个名称属于哪个命名空间。如果后续添加或修改了同名的实体，可能导致编译失败，甚至可能引入难以发现的错误。</p></li><li><p>降低编译性能：using namespace 可能会导致编译器查找符号时的性能下降，因为它需要在所有导入的命名空间中搜索。</p></li></ol><p>同时，我们放开了例外的限制，没错，您可以在任何地方，比如头文件里，使用 <code>using namespace</code> 各种 <code>std::literals</code>！</p><p>如果您觉得不使用 using namespace，会导致需要写大量很长的 namespace，那您应该使用 namespace 定义别名来缩短，如果是本项目的 namespace 倾向于使用最短的简称。例如：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> d = umutech::regame::diagnostics; <span class="comment">// 自己的命名空间，尽量短</span></span><br><span class="line"><span class="keyword">namespace</span> fs = boost::filesystem;</span><br><span class="line"><span class="keyword">namespace</span> nw = boost::nowide;</span><br><span class="line"><span class="keyword">namespace</span> po = boost::program_options;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>::string_view_literals;  <span class="comment">// 例外</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">掐鸡说它能编造更多别用 using namespace 的理由！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+    <category term="coding-style" scheme="https://blog.umu618.com/tags/coding-style/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>microsoft/proxy 学习笔记</title>
+    <link href="https://blog.umu618.com/2024/12/07/umutech-microsoft-proxy/"/>
+    <id>https://blog.umu618.com/2024/12/07/umutech-microsoft-proxy/</id>
+    <published>2024-12-07T05:41:47.000Z</published>
+    <updated>2024-12-09T05:28:53.791Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-用于啥需求？">1. 用于啥需求？</h2><p>实现多态性。它允许统一管理和操作多种子类对象，在传统方法中，这通常通过基类指针来实现。</p><h2 id="2-何时使用-Proxy？">2. 何时使用 Proxy？</h2><p>每当你在代码中使用 virtual 关键字定义虚函数时，可以考虑使用 <a href="https://github.com/microsoft/proxy">Proxy</a> 库作为替代方案，以提高性能和简化代码管理。</p><h2 id="3-有时候-CRTP-也可以替代-virtual，CRTP-也能用-Proxy-替代吗？">3. 有时候 CRTP 也可以替代 virtual，CRTP 也能用 Proxy 替代吗？</h2><p>虽然 Curiously Recurring Template Pattern (<a href="https://en.cppreference.com/w/cpp/language/crtp">CRTP</a>) 可以在某些情况下替代 virtual 函数，但 <a href="https://github.com/microsoft/proxy">Proxy</a> 并不是用来替代 <a href="https://en.cppreference.com/w/cpp/language/crtp">CRTP</a> 的。如果你的目标是代码复用，而不是统一管理多种子类，那么 <a href="https://en.cppreference.com/w/cpp/language/crtp">CRTP</a> 仍然是更合适的选择。例如，如果你有多个项目使用相似的代码段，并且这些代码段被封装在一个基类中，通过 <a href="https://en.cppreference.com/w/cpp/language/crtp">CRTP</a> 实现代码复用，而这些子类只在各自的项目模块中使用，那么继续使用 <a href="https://en.cppreference.com/w/cpp/language/crtp">CRTP</a> 是合适的，使用 <a href="https://github.com/microsoft/proxy">Proxy</a> 则不太适合。</p>]]></content>
+    
+    
+    <summary type="html">掐鸡说这个代理是网络代理……</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows 平台编译 FFmpeg</title>
@@ -642,7 +690,7 @@
     <link href="https://blog.umu618.com/2024/03/05/umutech-bom/"/>
     <id>https://blog.umu618.com/2024/03/05/umutech-bom/</id>
     <published>2024-03-05T15:31:07.000Z</published>
-    <updated>2024-03-05T16:19:39.666Z</updated>
+    <updated>2024-12-09T05:28:53.782Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>文本文件加 BOM 有何好处？有何坏处？到底加不加？</p><h2 id="说法">说法</h2><ol><li><p>UTF-8 不需要 BOM，不含 BOM 的 UTF-8 才是标准形式，尽管 Unicode 标准允许在 UTF-8 中使用 BOM。</p></li><li><p>文本文件带 BOM 不是个标准的做法，而且可能会导致某些 reader 或者编辑器解析出错，所以一般不推荐文本文件去携带 BOM。</p></li></ol><h2 id="分析">分析</h2><p>人们写文本文件肯定有不同目的，所以，加和不加可能分别适用于不同目的，不能一概地认为哪种更好。</p><p>更聪明的做法是分类对待，可以根据以下基本原则：</p><ul><li><p>在有结构的文件里，不需要 BOM。</p></li><li><p>在没有结构的文本文件里，最好有 BOM（见下面“兼容问题”）。</p></li></ul><p>举例 1：.html, .xml 等文件有结构，不需要。</p><p>举例 2：.txt 没有结构，如果不加 BOM，软件需要自己判断，很可能判断失误出现乱码，或者为了正确判断付出巨大代价。</p><p>举例 3：带 shebang line 的文件，有结构，如果加了 BOM，会使弱鸡 Shell 不认识而出错。</p><p>举例 4：.cpp, .hpp，没有结构，里面如果没有中文、法语等 ASCII 码大于 127 的字符，加不加都无所谓，如果带中文，哪怕是注释，建议 UTF-8 with BOM。</p><p><s>毕竟稣有 20 几台电脑，涵盖 Windows、macOS、Linux 系统和 x86、x64、armhf、arm64 架构，没有 BOM 怎么愉快地写 C++？</s></p><h2 id="兼容问题">兼容问题</h2><p>本节，只针对没有结构的文本文件。</p><p>遇到阅读器/编辑器不支持的情况，那就是不加好，但并不是绝对，因为这其实还是个需求问题。</p><p>比如说，稣一直用 Windows 的记事本写一些备忘，如果汉字局多，就选择 UTF-16 LE with BOM，代码居多则用 UTF-8 with BOM。这些文件换用其它软件打开也许会乱码，但有何关系呢？他们可以写出不支持 BOM 的擸𢶍软件，稣也可以不用呀！稣在 macOS、Linux 上都可以拿支持 BOM 的软件（比如 VSCode）打开这些文件。</p><p>再考虑一种死翘翘的情况：您在用 B 语言写代码，但它的编译器不支持 BOM，那么显然您就不应该加了。</p><p>所以，当您的文本文件的主程序不支持 BOM 时，不应该加，支持的情况，还是加的好。</p>]]></content>
     
@@ -653,6 +701,8 @@
     
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
     
     <category term="coding-style" scheme="https://blog.umu618.com/tags/coding-style/"/>
     
