@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2024-12-17T09:03:20.183Z</updated>
+  <updated>2025-01-26T12:07:03.662Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>声音共享 SoundShare</title>
+    <link href="https://blog.umu618.com/2025/01/26/umutech-sound-share/"/>
+    <id>https://blog.umu618.com/2025/01/26/umutech-sound-share/</id>
+    <published>2025-01-26T12:02:00.000Z</published>
+    <updated>2025-01-26T12:07:03.662Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="故事-The-Story">故事 The Story</h2><p>SoundShare 是 RegameDesk 开发过程中的副产品。</p><blockquote><p>SoundShare is a by-product of the development process of RegameDesk.</p></blockquote><p>在金山云开发鎏光时，领导给了两个设定：仅用于边缘网络、示范性实现。所以没有使用当时很火的 WebRTC，直接使用 WebSocket 传输音视频裸流。可想而知，在很多场景下，其音频的效果是不好的。</p><blockquote><p>During the development of Liuguang at Kingsoft Cloud, the leadership provided two directives: it should be designed only for edge networks and serve as a demonstrative implementation. Consequently, instead of utilizing the then-popular WebRTC, I directly employed WebSocket to transmit raw audio and video streams. As one might expect, the audio quality was suboptimal in many scenarios.</p></blockquote><p>后来，在雪蛤油开发远程桌面产品时，稣便发现使用 RTC SDK 能有效地改善音频的效果。但是这个 RTC SDK 是公司其它团队开发的，而且开发者人数众多，想必是个大型库。稣的重心放在除了传输协议之外的其余部分，对 WebRTC 可以说一知半解。</p><blockquote><p>Later, while developing a remote desktop product at Xuehayou, I discovered that employing an RTC SDK could significantly enhance audio quality. However, this RTC SDK was developed by another team within the company, and given the large number of developers involved, it was presumably a substantial library. My focus was primarily on aspects other than the transmission protocol, and thus, my understanding of WebRTC was, at best, rudimentary.</p></blockquote><p>现在，既然要做自己的远程桌面产品，就不得不亲自面对 WebRTC。当然，前公司的 RTC SDK 肯定是不能用的，因为它以 Google WebRTC m89 为基准，这个库，稣认为太复杂了，没那么多时间去重新整理一遍。所以我选择了一个比较小型但新颖的库，作为熟悉它的试验性项目，“声音共享”就诞生了。</p><blockquote><p>Now, as I embark on creating my own remote desktop product, it is imperative that I confront WebRTC directly. Naturally, the RTC SDK from the previous company is out of the question for use, as it is based on Google WebRTC m89—a library I consider to be overly complex, and one that I simply do not have the time to reorganize from scratch. Therefore, I opted for a smaller yet more innovative library as an experimental project to familiarize myself with it, and thus, SoundShare was born.</p></blockquote><h2 id="开发过程-Development-Process">开发过程 Development Process</h2><p>首先在 Copilot 和 DeepSeek 的帮助下，理清了许多 WebRTC 的概念和原理，后来在 vcpkg 里搜索 rtc，对比了几个库，做好库的选型。</p><blockquote><p>Initially, with the assistance of Copilot and DeepSeek, I clarified many concepts and principles of WebRTC. Subsequently, I searched for ‘rtc’ within vcpkg, compared several libraries, and finalized the selection of the appropriate library.</p></blockquote><p>接下来，考虑先做个小工具练练手，不然直接把一个陌生的库上到 RegameDesk，万一后面发现不好用，岂不是要返工？</p><blockquote><p>Next, I contemplated starting with a small tool to practice, reasoning that directly integrating an unfamiliar library into RegameDesk could lead to rework if it later proved unsuitable.</p></blockquote><p>刚好，稣的笔记本扬声器很差，另一台迷你主机干脆就没有扬声器，还好又有一台脑波退下来的 iPhone 11 Pro Max，外放效果特别好，于是想到可以做个串流工具，让 iPhone 当笔记本的扬声器。</p><blockquote><p>Coincidentally, my laptop’s speakers are subpar, and my mini PC lacks speakers altogether. However, I happen to have a decommissioned iPhone 11 Pro Max from my wife, which boasts excellent external audio performance. This led me to conceive of a streaming tool that would allow the iPhone to serve as the laptop’s speaker.</p></blockquote><p>这里不得不吐槽一下 iPhone 11 Pro Max 的蜂窝信号，真的太差了，所以它基本上就是为 WiFi 而生，十分适合用来做&quot;声音共享&quot;的测试设备。</p><blockquote><p>Here, I must vent a bit about the iPhone 11 Pro Max’s cellular signal—it’s truly abysmal. As a result, it’s essentially designed for WiFi, making it an ideal candidate for testing SoundShare.</p></blockquote><p>虽然这本是一个练手的项目，但稣将它发布给一位朋友时，他竟然打赏了一块钱，于是干脆加点码，​做好一些！</p><blockquote><p>Although this was initially a practice project, when I shared it with a friend, he unexpectedly tipped me one CNY. This gesture motivated me to enhance the project further and refine it to a higher standard!​</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;故事-The-Story&quot;&gt;故事 The Story&lt;/h2&gt;
+&lt;p&gt;SoundShare 是 RegameDesk 开发过程中的副产品。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SoundShare is a by-product of the developm</summary>
+      
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="作品" scheme="https://blog.umu618.com/tags/%E4%BD%9C%E5%93%81/"/>
+    
+    <category term="streaming-media" scheme="https://blog.umu618.com/tags/streaming-media/"/>
+    
+    <category term="ffmpeg" scheme="https://blog.umu618.com/tags/ffmpeg/"/>
+    
+  </entry>
   
   <entry>
     <title>RegameDesk 开发笔记【2】Avro</title>
