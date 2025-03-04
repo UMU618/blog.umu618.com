@@ -408,17 +408,21 @@
 <p>已经 C++20 了，请放心，直接，返回对象！</p>
 <h2 id="概念">概念</h2>
 <ul>
-<li>
-<p>RVO：Return Value Optimization，返回值优化。</p>
-</li>
-<li>
-<p>NRVO：Named RVO，具名的返回值优化。</p>
-</li>
+<li>RVO：Return Value Optimization，返回值优化。</li>
 </ul>
+<p>广义的 RVO 分为两种，它们之间的主要区别在于返回值是具名的局部变量还是无名的临时对象。</p>
+<ol>
+<li>
+<p>NRVO：Named RVO，具名的返回值优化。这是可选的优化，通常没有多个返回路径返回不同的对象，或者返回的对象不依赖于条件判断时，会被实施。</p>
+</li>
+<li>
+<p>URVO：Unnamed RVO，匿名的返回值优化。通常 RVO 特指 URVO。C++ 17 开始 URVO 必然被实施。</p>
+</li>
+</ol>
 <p>返回的对象会 move 给接收的变量，并且，最多可能优化成直接对接收变量进行构造（NRVO）。</p>
 <p>如果明确没有 move 构造函数，则会调用 copy 构造函数，当对象构造代价高时，应该尽量保证有 move 构造函数。</p>
 <h2 id="例子">例子</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统，不建议，可读性差，使用也不方便</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GetName</span><span class="params">(std::string&amp; name)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  name = <span class="string">&quot;UMU&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// RVO，优化，但不够</span></span><br><span class="line"><span class="function">std::string <span class="title">GetName</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;UMU618&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// NRVO, 最优化，推荐这样写！</span></span><br><span class="line"><span class="function">std::string <span class="title">GetName</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="function">std::string <span class="title">name</span><span class="params">(<span class="string">&quot;UMU618&quot;</span>)</span></span>;</span><br><span class="line">  <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统，不建议，可读性差，使用也不方便</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">GetName</span><span class="params">(std::string&amp; name)</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  name = <span class="string">&quot;UMU&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// URVO，C++ 17 开始必然优化</span></span><br><span class="line"><span class="function">std::string <span class="title">GetName</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;UMU618&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// NRVO, 可选优化，具体来说，以下的写法会优化</span></span><br><span class="line"><span class="function">std::string <span class="title">GetName</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">  <span class="function">std::string <span class="title">name</span><span class="params">(<span class="string">&quot;UMU618&quot;</span>)</span></span>;</span><br><span class="line">  <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="避坑">避坑</h2>
 <p>没有必要对返回值再加一次 std::move，因为返回本身就已经是 move，再加一次就是多一次没必要的 move。</p>
 
