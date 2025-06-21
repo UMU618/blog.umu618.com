@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2025-03-19T14:10:57.823Z</updated>
+  <updated>2025-06-21T08:41:34.445Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,83 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>通过 iPXE 安装 Debian</title>
+    <link href="https://blog.umu618.com/2025/06/21/umutech-install-debian-via-ipxe/"/>
+    <id>https://blog.umu618.com/2025/06/21/umutech-install-debian-via-ipxe/</id>
+    <published>2025-06-21T08:16:55.000Z</published>
+    <updated>2025-06-21T08:41:34.445Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="起源">起源</h2><p>想安装 Debian 12，但没 U 盘。</p><h2 id="思考、观测">思考、观测</h2><ul><li><p>Debian 能通过网络安装，参考：<a href="https://wiki.debian.org/PXEBootInstall">Installing Debian using network booting</a></p></li><li><p>但 PXE 太麻烦了，放弃。</p></li><li><p>观测目标机器，发现其 EFI 有网络启动功能，还能按 Ctrl+B 进入 iPXE。</p></li></ul><h2 id="解决">解决</h2><ol><li><p>开启网络启动，并关闭 Secure Boot。</p></li><li><p>看到 PXE 启动画面时，按 Ctrl+B，进入 iPXE。</p></li><li><p>输入 dhcp，使目标机器得到 IP 地址，成功即可下一步；但如果局域网内没有 DHCP Server，则需要手动配置：</p></li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> net0/ip 192.168.1.77</span><br><span class="line"><span class="built_in">set</span> net0/netmask 255.255.255.0</span><br><span class="line"><span class="built_in">set</span> net0/gateway 192.168.1.254</span><br><span class="line"><span class="built_in">set</span> dns 8.8.8.8</span><br><span class="line"></span><br><span class="line">ifopen net0</span><br><span class="line">ifstat net0</span><br></pre></td></tr></table></figure><p>以上最后一条命令 <code>ifstat net0</code> 输入完后，应该能看到输出里有 open 的字样。</p><ol start="4"><li>启动内核</li></ol><p>以 Debian 12 为例，先设置网址前缀：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> URL http://mirrors.ustc.edu.cn/debian/dists/bookworm/main/installer-amd64/current/images/netboot/debian-installer/amd64/</span><br></pre></td></tr></table></figure><p>注意，iPXE 里只支持 http。网址里的 <code>mirrors.ustc.edu.cn</code> 是中科大的镜像域名，在厦门、上海、长沙访问都很快。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kernel <span class="variable">$&#123;URL&#125;</span>linux console=ttyS1,115200n8 initrd=initrd.gz</span><br><span class="line">initrd <span class="variable">$&#123;URL&#125;</span>initrd.gz</span><br><span class="line">boot</span><br></pre></td></tr></table></figure><ol start="5"><li>加速安装</li></ol><p>请参考<a href="/2024/05/19/umutech-install-debian-quickly/">《快速安装 Debian》</a>，其中“按 Ctrl+Alt+F5 回到安装界面”这步需要改为“按 Ctrl+Alt+F1 回到安装界面”，因为通过 iPXE 启动的 Debian 安装程序是 TUI，运行于第一个控制台。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;起源&quot;&gt;起源&lt;/h2&gt;
+&lt;p&gt;想安装 Debian 12，但没 U 盘。&lt;/p&gt;
+&lt;h2 id=&quot;思考、观测&quot;&gt;思考、观测&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Debian 能通过网络安装，参考：&lt;a href=&quot;https://wiki.debian.org/P</summary>
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+    <category term="debian" scheme="https://blog.umu618.com/tags/debian/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何让开始按钮的右键菜单带加速键？</title>
+    <link href="https://blog.umu618.com/2025/06/21/umutech-win-x/"/>
+    <id>https://blog.umu618.com/2025/06/21/umutech-win-x/</id>
+    <published>2025-06-21T08:07:10.000Z</published>
+    <updated>2025-06-21T08:15:10.196Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://mp.weixin.qq.com/s/8WUWIQCcDXFFPI0DEcpW1Q">Win 键被禁用后发现 Windows 11 24H2 的一个小伎俩</a></p><h2 id="起源">起源</h2><p>最近在开发基于 QEMU 的 Windows 虚拟机的 GPU 加速驱动。由于不想频繁按 Ctrl+Alt+G 退出虚拟机窗口的捕获状态，就不用鼠标设备，而是使用触控屏设备。即：<br>-device qemu-xhci -device usb-tablet<br>但这么一来，虚拟机就接收不到 Win 键了……于是之前迅速打开设备管理器的“Win+X, M”也跟着无效。</p><h2 id="解决">解决</h2><p>“Win+X”的替代自然就是“鼠标右击开始按钮”，然而出来的菜单居然没有加速键？</p><p><img src="/images/2025/20250607-no-accelerator-keys.png" alt="No accelerator keys"></p><p>用“Win+X”呼出的菜单应该是下面这样的：</p><p><img src="/images/2025/20250607-with-accelerator-keys.png" alt="With accelerator keys"></p><p>于是猜测，微软一定会设计另一种机制，比如“按下某种组合键”，来提供有加速键的 Win+X 菜单。测试按 Ctrl 和 Shift，发现有时候第一次按无效，后面才会有效，索性再测试 Ctrl 和 Shift 同时按，则每次都有效。</p><p>所以，解决方式是：同时按下 Ctrl 和 Shift，再鼠标右击开始按钮。</p>]]></content>
+    
+    
+    <summary type="html">掐鸡说没加速键岂不是需要用鼠标手点鼠标？</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RegameDesk 开发笔记【9】hello_imgui</title>
+    <link href="https://blog.umu618.com/2025/04/19/umutech-regamedesk-9-hello_imgui/"/>
+    <id>https://blog.umu618.com/2025/04/19/umutech-regamedesk-9-hello_imgui/</id>
+    <published>2025-04-19T07:45:00.000Z</published>
+    <updated>2025-06-21T08:13:06.869Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://mp.weixin.qq.com/s/QK6kYN6BXhpa5IsFpL2ISA">本文的微信公众号链接</a></p><h2 id="需求">需求</h2><p>客户端（主控）渲染窗口需要故障排除功能，比如说显示 FPS、丢帧、延迟等信息，以方便调试、测试。一个较为常见且靠谱的作法是基于 <a href="https://github.com/ocornut/imgui">Dear ImGui</a> 来实现。</p><h2 id="学习">学习</h2><p>高手直接看 <a href="https://github.com/ocornut/imgui">Dear ImGui</a> 也不是不行。但如果是初学者，从 <a href="https://github.com/pthom/hello_imgui">Hello ImGui</a> 开始，比较不容易吓退。</p><p><a href="https://github.com/pthom/hello_imgui">Hello ImGui</a> 基于 <a href="https://github.com/ocornut/imgui">Dear ImGui</a>，所以拿前者练好，再上生产环境用后者，是一个不错的路线。</p><h2 id="实践">实践</h2><p>故障排除功能通常是一个彩蛋（隐藏功能），需要某种触发机制唤出。常见采用快捷键，但这可能和远程端系统里某个快捷键冲突。所以也可以考虑使用鼠标操作唤出，比如在顶部操作栏（显示状态下）连击 3 次右键。</p><p><img src="/images/2025/20250419.webp" alt="Remote Desktop"></p>]]></content>
+    
+    
+    <summary type="html">掐鸡说要先学会 Hello</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="作品" scheme="https://blog.umu618.com/tags/%E4%BD%9C%E5%93%81/"/>
+    
+  </entry>
   
   <entry>
     <title>诗盗·独钓春江鞋</title>
