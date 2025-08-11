@@ -44,7 +44,7 @@
     <link href="https://blog.umu618.com/2025/06/21/umutech-install-debian-via-ipxe/"/>
     <id>https://blog.umu618.com/2025/06/21/umutech-install-debian-via-ipxe/</id>
     <published>2025-06-21T08:16:55.000Z</published>
-    <updated>2025-06-21T08:41:34.445Z</updated>
+    <updated>2025-08-11T03:51:16.531Z</updated>
     
     <content type="html"><![CDATA[<h2 id="起源">起源</h2><p>想安装 Debian 12，但没 U 盘。</p><h2 id="思考、观测">思考、观测</h2><ul><li><p>Debian 能通过网络安装，参考：<a href="https://wiki.debian.org/PXEBootInstall">Installing Debian using network booting</a></p></li><li><p>但 PXE 太麻烦了，放弃。</p></li><li><p>观测目标机器，发现其 EFI 有网络启动功能，还能按 Ctrl+B 进入 iPXE。</p></li></ul><h2 id="解决">解决</h2><ol><li><p>开启网络启动，并关闭 Secure Boot。</p></li><li><p>看到 PXE 启动画面时，按 Ctrl+B，进入 iPXE。</p></li><li><p>输入 dhcp，使目标机器得到 IP 地址，成功即可下一步；但如果局域网内没有 DHCP Server，则需要手动配置：</p></li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> net0/ip 192.168.1.77</span><br><span class="line"><span class="built_in">set</span> net0/netmask 255.255.255.0</span><br><span class="line"><span class="built_in">set</span> net0/gateway 192.168.1.254</span><br><span class="line"><span class="built_in">set</span> dns 8.8.8.8</span><br><span class="line"></span><br><span class="line">ifopen net0</span><br><span class="line">ifstat net0</span><br></pre></td></tr></table></figure><p>以上最后一条命令 <code>ifstat net0</code> 输入完后，应该能看到输出里有 open 的字样。</p><ol start="4"><li>启动内核</li></ol><p>以 Debian 12 为例，先设置网址前缀：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> URL http://mirrors.ustc.edu.cn/debian/dists/bookworm/main/installer-amd64/current/images/netboot/debian-installer/amd64/</span><br></pre></td></tr></table></figure><p>注意，iPXE 里只支持 http。网址里的 <code>mirrors.ustc.edu.cn</code> 是中科大的镜像域名，在厦门、上海、长沙访问都很快。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kernel <span class="variable">$&#123;URL&#125;</span>linux console=ttyS1,115200n8 initrd=initrd.gz</span><br><span class="line">initrd <span class="variable">$&#123;URL&#125;</span>initrd.gz</span><br><span class="line">boot</span><br></pre></td></tr></table></figure><ol start="5"><li>加速安装</li></ol><p>请参考<a href="/2024/05/19/umutech-install-debian-quickly/">《快速安装 Debian》</a>，其中“按 Ctrl+Alt+F5 回到安装界面”这步需要改为“按 Ctrl+Alt+F1 回到安装界面”，因为通过 iPXE 启动的 Debian 安装程序是 TUI，运行于第一个控制台。</p>]]></content>
     
@@ -60,6 +60,8 @@
       
     
     
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
     <category term="linux" scheme="https://blog.umu618.com/tags/linux/"/>

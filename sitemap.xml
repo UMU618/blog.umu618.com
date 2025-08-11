@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.umu618.com/2025/08/10/umutech-spdlog/</loc>
+    <loc>https://blog.umu618.com/2025/06/21/umutech-install-debian-via-ipxe/</loc>
     
     <lastmod>2025-08-11</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>https://blog.umu618.com/2025/06/21/umutech-install-debian-via-ipxe/</loc>
+    <loc>https://blog.umu618.com/2025/08/10/umutech-spdlog/</loc>
     
-    <lastmod>2025-06-21</lastmod>
+    <lastmod>2025-08-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
