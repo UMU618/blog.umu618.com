@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2025-10-12T11:52:22.865Z</updated>
+  <updated>2025-12-31T07:35:39.696Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux 远程桌面服务使用报告（2025 年）</title>
+    <link href="https://blog.umu618.com/2025/12/31/umutech-linux-remote-desktop-service-usage-report/"/>
+    <id>https://blog.umu618.com/2025/12/31/umutech-linux-remote-desktop-service-usage-report/</id>
+    <published>2025-12-31T05:21:16.000Z</published>
+    <updated>2025-12-31T07:35:39.696Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="观点">观点</h2><p>几年前就发现 Linux 桌面作为远程桌面服务体验远不如 Windows，今天是 2025 年的最后一天，情况依然如此。</p><h2 id="限定">限定</h2><p>请注意本文只讨论 Terminal Service/RDP 那样【安全】的远程桌面，即本地不能看到远程的操作，远程不能看到本地的操作。VNC 之流或像 VNC 那种本地和远程都能看到同一个本地会话的就算了。</p><h2 id="论证">论证</h2><ol><li><p>现在大部分发行版都默认采用 Wayland，然而 Wayland 下的远程桌面，都必须在用户已经在本地登陆后才能提供服务。不管是 gnome 的，还是 KDE 的，都是如此，这是由 Wayland 的特性决定的。</p></li><li><p>xrdp 等基于 X11 的方案通过启动独立的 X 会话来支持远程登录，能够在无需本地显示器或未登录时工作，但该会话与本地的 Wayland 会话体验不一致。想要一致的体验，则需要放弃 Wayland，这真是令人惋惜！</p></li><li><p>使用 xrdp，还会遇到一些问题：如果本地已经登录，则远程登录后，远程会话里部分桌面环境无法正常工作。比如 KDE 会卡在初始化界面，轮子转一段时间后就黑屏了。只能跑一些轻量级的窗口管理器，比如 i3。相反的登录顺序，若在远程已经登录 xrdp 后，想本地登录，也会发生类似的困境——本地 Wayland 会话里的 KDE 卡在初始化界面！本地的桌面环境甚至不能用了！</p></li></ol><p>再来看看 Windows 的 Terminal Service 是多么优秀！体验好还安全。</p><ol><li><p>当本地已经登录，可以远程登录，本地会话被切到远程会话，之前在本地打开的应用，在远程会话里都在，能直接使用。</p></li><li><p>当远程登录在前，则在本地输入用户密码，可以把远程会话抢到本地，并踢掉远程连接。</p></li><li><p>经过一定配置，可以让 Windows Server 能够同时运行多会话，即本地和远程不需要抢夺唯一的会话，可以同时登录并使用各自会话。</p></li></ol>]]></content>
+    
+    
+    <summary type="html">简直是擸𢶍！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="喷" scheme="https://blog.umu618.com/tags/%E5%96%B7/"/>
+    
+    <category term="linux" scheme="https://blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+    <category term="remote-desktop" scheme="https://blog.umu618.com/tags/remote-desktop/"/>
+    
+  </entry>
   
   <entry>
     <title>八哥之神【番外篇12】剧终</title>
@@ -892,7 +919,7 @@
     <link href="https://blog.umu618.com/2024/04/13/umutech-enable-sound-redirection-on-debian-12-with-xrdp/"/>
     <id>https://blog.umu618.com/2024/04/13/umutech-enable-sound-redirection-on-debian-12-with-xrdp/</id>
     <published>2024-04-12T16:41:19.000Z</published>
-    <updated>2024-06-29T10:31:52.791Z</updated>
+    <updated>2025-12-31T02:13:03.336Z</updated>
     
     <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>自从给华为擎云 <a href="/2022/05/21/umutech-huawei-qingyun-l420-uos-kylinos/">L420</a>、<a href="/2022/06/18/umutech-huawei-qingyun-l410/">L410</a> 和 <a href="https://www.passmark.com/baselines/V11/display.php?id=505991431952">W515</a> 都装上 Debian 12 后，稣就把前两者卖了，因为它们是笔记本，稣有太多笔记本了……唯独留下 W515，并宠爱有加，因为它是台式机。</p><p>稣还给它装了（华为？）MATE 桌面，获得<a href="/2024/04/11/umutech-compatibility-of-various-des-and-xrdp-under-linux/">和 xrdp 不错的兼容性</a>！果然还是华为 MATE 牛逼！</p><p>于是乎，在远程桌面下都有图像的前提下，没有声音就显得很奇怪！</p><h2 id="分析">分析</h2><p>很容易发现，远程桌面下，默认是没有声音输出设备的，所以没有声音！我们需要的是一个虚拟声卡。</p><p>由于 Debian 12 的声音系统是 pipewire，使用“pipewire xrdp”作为关键词，很容易能找到：</p><p><a href="https://github.com/neutrinolabs/pipewire-module-xrdp">https://github.com/neutrinolabs/pipewire-module-xrdp</a></p><h2 id="编译-pipewire-module-xrdp">编译 pipewire-module-xrdp</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/neutrinolabs/pipewire-module-xrdp</span><br><span class="line"><span class="built_in">cd</span> pipewire-module-xrdp</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install build environment</span></span><br><span class="line">sudo apt install git pkg-config autotools-dev libtool make gcc</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install dependencies</span></span><br><span class="line">sudo apt install libpipewire-0.3-dev libspa-0.2-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build</span></span><br><span class="line">./bootstrap</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure><h2 id="使用">使用</h2><p>连重启都不用，只需要重新进行 RDP 连接即可生效。</p>]]></content>
     
@@ -909,6 +936,8 @@
     <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
     
     <category term="debian" scheme="https://blog.umu618.com/tags/debian/"/>
+    
+    <category term="remote-desktop" scheme="https://blog.umu618.com/tags/remote-desktop/"/>
     
   </entry>
   
@@ -942,7 +971,7 @@
     <link href="https://blog.umu618.com/2024/04/11/umutech-compatibility-of-various-des-and-xrdp-under-linux/"/>
     <id>https://blog.umu618.com/2024/04/11/umutech-compatibility-of-various-des-and-xrdp-under-linux/</id>
     <published>2024-04-11T13:18:56.000Z</published>
-    <updated>2024-06-29T10:31:52.791Z</updated>
+    <updated>2025-12-31T02:12:57.996Z</updated>
     
     <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>稣主要使用 macOS 和 Windows 远程桌面访问 Windows 和 Linux，所以 Linux 下哪个 DE 对 xrdp 支持最好呢？</p><h2 id="选手">选手</h2><p>在过去<a href="/2022/04/25/umutech-linux-desktop/">Linux 桌面玩稣</a>的时代，主要使用以下 DE：</p><ul><li>GNOME</li><li>Cinnamon</li><li>MATE</li><li>Xfce</li><li>KDE</li><li>i3</li></ul><p>其中 GNOME 和 KDE 太大了，而且对 xrdp 支持并不好，不想再使用，直接淘汰。加入两个从没使用过的选手：</p><ul><li>LXDE</li><li>LXQt</li></ul><p>但由于它们太像了，简单看起来仅仅是样式不同，所以算一个吧。</p><h2 id="对比">对比</h2><p>以下为最直观的感受，没有深入去折腾。</p><table><thead><tr><th style="text-align:left">DE 名称</th><th style="text-align:left">GUI 下支持的缩放个数</th><th style="text-align:left">缩放有效否</th><th style="text-align:left">明显的坑</th></tr></thead><tbody><tr><td style="text-align:left">Cinnamon</td><td style="text-align:left">5 个（100、125、150、175、200）</td><td style="text-align:left">是，立刻生效</td><td style="text-align:left">第一次设置缩放后，开始菜单高度没变高，是个矮个子的错误状态，注销再登录才正常</td></tr><tr><td style="text-align:left">MATE</td><td style="text-align:left">2 个（100、200）</td><td style="text-align:left">是，立刻生效</td><td style="text-align:left">没有 Cinnamon 漂亮，界面布局需要适应，容易把左下角的“显示桌面”当成开始菜单</td></tr><tr><td style="text-align:left">Xfce</td><td style="text-align:left">5 个（100、125、150、175、200）</td><td style="text-align:left">否，即使重新登录也无效</td><td style="text-align:left">永远 100% 的缩放</td></tr><tr><td style="text-align:left">i3</td><td style="text-align:left">0 个（自己改配置去！）</td><td style="text-align:left">否，改配置后无法在一次会话里即时成效</td><td style="text-align:left">WIN 键有时候失灵，是在不同 RDP 客户端连接下键值可能和服务端本地不同！</td></tr><tr><td style="text-align:left">LXDE/LXQt</td><td style="text-align:left">0 个</td><td style="text-align:left">否，界面上没找到地方改</td><td style="text-align:left">永远 100% 的缩放，即使 RDP 客户端已经记住密码，每次登录必然再弹出对话框要求输入密码。</td></tr></tbody></table><h2 id="结论">结论</h2><p>似乎就 Cinnamon 和 MATE 是应该一起安装的！一个大哥，一个小妹，能互补，还能偶尔换换口味。</p><p>Xfce 和 i3 也许折腾几下也能好用。</p><p>不过，以上，在 Windows 面前，都是乐射……不管本地、还是被远程，Windows 都完美缩放。</p>]]></content>
     
@@ -957,6 +986,8 @@
     <category term="linux" scheme="https://blog.umu618.com/tags/linux/"/>
     
     <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+    <category term="remote-desktop" scheme="https://blog.umu618.com/tags/remote-desktop/"/>
     
   </entry>
   
@@ -1524,7 +1555,7 @@
     <link href="https://blog.umu618.com/2023/08/13/umutech-bug-xrdp-was-broken/"/>
     <id>https://blog.umu618.com/2023/08/13/umutech-bug-xrdp-was-broken/</id>
     <published>2023-08-13T08:54:01.000Z</published>
-    <updated>2024-06-29T10:31:52.786Z</updated>
+    <updated>2025-12-31T07:29:27.082Z</updated>
     
     <content type="html"><![CDATA[<p>八哥就是让你料不到！</p><h2 id="故事">故事</h2><p>用 macOS 的 Microsoft Remote Desktop Beta 连着 Debian 12，切回 macOS 一段时间后，再回 Debian，发现卡死了。</p><p>一看 Debian 的机器，是睡眠了，立刻按电源键唤醒。但是 Microsoft Remote Desktop Beta 再也连不上 Debian。一直在连接的界面，也不报错，也不超时。</p><p>SSH 到 Debian 一顿治疗后，依然无法连接。最后重启 Microsoft Remote Desktop Beta，居然好了……</p><h2 id="折腾记录">折腾记录</h2><h3 id="八哥一：为什么睡眠了？">八哥一：为什么睡眠了？</h3><p>因为每次 RDP 进入 KDE 后，都弹出一个密码输入框，上面想着“挂起系统需要身份验证”，于是稣做了如下操作，把它去掉。</p><p><code>sudo vim /etc/polkit-1/rules.d/85-suspend.rules</code>，输入：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">polkit.<span class="title function_">addRule</span>(<span class="keyword">function</span>(<span class="params">action, subject</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (action.<span class="property">id</span> == <span class="string">&quot;org.freedesktop.login1.suspend&quot;</span> &amp;&amp;</span><br><span class="line">        subject.<span class="title function_">isInGroup</span>(<span class="string">&quot;tsusers&quot;</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> polkit.<span class="property">Result</span>.<span class="property">YES</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 755 /etc/polkit-1/rules.d</span><br><span class="line">sudo <span class="built_in">chmod</span> 644 /etc/polkit-1/rules.d/85-suspend.rules</span><br></pre></td></tr></table></figure><p>结果——机器就能自动睡眠了。这是不符合预期的……</p><h3 id="八哥二：SSH-好好的，唯独-XRDP-坏了？">八哥二：SSH 好好的，唯独 XRDP 坏了？</h3><p>确实是稣的一大失算！因为期间在 Debian 本地使用了 wayland，而 xrdp 用的是 xorg，怀疑这可能把 xrdp 弄坏，就把目光都集中在 xrdp 上，各种修复，甚至重新安装、配置 xrdp，也无济于事。</p><p>另外一个误导因素是：刚用上 京东京造的 SSD，期间摸了摸，觉得烫得不行，担心是 SSD 异常，导致 xrdp 的文件被破坏。事实上，这个破硬盘也确实因为过热自动写保护两次，最后都无法启动系统了。</p><h3 id="八哥三：Windows-连-Debian-居然没问题……">八哥三：Windows 连 Debian 居然没问题……</h3><p>这才意识到是 macOS 的 Microsoft Remote Desktop Beta 有问题！连忙重启这个 App，终于真相大白！现在看着这名字末尾的 Beta 陷入沉思。</p>]]></content>
     
@@ -1545,6 +1576,8 @@
     <category term="macos" scheme="https://blog.umu618.com/tags/macos/"/>
     
     <category term="debian" scheme="https://blog.umu618.com/tags/debian/"/>
+    
+    <category term="remote-desktop" scheme="https://blog.umu618.com/tags/remote-desktop/"/>
     
   </entry>
   
