@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.umu618.com/images/2026/20260118-crlfoption.png">
 <meta property="article:published_time" content="2026-01-18T12:34:53.000Z">
-<meta property="article:modified_time" content="2026-01-18T12:53:07.264Z">
+<meta property="article:modified_time" content="2026-01-18T13:07:30.892Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="windows">
@@ -161,9 +161,9 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --system core.autocrlf <span class="literal">false</span></span><br><span class="line">git config --system core.safecrlf <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>以上针对本机生效，如果您机器上有多个用户，建议这样做。如果没有管理员权限，那就只能针对当前用户设置了，相应的命令为：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf <span class="literal">false</span></span><br><span class="line">git config --global core.safecrlf <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>core.safecrlf 的默认值就是 true，这里也显示设置，是建议您不要关掉它。</p>
+<p>core.safecrlf 的默认值就是 true，这里也显式设置，是建议您不要关掉它。</p>
 <h2 id="例外">例外</h2>
-<p>Windows 下还是有些软件对某些文本文件只支持 CRLF 的，所以需要使用 .gitattributes 来排除它们，比如说：</p>
+<p>Windows 上还是有些软件对某些文本文件只支持 CRLF 的，所以需要使用 .gitattributes 来排除它们，比如说：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* text=auto eol=lf</span><br><span class="line"></span><br><span class="line">*.rc                text eol=crlf</span><br><span class="line">*.inf               text eol=crlf</span><br><span class="line">*.sln               text eol=crlf</span><br><span class="line">*.slnx              text eol=crlf</span><br><span class="line">*.vcxproj           text eol=crlf</span><br><span class="line">*.vcxproj.filters   text eol=crlf</span><br><span class="line">resource.h          text eol=crlf</span><br><span class="line">packages.config     text eol=crlf</span><br></pre></td></tr></table></figure>
 <p>注意第一行，它是设置默认换行符为 LF，这符合“世界唯一”的设定，要牢记。</p>
 
