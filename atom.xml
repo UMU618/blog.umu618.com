@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2026-01-18T13:07:30.892Z</updated>
+  <updated>2026-01-25T15:53:09.545Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>写跨平台的 PowerShell 脚本</title>
+    <link href="https://blog.umu618.com/2026/01/25/umutech-write-cross-platform-powershell-scripts/"/>
+    <id>https://blog.umu618.com/2026/01/25/umutech-write-cross-platform-powershell-scripts/</id>
+    <published>2026-01-25T14:58:58.000Z</published>
+    <updated>2026-01-25T15:53:09.545Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="跨平台用-pwsh-写脚本？认准原生-Cmdlet-才是王道">跨平台用 pwsh 写脚本？认准原生 Cmdlet 才是王道</h2><p>作为常年同时使用 Linux、macOS、Windows 的开发者，稣对 pwsh（PowerShell 7+）的跨平台一致性情有独钟——只需写一套 .ps1 脚本，就能在三大系统运行。但最近踩了个 mkdir 的小坑，才发现看似通用的命令背后，藏着平台差异的玄机，也让稣更坚定了「优先用原生命令」的原则。</p><h2 id="意外发现：mkdir-居然不是-alias">意外发现：mkdir 居然不是 alias</h2><p>一直以为 Windows 版 pwsh 上的 mkdir 是个 alias，直到某次在 Windows 上执行 <code>Get-Alias mkdir</code> 时，居然报错，这才意识到，它在不同平台下是不同实现。</p><p>用 <code>Get-Command mkdir</code> 一查，差异瞬间清晰：</p><ul><li><p>Windows：mkdir 是一个 Function，本质是 New-Item -ItemType Directory 的封装，用 (Get-Command mkdir).Definition 就能看到其代码；</p></li><li><p>Linux/macOS：mkdir 是 Application，直接调用系统自带的 /bin/mkdir。</p></li></ul><p>这就导致了关键差异：Linux/macOS 上的 mkdir 支持 -p 参数创建多级目录，但 Windows 上的 Function 版 mkdir 并没有 -p 参数（即加不加 -p 都是一样的），它都是能“创建多级目录”的语义。</p><p>顺着这个思路查了 rmdir，发现它同样存在差异：</p><ul><li><p>Windows：rmdir 是 Alias，指向 Remove-Item -ItemType Directory，本质还是 pwsh 原生 Cmdlet；</p></li><li><p>Linux/macOS：rmdir 依然是系统 Application（/bin/rmdir）。</p></li></ul><p>同一个「看似通用」的命令，在不同平台可能是 Function、Alias 或系统应用，这正是跨平台脚本踩坑的核心原因——依赖系统级命令，必然受底层平台规则约束。</p><h2 id="跨平台脚本的核心解法：认准-pwsh-原生命令">跨平台脚本的核心解法：认准 pwsh 原生命令</h2><p>想要一套脚本跑遍所有平台，关键就是抛弃系统命令/别名，优先使用 pwsh 原生 Cmdlet（动词 + 名词格式，如 New-Item）。这些 Cmdlet 是 pwsh 统一封装的，不依赖底层系统，行为和参数在所有平台完全一致。</p><p>留言请到：<a href="https://mp.weixin.qq.com/s/iE4cPVCP6rRHLG1Neg-8Ew">https://mp.weixin.qq.com/s/iE4cPVCP6rRHLG1Neg-8Ew</a></p>]]></content>
+    
+    
+    <summary type="html">豆包说它会写，以后就让豆包写！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="powershell" scheme="https://blog.umu618.com/tags/powershell/"/>
+    
+  </entry>
   
   <entry>
     <title>Git 换行符设置终极指南</title>
@@ -669,9 +692,9 @@
     <link href="https://blog.umu618.com/2024/07/07/umutech-install-debian-12-on-w515/"/>
     <id>https://blog.umu618.com/2024/07/07/umutech-install-debian-12-on-w515/</id>
     <published>2024-07-07T08:30:55.000Z</published>
-    <updated>2024-07-11T15:40:46.275Z</updated>
+    <updated>2026-01-25T14:51:06.201Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1-需求">1. 需求</h2><p>GitHub 太慢，Gitee 老是被封，发邮件反馈好多次，至今给稣打上奇怪的标签。</p><p><a href="https://gitee.com/umu618">https://gitee.com/umu618</a></p><p>于是直接使用 gitlab-ce 打造自己的 git 服务，实现真正的 Private 仓库。</p><h2 id="2-硬件选型">2. 硬件选型</h2><p>首先，上擸𢶍，一台 J4125，6GB 内存的机器。实测 6GB 内存不太够，淘汰。</p><p>看来需要 8~12GB 内存比较靠谱，手里还有 3 台 N100，内存分别为：LPDDR5 4800MHz 8GB、DDR4 3200MHz 32GB、DDR5 4800MHz 32GB，问题是 N100 这么高贵的核显不是浪费了？果断都淘汰。</p><p>后来，把 DDR4 3200MHz 32GB 的 N100 机器出给道友，并收了他的华为擎云 W515，硬件选型迎来完美结束——省电的 arm64 CPU（整机并不省电）；8GB 内存；带不动 4K 的擸𢶍核显，一点都不浪费。</p><h2 id="3-OS-选型">3. OS 选型</h2><p>UOS 和 KylinOS 都玩了好几遍，它们都是桌面系统，有许多限制，不适合做 Server。</p><p>考虑上 Debian，但正常安装 Debian 11 和 12 都会遇到各种黑屏、无法启动。推测新内核无法启动 W515，是因为国产生态的开发比较保守，主要使用 4 和 5 这两个大版本，没给 6 的大版本适配。</p><p>最开始的解决方式是把 Debian 的内核换成 UOS 或 KylinOS 的，虽然启动报错导致启动慢，但又不是不能用。截图是 KylinOS 内核：</p><p><img src="/images/2024/20240331-w515-info.png" alt="W515 信息"></p><p>EFI 程序也是使用 Kylin 的：</p><p><img src="/images/2024/20240331-w515-info.png" alt="W515 EFI"></p><p>至此已经能够使用最新 Debian 发行版，并安装 gitlab-ce。</p><h2 id="4-后记">4. 后记</h2><p>以上折腾完都快一年了，最近发现原来 Debian 10 (Buster) 的内核就是 4.19 系列，所以它的 arm64 版可以直接使用……</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="1-需求">1. 需求</h2><p>GitHub 太慢，Gitee 老是被封，发邮件反馈好多次，至今给稣打上奇怪的标签。</p><p><a href="https://gitee.com/umu618">https://gitee.com/umu618</a></p><p>于是直接使用 gitlab-ce 打造自己的 git 服务，实现真正的 Private 仓库。</p><h2 id="2-硬件选型">2. 硬件选型</h2><p>首先，上擸𢶍，一台 J4125，6GB 内存的机器。实测 6GB 内存不太够，淘汰。</p><p>看来需要 8~12GB 内存比较靠谱，手里还有 3 台 N100，内存分别为：LPDDR5 4800MHz 8GB、DDR4 3200MHz 32GB、DDR5 4800MHz 32GB，问题是 N100 这么高贵的核显不是浪费了？果断都淘汰。</p><p>后来，把 DDR4 3200MHz 32GB 的 N100 机器出给道友，并收了他的华为擎云 W515，硬件选型迎来完美结束——省电的 arm64 CPU（整机并不省电）；8GB 内存；带不动 4K 的擸𢶍核显，一点都不浪费。</p><h2 id="3-OS-选型">3. OS 选型</h2><p>UOS 和 KylinOS 都玩了好几遍，它们都是桌面系统，有许多限制，不适合做 Server。</p><p>考虑上 Debian，但正常安装 Debian 11 和 12 都会遇到各种黑屏、无法启动。推测新内核无法启动 W515，是因为国产生态的开发比较保守，主要使用 4 和 5 这两个大版本，没给 6 的大版本适配。</p><p>最开始的解决方式是把 Debian 的内核换成 UOS 或 KylinOS 的，虽然启动报错导致启动慢，但又不是不能用。截图是 KylinOS 内核：</p><p><img src="/images/2024/20240331-w515-info.png" alt="W515 信息"></p><p>EFI 程序也是使用 Kylin 的：</p><p><img src="/images/2024/20240707-w515-efi.png" alt="W515 EFI"></p><p>至此已经能够使用最新 Debian 发行版，并安装 gitlab-ce。</p><h2 id="4-后记">4. 后记</h2><p>以上折腾完都快一年了，最近发现原来 Debian 10 (Buster) 的内核就是 4.19 系列，所以它的 arm64 版可以直接使用……</p>]]></content>
     
     
     <summary type="html">掐鸡说装 Debian 10 很快</summary>
