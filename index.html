@@ -130,7 +130,8 @@
 <p>著名风格中，使用 2 个空格缩进的有：LLVM、Google、Chromium、GNU、Mozilla，用 4 个的只有：Microsoft 和 WebKit。可见 2 个才是主流。</p>
 <p>ClangFormat 配置为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IndentWidth: 2</span><br></pre></td></tr></table></figure>
-<h3 id="2-指针左对齐">2. 指针左对齐</h3>
+<h3 id="2-左对齐节省空格">2. 左对齐节省空格</h3>
+<h4 id="2-1-指针左对齐（PointerAlignment）">2.1 指针左对齐（PointerAlignment）</h4>
 <p>C++ 不像 Go、Rust 那样有“官方的”格式化风格，所以指针符号怎么对齐就有四种样式：</p>
 <ul>
 <li>左：<code>int* p;</code></li>
@@ -151,17 +152,25 @@
 <p>em，本条还没完……还有一个 DerivePointerAlignment 应该设为 false。如果是 true，ClangFormat 会分析格式化文件，以确定最常见的 &amp; 和 * 对齐方式。指针和引用对齐样式将根据文件中找到的首选项进行更新。然后，PointerAlignment 仅用作后备。</p>
 <p>一份 .clang-format 的相关部分参考：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DerivePointerAlignment: false</span><br><span class="line">PointerAlignment: Left</span><br><span class="line">ReferenceAlignment: Pointer</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-AlignEscapedNewlines-左对齐">2.2 AlignEscapedNewlines 左对齐</h4>
+<p>在转义的换行符中对齐反斜杠的选项。可能的值：</p>
+<ul>
+<li>DontAlign：不要对齐转义的换行符。（难看）</li>
+<li>Left：将转义的换行符尽可能左对齐。</li>
+<li>Right：将转义的换行符尽可能右对齐。（最好看，但空格更多）</li>
+</ul>
+<p>AlignEscapedNewlines 使用 Left 的著名风格有：Google、Chromium，使用 Right 的有：LLVM、GNU、Microsoft、Mozilla、WebKit。</p>
 <h3 id="3-在不影响可读性时，尽量少换行">3. 在不影响可读性时，尽量少换行</h3>
 <p>通常来说，在语句块之间插入换行或注释，可以提高可读性。比如说：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">render_log_init</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">render_context_args</span> ctx_args;</span><br><span class="line"><span class="type">bool</span> ok = <span class="built_in">render_server_main</span>(argc, argv, &amp;ctx_args);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* this is a subprocess */</span></span><br><span class="line"><span class="keyword">if</span> (ok &amp;&amp; ctx_args.valid)</span><br><span class="line">   ok = <span class="built_in">render_context_main</span>(&amp;ctx_args);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> ok ? <span class="number">0</span> : <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
 <p>如果把空行都去掉，就比较难一眼看清这些代码做了几件事。当然，如果每个语句块的开头都有注释，其实也可以不要空行，只不过注释可不是人人都爱写，并且，一些通过命名自注释的语句块，再写注释确实显得重复啰嗦。</p>
 <p>但是，反转来了——有些地方换不换行不影响可读性。比如说 <code>&#123;</code> 之前的换行、函数返回值类型后的换行……</p>
-<h4 id="2-1-BraceWrapping">2.1 BraceWrapping</h4>
+<h4 id="3-1-BraceWrapping">3.1 BraceWrapping</h4>
 <p>事实上，缩进已经能保证可读性，<code>&#123;</code> 有没有和 <code>&#125;</code> 垂直对齐，已经不重要。（每行不要太长更重要点！）</p>
 <p>所以，在 .clang-format 的 BraceWrapping 节下面，应该越多 false/Never 越好，比如 Google 和 Chromium 都是：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">BraceWrapping:</span><br><span class="line">  AfterCaseLabel:  false</span><br><span class="line">  AfterClass:      false</span><br><span class="line">  AfterControlStatement: Never</span><br><span class="line">  AfterEnum:       false</span><br><span class="line">  AfterExternBlock: false</span><br><span class="line">  AfterFunction:   false</span><br><span class="line">  AfterNamespace:  false</span><br><span class="line">  AfterObjCDeclaration: false</span><br><span class="line">  AfterStruct:     false</span><br><span class="line">  AfterUnion:      false</span><br><span class="line">  BeforeCatch:     false</span><br><span class="line">  BeforeElse:      false</span><br><span class="line">  BeforeLambdaBody: false</span><br><span class="line">  BeforeWhile:     false</span><br><span class="line">  IndentBraces:    false</span><br><span class="line">  SplitEmptyFunction: true</span><br><span class="line">  SplitEmptyRecord: true</span><br><span class="line">  SplitEmptyNamespace: true</span><br></pre></td></tr></table></figure>
 <p>在著名风格里，论 <code>&#123;</code> 之前省换行，Google 和 Chromium 是并列第一名。</p>
-<h4 id="2-2-BreakAfterReturnType">2.2 BreakAfterReturnType</h4>
+<h4 id="3-2-BreakAfterReturnType">3.2 BreakAfterReturnType</h4>
 <p>这个选项有 5 个可选样式值：</p>
 <ul>
 <li>None：自动</li>
