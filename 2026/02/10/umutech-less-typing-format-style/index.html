@@ -14,7 +14,7 @@
 <meta property="og:description" content="Less Typing Format Style">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-10T07:38:46.000Z">
-<meta property="article:modified_time" content="2026-02-11T07:39:04.040Z">
+<meta property="article:modified_time" content="2026-02-15T08:15:53.668Z">
 <meta property="article:author" content="圣小开">
 <meta property="article:tag" content="dev">
 <meta property="article:tag" content="cpp">
@@ -148,13 +148,16 @@
 <p>作为规范制定者，淘汰掉最后一种是极其容易的——因为 ClangFormat 的 PointerAlignment 没有这个选项！而 Middle，则是因为没有著名风格使用，也应该被淘汰！</p>
 <p>接下来，稣便利用“敲击少”的原则在“左”和“右”中二选一！注意到：在类型转换中，两者是不同的：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>*p&#123;&#125;;</span><br><span class="line"><span class="keyword">auto</span> i = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>*&gt;(p);</span><br></pre></td></tr></table></figure>
-<p>在左样式时，被格式化为：</p>
+<p>在左对齐时，被格式化为：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>* p&#123;&#125;;</span><br><span class="line"><span class="keyword">auto</span> i = <span class="built_in">static_cast</span>&lt;<span class="type">int</span>*&gt;(p);</span><br></pre></td></tr></table></figure>
-<p>而使用右样式，则被格式化为：</p>
+<p>而使用右对齐，则被格式化为：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *p&#123;&#125;;</span><br><span class="line"><span class="keyword">auto</span> i = <span class="built_in">static_cast</span>&lt;<span class="type">int</span> *&gt;(p);</span><br></pre></td></tr></table></figure>
-<p>可见右样式在类型转换场景下会比左样式多出一个空格，这违反了“敲击少”的原则，所以稣愉快地选择了<strong>左样式</strong>。</p>
+<p>可见右对齐在类型转换场景下会比左样式多出一个空格，这违反了“敲击少”的原则，所以稣愉快地选择了<strong>左对齐</strong>。</p>
 <p>同理，ReferenceAlignment 应该和 PointerAlignment 一样，所以可以把其值设为 Pointer 或 Left。</p>
 <p>em，本条还没完……还有一个 DerivePointerAlignment 应该设为 false。如果是 true，ClangFormat 会分析格式化文件，以确定最常见的 &amp; 和 * 对齐方式。指针和引用对齐样式将根据文件中找到的首选项进行更新。然后，PointerAlignment 仅用作后备。</p>
+<p>指针对齐一直是争议比较大的，左对齐的反对者常会举出一行定义多个变量的例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* p, q;</span><br></pre></td></tr></table></figure>
+<p>然后说左对齐，容易产生 <code>q</code> 也是指针的错觉。实际上这例子的说服力不大，毕竟那是新手才容易产生的幻觉。而且，通常不建议一行定义多个变量。</p>
 <p>一份 .clang-format 的相关部分参考：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DerivePointerAlignment: false</span><br><span class="line">PointerAlignment: Left</span><br><span class="line">ReferenceAlignment: Pointer</span><br></pre></td></tr></table></figure>
 <h4 id="2-2-AlignEscapedNewlines-左对齐">2.2 AlignEscapedNewlines 左对齐</h4>
