@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2026-02-15T08:15:53.668Z</updated>
+  <updated>2026-02-17T13:19:25.948Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>减少 vcpkg 占用空间</title>
+    <link href="https://blog.umu618.com/2026/02/17/umutech-reduce-space-occupied-by-vcpkg/"/>
+    <id>https://blog.umu618.com/2026/02/17/umutech-reduce-space-occupied-by-vcpkg/</id>
+    <published>2026-02-17T12:33:54.000Z</published>
+    <updated>2026-02-17T13:19:25.948Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>公司的开发机，硬盘只有 1T，编译了几个版本的 Chromium 之后，可用容量告急。经过分析之后，vcpkg 目录居然有几百 GB……直觉告诉稣，这里面有很多擸𢶍。</p><h2 id="分析">分析</h2><p>vcpkg 目录里有这几个子目录是非 Git 跟踪的：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/buildtrees/</span><br><span class="line">/downloads/</span><br><span class="line">/installed/</span><br><span class="line">/packages/</span><br></pre></td></tr></table></figure><p>很明显，<code>/installed/</code> 是实际被使用的，所以不能删。</p><ol><li><p><code>/downloads/</code> 里是下载的代码压缩包和补丁等。这里可能有很多文件是旧版本，只要不再使用是可以删的。当前版本的文件，可以留着。理由是：万一另一台开发机需要，可以直接复制过去，加快 <code>vcpkg install</code> 速度，毕竟从 GitHub 下载通常比较慢，还容易失败。</p></li><li><p><code>/buildtrees/</code> 里是构建中间文件、日志等临时文件。只要不开发 port，几乎没有价值。</p></li><li><p><code>/packages/</code> 里是构建完成后的“待安装文件”。如果删了，就不能增量构建。举例说明它的作用：比如说 A 库依赖 B 库，而 B 库曾经被安装过，它会被缓存在 <code>/packages/B/</code>目录里，当安装 A 库时，B 库就不需要再编译一遍了。要是把 <code>/packages/</code> 里面的文件全部删除，则 B 库需要再次编译。这会带来一些副作用，比如说 B 的二进制程序文件会和上次编译的不一样，但实际上它们的版本没变化，下次打包会引入一些版本没变化，但文件内容变化的文件（这并不致命，只是显得不太专业，如果是编译机建议别删，开发机比较无所谓）。</p></li></ol><h2 id="结论">结论</h2><p>稣先把 <code>/buildtrees/</code> 里的文件全删了。下次再告急就删 <code>/packages/</code>，毕竟这是开发机。</p>]]></content>
+    
+    
+    <summary type="html">SSD 太贵，不得不对 vcpkg 下手了！</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
+    <category term="opoptimization" scheme="https://blog.umu618.com/tags/opoptimization/"/>
+    
+  </entry>
   
   <entry>
     <title>“敲击少”格式化风格</title>
