@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2026-04-10T06:02:45.444Z</updated>
+  <updated>2026-05-25T08:21:30.773Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在 Debian Testing 安装 WineHQ</title>
+    <link href="https://blog.umu618.com/2026/05/25/umutech-install-winehq-on-debian-testing/"/>
+    <id>https://blog.umu618.com/2026/05/25/umutech-install-winehq-on-debian-testing/</id>
+    <published>2026-05-25T07:44:41.000Z</published>
+    <updated>2026-05-25T08:21:30.773Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><ul><li>想把自己写的 <a href="https://github.com/UMU618/MarkdownEditor">MarkdownEditor</a> 移植到 Debian，同时尽可能少改代码。</li><li>想在 Debian  用几个惯用的 Windows 软件。</li></ul><h2 id="思考">思考</h2><p>改代码太不划算了，又没人给钱！虚拟机太重，为几个小应用使用虚拟机也不划算。用 wine 才是正道！</p><p>都用 Debian Testing 了，怎么也得装个 winehq-devel 吧！</p><h2 id="安装">安装</h2><p><strong>注意</strong>：现在是 2026-05-25，目前 testing 是 forky，将来变为其它时，需要相应更改部分命令。</p><h3 id="1-添加仓库公钥">1. 添加仓库公钥</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -pm755 /etc/apt/keyrings</span><br><span class="line">wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor -o /etc/apt/keyrings/winehq-archive.key -</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="2-添加源文件">2. 添加源文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/forky/winehq-forky.sources</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="3-【可选】使用国内镜像">3. 【可选】使用国内镜像</h3><p>这步是为了网络提速，不是必须的。</p><p><strong>方法一</strong>：手动编辑，保险应对将来风险：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list.d/winehq-forky.sources</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>把 Host（通常为 <code>dl.winehq.org</code>）改为 <code>mirror.nju.edu.cn</code>。</p><p><strong>方法二</strong>：无脑替换（将来有可能失败！）</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i <span class="string">&#x27;s|dl.winehq.org|mirror.nju.edu.cn|g&#x27;</span> /etc/apt/sources.list.d/winehq-forky.sources</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="3-安装-WineHQ-软件包">3. 安装 WineHQ 软件包</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install --install-recommends winehq-devel</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="额外">额外</h2><p>可以安装 <a href="https://portableapps.com/download">PortableApps</a>，里面的软件大部分能在 wine 环境运行，比如著名的 Notepad++。</p><p><strong>注</strong>：提到 Notepad++，是因为它是著名的 Windows Only 软件，并不代表稣推荐它。</p>]]></content>
+    
+    
+    <summary type="html">兼容 Windows 纯应用</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="linux" scheme="https://blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+    <category term="debian" scheme="https://blog.umu618.com/tags/debian/"/>
+    
+    <category term="wine" scheme="https://blog.umu618.com/tags/wine/"/>
+    
+  </entry>
   
   <entry>
     <title>优化思维【7】字符串拼接</title>
@@ -44,7 +71,7 @@
     <link href="https://blog.umu618.com/2026/02/17/umutech-reduce-space-occupied-by-vcpkg/"/>
     <id>https://blog.umu618.com/2026/02/17/umutech-reduce-space-occupied-by-vcpkg/</id>
     <published>2026-02-17T12:33:54.000Z</published>
-    <updated>2026-02-17T13:19:25.948Z</updated>
+    <updated>2026-05-25T07:50:16.722Z</updated>
     
     <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>公司的开发机，硬盘只有 1T，编译了几个版本的 Chromium 之后，可用容量告急。经过分析之后，vcpkg 目录居然有几百 GB……直觉告诉稣，这里面有很多擸𢶍。</p><h2 id="分析">分析</h2><p>vcpkg 目录里有这几个子目录是非 Git 跟踪的：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/buildtrees/</span><br><span class="line">/downloads/</span><br><span class="line">/installed/</span><br><span class="line">/packages/</span><br></pre></td></tr></table></figure><p>很明显，<code>/installed/</code> 是实际被使用的，所以不能删。</p><ol><li><p><code>/downloads/</code> 里是下载的代码压缩包和补丁等。这里可能有很多文件是旧版本，只要不再使用是可以删的。当前版本的文件，可以留着。理由是：万一另一台开发机需要，可以直接复制过去，加快 <code>vcpkg install</code> 速度，毕竟从 GitHub 下载通常比较慢，还容易失败。</p></li><li><p><code>/buildtrees/</code> 里是构建中间文件、日志等临时文件。只要不开发 port，几乎没有价值。</p></li><li><p><code>/packages/</code> 里是构建完成后的“待安装文件”。如果删了，就不能增量构建。举例说明它的作用：比如说 A 库依赖 B 库，而 B 库曾经被安装过，它会被缓存在 <code>/packages/B/</code>目录里，当安装 A 库时，B 库就不需要再编译一遍了。要是把 <code>/packages/</code> 里面的文件全部删除，则 B 库需要再次编译。这会带来一些副作用，比如说 B 的二进制程序文件会和上次编译的不一样，但实际上它们的版本没变化，下次打包会引入一些版本没变化，但文件内容变化的文件（这并不致命，只是显得不太专业，如果是编译机建议别删，开发机比较无所谓）。</p></li></ol><h2 id="结论">结论</h2><p>稣先把 <code>/buildtrees/</code> 里的文件全删了。下次再告急就删 <code>/packages/</code>，毕竟这是开发机。</p>]]></content>
     
@@ -58,7 +85,9 @@
     
     <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
     
-    <category term="opoptimization" scheme="https://blog.umu618.com/tags/opoptimization/"/>
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+    <category term="optimization" scheme="https://blog.umu618.com/tags/optimization/"/>
     
   </entry>
   
