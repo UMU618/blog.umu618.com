@@ -6,7 +6,7 @@
   <link href="https://blog.umu618.com/atom.xml" rel="self"/>
   
   <link href="https://blog.umu618.com/"/>
-  <updated>2026-05-25T08:21:30.773Z</updated>
+  <updated>2026-07-11T09:25:42.211Z</updated>
   <id>https://blog.umu618.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>无银第八哥【4】移除测试模式水印</title>
+    <link href="https://blog.umu618.com/2026/07/11/umutech-windbg-4-remove-testing-mode-watermark/"/>
+    <id>https://blog.umu618.com/2026/07/11/umutech-windbg-4-remove-testing-mode-watermark/</id>
+    <published>2026-07-11T08:21:10.000Z</published>
+    <updated>2026-07-11T09:25:42.211Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求">需求</h2><p>稣是驱动开发，所以使用的 Windows 几乎都处于测试模式。测试模式会在桌面右下角显示 Testing Mode 字样的水印。这水印只有在首次进入测试模式时有用，其它时候十分多余，所以，把它去掉吧！</p><h2 id="理论">理论</h2><p>这水印是 explorer.exe 调用 <code>SHELL32!CDesktopWatermark::s_DesktopBuildPaint</code> 画的。</p><p>所以，只要在这个函数开头写一个 <code>ret</code> 指令，即可使其不画任何东西。</p><h2 id="实践">实践</h2><h3 id="1-附加到-explorer-exe">1. 附加到 explorer.exe</h3><p>打开 WinDbg，按 F6，或者点菜单 <code>File - Attach to a Process...</code>，然后找到 explorer.exe，使用非入侵方式附加。</p><p>可以按进程名排序，比较容易找到哦！</p><p><img src="/images/2026/20260711-windbg-attach.png" alt="Attach to explorer.exe"></p><p><strong>注意</strong>：需勾选 Noninvasive，否则退出调试时，explorer.exe 也跟着重启了。</p><h3 id="2-确认目标函数的地址">2. 确认目标函数的地址</h3><p>输入命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x SHELL32!CDesktopWatermark::s_DesktopBuildPaint</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>稣机器上的输出为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00007ffa`38bdfcc8 SHELL32!CDesktopWatermark::s_DesktopBuildPaint (private: static void __cdecl CDesktopWatermark::s_DesktopBuildPaint(struct HDC__ *,struct tagRECT const *,struct HFONT__ *,bool))</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>可见目标地址为：00007ffa`38bdfcc8。<strong>注意</strong>：您的机器上很可能不是这个地址！在下个步骤使用时，需要替换为您机器上的地址。</p><h3 id="3-修改目标函数">3. 修改目标函数</h3><p>在 x64 上，<code>ret</code> 指令的机器码为一个字节 0xC3，所以修改的指令为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ed 00007ffa`38bdfcc8 c3</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>回到桌面，确认右下角的水印是否消失，可能需要刷新才会消失。</p><p>确认没问题后，输入 <code>q</code> 退出调试，大功告成。</p><h2 id="限制">限制</h2><p>当 explorer.exe 重启后，水印会再出现。</p>]]></content>
+    
+    
+    <summary type="html">ret</summary>
+    
+    
+    
+    <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
+    
+    
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="debug" scheme="https://blog.umu618.com/tags/debug/"/>
+    
+    <category term="reverse-engineering" scheme="https://blog.umu618.com/tags/reverse-engineering/"/>
+    
+  </entry>
   
   <entry>
     <title>在 Debian Testing 安装 WineHQ</title>
