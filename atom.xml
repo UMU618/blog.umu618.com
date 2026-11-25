@@ -7370,7 +7370,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/"/>
     <id>https://blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/</id>
     <published>2019-05-23T14:29:08.000Z</published>
-    <updated>2024-06-29T10:31:52.759Z</updated>
+    <updated>2026-11-25T08:51:36.136Z</updated>
     
     <content type="html"><![CDATA[<h2 id="定义">定义</h2><p>“鸡兔同笼问题”是我国古算书《孙子算经》中著名的数学问题，其内容是：</p><blockquote><p>今有雉（鸡）兔同笼，上有三十五头，下有九十四足。问雉兔各几何。</p></blockquote><h2 id="数学描述">数学描述</h2><p>设鸡有 x 只，兔有 y 只，则：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x + y = 35</span><br><span class="line">2x + 4y = 94</span><br></pre></td></tr></table></figure><p>解这个方程组得 <code>x = 23, y = 12</code>。</p><p>用矩阵表示：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 1]  *  [x]  =  [35]</span><br><span class="line">[2, 4]     [y]     [94]</span><br></pre></td></tr></table></figure><h2 id="Python-代码">Python 代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.mat([[<span class="number">1</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">4</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.mat([[<span class="number">35</span>], [<span class="number">94</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.I * b</span><br><span class="line">matrix([[<span class="number">23.</span>],</span><br><span class="line">        [<span class="number">12.</span>]])</span><br></pre></td></tr></table></figure><p>再来一题三元版本：</p><blockquote><p>有蜘蛛，蜻蜓，蝉三种动物共 18 只，共有腿 118 条，翅膀 20 对，三种动物各几只？</p></blockquote><p>蜘蛛 8 条腿；蜻蜓 6 条腿， 2 对翅膀；蝉 6 条腿，1 对翅膀。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 1, 1]     [x]     [18]</span><br><span class="line">[8, 6, 6]  *  [y]  =  [118]</span><br><span class="line">[0, 2, 1]     [z]     [20]</span><br></pre></td></tr></table></figure><p>代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.mat([[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">8</span>, <span class="number">6</span>, <span class="number">6</span>], [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.mat([[<span class="number">18</span>], [<span class="number">118</span>], [<span class="number">20</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.I * b</span><br><span class="line">matrix([[<span class="number">5.</span>],</span><br><span class="line">        [<span class="number">7.</span>],</span><br><span class="line">        [<span class="number">6.</span>]])</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -7390,9 +7390,9 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
-    <category term="做题" scheme="https://blog.umu618.com/tags/%E5%81%9A%E9%A2%98/"/>
-    
     <category term="数学" scheme="https://blog.umu618.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="quiz" scheme="https://blog.umu618.com/tags/quiz/"/>
     
   </entry>
   
@@ -10283,7 +10283,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2018/05/26/leave-one-out-cross-validation/"/>
     <id>https://blog.umu618.com/2018/05/26/leave-one-out-cross-validation/</id>
     <published>2018-05-26T15:27:16.000Z</published>
-    <updated>2024-06-29T10:31:52.744Z</updated>
+    <updated>2026-11-25T08:52:38.763Z</updated>
     
     <content type="html"><![CDATA[<h2 id="题目">题目</h2><p>假设有如下一组输入并输出一个实数的数据，则线性回归（Y = bX + c）的留一法交叉验证均方差为？</p><table><thead><tr><th style="text-align:right">X</th><th style="text-align:right">Y</th></tr></thead><tbody><tr><td style="text-align:right">0</td><td style="text-align:right">2</td></tr><tr><td style="text-align:right">2</td><td style="text-align:right">2</td></tr><tr><td style="text-align:right">3</td><td style="text-align:right">1</td></tr></tbody></table><p>A. 10/27<br>B. 20/27<br>C. 50/27<br>D. 49/27</p><h2 id="概念">概念</h2><h3 id="1-交叉验证（Cross-Validation）">1. 交叉验证（Cross Validation）</h3><p>也称作循环估计（Rotation Estimation），是一种统计学上将数据样本切割成较小子集的实用方法。</p><p>在模式识别（Pattern Recognition）和机器学习（Machine Learning）的相关研究中，经常会将整个数据集合分成两个部分，分别是训练集合和测试集合。在一个 n 个元素的集合，选择 r 个元素做训练集（非空集，r &gt; 0），剩下的 n - r 个做测试集，这可以用“组合”计算有多少种可能。把每种组合都做过一遍就是交叉验证。</p><h3 id="2-组合（Combination）">2. 组合（Combination）</h3><p>nCr 表示由 n 个不同元素中，每次取出 r 个不重复之元素的组合，用符号 C n（下标）r（上标）表示。</p><h3 id="3-留一法交叉验证（Leave-one-out-Cross-Validation）">3. 留一法交叉验证（Leave-one-out Cross Validation）</h3><p>只留一个元素做测试集，即：r = n - 1。</p><h3 id="4-均方差">4. 均方差</h3><p>标准差（Standard Deviation），别名：标准偏差、实验标准差、均方差，是离均差平方的算术平均数的平方根，用 σ 表示。标准差是方差的算术平方根。标准差能反映一个数据集的离散程度。平均数相同的两组数据，标准差未必相同。</p><h2 id="解题">解题</h2><p>三个元素的集合留一，一共有 3C1 = 3 种组合，画 3 个点：</p><ul><li>A = (0, 2)</li><li>B = (2, 2)</li><li>C = (3, 1)</li></ul><ol><li>连接 A 和 B，得到直线 Y = 2，C 点的偏差 = 2 - 1 = 1</li><li>连接 A 和 C，得到直线 Y = (6 - X) / 3，B 点的偏差 = 4/3 - 2 = -2/3</li><li>连接 B 和 C，得到直线 Y = 4 - X，A 点的偏差 = 4 - 2 = 2</li></ol><p>所以方差为：(1^2 + (2/3)^2 + 2^2) / 3 = (9 + 4 + 4 * 9) / 27 = 49/27</p><p>题目说的是“均方差”，根据百度百科<a href="https://baike.baidu.com/item/%E6%A0%87%E5%87%86%E5%B7%AE">标准差</a>词条的说法，“均方差”==标准差，要开平方……所以题目中的答案没有一个是对的。出题者想让我们选 D，稣偏要选 F，你懂的 ck……</p>]]></content>
     
@@ -10306,9 +10306,9 @@ AI 做，效率堪可。&lt;br&gt;
     
     <category term="debug" scheme="https://blog.umu618.com/tags/debug/"/>
     
-    <category term="做题" scheme="https://blog.umu618.com/tags/%E5%81%9A%E9%A2%98/"/>
-    
     <category term="数学" scheme="https://blog.umu618.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="quiz" scheme="https://blog.umu618.com/tags/quiz/"/>
     
   </entry>
   
@@ -10580,7 +10580,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2018/04/18/umutech-winhttpconnect-punycode/"/>
     <id>https://blog.umu618.com/2018/04/18/umutech-winhttpconnect-punycode/</id>
     <published>2018-04-18T14:47:28.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T09:00:39.292Z</updated>
     
     <content type="html"><![CDATA[<p>最近开发 <a href="https://github.com/Wangsu-Cloud-Storage/wcs-go-sdk">WCS go SDK</a>，用 go 的 http client 觉得十分便捷，前几天在调试过程中，突然想起很多年前用 WinHttp API 写的一个下载程序，当时看到 WinHttpConnect 顾名思义就以为调完这个 API 后应该有 TCP 连接，现在仔细思考后觉得不合理，于是打开那个代码研究一下，果然以前想当然是错的！</p><p>用 TcpView 和 Microsoft Network Monitor 抓包，都没发现 WinHttpConnect 成功之后有任何 TCP 连接。</p><p>回头去看 MSDN 的描述，果然从头到尾没提到 TCP 连接。不过意外在文档里学到了一个新知识：<a href="https://baike.baidu.com/item/Punycode">Punycode</a>，其实是老知识，以前没去深挖，熟视无睹而已。所有中文域名的解析都需要转成 punycode 码，然后由 DNS 解析 punycode 码。目前所说和各种浏览器完美支持中文域名，只是浏览器软件里面主动加入了中文域名自动转码，不需要原来的再次安装中文域名转码控件来完成整个流程。</p>]]></content>
     
@@ -10595,11 +10595,9 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
     <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
-    
-    <category term="http" scheme="https://blog.umu618.com/tags/http/"/>
-    
-    <category term="dns" scheme="https://blog.umu618.com/tags/dns/"/>
     
   </entry>
   
@@ -10608,7 +10606,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2018/04/17/umutech-quiz-regex-lazy-vs-greedy/"/>
     <id>https://blog.umu618.com/2018/04/17/umutech-quiz-regex-lazy-vs-greedy/</id>
     <published>2018-04-17T05:00:17.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T09:00:15.212Z</updated>
     
     <content type="html"><![CDATA[<p>表面上看是一样的，但贪婪程度不一样。前者非贪婪模式，后者贪婪模式。</p><h2 id="例-1">例 1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UMUUUUUUMU</span><br></pre></td></tr></table></figure><ul><li><code>U&#123;3,5&#125;?</code> 匹配 3 个 U</li><li><code>U&#123;3,5&#125;</code> 匹配 5 个 U</li></ul><h2 id="例-2">例 2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;name&gt;UMU618&lt;/name&gt;&lt;name&gt;UMUTech&lt;/name&gt;</span><br></pre></td></tr></table></figure><ul><li><code>&gt;.*?&lt;</code> 匹配 <code>UMU618</code></li><li><code>&gt;.*&lt;</code> 匹配 <code>UMU618&lt;/name&gt;&lt;name&gt;UMUTech</code></li></ul>]]></content>
     
@@ -10629,7 +10627,7 @@ AI 做，效率堪可。&lt;br&gt;
     
     <category term="quiz" scheme="https://blog.umu618.com/tags/quiz/"/>
     
-    <category term="regex" scheme="https://blog.umu618.com/tags/regex/"/>
+    <category term="algorithm" scheme="https://blog.umu618.com/tags/algorithm/"/>
     
   </entry>
   
@@ -10944,7 +10942,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2018/02/02/umutech-windows-server-network-slower-than-linux/"/>
     <id>https://blog.umu618.com/2018/02/02/umutech-windows-server-network-slower-than-linux/</id>
     <published>2018-02-02T08:52:53.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:59:43.848Z</updated>
     
     <content type="html"><![CDATA[<h1>前情</h1><p>用 iperf3 测试云主机不同系统之间能跑多少带宽。</p><h1>怪现象</h1><ol><li>两台 Windows Server 2012 R2 测试，带宽只能到 2.4Gbps；</li><li>两台 CentOS 6.8 测试，可以达到 4Gbps，不限制带宽的环境下可以到 16Gbps；</li><li>CentOS 做 Client，Windows 做 Server，也只能跑到 2.4Gbps。</li></ol><h1>排查过程</h1><h2 id="1-怀疑虚拟机不在同一台物理机上">1. 怀疑虚拟机不在同一台物理机上</h2><p>把测试用的虚拟机都迁移到一台物理机上，测试结果依然是 Linux 完胜 Windows Server。</p><h2 id="2-怀疑系统的-TCP-wscale-值差异">2. 怀疑系统的 TCP wscale 值差异</h2><p>抓包发现 iperf3 Windows 版用的 wscale 是 2，CentOS 版经过系统级的 TCP 参数调优后是 7，所以把目标放在调高 Windows 的 wscale。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netsh interface tcp set supplemental template=datacenter</span><br><span class="line">netsh interface tcp set global autotuninglevel=experimental</span><br></pre></td></tr></table></figure><p>结果发现，这样设置后，带宽确实提高到 3.5Gbps，但 wscale 并没有变化。</p><h2 id="3-怀疑-iperf3-Windows-版有毛病">3. 怀疑 iperf3 Windows 版有毛病</h2><p>因为上面的 2 条命令可以增加其它应用的 wscale 到 7，但 iperf3 不受影响，所以怀疑它有毛病。看了代码后，发现 Client 端用 <code>-w</code> 参数就可以让 Server 的 SO_RCVBUF 也使用 Client 设置的值，然后加上 <code>-w 16000000</code> 和 <code>-w 32000000</code> 分别测试，发现带宽还是无法提高，甚至有点下降。但到这里，我们可以得出结论：Windows 机器之间带宽上不去，并非因为 wscale 小。</p><h2 id="4-怀疑是虚拟机服务器和客户机系统驱动之间有关联">4. 怀疑是虚拟机服务器和客户机系统驱动之间有关联</h2><p>云主机是虚拟机，它跑在 Linux 的物理机上，有可能一脉相承的 Linux 的驱动设计得比较好，所以 Linux 的虚拟机网络性能更高。带着这个怀疑，稣在 Hyper-V Server 上开了两个 Ubuntu 上测试，并优化了 TCP 参数：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;88584 118114 177168&quot; | sudo tee /proc/sys/net/ipv4/tcp_mem</span><br></pre></td></tr></table></figure><p>结果也才 2-3Gbps 左右……不玩了。</p><p>总之，物理机什么系统，客户机最好也是一样的，毕竟有血缘关系。</p>]]></content>
     
@@ -10964,13 +10962,13 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
+    <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
+    
+    <category term="linux" scheme="https://blog.umu618.com/tags/linux/"/>
+    
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
     <category term="肃域" scheme="https://blog.umu618.com/tags/%E8%82%83%E5%9F%9F/"/>
-    
-    <category term="network" scheme="https://blog.umu618.com/tags/network/"/>
-    
-    <category term="server" scheme="https://blog.umu618.com/tags/server/"/>
-    
-    <category term="tcp" scheme="https://blog.umu618.com/tags/tcp/"/>
     
   </entry>
   
@@ -11007,7 +11005,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2018/01/23/umutech-macbook-windows-efi-update/"/>
     <id>https://blog.umu618.com/2018/01/23/umutech-macbook-windows-efi-update/</id>
     <published>2018-01-23T02:48:45.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:58:59.113Z</updated>
     
     <content type="html"><![CDATA[<h1>1. SMC 可以用 rEFInd 更新，升级和降级都没问题</h1><p>rEFInd 可以放在 U 盘里，按 Option 开机，选择从 U 盘启动，不需要改动硬盘。</p><p>升级命令行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SmcFlasher.efi -LoadApp Your.smc</span><br></pre></td></tr></table></figure><p>降级命令行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SmcFlasher.efi -force -update -LoadApp Your.smc</span><br></pre></td></tr></table></figure><h1>2. 建议 EFI 方式安装 Windows</h1><p>把 Windows 安装盘 ISO 解压放在 U 盘就行了，这样只能 EFI 安装，如果您费力去用某些工具（比如盗版的 UltraISO）把 ISO 烧写到 U 盘里，则可能出现传统的安装方式，不小心使用传统安装的话您将来会后悔。</p><h1>3. 更新 EFI 固件</h1><p>原理上讲，需要两个步骤：把固件更新包放在硬盘的 ESP 分区 /EFI/APPLE 目录下，比如：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/EFI/APPLE/FIRMWARE/MBP112_0142_B00.scap</span><br><span class="line">/EFI/APPLE/EXTENSIONS/Firmware.scap</span><br></pre></td></tr></table></figure><p>然后写 NVRAM，指定这些文件。</p><p><strong>如果您的硬盘上没有 ESP 分区（EFI 分区）则无法更新 EFI，即使您用有 ESP 分区的 U 盘启动也没用。</strong></p><h1>4. 没有 macOS 能不能更新 EFI 固件呢？</h1><p>当然可以……但是 2015 年后苹果已经不发布单独的固件更新包了，而且解压 pkg 的工具在 macOS 上找比较快，所以您可能需要 macOS 配合一下，不然要自己去找那些必要的文件和工具。所以，建议您在 U 盘上装个 macOS 会方便很多。</p>]]></content>
     
@@ -11027,11 +11025,11 @@ AI 做，效率堪可。&lt;br&gt;
     
     <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
     
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
+    
+    <category term="macos" scheme="https://blog.umu618.com/tags/macos/"/>
+    
     <category term="肃域" scheme="https://blog.umu618.com/tags/%E8%82%83%E5%9F%9F/"/>
-    
-    <category term="macbook" scheme="https://blog.umu618.com/tags/macbook/"/>
-    
-    <category term="efi" scheme="https://blog.umu618.com/tags/efi/"/>
     
   </entry>
   
@@ -11218,22 +11216,25 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2017/11/13/umutech-database-algorithm-xxhash/"/>
     <id>https://blog.umu618.com/2017/11/13/umutech-database-algorithm-xxhash/</id>
     <published>2017-11-13T14:25:03.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:53:17.804Z</updated>
     
-    <content type="html"><![CDATA[<p>Extremely fast non-cryptographic hash algorithm <a href="http://www.xxhash.com/">http://www.xxhash.com/</a></p><ol><li>Extremely fast，超快，working at speeds close to RAM limits。看了代码，作者对 memcpy 这样的 CRT 函数都要去追究性能，嫌弃它在一些平台/编译器组合下，只是次优解；而且处处可见对内存对齐的优化。总之优化功力挺深。</li><li>non-cryptographic，非加密型的 Hash。如果是 cryptographic hash algorithm，则输入的数据只要改变一个 bit，输出的 bits 就应该改变 50%，这样的安全性才合格。而非加密型，没有防破解“安全性”这个要求，仅要求“唯一性”。</li><li>通过 SMHasher 测试，这是一个专门测试 non-cryptographic hash 的工具，测试包括分布、碰撞、性能。</li><li>It is proposed in two flavors, 32 and 64 bits. 32 位程序用 32 位库比较快，同理，64 位程序用 64 位库比较快。</li><li>多平台支持，包括硬件平台（Big Endian/Little Endian、不同 CPU 架构等）和操作系统。多种语言实现。RocksDB、MySQL 用它。它可以用来实现 Bloom Filter。</li><li>库只有两个文件：xxhash.c、xxhash.h，BSD 2 协议。</li></ol>]]></content>
+    <content type="html"><![CDATA[<p>Extremely fast non-cryptographic hash algorithm <a href="http://www.xxhash.com/">http://www.xxhash.com/</a></p><ol><li><p>Extremely fast，超快，working at speeds close to RAM limits。看了代码，作者对 memcpy 这样的 CRT 函数都要去追究性能，嫌弃它在一些平台/编译器组合下，只是次优解；而且处处可见对内存对齐的优化。总之优化功力挺深。</p></li><li><p>non-cryptographic，非加密型的 Hash。如果是 cryptographic hash algorithm，则输入的数据只要改变一个 bit，输出的 bits 就应该改变 50%，这样的安全性才合格。而非加密型，没有防破解“安全性”这个要求，仅要求“唯一性”。</p></li><li><p>通过 SMHasher 测试，这是一个专门测试 non-cryptographic hash 的工具，测试包括分布、碰撞、性能。</p></li><li><p>It is proposed in two flavors, 32 and 64 bits. 32 位程序用 32 位库比较快，同理，64 位程序用 64 位库比较快。</p></li><li><p>多平台支持，包括硬件平台（Big Endian/Little Endian、不同 CPU 架构等）和操作系统。多种语言实现。RocksDB、MySQL 用它。它可以用来实现 Bloom Filter。</p></li><li><p>库只有两个文件：xxhash.c、xxhash.h，BSD 2 协议。</p></li></ol>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;Extremely fast non-cryptographic hash algorithm &lt;a href=&quot;http://www.xxhash.com/&quot;&gt;http://www.xxhash.com/&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Extremely fast，超</summary>
+&lt;li&gt;
+&lt;p&gt;Extremely fa</summary>
       
     
     
     
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
+    
+    <category term="lib" scheme="https://blog.umu618.com/tags/lib/"/>
     
     <category term="algorithm" scheme="https://blog.umu618.com/tags/algorithm/"/>
     
@@ -11309,7 +11310,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2017/10/19/umutech-memory-alignment-xmmatrix/"/>
     <id>https://blog.umu618.com/2017/10/19/umutech-memory-alignment-xmmatrix/</id>
     <published>2017-10-19T06:34:13.000Z</published>
-    <updated>2026-11-25T08:44:25.492Z</updated>
+    <updated>2026-11-25T08:58:05.886Z</updated>
     
     <content type="html"><![CDATA[<p>最近研究 D3D，搜了一个教材跟着学：<a href="http://www.rastertek.com/dx11s2tut04.html">http://www.rastertek.com/dx11s2tut04.html</a></p><p>用 x64 的配置运行，完美，过了几天需要用 x86 测试，结果一运行，程序崩溃……赶紧排查问题，x64 的 Debug、Release 都是可以的，而 x86 则是 Debug 可以，Release 才会崩。开发环境是 VS2015，编译时曾经遇到一些错误和警告，是 UMU 自己消灭掉了，最后有一类警告应该是关键：</p><blockquote><p>warning C4316: ‘SystemClass’ : object allocated on the heap may not be aligned 16</p></blockquote><p>原因是 XMMATRIX 需要 16 字节对齐，但代码的作者把它塞在几个类里，然后去 new 这些类了……尝试把这些类从 heap 改为 stack，问题解决！</p><p>八哥太多，不能轻易放任警告！</p>]]></content>
     
@@ -11325,11 +11326,11 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
     <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
     
     <category term="肃域" scheme="https://blog.umu618.com/tags/%E8%82%83%E5%9F%9F/"/>
-    
-    <category term="memory" scheme="https://blog.umu618.com/tags/memory/"/>
     
   </entry>
   
@@ -11578,7 +11579,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2017/08/02/umutech-ogg-crc-checksum/"/>
     <id>https://blog.umu618.com/2017/08/02/umutech-ogg-crc-checksum/</id>
     <published>2017-08-02T14:31:23.000Z</published>
-    <updated>2026-11-25T08:43:48.464Z</updated>
+    <updated>2026-11-25T08:57:58.053Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>最近研究 live555，惊讶地发现它流化的 opus 文件，VLC 居然无法播放。</p><h2 id="分析">分析</h2><p>先了解一下 opus 文件：看 live555 的 OggFileParser 代码，发现 checksum 都被无视。</p><p>本来 UMU 也应该无视这个细节的，然而随便用自己以前写的 CRC32 代码验证了一下，居然不一样！而这份代码之前是测试过的，和 7-Zip 的 CRC-32 算出来是一致的。</p><p>因为 opus 文件是基于 ogg 文件格式的，所以阅读 [Ogg Documentation](https: <a href="//www.xiph.org/ogg/doc/framing.html">//www.xiph.org/ogg/doc/framing.html</a>)，发现确实不一样，它用的其实是 CRC32_IEEE。</p><h2 id="解决">解决</h2><p>于是参考 libogg 的 framing.c 和 ffmpeg\libavutil\crc.c 更新自己的代码库，使用模版增强功能：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> region <span class="string">&quot;CRC&quot;</span></span></span><br><span class="line"><span class="comment">// CRC_8_ATM        &lt;false,  8,       0x07, 0&gt;</span></span><br><span class="line"><span class="comment">// CRC_16_ANSI      &lt;false, 16,     0x8005, 0&gt;</span></span><br><span class="line"><span class="comment">// CRC_16_CCITT     &lt;false, 16,     0x1021, 0&gt;</span></span><br><span class="line"><span class="comment">// CRC_24_IEEE      &lt;false, 24,   0x864CFB, 0&gt;</span></span><br><span class="line"><span class="comment">// CRC_32_IEEE      &lt;false, 32, 0x04C11DB7, 0&gt;  -&gt; OggFile&#x27;s Checksum</span></span><br><span class="line"><span class="comment">// CRC_32_IEEE_LE   &lt;true,  32, 0xEDB88320, 0&gt;</span></span><br><span class="line"><span class="comment">// CRC_16_ANSI_LE   &lt;true,  16,     0xA001, 0&gt;</span></span><br><span class="line"><span class="comment">// defualt          &lt;true,  32, 0xEDB88320, 0xFFFFFFFF&gt;, 7-Zip&#x27;s CRC-32</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="type">bool</span> kIsLE = <span class="literal">true</span>,</span><br><span class="line">          <span class="type">uint8_t</span> kBits = <span class="number">32</span>,</span><br><span class="line">          <span class="type">uint32_t</span> kPolynomial = <span class="number">0xEDB88320</span>,</span><br><span class="line">          <span class="type">uint32_t</span> kXorOut = <span class="number">0xFFFFFFFF</span>&gt;</span><br><span class="line"><span class="keyword">class</span> CRC &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">CRC</span>() &#123;</span><br><span class="line">    <span class="built_in">static_assert</span>(kBits &gt;= <span class="number">8</span> &amp;&amp; kBits &lt;= <span class="number">32</span> &amp;&amp; kPolynomial &lt; (<span class="number">1LL</span> &lt;&lt; kBits),</span><br><span class="line">                  <span class="string">&quot;invalid bits&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; ++i) &#123;</span><br><span class="line">      <span class="keyword">if</span> (kIsLE) &#123;</span><br><span class="line">        <span class="comment">/*register*/</span> <span class="type">uint32_t</span> crc = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">8</span>; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">          crc = (crc &gt;&gt; <span class="number">1</span>) ^ (kPolynomial &amp; (-<span class="built_in">static_cast</span>&lt;<span class="type">int32_t</span>&gt;(crc &amp; <span class="number">1</span>)));</span><br><span class="line">          <span class="comment">// if (crc &amp; 1) &#123;</span></span><br><span class="line">          <span class="comment">//    crc = (crc &gt;&gt; 1) ^ kPolynomial;</span></span><br><span class="line">          <span class="comment">//&#125; else &#123;</span></span><br><span class="line">          <span class="comment">//    crc &gt;&gt;= 1;</span></span><br><span class="line">          <span class="comment">//&#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">        crc32_table_[i] = crc;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">/*register*/</span> <span class="type">uint32_t</span> crc = i &lt;&lt; <span class="number">24</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">8</span>; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">          crc = (crc &lt;&lt; <span class="number">1</span>) ^ ((kPolynomial &lt;&lt; (<span class="number">32</span> - kBits)) &amp;</span><br><span class="line">                              (<span class="built_in">static_cast</span>&lt;<span class="type">int32_t</span>&gt;(crc) &gt;&gt; <span class="number">31</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        crc32_table_[i] = <span class="built_in">be2me_32</span>(crc);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">uint32_t</span> <span class="title">GetCRC</span><span class="params">(<span class="type">uint32_t</span> crcinit, <span class="type">const</span> <span class="type">void</span>* _data, <span class="type">size_t</span> data_size)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*register*/</span> <span class="type">uint32_t</span> crc = crcinit ^ kXorOut;</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">uint8_t</span>* data = <span class="built_in">static_cast</span>&lt;<span class="type">const</span> <span class="type">uint8_t</span>*&gt;(_data);</span><br><span class="line">    <span class="comment">/* process not aligned message head */</span></span><br><span class="line">    <span class="keyword">for</span> (; (<span class="number">3</span> &amp; <span class="built_in">reinterpret_cast</span>&lt;<span class="type">uintptr_t</span>&gt;(data)) &amp;&amp; data_size &gt; <span class="number">0</span>;</span><br><span class="line">         ++data, --data_size) &#123;</span><br><span class="line">      crc = crc32_table_[<span class="built_in">static_cast</span>&lt;<span class="type">uint8_t</span>&gt;(crc) ^ *data] ^ (crc &gt;&gt; <span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* fast CRC32 calculation of a DWORD-aligned message */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="type">uint8_t</span>* e = data + (data_size &amp; ~<span class="number">15</span>); data &lt; e; data += <span class="number">4</span>) &#123;</span><br><span class="line">      crc ^= <span class="built_in">le2me_32</span>(*<span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> <span class="type">uint32_t</span>*&gt;(data));</span><br><span class="line">      crc = crc32_table_[crc &amp; <span class="number">0xFF</span>] ^ (crc &gt;&gt; <span class="number">8</span>);</span><br><span class="line">      crc = crc32_table_[crc &amp; <span class="number">0xFF</span>] ^ (crc &gt;&gt; <span class="number">8</span>);</span><br><span class="line">      crc = crc32_table_[crc &amp; <span class="number">0xFF</span>] ^ (crc &gt;&gt; <span class="number">8</span>);</span><br><span class="line">      crc = crc32_table_[crc &amp; <span class="number">0xFF</span>] ^ (crc &gt;&gt; <span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* process not aligned message tail */</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="type">uint8_t</span>* e = data + (data_size &amp; <span class="number">15</span>); data &lt; e; ++data) &#123;</span><br><span class="line">      crc = crc32_table_[<span class="built_in">static_cast</span>&lt;<span class="type">uint8_t</span>&gt;(crc) ^ *data] ^ (crc &gt;&gt; <span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> crc ^ kXorOut;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  <span class="type">uint32_t</span> crc32_table_[<span class="number">256</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> endregion</span></span><br></pre></td></tr></table></figure>]]></content>
     
@@ -11596,6 +11597,8 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
     <category term="streaming-media" scheme="https://blog.umu618.com/tags/streaming-media/"/>
     
     <category term="肃域" scheme="https://blog.umu618.com/tags/%E8%82%83%E5%9F%9F/"/>
@@ -11607,7 +11610,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2017/08/01/umutech-fix-ffplay-no-sound/"/>
     <id>https://blog.umu618.com/2017/08/01/umutech-fix-ffplay-no-sound/</id>
     <published>2017-08-01T06:54:58.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:57:52.008Z</updated>
     
     <content type="html"><![CDATA[<p>用 ffplay 播放 opus 文件，错误信息如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SDL_OpenAudio (2 channels, 48000 Hz): XAudio2: XAudio2Create() failed at open.</span><br><span class="line">SDL_OpenAudio (1 channels, 48000 Hz): XAudio2: XAudio2Create() failed at open.</span><br><span class="line">SDL_OpenAudio (2 channels, 44100 Hz): XAudio2: XAudio2Create() failed at open.</span><br><span class="line">SDL_OpenAudio (1 channels, 44100 Hz): XAudio2: XAudio2Create() failed at open.</span><br></pre></td></tr></table></figure><p>解决方法——在 ffplay.c 的 <code>main</code> 函数开头，加上：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _WIN32</span></span><br><span class="line"><span class="built_in">CoInitializeEx</span>(<span class="literal">NULL</span>, COINIT_MULTITHREADED);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>]]></content>
     
@@ -11622,6 +11625,8 @@ AI 做，效率堪可。&lt;br&gt;
     
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
+    
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
     
     <category term="streaming-media" scheme="https://blog.umu618.com/tags/streaming-media/"/>
     
@@ -11864,15 +11869,17 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2017/07/04/umutech-fix-windows-10-irda/"/>
     <id>https://blog.umu618.com/2017/07/04/umutech-fix-windows-10-irda/</id>
     <published>2017-07-04T02:10:11.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:56:57.032Z</updated>
     
-    <content type="html"><![CDATA[<p>最近买了一个 Intel NUC，有个红外线端口，昨晚想尝试用 WinSock 对它编程，结果发现到 bind 就失败了，错误码是 10050，套接字操作遇到了一个已死的网络。</p><p>搜了一把，发现是 Windows 10 移除了 IrDA 的协议栈，但是还可以装回来，参考：<a href="https://support.microsoft.com/en-us/help/3150989/an-irda-networking-device-does-not-work-in-windows-10-version-1511">https://support.microsoft.com/en-us/help/3150989/an-irda-networking-device-does-not-work-in-windows-10-version-1511</a>，三条命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">netcfg -u ms_irda</span><br><span class="line">netcfg -c p -I ms_irda</span><br><span class="line">sc start irda</span><br><span class="line">sc start irmon</span><br></pre></td></tr></table></figure><p>IrDA 要死了，不推荐这么操作！</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><p>最近买了一个 Intel NUC，有个红外线端口，昨晚想尝试用 WinSock 对它编程，结果发现到 bind 就失败了，错误码是 10050，套接字操作遇到了一个已死的网络。</p><h2 id="解决">解决</h2><p>搜了一把，发现是 Windows 10 移除了 IrDA 的协议栈，但是还可以装回来，参考：<a href="https://support.microsoft.com/en-us/help/3150989/an-irda-networking-device-does-not-work-in-windows-10-version-1511">https://support.microsoft.com/en-us/help/3150989/an-irda-networking-device-does-not-work-in-windows-10-version-1511</a>，三条命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">netcfg -u ms_irda</span><br><span class="line">netcfg -c p -I ms_irda</span><br><span class="line">sc start irda</span><br><span class="line">sc start irmon</span><br></pre></td></tr></table></figure><p>IrDA 要死了，不推荐这么操作！</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;最近买了一个 Intel NUC，有个红外线端口，昨晚想尝试用 WinSock 对它编程，结果发现到 bind 就失败了，错误码是 10050，套接字操作遇到了一个已死的网络。&lt;/p&gt;
-&lt;p&gt;搜了一把，发现是 Windows 10 移除了 IrDA 的协议栈，但是还可以装回</summary>
+    <summary type="html">&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+&lt;p&gt;最近买了一个 Intel NUC，有个红外线端口，昨晚想尝试用 WinSock 对它编程，结果发现到 bind 就失败了，错误码是 10050，套接字操作遇到了一个已死的网络。&lt;/p&gt;
+&lt;h2 id=&quot;解决&quot;&gt;解决&lt;/h2&gt;
+&lt;p&gt;搜</summary>
       
     
     
@@ -11882,7 +11889,7 @@ AI 做，效率堪可。&lt;br&gt;
     
     <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
     
-    <category term="network" scheme="https://blog.umu618.com/tags/network/"/>
+    <category term="ops" scheme="https://blog.umu618.com/tags/ops/"/>
     
   </entry>
   
@@ -11922,20 +11929,20 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2017/06/07/umutech-fix-blurry-dialog-font/"/>
     <id>https://blog.umu618.com/2017/06/07/umutech-fix-blurry-dialog-font/</id>
     <published>2017-06-07T08:08:57.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:56:22.983Z</updated>
     
-    <content type="html"><![CDATA[<p>现象：</p><ol><li>在 VS 的资源编辑器里，点预览对话框，即：Test Dialog(Ctrl+T)，字体十分平滑，无锯齿。</li><li>实际运行 exe 时，却发现对话框上的文字模糊了，字体出现锯齿。</li></ol><p>解决过程：</p><ol><li>怀疑是 DPI 导致，怀疑是程序没有明确声明自己支持高 DPI。</li><li>用资源编辑器查看了 manifest，和记事本、资源管理器等系统自带应用对比，发现确实有个不一样的：</li></ol><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dpiAwareness</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://schemas.microsoft.com/SMI/2016/WindowsSettings&quot;</span>&gt;</span>PerMonitorV2<span class="tag">&lt;/<span class="name">dpiAwareness</span>&gt;</span></span><br></pre></td></tr></table></figure><ol start="3"><li>尝试改工程属性 - Manifest Tool - Input and Output - DPI Awareness 为 Per Monitor High DPI Aware，问题解决。</li></ol>]]></content>
+    <content type="html"><![CDATA[<h2 id="问题">问题</h2><ol><li><p>在 VS 的资源编辑器里，点预览对话框，即：Test Dialog(Ctrl+T)，字体十分平滑，无锯齿。</p></li><li><p>实际运行 exe 时，却发现对话框上的文字模糊了，字体出现锯齿。</p></li></ol><h2 id="解决">解决</h2><ol><li><p>怀疑是 DPI 导致，怀疑是程序没有明确声明自己支持高 DPI。</p></li><li><p>用资源编辑器查看了 manifest，和记事本、资源管理器等系统自带应用对比，发现确实有个不一样的：</p></li></ol><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dpiAwareness</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://schemas.microsoft.com/SMI/2016/WindowsSettings&quot;</span>&gt;</span>PerMonitorV2<span class="tag">&lt;/<span class="name">dpiAwareness</span>&gt;</span></span><br></pre></td></tr></table></figure><ol start="3"><li>尝试改工程属性 - Manifest Tool - Input and Output - DPI Awareness 为 Per Monitor High DPI Aware，问题解决。</li></ol>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;现象：&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;在 VS 的资源编辑器里，点预览对话框，即：Test Dialog(Ctrl+T)，字体十分平滑，无锯齿。&lt;/li&gt;
-&lt;li&gt;实际运行 exe 时，却发现对话框上的文字模糊了，字体出现锯齿。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;解决过程：&lt;/p&gt;
-</summary>
+&lt;li&gt;
+&lt;p&gt;在 VS 的资源编辑器里，点预览对话框，即：Test Dialog(Ctrl+T)，字体十分平滑，无锯齿。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实际运行 exe 时，却发现对话框上的文字模糊了，字体出现锯齿。&lt;/p</summary>
       
     
     
@@ -11943,13 +11950,11 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
     <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
     
     <category term="肃域" scheme="https://blog.umu618.com/tags/%E8%82%83%E5%9F%9F/"/>
-    
-    <category term="dpi" scheme="https://blog.umu618.com/tags/dpi/"/>
-    
-    <category term="win32" scheme="https://blog.umu618.com/tags/win32/"/>
     
   </entry>
   
@@ -12245,7 +12250,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2017/01/18/umutech-cpp-learning-notes-5-asio-coroutine/"/>
     <id>https://blog.umu618.com/2017/01/18/umutech-cpp-learning-notes-5-asio-coroutine/</id>
     <published>2017-01-18T08:36:46.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:55:21.122Z</updated>
     
     <content type="html"><![CDATA[<p>前几天在 Windows 编译 <code>asio-1.10.8\src\tests\latency\tcp_server.cpp</code>，结果并不能正常工作，客户端连上来，发数据后就卡死了……</p><p>今天，重新思考用 asio coroutine 来写个 echo server 练手，终于把这个 bug 解决了，具体见注释。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asio/io_service.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asio/ip/tcp.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asio/read.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asio/write.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asio/yield.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> asio::ip::tcp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">tcp_server</span> : asio::coroutine</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">tcp_server</span>(tcp::acceptor&amp; acceptor, std::<span class="type">size_t</span> buf_size)</span><br><span class="line">        : <span class="built_in">acceptor_</span>(acceptor),</span><br><span class="line">          <span class="built_in">socket_</span>(acceptor_.<span class="built_in">get_io_service</span>()),</span><br><span class="line">          <span class="built_in">buffer_</span>(buf_size)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(asio::error_code ec, std::<span class="type">size_t</span> n = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">reenter</span>(<span class="keyword">this</span>) <span class="keyword">for</span> (;;)</span><br><span class="line">        &#123;</span><br><span class="line">            yield acceptor_.<span class="built_in">async_accept</span>(socket_, <span class="built_in">ref</span>(<span class="keyword">this</span>));</span><br><span class="line">            <span class="keyword">if</span> (ec)</span><br><span class="line">            &#123;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;[&quot;</span> &lt;&lt; ec.<span class="built_in">value</span>() &lt;&lt; <span class="string">&quot;]&quot;</span> &lt;&lt; ec.<span class="built_in">message</span>() &lt;&lt; std::endl;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;Connect from &quot;</span> &lt;&lt; socket_.<span class="built_in">remote_endpoint</span>() &lt;&lt; std::endl;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!ec)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// UMU: 下一行是 bug，会卡死！！！</span></span><br><span class="line">                <span class="comment">//yield asio::async_read(socket_, asio::buffer(buffer_), ref(this));</span></span><br><span class="line">                yield socket_.<span class="built_in">async_read_some</span>(asio::<span class="built_in">buffer</span>(buffer_), <span class="built_in">ref</span>(<span class="keyword">this</span>));</span><br><span class="line">                <span class="keyword">if</span> (ec)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// UMU:</span></span><br><span class="line">                    <span class="comment">//std::cout &lt;&lt; &quot;[&quot; &lt;&lt; ec.value() &lt;&lt; &quot;]&quot; &lt;&lt; ec.message() &lt;&lt; std::endl;</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    std::cout &lt;&lt; <span class="string">&quot;Read &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot; from &quot;</span> &lt;&lt; socket_.<span class="built_in">remote_endpoint</span>() &lt;&lt; <span class="string">&quot;: &quot;</span>;</span><br><span class="line">                    std::cout.<span class="built_in">write</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="type">char</span> *&gt;(buffer_.<span class="built_in">data</span>()), n);</span><br><span class="line">                    std::cout &lt;&lt; std::endl;</span><br><span class="line">                    <span class="comment">// UMU: 下面两种写法都可以</span></span><br><span class="line">                    <span class="comment">//yield asio::async_write(socket_, asio::buffer(buffer_, n), ref(this));</span></span><br><span class="line">                    yield socket_.<span class="built_in">async_write_some</span>(asio::<span class="built_in">buffer</span>(buffer_, n), <span class="built_in">ref</span>(<span class="keyword">this</span>));</span><br><span class="line">                    <span class="keyword">if</span> (ec)</span><br><span class="line">                    &#123;</span><br><span class="line">                        std::cout &lt;&lt; <span class="string">&quot;[&quot;</span> &lt;&lt; ec.<span class="built_in">value</span>() &lt;&lt; <span class="string">&quot;]&quot;</span> &lt;&lt; ec.<span class="built_in">message</span>() &lt;&lt; std::endl;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        std::cout &lt;&lt; <span class="string">&quot;Write &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot; to &quot;</span> &lt;&lt; socket_.<span class="built_in">remote_endpoint</span>() &lt;&lt; std::endl;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            socket_.<span class="built_in">close</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">ref</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">explicit</span> <span class="title">ref</span><span class="params">(tcp_server* p)</span> : p_(p)</span></span><br><span class="line"><span class="function">        &#123;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(asio::error_code ec, std::<span class="type">size_t</span> n = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">// UMU: for debug</span></span><br><span class="line">            <span class="comment">//std::cout &lt;&lt; &quot;#&quot; &lt;&lt; ec.value() &lt;&lt; &quot;, &quot; &lt;&lt; n &lt;&lt; std::endl;</span></span><br><span class="line">            (*p_)(ec, n);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        tcp_server* p_;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    tcp::acceptor&amp; acceptor_;</span><br><span class="line">    tcp::socket socket_;</span><br><span class="line">    std::vector&lt;<span class="type">unsigned</span> <span class="type">char</span>&gt; buffer_;</span><br><span class="line">    tcp::endpoint sender_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;asio/unyield.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">5</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        std::<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Usage: tcp_server &lt;port&gt; &lt;nconns&gt; &lt;bufsize&gt; &#123;spin|block&#125;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> port = <span class="built_in">static_cast</span>&lt;<span class="type">unsigned</span> <span class="type">short</span>&gt;(std::<span class="built_in">atoi</span>(argv[<span class="number">1</span>]));</span><br><span class="line">    <span class="type">int</span> max_connections = std::<span class="built_in">atoi</span>(argv[<span class="number">2</span>]);</span><br><span class="line">    std::<span class="type">size_t</span> buf_size = std::<span class="built_in">atoi</span>(argv[<span class="number">3</span>]);</span><br><span class="line">    <span class="type">bool</span> spin = (std::<span class="built_in">strcmp</span>(argv[<span class="number">4</span>], <span class="string">&quot;spin&quot;</span>) == <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function">asio::io_service <span class="title">io_service</span><span class="params">(<span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="function">tcp::acceptor <span class="title">acceptor</span><span class="params">(io_service, tcp::endpoint(tcp::v4(), port))</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//std::vector&lt;boost::shared_ptr&lt;tcp_server&gt; &gt; servers;</span></span><br><span class="line">    std::vector&lt;std::shared_ptr&lt;tcp_server&gt; &gt; servers;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; max_connections; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//boost::shared_ptr&lt;tcp_server&gt; s(new tcp_server(acceptor, buf_size));</span></span><br><span class="line">        <span class="function">std::shared_ptr&lt;tcp_server&gt; <span class="title">s</span><span class="params">(std::make_shared&lt;tcp_server&gt;(acceptor, buf_size))</span></span>;</span><br><span class="line">        servers.<span class="built_in">push_back</span>(s);</span><br><span class="line">        (*s)(asio::<span class="built_in">error_code</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (spin)</span><br><span class="line">        <span class="keyword">for</span> (;;)</span><br><span class="line">            io_service.<span class="built_in">poll</span>();</span><br><span class="line">    <span class="comment">// UMU: CPU 占用率很高</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        io_service.<span class="built_in">run</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -12263,7 +12268,7 @@ AI 做，效率堪可。&lt;br&gt;
     
     <category term="cpp" scheme="https://blog.umu618.com/tags/cpp/"/>
     
-    <category term="asio" scheme="https://blog.umu618.com/tags/asio/"/>
+    <category term="boost" scheme="https://blog.umu618.com/tags/boost/"/>
     
   </entry>
   
@@ -13010,7 +13015,7 @@ AI 做，效率堪可。&lt;br&gt;
     <link href="https://blog.umu618.com/2016/05/19/umutech-vs2015-yasm-1-3/"/>
     <id>https://blog.umu618.com/2016/05/19/umutech-vs2015-yasm-1-3/</id>
     <published>2016-05-19T09:16:35.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:54:48.373Z</updated>
     
     <content type="html"><![CDATA[<p>系统：Windows 10</p><p>IDE：VS2015</p><p>任务：集成 YASM 1.3</p><p>官网：<a href="http://yasm.tortall.net/Download.html">http://yasm.tortall.net/Download.html</a></p><p>照做后，得到一个错误：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error MSB3721: The command &quot;......&quot; exited with code 1.</span><br></pre></td></tr></table></figure><p>直接跑命令则提示：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vsyasm: FATAL: unrecognized object format `Win32&#x27;</span><br></pre></td></tr></table></figure><p>原因：区分大小写……应该用 win32 而不是 Win32，您可以改一下工程平台的名字，但默认都是 Win32，不太方便，所以我们要对 vsyasm.props 进行改造：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">CommandLineTemplate</span>&gt;</span>&quot;$(YasmPath)&quot;vsyasm.exe -Xvc -f $(Platform) [AllOptions] [AdditionalOptions] [Inputs]<span class="tag">&lt;/<span class="name">CommandLineTemplate</span>&gt;</span></span><br></pre></td></tr></table></figure><p>替换为：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">CommandLineTemplate</span>&gt;</span>&quot;$(YasmPath)vsyasm.exe&quot; -Xvc -f $(Platform.ToLower()) [AllOptions] [AdditionalOptions] [Inputs]<span class="tag">&lt;/<span class="name">CommandLineTemplate</span>&gt;</span></span><br></pre></td></tr></table></figure><p>或者：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">CommandLineTemplate</span>&gt;</span>&quot;$(YasmPath)vsyasm.exe&quot; -Xvc -f win$(PlatformArchitecture) [AllOptions] [AdditionalOptions] [Inputs]<span class="tag">&lt;/<span class="name">CommandLineTemplate</span>&gt;</span></span><br></pre></td></tr></table></figure><p>保存即搞定，连 VS 都不需要重启。</p>]]></content>
     
@@ -13028,11 +13033,9 @@ AI 做，效率堪可。&lt;br&gt;
     <category term="UMUTech" scheme="https://blog.umu618.com/categories/UMUTech/"/>
     
     
+    <category term="dev" scheme="https://blog.umu618.com/tags/dev/"/>
+    
     <category term="windows" scheme="https://blog.umu618.com/tags/windows/"/>
-    
-    <category term="yasm" scheme="https://blog.umu618.com/tags/yasm/"/>
-    
-    <category term="build" scheme="https://blog.umu618.com/tags/build/"/>
     
   </entry>
   
@@ -13577,7 +13580,7 @@ friend with benefit&lt;/p&gt;
     <link href="https://blog.umu618.com/2015/12/17/umutech-how-to-compare-two-files/"/>
     <id>https://blog.umu618.com/2015/12/17/umutech-how-to-compare-two-files/</id>
     <published>2015-12-17T09:45:35.000Z</published>
-    <updated>2026-11-25T08:40:46.567Z</updated>
+    <updated>2026-11-25T08:53:59.776Z</updated>
     
     <content type="html"><![CDATA[<p>如何比较两个文件是否一样？注意是<strong>两个文件</strong>，而且是基于二进制比较的。</p><p>太简单了，首先比较文件大小，大小不一样一定不一样。</p><p>如果大小一样，就打开对比字节流，实现可能是一个循环，每次读取 8K 字节，然后按顺序对比，只要有不同就返回不同，直到全部比较完了都没有不同，那就是相同了。</p><p>好简单啊……不如来点逼格？UMU 看到有人是对两个文件取 MD5 hash，然后比较 hash 是否相等……</p><p>开喷！</p><ol><li>MD5 有碰撞问题……有可能不同的文件，hash 出来是一样的，即存在误判的可能。</li><li>这效率会耗在计算 hash 上，事实上如果文件不一样，极可能不需要读取整个文件就可以发现不同的，而算 hash 是一定要把文件都读完的。</li></ol><p>总之，还是用前面的方法好，hash 的方式适合用于文件很多，很多，很多，每两个之间都要对比的情况，请参考《<a href="44">UMU WSH 教程</a> WII 应用实例 - 查找重复文件》：&lt;/2013/05/28/umutech-wsh-44-wii-find-duplicate-files/&gt;。只有两个，两个，两个对比的情况，请不要装逼，就直接对比，直接对比，直接对比。</p><p>优化需要谨慎！</p>]]></content>
     
@@ -13597,8 +13600,6 @@ friend with benefit&lt;/p&gt;
     <category term="肃域" scheme="https://blog.umu618.com/tags/%E8%82%83%E5%9F%9F/"/>
     
     <category term="algorithm" scheme="https://blog.umu618.com/tags/algorithm/"/>
-    
-    <category term="file" scheme="https://blog.umu618.com/tags/file/"/>
     
   </entry>
   
@@ -15881,7 +15882,7 @@ friend with benefit&lt;/p&gt;
     <link href="https://blog.umu618.com/2014/06/04/umutech-interview-question-why-does-shell-treat-string-10001-as-binary-and-print-17/"/>
     <id>https://blog.umu618.com/2014/06/04/umutech-interview-question-why-does-shell-treat-string-10001-as-binary-and-print-17/</id>
     <published>2014-06-04T03:05:00.000Z</published>
-    <updated>2024-06-29T10:31:52.728Z</updated>
+    <updated>2026-11-25T08:52:33.094Z</updated>
     
     <content type="html"><![CDATA[<h2 id="注解">注解</h2><p>这并非是“微软公司”的面试题，而是稣想出来“让人微软”的题。</p><h2 id="题目">题目</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="function"><span class="title">test</span></span>() &#123;</span><br><span class="line"> v=<span class="string">&#x27;10001&#x27;</span>;</span><br><span class="line"> <span class="built_in">return</span> <span class="variable">$v</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span>;</span><br><span class="line"><span class="built_in">echo</span> $?</span><br></pre></td></tr></table></figure><p>运行后输出 17（二进制 10001 的十进制 17），解释一下？</p><h2 id="解答（2023-01-17-新增）">解答（2023-01-17 新增）</h2><p>返回值是个 Byte 呀！10001 是 0x2711，所以被截断为 0x11，那就是 17。即：</p><p><code>10001 mod 256 = 17</code></p><p>本题设置的陷阱正是“二进制 10001 的十进制等于 17”，误导人真有一套。</p>]]></content>
     
@@ -15901,7 +15902,7 @@ friend with benefit&lt;/p&gt;
     
     <category term="debug" scheme="https://blog.umu618.com/tags/debug/"/>
     
-    <category term="做题" scheme="https://blog.umu618.com/tags/%E5%81%9A%E9%A2%98/"/>
+    <category term="quiz" scheme="https://blog.umu618.com/tags/quiz/"/>
     
   </entry>
   

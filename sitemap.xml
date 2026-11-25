@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.umu618.com/2018/04/18/umutech-winhttpconnect-punycode/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2018/04/17/umutech-quiz-regex-lazy-vs-greedy/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2018/02/02/umutech-windows-server-network-slower-than-linux/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2018/01/23/umutech-macbook-windows-efi-update/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.umu618.com/2017/10/19/umutech-memory-alignment-xmmatrix/</loc>
     
     <lastmod>2026-11-25</lastmod>
@@ -20,7 +56,88 @@
   </url>
   
   <url>
+    <loc>https://blog.umu618.com/2017/08/01/umutech-fix-ffplay-no-sound/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2017/07/04/umutech-fix-windows-10-irda/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2017/06/07/umutech-fix-blurry-dialog-font/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2017/01/18/umutech-cpp-learning-notes-5-asio-coroutine/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.umu618.com/2016/05/19/umutech-vs2015-yasm-1-3/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2015/12/17/umutech-how-to-compare-two-files/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2017/11/13/umutech-database-algorithm-xxhash/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2018/05/26/leave-one-out-cross-validation/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2014/06/04/umutech-interview-question-why-does-shell-treat-string-10001-as-binary-and-print-17/</loc>
+    
+    <lastmod>2026-11-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/</loc>
     
     <lastmod>2026-11-25</lastmod>
     
@@ -39,15 +156,6 @@
   
   <url>
     <loc>https://blog.umu618.com/2017/01/06/umutech-cpp-learning-notes-3-make-shared/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2017/01/18/umutech-cpp-learning-notes-5-asio-coroutine/</loc>
     
     <lastmod>2026-11-25</lastmod>
     
@@ -93,87 +201,6 @@
   
   <url>
     <loc>https://blog.umu618.com/2017/03/02/umutech-cpp11-delete-default-member-functions/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2017/06/07/umutech-fix-blurry-dialog-font/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2017/08/01/umutech-fix-ffplay-no-sound/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2017/07/04/umutech-fix-windows-10-irda/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2017/11/13/umutech-database-algorithm-xxhash/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2015/12/17/umutech-how-to-compare-two-files/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2018/01/23/umutech-macbook-windows-efi-update/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2018/02/02/umutech-windows-server-network-slower-than-linux/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2018/04/17/umutech-quiz-regex-lazy-vs-greedy/</loc>
-    
-    <lastmod>2026-11-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2018/04/18/umutech-winhttpconnect-punycode/</loc>
     
     <lastmod>2026-11-25</lastmod>
     
@@ -2333,15 +2360,6 @@
   </url>
   
   <url>
-    <loc>https://blog.umu618.com/2019/05/23/chicken-with-rabbit-cage/</loc>
-    
-    <lastmod>2024-06-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.umu618.com/2019/05/23/zero-sum-game/</loc>
     
     <lastmod>2024-06-29</lastmod>
@@ -3639,15 +3657,6 @@
   
   <url>
     <loc>https://blog.umu618.com/2018/05/22/tesula/</loc>
-    
-    <lastmod>2024-06-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/2018/05/26/leave-one-out-cross-validation/</loc>
     
     <lastmod>2024-06-29</lastmod>
     
@@ -5402,15 +5411,6 @@
   </url>
   
   <url>
-    <loc>https://blog.umu618.com/2014/06/04/umutech-interview-question-why-does-shell-treat-string-10001-as-binary-and-print-17/</loc>
-    
-    <lastmod>2024-06-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.umu618.com/2008/12/11/no-jb/</loc>
     
     <lastmod>2024-06-29</lastmod>
@@ -6971,13 +6971,6 @@
   </url>
   
   <url>
-    <loc>https://blog.umu618.com/tags/%E5%81%9A%E9%A2%98/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.umu618.com/tags/%E8%B0%83%E7%A0%94/</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -7258,56 +7251,7 @@
   </url>
   
   <url>
-    <loc>https://blog.umu618.com/tags/yasm/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/build/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.umu618.com/tags/quiz/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/asio/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/dpi/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/win32/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/network/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/memory/</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -7322,62 +7266,6 @@
   
   <url>
     <loc>https://blog.umu618.com/tags/database/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/file/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/macbook/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/efi/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/server/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/tcp/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/regex/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/http/</loc>
-    <lastmod>2026-11-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.umu618.com/tags/dns/</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
